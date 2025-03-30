@@ -5,7 +5,7 @@ import ServiceCard from "@/components/ServiceCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import FeatureBox from "@/components/FeatureBox";
 import CTA from "@/components/CTA";
-import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users } from "lucide-react";
+import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -15,31 +15,36 @@ const Index = () => {
       title: "Isolation Thermique",
       description: "Solutions d'isolation pour combles, murs, fenêtres et planchers pour maximiser votre confort et réduire vos factures.",
       icon: <ThermometerSun size={32} />,
-      link: "/services#isolation"
+      link: "/services#isolation",
+      imageUrl: "https://images.unsplash.com/photo-1613979912728-a41851e28a6a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     },
     {
       title: "Pompes à Chaleur",
       description: "Des systèmes performants et économiques pour chauffer votre habitation tout en réduisant votre consommation d'énergie.",
       icon: <Home size={32} />,
-      link: "/services#chauffage"
+      link: "/services#chauffage",
+      imageUrl: "https://images.unsplash.com/photo-1617712845765-205503c01957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     },
     {
       title: "Eau Chaude Sanitaire",
       description: "Chauffe-eau thermodynamiques et systèmes solaires combinés pour une eau chaude économique et écologique.",
       icon: <Droplets size={32} />,
-      link: "/services#eau-chaude"
+      link: "/services#eau-chaude",
+      imageUrl: "https://images.unsplash.com/photo-1585417239767-4a89f9dc7e37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     },
     {
       title: "Panneaux Solaires",
       description: "Production d'électricité verte grâce aux panneaux photovoltaïques. Réduisez vos factures et votre empreinte carbone.",
       icon: <SunMedium size={32} />,
-      link: "/services#solaire"
+      link: "/services#solaire",
+      imageUrl: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     },
     {
       title: "Rénovation Globale",
       description: "Accompagnement complet pour votre projet de rénovation énergétique dans le cadre des programmes de l'ANAH.",
       icon: <Building size={32} />,
-      link: "/services#renovation"
+      link: "/services#renovation",
+      imageUrl: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
     }
   ];
 
@@ -68,69 +73,111 @@ const Index = () => {
     {
       title: "Expertise Certifiée",
       description: "Tous nos professionnels sont certifiés RGE (Reconnu Garant de l'Environnement) pour vous garantir un travail de qualité.",
-      icon: <BadgeCheck size={48} />
+      icon: <BadgeCheck size={36} />
     },
     {
       title: "Garantie Décennale",
       description: "Nous offrons une garantie décennale sur tous nos travaux pour votre tranquillité d'esprit à long terme.",
-      icon: <CheckCircle2 size={48} />
+      icon: <Shield size={36} />
     },
     {
       title: "Intervention Rapide",
       description: "Notre équipe réactive intervient rapidement pour répondre à vos besoins en rénovation énergétique.",
-      icon: <Clock size={48} />
+      icon: <Clock size={36} />
     },
     {
       title: "Aides Financières",
       description: "Nous vous accompagnons dans toutes vos démarches pour obtenir les aides financières auxquelles vous avez droit.",
-      icon: <Award size={48} />
+      icon: <Award size={36} />
+    }
+  ];
+
+  const stats = [
+    { value: "1500+", label: "Clients satisfaits" },
+    { value: "98%", label: "Taux de satisfaction" },
+    { value: "30%", label: "Économies moyennes" },
+    { value: "10+", label: "Années d'expérience" }
+  ];
+
+  const values = [
+    {
+      title: "Engagement écologique",
+      description: "Nous nous engageons à réduire l'empreinte carbone de chaque foyer et entreprise.",
+      icon: <Leaf size={36} />
+    },
+    {
+      title: "Excellence technique",
+      description: "Nos solutions sont à la pointe de la technologie pour une efficacité maximale.",
+      icon: <Target size={36} />
+    },
+    {
+      title: "Économies durables",
+      description: "Nous concevons des solutions qui généreront des économies sur le long terme.",
+      icon: <TrendingUp size={36} />
     }
   ];
 
   return (
     <div>
       <Hero 
-        title="Experts en rénovation énergétique pour un avenir durable"
-        subtitle="Réduisez votre consommation énergétique et votre empreinte carbone avec des solutions performantes et éco-responsables."
-        buttonText="Découvrir nos services"
+        title="Transformez votre habitat et réduisez vos factures énergétiques"
+        subtitle="Experts en rénovation énergétique pour un avenir plus durable et économique"
+        buttonText="Découvrir nos solutions"
         buttonLink="/services"
         imageSrc="https://images.unsplash.com/photo-1627556592933-ffe99c1cd9eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
       />
 
+      {/* Stats Section */}
+      <section className="py-12 bg-supreme-primary text-white">
+        <div className="container-custom">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {stats.map((stat, index) => (
+              <div key={index} className="p-4">
+                <div className="text-4xl font-bold mb-2">{stat.value}</div>
+                <div className="text-white/80">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding">
         <div className="container-custom">
           <SectionHeader 
-            title="Nos Services" 
+            title="Nos Solutions Énergétiques" 
             subtitle="Découvrez notre gamme complète de solutions pour améliorer l'efficacité énergétique de votre habitation ou de votre entreprise."
+            highlightedWord="Solutions"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {services.slice(0, 3).map((service, index) => (
               <ServiceCard
                 key={index}
                 title={service.title}
                 description={service.description}
                 icon={service.icon}
                 link={service.link}
+                imageUrl={service.imageUrl}
               />
             ))}
           </div>
 
           <div className="text-center mt-12">
             <Button asChild className="bg-supreme-primary hover:bg-supreme-primary/90">
-              <Link to="/services">Voir tous nos services</Link>
+              <Link to="/services">Voir toutes nos solutions</Link>
             </Button>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="section-padding">
+      <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <SectionHeader 
             title="Pourquoi Nous Choisir ?" 
             subtitle="SupremEnergies s'engage à fournir des services de qualité pour garantir votre satisfaction et la performance énergétique de votre habitat."
+            highlightedWord="Choisir"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -147,40 +194,37 @@ const Index = () => {
       </section>
 
       {/* About Us Preview Section */}
-      <section className="section-padding bg-supreme-light">
+      <section className="section-padding">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-supreme-primary">À Propos de SupremEnergies</h2>
+            <div className="order-2 md:order-1">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                <span className="text-supreme-primary">SupremEnergies</span>, votre partenaire de confiance
+              </h2>
               <p className="text-lg mb-6 text-gray-700">
                 Depuis notre création, SupremEnergies s'est engagée à offrir des solutions de rénovation énergétique de haute qualité pour les particuliers et les professionnels.
               </p>
               <p className="text-lg mb-6 text-gray-700">
                 Notre mission est de contribuer à la transition énergétique en rendant les bâtiments plus efficaces et en réduisant leur empreinte environnementale.
               </p>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start">
-                  <CheckCircle2 className="h-6 w-6 text-supreme-primary mr-2 flex-shrink-0 mt-0.5" />
-                  <span>Une équipe de professionnels certifiés RGE</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="h-6 w-6 text-supreme-primary mr-2 flex-shrink-0 mt-0.5" />
-                  <span>Plus de 1000 chantiers réalisés avec succès</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="h-6 w-6 text-supreme-primary mr-2 flex-shrink-0 mt-0.5" />
-                  <span>Accompagnement personnalisé pour vos projets</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="h-6 w-6 text-supreme-primary mr-2 flex-shrink-0 mt-0.5" />
-                  <span>Engagement pour un avenir durable</span>
-                </li>
-              </ul>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                {values.map((value, index) => (
+                  <div key={index} className="flex flex-col items-center text-center p-4">
+                    <div className="h-16 w-16 rounded-full bg-supreme-light flex items-center justify-center mb-4 text-supreme-primary">
+                      {value.icon}
+                    </div>
+                    <h3 className="font-semibold mb-2">{value.title}</h3>
+                    <p className="text-sm text-gray-600">{value.description}</p>
+                  </div>
+                ))}
+              </div>
+              
               <Button asChild className="bg-supreme-secondary hover:bg-supreme-secondary/90">
                 <Link to="/about">En savoir plus sur nous</Link>
               </Button>
             </div>
-            <div className="rounded-lg overflow-hidden shadow-xl">
+            <div className="order-1 md:order-2 rounded-lg overflow-hidden shadow-xl">
               <img 
                 src="https://images.unsplash.com/photo-1603190287605-e6ade32fa852?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                 alt="Équipe SupremEnergies"
@@ -191,12 +235,57 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Process Section */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <SectionHeader 
+            title="Notre Processus Simple" 
+            subtitle="Nous rendons votre transition énergétique facile et sans stress avec notre processus en quatre étapes"
+            highlightedWord="Simple"
+          />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { 
+                title: "Consultation", 
+                description: "Évaluation gratuite de vos besoins et objectifs énergétiques",
+                step: "01"
+              },
+              { 
+                title: "Proposition", 
+                description: "Solutions personnalisées et devis transparent sans engagement",
+                step: "02"
+              },
+              { 
+                title: "Installation", 
+                description: "Travaux réalisés par nos équipes certifiées RGE",
+                step: "03"
+              },
+              { 
+                title: "Suivi", 
+                description: "Accompagnement continu et service après-vente réactif",
+                step: "04"
+              }
+            ].map((process, index) => (
+              <div key={index} className="bg-white p-8 rounded-lg shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                <div className="absolute -right-4 -top-4 text-8xl font-bold text-supreme-light/70 group-hover:text-supreme-light transition-colors">
+                  {process.step}
+                </div>
+                <h3 className="text-xl font-semibold mb-3 relative z-10">{process.title}</h3>
+                <p className="text-gray-600 relative z-10">{process.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="section-padding">
         <div className="container-custom">
           <SectionHeader 
             title="Ce Que Disent Nos Clients" 
             subtitle="Découvrez les témoignages de nos clients satisfaits qui ont fait confiance à SupremEnergies pour leurs projets de rénovation énergétique."
+            highlightedWord="Clients"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -214,7 +303,7 @@ const Index = () => {
       </section>
 
       {/* B2B Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding bg-supreme-light">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 rounded-lg overflow-hidden shadow-xl">
@@ -225,7 +314,9 @@ const Index = () => {
               />
             </div>
             <div className="order-1 md:order-2">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-supreme-primary">Solutions pour Entreprises</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Solutions pour <span className="text-supreme-primary">Entreprises</span>
+              </h2>
               <p className="text-lg mb-6 text-gray-700">
                 SupremEnergies accompagne les entreprises dans leur transition énergétique avec des solutions sur mesure pour réduire leur consommation et optimiser leurs installations.
               </p>
@@ -260,7 +351,6 @@ const Index = () => {
 
       {/* CTA Section */}
       <CTA />
-
     </div>
   );
 };

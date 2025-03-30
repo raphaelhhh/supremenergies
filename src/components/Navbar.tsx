@@ -37,16 +37,24 @@ const Navbar = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${
+      scrolled 
+        ? "bg-white shadow-md py-2" 
+        : "bg-transparent py-4"
+    }`}>
       <div className="container-custom flex items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-supreme-primary to-supreme-secondary">
+          <span className={`text-2xl font-bold ${
+            scrolled || isOpen
+              ? "text-supreme-primary"
+              : "text-white"
+          } transition-colors`}>
             SupremEnergies
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
+        <nav className="hidden md:flex space-x-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -54,7 +62,9 @@ const Navbar = () => {
               className={`font-medium transition-colors hover:text-supreme-primary ${
                 location.pathname === link.path
                   ? "text-supreme-primary"
-                  : "text-gray-700"
+                  : scrolled
+                    ? "text-gray-800"
+                    : "text-white"
               }`}
             >
               {link.name}
@@ -72,7 +82,9 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-700 hover:text-supreme-primary"
+          className={`md:hidden ${
+            scrolled || isOpen ? "text-gray-800" : "text-white"
+          } hover:text-supreme-primary`}
           onClick={toggleMenu}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -90,7 +102,7 @@ const Navbar = () => {
                 className={`font-medium transition-colors hover:text-supreme-primary ${
                   location.pathname === link.path
                     ? "text-supreme-primary"
-                    : "text-gray-700"
+                    : "text-gray-800"
                 }`}
               >
                 {link.name}

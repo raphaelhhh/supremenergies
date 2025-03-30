@@ -8,6 +8,7 @@ interface SectionHeaderProps {
   className?: string;
   titleClassName?: string;
   subtitleClassName?: string;
+  highlightedWord?: string;
 }
 
 const SectionHeader = ({
@@ -17,7 +18,24 @@ const SectionHeader = ({
   className,
   titleClassName,
   subtitleClassName,
+  highlightedWord,
 }: SectionHeaderProps) => {
+  // Function to highlight a word in the title
+  const renderTitle = () => {
+    if (!highlightedWord || !title.includes(highlightedWord)) {
+      return title;
+    }
+    
+    const parts = title.split(highlightedWord);
+    return (
+      <>
+        {parts[0]}
+        <span className="text-supreme-primary">{highlightedWord}</span>
+        {parts[1]}
+      </>
+    );
+  };
+
   return (
     <div className={cn(
       "mb-12",
@@ -28,7 +46,7 @@ const SectionHeader = ({
         "text-3xl md:text-4xl font-bold mb-4",
         titleClassName
       )}>
-        {title}
+        {renderTitle()}
       </h2>
       {subtitle && (
         <p className={cn(

@@ -8,9 +8,12 @@ interface HeroProps {
   subtitle: string;
   buttonText?: string;
   buttonLink?: string;
+  secondaryButtonText?: string;
+  secondaryButtonLink?: string;
   imageSrc?: string;
   imageAlt?: string;
   overlay?: boolean;
+  className?: string;
 }
 
 const Hero = ({
@@ -18,12 +21,15 @@ const Hero = ({
   subtitle,
   buttonText = "En savoir plus",
   buttonLink = "/services",
+  secondaryButtonText = "Demander un devis",
+  secondaryButtonLink = "/contact",
   imageSrc = "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
   imageAlt = "Rénovation énergétique",
   overlay = true,
+  className,
 }: HeroProps) => {
   return (
-    <div className="relative h-screen min-h-[600px] flex items-center">
+    <div className={`relative min-h-[85vh] flex items-center ${className}`}>
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -32,7 +38,7 @@ const Hero = ({
           className="w-full h-full object-cover"
         />
         {overlay && (
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-black/50"></div>
         )}
       </div>
 
@@ -60,7 +66,7 @@ const Hero = ({
               variant="outline" 
               className="bg-white hover:bg-gray-100 text-supreme-primary border-supreme-primary px-6 py-6 rounded-md text-lg"
             >
-              <Link to="/contact">Demander un devis</Link>
+              <Link to={secondaryButtonLink}>{secondaryButtonText}</Link>
             </Button>
           </div>
         </div>
