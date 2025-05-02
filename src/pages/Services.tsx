@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Hero from "@/components/Hero";
@@ -48,7 +49,7 @@ const Services = () => {
         subtitle="Des solutions complètes et efficaces pour réduire votre consommation d'énergie et améliorer votre confort."
         buttonText="Demander un devis"
         buttonLink="/contact"
-        imageSrc="https://images.pexels.com/photos/8961216/pexels-photo-8961216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        imageSrc="https://images.pexels.com/photos/4489732/pexels-photo-4489732.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         imageAlt="Isolation thermique par l'extérieur et des combles"
       />
 
@@ -130,7 +131,7 @@ const Services = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="https://images.pexels.com/photos/7195303/pexels-photo-7195303.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                src="https://images.pexels.com/photos/4489773/pexels-photo-4489773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
                 alt="Isolation Thermique par l'extérieur"
                 className="w-full h-full object-cover"
               />
@@ -145,7 +146,7 @@ const Services = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1643756055617-608c1492f932?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                src="https://images.pexels.com/photos/5591874/pexels-photo-5591874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
                 alt="Pompes à Chaleur"
                 className="w-full h-full object-cover"
               />
@@ -252,7 +253,7 @@ const Services = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1585858192700-9c3d8b9a333f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                src="https://images.pexels.com/photos/5824538/pexels-photo-5824538.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
                 alt="Eau Chaude Sanitaire"
                 className="w-full h-full object-cover"
               />
