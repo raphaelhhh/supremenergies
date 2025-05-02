@@ -1,9 +1,7 @@
-
 import { ArrowRight, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
 interface HeroProps {
   title: string;
   subtitle: string;
@@ -17,7 +15,6 @@ interface HeroProps {
   overlay?: boolean;
   className?: string;
 }
-
 const Hero = ({
   title,
   subtitle,
@@ -31,8 +28,7 @@ const Hero = ({
   overlay = true,
   className
 }: HeroProps) => {
-  return (
-    <div className={cn("relative overflow-hidden bg-gradient-to-b from-supreme-light to-white", className)}>
+  return <div className={cn("relative overflow-hidden bg-gradient-to-b from-supreme-light to-white", className)}>
       <div className="container-custom relative z-10 py-20 md:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
@@ -46,14 +42,12 @@ const Hero = ({
 
             {/* Features List */}
             <div className="space-y-4 mb-8">
-              {features.map((feature, index) => (
-                <div key={index} className="flex items-center">
+              {features.map((feature, index) => <div key={index} className="flex items-center">
                   <div className="rounded-full bg-supreme-primary p-1 mr-3">
                     <Check className="h-4 w-4 text-white" />
                   </div>
                   <span className="text-gray-700">{feature}</span>
-                </div>
-              ))}
+                </div>)}
             </div>
 
             <div className="flex flex-wrap gap-4">
@@ -75,12 +69,8 @@ const Hero = ({
             <div className="absolute -left-8 bottom-0 w-64 h-64 bg-supreme-secondary/10 rounded-full blur-3xl"></div>
             
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-8 border-white">
-              <img 
-                src={imageSrc} 
-                alt={imageAlt} 
-                className="w-full h-[500px] object-cover"
-              />
-              {overlay && <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>}
+              <img src={imageSrc} alt={imageAlt} className="w-full h-[500px] object-cover" />
+              {overlay && <div className="mets une photo de maison bien renov\xE9 isolations murs par l'exterieur, pompe a chaleur air air clim"></div>}
             </div>
             
             <div className="absolute -right-8 -bottom-8 w-48 h-48 bg-supreme-accent/10 rounded-full blur-xl"></div>
@@ -91,8 +81,6 @@ const Hero = ({
       {/* Decorative Elements */}
       <div className="absolute top-1/4 left-0 w-64 h-64 bg-supreme-light rounded-full -translate-x-1/2 blur-3xl opacity-60"></div>
       <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-supreme-light rounded-full translate-x-1/2 blur-3xl opacity-60"></div>
-    </div>
-  );
+    </div>;
 };
-
 export default Hero;
