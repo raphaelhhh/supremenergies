@@ -24,7 +24,7 @@ const Hero = ({
   buttonLink = "/services",
   secondaryButtonText = "Demander un devis",
   secondaryButtonLink = "/contact",
-  imageSrc = "https://images.unsplash.com/photo-1605538032404-d7f061675c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+  imageSrc = "https://images.pexels.com/photos/7195781/pexels-photo-7195781.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   imageAlt = "Isolation thermique par l'extérieur",
   overlay = true,
   className

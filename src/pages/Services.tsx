@@ -48,7 +48,7 @@ const Services = () => {
         subtitle="Des solutions complètes et efficaces pour réduire votre consommation d'énergie et améliorer votre confort."
         buttonText="Demander un devis"
         buttonLink="/contact"
-        imageSrc="https://images.unsplash.com/photo-1604076913837-52ab5629fba9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+        imageSrc="https://images.pexels.com/photos/8961216/pexels-photo-8961216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         imageAlt="Isolation thermique par l'extérieur et des combles"
       />
 
@@ -130,7 +130,7 @@ const Services = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1605538032404-d7f061675c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                src="https://images.pexels.com/photos/7195303/pexels-photo-7195303.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
                 alt="Isolation Thermique par l'extérieur"
                 className="w-full h-full object-cover"
               />
@@ -374,7 +374,7 @@ const Services = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                src="https://images.unsplash.com/photo-1534237710431-e2fc6984a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                 alt="Rénovation Globale"
                 className="w-full h-full object-cover"
               />
@@ -466,7 +466,7 @@ const Services = () => {
                   <span>Récupération de chaleur</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle2 className="h-5 w-5 text-supreme-secondary mr-2 flex-shrink-0" />
+                  <CheckCircle2 className="h-5 w-6 text-supreme-secondary mr-2 flex-shrink-0" />
                   <span>Remplacement par des équipements performants</span>
                 </li>
               </ul>
