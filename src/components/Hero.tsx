@@ -1,3 +1,4 @@
+
 import { ArrowRight, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -23,7 +24,7 @@ const Hero = ({
   buttonLink = "/services",
   secondaryButtonText = "Demander un devis",
   secondaryButtonLink = "/contact",
-  imageSrc = "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+  imageSrc = "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
   imageAlt = "Rénovation énergétique",
   overlay = true,
   className
@@ -70,7 +71,7 @@ const Hero = ({
             
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-8 border-white">
               <img src={imageSrc} alt={imageAlt} className="w-full h-[500px] object-cover" />
-              {overlay && <div className="mets une photo de maison bien renov\xE9 isolations murs par l'exterieur, pompe a chaleur air air clim"></div>}
+              {overlay && <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>}
             </div>
             
             <div className="absolute -right-8 -bottom-8 w-48 h-48 bg-supreme-accent/10 rounded-full blur-xl"></div>
