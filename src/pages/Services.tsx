@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Hero from "@/components/Hero";
@@ -49,7 +48,7 @@ const Services = () => {
         subtitle="Des solutions complètes et efficaces pour réduire votre consommation d'énergie et améliorer votre confort."
         buttonText="Demander un devis"
         buttonLink="/contact"
-        imageSrc="https://images.pexels.com/photos/4489732/pexels-photo-4489732.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        imageSrc="public/lovable-uploads/590f8f79-d20f-4345-b2ea-79fa7f2a352b.png" // Image d'isolation par l'extérieur que vous avez fournie
         imageAlt="Isolation thermique par l'extérieur et des combles"
       />
 
@@ -131,7 +130,7 @@ const Services = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="https://images.pexels.com/photos/4489773/pexels-photo-4489773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                src="public/lovable-uploads/590f8f79-d20f-4345-b2ea-79fa7f2a352b.png" 
                 alt="Isolation Thermique par l'extérieur"
                 className="w-full h-full object-cover"
               />
