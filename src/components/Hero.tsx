@@ -1,4 +1,3 @@
-
 import { ArrowRight, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -24,7 +23,7 @@ const Hero = ({
   buttonLink = "/services",
   secondaryButtonText = "Demander un devis",
   secondaryButtonLink = "/contact",
-  imageSrc = "public/lovable-uploads/590f8f79-d20f-4345-b2ea-79fa7f2a352b.png", // Image d'isolation par l'extérieur que vous avez fournie
+  imageSrc = "/lovable-uploads/590f8f79-d20f-4345-b2ea-79fa7f2a352b.png", // Suppression du préfixe "public"
   imageAlt = "Isolation thermique par l'extérieur",
   overlay = true,
   className
