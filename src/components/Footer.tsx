@@ -1,6 +1,5 @@
-
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Twitter, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Mail, MapPin, Facebook, Instagram, Linkedin, Twitter, ArrowRight, CheckCircle2 } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -140,14 +139,8 @@ const Footer = () => {
               <li className="flex items-start space-x-3">
                 <MapPin size={20} className="text-supreme-accent flex-shrink-0 mt-1" />
                 <span className="text-gray-300">
-                  123 Rue de l'Énergie,<br />75001 Paris, France
+                  55 rue cartier bresson,<br />93500 pantin, France
                 </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Phone size={20} className="text-supreme-accent flex-shrink-0" />
-                <a href="tel:+33123456789" className="text-gray-300 hover:text-white transition-colors">
-                  01 23 45 67 89
-                </a>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={20} className="text-supreme-accent flex-shrink-0" />

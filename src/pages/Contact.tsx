@@ -1,7 +1,6 @@
-
 import Hero from "@/components/Hero";
 import ContactForm from "@/components/ContactForm";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin, Clock } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -21,7 +20,7 @@ const Contact = () => {
             <div>
               <h2 className="text-3xl font-bold mb-6 text-supreme-primary">Nos Coordonnées</h2>
               <p className="text-lg mb-8 text-gray-700">
-                N'hésitez pas à nous contacter par téléphone, email ou en venant directement à nos bureaux. Notre équipe de conseillers spécialisés se fera un plaisir de vous accompagner dans vos projets.
+                N'hésitez pas à nous contacter par email ou en venant directement à nos bureaux. Notre équipe de conseillers spécialisés se fera un plaisir de vous accompagner dans vos projets.
               </p>
 
               <div className="space-y-6">
@@ -31,21 +30,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Adresse</h3>
-                    <p className="text-gray-600">123 Rue de l'Énergie, 75001 Paris, France</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="bg-supreme-light rounded-full p-3 mr-4">
-                    <Phone className="h-6 w-6 text-supreme-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg">Téléphone</h3>
-                    <p className="text-gray-600">
-                      <a href="tel:+33123456789" className="hover:text-supreme-primary transition-colors">
-                        01 23 45 67 89
-                      </a>
-                    </p>
+                    <p className="text-gray-600">55 rue cartier bresson, 93500 pantin, France</p>
                   </div>
                 </div>
 
