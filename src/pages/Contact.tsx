@@ -7,9 +7,9 @@ const Contact = () => {
   return (
     <div>
       <Hero 
-        title="Contactez-nous"
-        subtitle="Notre équipe est à votre disposition pour répondre à toutes vos questions et vous accompagner dans votre projet de rénovation énergétique."
-        buttonText="Voir nos services"
+        title="Contactez SupremEnergies"
+        subtitle="Notre équipe d'experts est à votre écoute pour tous vos projets de rénovation énergétique. N'hésitez pas à nous solliciter pour un devis gratuit ou des conseils personnalisés."
+        buttonText="Découvrir nos services"
         buttonLink="/services"
         imageSrc="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
       />
@@ -21,7 +21,7 @@ const Contact = () => {
             <div>
               <h2 className="text-3xl font-bold mb-6 text-supreme-primary">Nos Coordonnées</h2>
               <p className="text-lg mb-8 text-gray-700">
-                N'hésitez pas à nous contacter par téléphone, email ou en venant directement à nos bureaux. Notre équipe se fera un plaisir de vous accueillir et de répondre à vos questions.
+                N'hésitez pas à nous contacter par téléphone, email ou en venant directement à nos bureaux. Notre équipe de conseillers spécialisés se fera un plaisir de vous accompagner dans vos projets.
               </p>
 
               <div className="space-y-6">
@@ -95,7 +95,7 @@ const Contact = () => {
             <div>
               <h2 className="text-3xl font-bold mb-6 text-supreme-primary">Formulaire de Contact</h2>
               <p className="text-lg mb-8 text-gray-700">
-                Remplissez le formulaire ci-dessous pour nous faire part de votre demande. Nous vous répondrons dans les plus brefs délais.
+                Remplissez le formulaire ci-dessous pour nous faire part de votre projet. Un conseiller vous recontactera dans les 24h pour étudier votre demande.
               </p>
               <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
                 <ContactForm />
@@ -108,7 +108,7 @@ const Contact = () => {
       {/* FAQ Section */}
       <section className="section-padding bg-supreme-light">
         <div className="container-custom">
-          <h2 className="text-3xl font-bold mb-8 text-supreme-primary text-center">Questions Fréquentes</h2>
+          <h2 className="text-3xl font-bold mb-8 text-supreme-primary text-center">Questions Fréquemment Posées</h2>
           
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white rounded-lg p-6 shadow-md">

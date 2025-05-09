@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,21 +58,21 @@ const ContactForm = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-            Nom complet *
+            Nom et prénom *
           </label>
           <Input
             id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Votre nom"
+            placeholder="Entrez votre nom complet"
             required
           />
         </div>
 
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email *
+            Adresse email *
           </label>
           <Input
             id="email"
@@ -81,7 +80,7 @@ const ContactForm = () => {
             type="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="votre@email.com"
+            placeholder="exemple@email.com"
             required
           />
         </div>
@@ -95,13 +94,13 @@ const ContactForm = () => {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="01 23 45 67 89"
+            placeholder="06 12 34 56 78"
           />
         </div>
 
         <div className="space-y-2">
           <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
-            Sujet *
+            Objet de votre demande *
           </label>
           <select
             id="subject"
@@ -112,26 +111,26 @@ const ContactForm = () => {
             required
           >
             <option value="" disabled>
-              Sélectionnez un sujet
+              Choisissez l'objet de votre demande
             </option>
-            <option value="devis">Demande de devis</option>
-            <option value="information">Demande d'information</option>
+            <option value="devis">Demande de devis gratuit</option>
+            <option value="information">Information sur nos services</option>
             <option value="rendez-vous">Prise de rendez-vous</option>
-            <option value="autre">Autre</option>
+            <option value="autre">Autre demande</option>
           </select>
         </div>
       </div>
 
       <div className="space-y-2">
         <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-          Message *
+          Votre message *
         </label>
         <Textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Votre message ici..."
+          placeholder="Décrivez votre projet ou votre demande en quelques mots..."
           rows={5}
           required
         />
@@ -148,8 +147,7 @@ const ContactForm = () => {
           htmlFor="consent"
           className="text-sm text-gray-600 leading-tight cursor-pointer"
         >
-          J'accepte que mes données soient traitées dans le cadre de ma demande
-          conformément à la politique de confidentialité de SupremEnergies.
+          J'accepte que mes informations soient utilisées pour me contacter dans le cadre de ma demande et conformément à la politique de confidentialité de SupremEnergies.
         </label>
       </div>
 
@@ -158,7 +156,7 @@ const ContactForm = () => {
         className="w-full bg-supreme-primary hover:bg-supreme-primary/90 text-white py-6 rounded-md text-lg"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Envoi en cours..." : "Envoyer"}
+        {isSubmitting ? "Envoi en cours..." : "Envoyer ma demande"}
       </Button>
     </form>
   );
