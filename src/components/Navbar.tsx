@@ -47,7 +47,7 @@ const Navbar = () => {
           <span className={`text-2xl font-bold ${
             scrolled || isOpen
               ? "text-supreme-primary"
-              : "text-white"
+              : "text-supreme-accent"
           } transition-colors`}>
             SupremEnergies
           </span>
@@ -64,7 +64,7 @@ const Navbar = () => {
                   ? "text-supreme-primary"
                   : scrolled
                     ? "text-gray-800"
-                    : "text-white"
+                    : "text-supreme-accent font-semibold"
               }`}
             >
               {link.name}
@@ -83,7 +83,7 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           className={`md:hidden ${
-            scrolled || isOpen ? "text-gray-800" : "text-white"
+            scrolled || isOpen ? "text-gray-800" : "text-supreme-accent"
           } hover:text-supreme-primary`}
           onClick={toggleMenu}
         >
