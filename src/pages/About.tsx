@@ -129,80 +129,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* Notre Équipe */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <SectionHeader 
-            title="Notre Équipe" 
-            subtitle="Une équipe d'experts passionnés et qualifiés, dédiés à la réussite de vos projets de rénovation énergétique."
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {/* Team Member 1 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-100">
-              <div className="aspect-square">
-                <img 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
-                  alt="Pierre Durand" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4 text-center">
-                <h3 className="text-xl font-semibold">Pierre Durand</h3>
-                <p className="text-supreme-primary font-medium">Directeur Général</p>
-              </div>
-            </div>
-
-            {/* Team Member 2 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-100">
-              <div className="aspect-square">
-                <img 
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" 
-                  alt="Marie Laurent" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4 text-center">
-                <h3 className="text-xl font-semibold">Marie Laurent</h3>
-                <p className="text-supreme-primary font-medium">Directrice Technique</p>
-              </div>
-            </div>
-
-            {/* Team Member 3 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-100">
-              <div className="aspect-square">
-                <img 
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-                  alt="Thomas Martin" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4 text-center">
-                <h3 className="text-xl font-semibold">Thomas Martin</h3>
-                <p className="text-supreme-primary font-medium">Chef de Projet</p>
-              </div>
-            </div>
-
-            {/* Team Member 4 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-100">
-              <div className="aspect-square">
-                <img 
-                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" 
-                  alt="Sophie Bernard" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4 text-center">
-                <h3 className="text-xl font-semibold">Sophie Bernard</h3>
-                <p className="text-supreme-primary font-medium">Conseillère Commerciale</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Certifications */}
-      <section className="section-padding">
+      <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
