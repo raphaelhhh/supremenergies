@@ -140,8 +140,10 @@ const About = () => {
               </p>
               <div className="space-y-4">
                 <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                  <div className="bg-supreme-light p-3 rounded-full">
-                    <Shield className="h-8 w-8 text-supreme-primary" />
+                  <div className="h-16 w-16 flex-shrink-0">
+                    <img src="https://www.qualit-enr.org/wp-content/uploads/2021/11/RGE_Quali_EnR_2022_RVB.png" 
+                         alt="Certification RGE" 
+                         className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Certification RGE</h3>
@@ -149,8 +151,10 @@ const About = () => {
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                  <div className="bg-supreme-light p-3 rounded-full">
-                    <Award className="h-8 w-8 text-supreme-primary" />
+                  <div className="h-16 w-16 flex-shrink-0">
+                    <img src="https://www.qualibat.com/wp-content/uploads/2021/08/logo-qualibat-rge.jpg" 
+                         alt="Qualibat" 
+                         className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Qualibat</h3>
@@ -158,8 +162,10 @@ const About = () => {
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                  <div className="bg-supreme-light p-3 rounded-full">
-                    <Users className="h-8 w-8 text-supreme-primary" />
+                  <div className="h-16 w-16 flex-shrink-0">
+                    <img src="https://www.qualit-enr.org/wp-content/uploads/2021/11/QualiSol_RGE_2022_RVB.png" 
+                         alt="Qualisol" 
+                         className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Qualisol</h3>
@@ -167,8 +173,10 @@ const About = () => {
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                  <div className="bg-supreme-light p-3 rounded-full">
-                    <CheckCircle2 className="h-8 w-8 text-supreme-primary" />
+                  <div className="h-16 w-16 flex-shrink-0">
+                    <img src="https://www.qualit-enr.org/wp-content/uploads/2021/11/QualiPAC_RGE_2022_RVB.png" 
+                         alt="Qualipac" 
+                         className="w-full h-full object-contain" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Qualipac</h3>
