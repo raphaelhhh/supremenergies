@@ -152,28 +152,49 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Certifications Section */}
+        {/* Certifications Section with Real RGE Logos */}
         <div className="py-6 border-t border-gray-800">
-          <div className="flex flex-wrap items-center justify-center md:justify-between gap-4">
-            <div className="flex items-center space-x-2">
-              <CheckCircle2 className="text-supreme-accent" />
-              <span className="text-gray-300">RGE Qualibat</span>
+          <h4 className="text-center text-lg font-medium mb-4 text-white">Nos certifications</h4>
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+            <div className="flex flex-col items-center">
+              <img 
+                src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALI_PAC_RGE-220x220-1.png" 
+                alt="QualiPAC RGE" 
+                className="h-16 object-contain bg-white p-1 rounded"
+              />
+              <span className="text-gray-300 text-xs mt-1">QualiPAC</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle2 className="text-supreme-accent" />
-              <span className="text-gray-300">QualiPV</span>
+            <div className="flex flex-col items-center">
+              <img 
+                src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALISOL_RGE-220x220-1.png" 
+                alt="QualiSol RGE" 
+                className="h-16 object-contain bg-white p-1 rounded"
+              />
+              <span className="text-gray-300 text-xs mt-1">QualiSol</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle2 className="text-supreme-accent" />
-              <span className="text-gray-300">QualiPAC</span>
+            <div className="flex flex-col items-center">
+              <img 
+                src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALIBOIS_RGE-220x220-1.png" 
+                alt="QualiBois RGE" 
+                className="h-16 object-contain bg-white p-1 rounded"
+              />
+              <span className="text-gray-300 text-xs mt-1">QualiBois</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle2 className="text-supreme-accent" />
-              <span className="text-gray-300">Qualibois</span>
+            <div className="flex flex-col items-center">
+              <img 
+                src="https://www.qualibat.com/wp-content/uploads/2022/09/logo-qualibat-rge.png" 
+                alt="Qualibat RGE" 
+                className="h-16 object-contain bg-white p-1 rounded"
+              />
+              <span className="text-gray-300 text-xs mt-1">Qualibat RGE</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <CheckCircle2 className="text-supreme-accent" />
-              <span className="text-gray-300">NF Habitat</span>
+            <div className="flex flex-col items-center">
+              <img 
+                src="https://particuliers.qualit-enr.org/wp-content/uploads/2022/11/Logotype-QualiPV-RGE-transparence.png" 
+                alt="QualiPV RGE" 
+                className="h-16 object-contain bg-white p-1 rounded"
+              />
+              <span className="text-gray-300 text-xs mt-1">QualiPV</span>
             </div>
           </div>
         </div>
