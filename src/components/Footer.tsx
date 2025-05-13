@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Facebook, Instagram, Linkedin, Twitter, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Mail, MapPin, Facebook, Instagram, Linkedin, Twitter, ArrowRight } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -160,7 +160,7 @@ const Footer = () => {
               <img 
                 src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALI_PAC_RGE-220x220-1.png" 
                 alt="QualiPAC RGE" 
-                className="h-16 object-contain bg-white p-1 rounded"
+                className="h-20 object-contain bg-white p-1 rounded"
               />
               <span className="text-gray-300 text-xs mt-1">QualiPAC</span>
             </div>
@@ -168,7 +168,7 @@ const Footer = () => {
               <img 
                 src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALISOL_RGE-220x220-1.png" 
                 alt="QualiSol RGE" 
-                className="h-16 object-contain bg-white p-1 rounded"
+                className="h-20 object-contain bg-white p-1 rounded"
               />
               <span className="text-gray-300 text-xs mt-1">QualiSol</span>
             </div>
@@ -176,7 +176,7 @@ const Footer = () => {
               <img 
                 src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALIBOIS_RGE-220x220-1.png" 
                 alt="QualiBois RGE" 
-                className="h-16 object-contain bg-white p-1 rounded"
+                className="h-20 object-contain bg-white p-1 rounded"
               />
               <span className="text-gray-300 text-xs mt-1">QualiBois</span>
             </div>
@@ -184,7 +184,7 @@ const Footer = () => {
               <img 
                 src="https://www.qualibat.com/wp-content/uploads/2022/09/logo-qualibat-rge.png" 
                 alt="Qualibat RGE" 
-                className="h-16 object-contain bg-white p-1 rounded"
+                className="h-20 object-contain bg-white p-1 rounded"
               />
               <span className="text-gray-300 text-xs mt-1">Qualibat RGE</span>
             </div>
@@ -192,7 +192,7 @@ const Footer = () => {
               <img 
                 src="https://particuliers.qualit-enr.org/wp-content/uploads/2022/11/Logotype-QualiPV-RGE-transparence.png" 
                 alt="QualiPV RGE" 
-                className="h-16 object-contain bg-white p-1 rounded"
+                className="h-20 object-contain bg-white p-1 rounded"
               />
               <span className="text-gray-300 text-xs mt-1">QualiPV</span>
             </div>
