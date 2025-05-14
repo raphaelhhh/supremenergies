@@ -93,10 +93,10 @@ const Index = () => {
   ];
 
   const stats = [
-    { value: "5000+", label: "Clients satisfaits" },
-    { value: "99%", label: "Taux de satisfaction" },
-    { value: "40%", label: "Économies moyennes" },
-    { value: "15+", label: "Années d'expérience" }
+    { value: "En croissance", label: "Clients satisfaits" },
+    { value: "Excellent", label: "Taux de satisfaction" },
+    { value: "Significatif", label: "Économies moyennes" },
+    { value: "Expert", label: "Niveau d'expérience" }
   ];
 
   const values = [
@@ -138,7 +138,7 @@ const Index = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat, index) => (
               <div key={index} className="p-6 rounded-lg backdrop-blur-sm bg-white/5 border border-white/10 transition-transform hover:scale-105">
-                <div className="text-4xl font-bold mb-3">{stat.value}</div>
+                <div className="text-2xl font-bold mb-3">{stat.value}</div>
                 <div className="text-white/90 font-medium">{stat.label}</div>
               </div>
             ))}
