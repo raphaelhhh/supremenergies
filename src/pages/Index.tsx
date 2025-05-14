@@ -129,13 +129,17 @@ const Index = () => {
       />
 
       {/* Stats Section */}
-      <section className="py-12 bg-supreme-primary text-white">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <section className="py-16 bg-gradient-to-r from-supreme-secondary to-supreme-primary text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-10">
+          <div className="absolute right-0 top-0 w-80 h-80 bg-white rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+          <div className="absolute left-0 bottom-0 w-80 h-80 bg-white rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
+        </div>
+        <div className="container-custom relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat, index) => (
-              <div key={index} className="p-4">
-                <div className="text-4xl font-bold mb-2">{stat.value}</div>
-                <div className="text-white/80">{stat.label}</div>
+              <div key={index} className="p-6 rounded-lg backdrop-blur-sm bg-white/5 border border-white/10 transition-transform hover:scale-105">
+                <div className="text-4xl font-bold mb-3">{stat.value}</div>
+                <div className="text-white/90 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
