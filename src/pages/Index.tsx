@@ -93,10 +93,10 @@ const Index = () => {
   ];
 
   const stats = [
-    { value: "1500+", label: "Clients satisfaits" },
-    { value: "98%", label: "Taux de satisfaction" },
-    { value: "30%", label: "Économies moyennes" },
-    { value: "10+", label: "Années d'expérience" }
+    { value: "5000+", label: "Clients satisfaits" },
+    { value: "99%", label: "Taux de satisfaction" },
+    { value: "40%", label: "Économies moyennes" },
+    { value: "15+", label: "Années d'expérience" }
   ];
 
   const values = [
