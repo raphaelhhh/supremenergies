@@ -160,7 +160,7 @@ const Footer = () => {
             <div className="flex flex-col items-center">
               <div className="bg-white p-2 rounded flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
                 <img 
-                  src="https://github.com/raphaelhhh/supremenergies/raw/main/src/components/logo-QualiPAC-2025-RGE_sc.png" 
+                  src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/components/logo-QualiPAC-2025-RGE_sc.png" 
                   alt="QualiPAC RGE" 
                   className="max-w-full max-h-full object-contain"
                 />
