@@ -160,7 +160,7 @@ const Footer = () => {
             <div className="flex flex-col items-center">
               <div className="bg-white p-2 rounded flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
                 <img 
-                  src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALI_PAC_RGE-220x220-1.png" 
+                  src="https://www.google.com/search?sca_esv=1bbf12dcdfda0a2c&rlz=1C5CHFA_enFR877FR879&sxsrf=AHTn8zpGZJ2INGZB22WjzVqPOA7yB3CAZA:1747233840968&q=rge+qualipac&udm=2&fbs=ABzOT_BnMAgCWdhr5zilP5f1cnRvJ3SHQcDVxkdpDyHwlRhdNfno-ClRh0PKqyvFYyTkfIfJOoyi6rL2ScSJ67dNoiLlma6nffqoENgGX1Qo-QK1HEFg3ItZnm6x0TVwu0vcGVLvKsTHoTPzsjl_vfkMTseLPtEAPAxx8yNBq8YShV_TbB2QQ98UL-rud6c8jEJL-mQnahUL&sa=X&ved=2ahUKEwiqv7ijmaONAxVvTaQEHbQIIV4QtKgLegQIGhAB&biw=1920&bih=958&dpr=1#vhid=rP0rT9eoO9xqxM&vssid=mosaic" 
                   alt="QualiPAC RGE" 
                   className="max-w-full max-h-full object-contain"
                 />
