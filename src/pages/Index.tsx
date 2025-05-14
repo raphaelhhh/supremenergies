@@ -1,4 +1,3 @@
-
 import Hero from "@/components/Hero";
 import SectionHeader from "@/components/SectionHeader";
 import ServiceCard from "@/components/ServiceCard";
@@ -124,7 +123,7 @@ const Index = () => {
         subtitle="Experts en rénovation énergétique pour un avenir plus durable et économique"
         buttonText="Découvrir nos solutions"
         buttonLink="/services"
-        imageSrc="/lovable-uploads/1f265e75-25a0-4d31-a5a9-181684274f50.png"
+        imageSrc="https://images.unsplash.com/photo-1613979912728-a41851e28a6a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
         imageAlt="Rénovation énergétique et isolation thermique"
       />
 
