@@ -158,51 +158,51 @@ const Footer = () => {
           <h4 className="text-center text-lg font-medium mb-4 text-white">Nos certifications</h4>
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
             <div className="flex flex-col items-center">
-              <div className="bg-white p-2 rounded flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
+              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
                 <img 
                   src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/components/logo-QualiPAC-2025-RGE_sc.png" 
                   alt="QualiPAC RGE" 
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-full max-h-full object-contain drop-shadow-md"
                 />
               </div>
               <span className="text-gray-300 text-xs mt-1">QualiPAC</span>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-white p-2 rounded flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
+              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
                 <img 
                   src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALISOL_RGE-220x220-1.png" 
                   alt="QualiSol RGE" 
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-full max-h-full object-contain drop-shadow-md"
                 />
               </div>
               <span className="text-gray-300 text-xs mt-1">QualiSol</span>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-white p-2 rounded flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
+              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
                 <img 
                   src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALIBOIS_RGE-220x220-1.png" 
                   alt="QualiBois RGE" 
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-full max-h-full object-contain drop-shadow-md"
                 />
               </div>
               <span className="text-gray-300 text-xs mt-1">QualiBois</span>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-white p-2 rounded flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
+              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
                 <img 
                   src="https://www.qualibat.com/wp-content/uploads/2022/09/logo-qualibat-rge.png" 
                   alt="Qualibat RGE" 
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-full max-h-full object-contain drop-shadow-md"
                 />
               </div>
               <span className="text-gray-300 text-xs mt-1">Qualibat RGE</span>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-white p-2 rounded flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
+              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
                 <img 
                   src="https://particuliers.qualit-enr.org/wp-content/uploads/2022/11/Logotype-QualiPV-RGE-transparence.png" 
                   alt="QualiPV RGE" 
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-full max-h-full object-contain drop-shadow-md"
                 />
               </div>
               <span className="text-gray-300 text-xs mt-1">QualiPV</span>
