@@ -1,10 +1,7 @@
-
 import { Link } from "react-router-dom";
 import { Mail, MapPin, Facebook, Instagram, Linkedin, Twitter, ArrowRight } from "lucide-react";
-
 const Footer = () => {
-  return (
-    <footer className="bg-gray-900 text-white">
+  return <footer className="bg-gray-900 text-white">
       <div className="container-custom">
         {/* Newsletter Section */}
         <div className="py-10 border-b border-gray-800">
@@ -17,16 +14,8 @@ const Footer = () => {
             </div>
             <div>
               <form className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  placeholder="Votre adresse email"
-                  className="flex-grow p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-supreme-primary"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-supreme-primary hover:bg-supreme-primary/90 text-white px-6 py-3 rounded-md transition-colors flex-shrink-0 flex items-center justify-center"
-                >
+                <input type="email" placeholder="Votre adresse email" className="flex-grow p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-supreme-primary" required />
+                <button type="submit" className="bg-supreme-primary hover:bg-supreme-primary/90 text-white px-6 py-3 rounded-md transition-colors flex-shrink-0 flex items-center justify-center">
                   S'inscrire <ArrowRight size={16} className="ml-2" />
                 </button>
               </form>
@@ -158,54 +147,49 @@ const Footer = () => {
           <h4 className="text-center text-lg font-medium mb-4 text-white">Nos certifications</h4>
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
             <div className="flex flex-col items-center">
-              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
-                <img 
-                  src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/components/logo-QualiPAC-2025-RGE_sc.png" 
-                  alt="QualiPAC RGE" 
-                  className="max-w-full max-h-full object-contain drop-shadow-md"
-                />
+              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{
+              width: '120px',
+              height: '120px'
+            }}>
+                <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/components/logo-QualiPAC-2025-RGE_sc.png" alt="QualiPAC RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
               </div>
-              <span className="text-gray-300 text-xs mt-1">QualiPAC</span>
+              <span className="text-gray-300 text-xs mt-1"></span>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
-                <img 
-                  src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALISOL_RGE-220x220-1.png" 
-                  alt="QualiSol RGE" 
-                  className="max-w-full max-h-full object-contain drop-shadow-md"
-                />
+              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{
+              width: '120px',
+              height: '120px'
+            }}>
+                <img src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALISOL_RGE-220x220-1.png" alt="QualiSol RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
               </div>
-              <span className="text-gray-300 text-xs mt-1">QualiSol</span>
+              <span className="text-gray-300 text-xs mt-1"></span>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
-                <img 
-                  src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALIBOIS_RGE-220x220-1.png" 
-                  alt="QualiBois RGE" 
-                  className="max-w-full max-h-full object-contain drop-shadow-md"
-                />
+              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{
+              width: '120px',
+              height: '120px'
+            }}>
+                <img src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALIBOIS_RGE-220x220-1.png" alt="QualiBois RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
               </div>
-              <span className="text-gray-300 text-xs mt-1">QualiBois</span>
+              <span className="text-gray-300 text-xs mt-1"></span>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
-                <img 
-                  src="https://www.qualibat.com/wp-content/uploads/2022/09/logo-qualibat-rge.png" 
-                  alt="Qualibat RGE" 
-                  className="max-w-full max-h-full object-contain drop-shadow-md"
-                />
+              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{
+              width: '120px',
+              height: '120px'
+            }}>
+                <img src="https://www.qualibat.com/wp-content/uploads/2022/09/logo-qualibat-rge.png" alt="Qualibat RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
               </div>
-              <span className="text-gray-300 text-xs mt-1">Qualibat RGE</span>
+              <span className="text-gray-300 text-xs mt-1"></span>
             </div>
             <div className="flex flex-col items-center">
-              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{ width: '120px', height: '120px' }}>
-                <img 
-                  src="https://particuliers.qualit-enr.org/wp-content/uploads/2022/11/Logotype-QualiPV-RGE-transparence.png" 
-                  alt="QualiPV RGE" 
-                  className="max-w-full max-h-full object-contain drop-shadow-md"
-                />
+              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{
+              width: '120px',
+              height: '120px'
+            }}>
+                <img src="https://particuliers.qualit-enr.org/wp-content/uploads/2022/11/Logotype-QualiPV-RGE-transparence.png" alt="QualiPV RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
               </div>
-              <span className="text-gray-300 text-xs mt-1">QualiPV</span>
+              <span className="text-gray-300 text-xs mt-1"></span>
             </div>
           </div>
         </div>
@@ -222,8 +206,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
