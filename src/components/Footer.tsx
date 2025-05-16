@@ -178,7 +178,7 @@ const Footer = () => {
               width: '120px',
               height: '120px'
             }}>
-                <img src="https://www.qualibat.com/wp-content/uploads/2022/09/logo-qualibat-rge.png" alt="Qualibat RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
+                <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/components/download-Photoroom%20(1).png" alt="Qualibat RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
               </div>
               <span className="text-gray-300 text-xs mt-1"></span>
             </div>
