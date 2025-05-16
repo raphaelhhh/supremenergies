@@ -160,7 +160,7 @@ const Footer = () => {
               width: '120px',
               height: '120px'
             }}>
-                <img src="https://www.qualit-enr.org/wp-content/uploads/2021/09/QUALISOL_RGE-220x220-1.png" alt="QualiSol RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
+                <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/components/download-Photoroom.png" alt="QualiSol RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
               </div>
               <span className="text-gray-300 text-xs mt-1"></span>
             </div>
