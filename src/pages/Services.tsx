@@ -145,7 +145,7 @@ const Services = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="https://images.pexels.com/photos/5591874/pexels-photo-5591874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/gettyimages-2160605901-612x612.jpg" 
                 alt="Pompes à Chaleur"
                 className="w-full h-full object-cover"
               />
