@@ -208,10 +208,6 @@ const Services = () => {
               <div className="flex items-center mb-4">
                 <Droplets className="w-8 h-8 text-supreme-primary mr-2" />
                 <h2 className="text-3xl md:text-4xl font-bold text-supreme-primary">Eau Chaude Sanitaire</h2>
-                <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/images_upscayl_5x_ultramix-balanced-4x.png" alt="upscayl image"
-                     alt="Eau Chaude Sanitaire"
-                className="w-full h-full object-cover"
-              />
               </div>
               <p className="text-lg mb-6 text-gray-700">
                 La production d'eau chaude sanitaire peut représenter jusqu'à 30% de votre consommation d'énergie. Nos solutions permettent de réduire cette consommation tout en garantissant votre confort au quotidien.
@@ -255,11 +251,10 @@ const Services = () => {
               </Button>
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
-              <img 
-                src="https://images.pexels.com/photos/5824538/pexels-photo-5824538.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                alt="Eau Chaude Sanitaire"
+                  <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/images_upscayl_5x_ultramix-balanced-4x.png" alt="upscayl image"
+                     alt="Eau Chaude Sanitaire"
                 className="w-full h-full object-cover"
-              />
+              />   
             </div>
           </div>
         </div>
