@@ -187,7 +187,7 @@ const Footer = () => {
               width: '120px',
               height: '120px'
             }}>
-                <img src="https://particuliers.qualit-enr.org/wp-content/uploads/2022/11/Logotype-QualiPV-RGE-transparence.png" alt="QualiPV RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
+                <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/download-Photoroom123456.png" alt="QualiPV RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
               </div>
               <span className="text-gray-300 text-xs mt-1"></span>
             </div>
