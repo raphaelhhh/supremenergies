@@ -23,7 +23,7 @@ const Index = () => {
       description: "Des systèmes performants et économiques pour chauffer votre habitation tout en réduisant votre consommation d'énergie.",
       icon: <Home size={32} />,
       link: "/services#chauffage",
-      imageUrl: "https://images.unsplash.com/photo-1617712845765-205503c01957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      imageUrl: "https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/gettyimages-2214842911-612x612.jpg"
     },
     {
       title: "Eau Chaude Sanitaire",
