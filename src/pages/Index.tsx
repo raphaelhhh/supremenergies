@@ -30,7 +30,7 @@ const Index = () => {
       description: "Chauffe-eau thermodynamiques et systèmes solaires combinés pour une eau chaude économique et écologique.",
       icon: <Droplets size={32} />,
       link: "/services#eau-chaude",
-      imageUrl: "https://images.unsplash.com/photo-1585417239767-4a89f9dc7e37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      imageUrl: "https://github.com/raphaelhhh/supremenergies/raw/main/src/pages/chauffe-eau-electrique-blanc-mince-moderne-mur-beton_241146-2250.avif"
     },
     {
       title: "Panneaux Solaires",
