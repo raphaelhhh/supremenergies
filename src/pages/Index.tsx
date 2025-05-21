@@ -231,7 +231,7 @@ const Index = () => {
             </div>
             <div className="order-1 md:order-2 rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1603190287605-e6ade32fa852?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                src="https://github.com/raphaelhhh/supremenergies/raw/main/src/pages/serrer-main-collegues-sourire-pour-reunion-dans-accord-bureau-vous-remercier-pour-affaires-collaboration-hommes-serrer-main-pour-travail-equipe-dans-projet-heureux-fusion-entreprise-pour-conception_590464-403903.avif" 
                 alt="Équipe SupremEnergies"
                 className="w-full h-full object-cover"
               />
