@@ -130,7 +130,7 @@ const Services = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="public/lovable-uploads/590f8f79-d20f-4345-b2ea-79fa7f2a352b.png" 
+                src="https://github.com/raphaelhhh/supremenergies/raw/main/src/pages/travailleur-lunettes-protection-respirateur-isolant-isolant-laine-roche-dans-cadre-bois-pour-futurs-murs-maison-pour-barriere-contre-froid-concept-accueil-economie-construction-renovation-chaleureux-confortable_127089-6625.avif" 
                 alt="Isolation Thermique par l'extérieur"
                 className="w-full h-full object-cover"
               />
