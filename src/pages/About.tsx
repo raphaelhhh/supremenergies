@@ -35,7 +35,6 @@ const About = () => {
         subtitle="Découvrez qui nous sommes et comment nous contribuons à un avenir plus durable grâce à nos solutions de rénovation énergétique."
         buttonText="Nos services"
         buttonLink="/services"
-        imageSrc="https://images.unsplash.com/photo-1461988625982-7e46a099bf4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
       />
 
       {/* Notre Histoire */}
