@@ -48,7 +48,7 @@ const Services = () => {
         subtitle="Des solutions complètes et efficaces pour réduire votre consommation d'énergie et améliorer votre confort."
         buttonText="Demander un devis"
         buttonLink="/contact"
-        imageSrc="public/lovable-uploads/590f8f79-d20f-4345-b2ea-79fa7f2a352b.png" // Image d'isolation par l'extérieur que vous avez fournie
+        imageSrc="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/coup-moyen-personnes-travaillant-casques_23-2149343697.avif" // Image d'isolation par l'extérieur que vous avez fournie
         imageAlt="Isolation thermique par l'extérieur et des combles"
       />
 
