@@ -92,13 +92,6 @@ const Index = () => {
     }
   ];
 
-  const stats = [
-    { value: "En croissance", label: "Clients satisfaits" },
-    { value: "Excellent", label: "Taux de satisfaction" },
-    { value: "Significatif", label: "Économies moyennes" },
-    { value: "Expert", label: "Niveau d'expérience" }
-  ];
-
   const values = [
     {
       title: "Engagement écologique",
@@ -127,24 +120,6 @@ const Index = () => {
         imageSrc="/lovable-uploads/1f265e75-25a0-4d31-a5a9-181684274f50.png"
         imageAlt="Rénovation énergétique et isolation thermique"
       />
-
-      {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-supreme-secondary to-supreme-primary text-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10">
-          <div className="absolute right-0 top-0 w-80 h-80 bg-white rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
-          <div className="absolute left-0 bottom-0 w-80 h-80 bg-white rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
-        </div>
-        <div className="container-custom relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map((stat, index) => (
-              <div key={index} className="p-6 rounded-lg backdrop-blur-sm bg-white/5 border border-white/10 transition-transform hover:scale-105">
-                <div className="text-2xl font-bold mb-3">{stat.value}</div>
-                <div className="text-white/90 font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Services Section */}
       <section className="section-padding">
