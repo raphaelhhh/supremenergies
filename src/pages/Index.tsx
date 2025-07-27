@@ -50,21 +50,21 @@ const Index = () => {
 
   const testimonials = [
     {
-      name: "Marie Dupont",
-      role: "Propriétaire à Paris",
-      testimonial: "Grâce à SupremEnergies, nous avons réduit nos factures d'énergie de 40%. L'équipe a été professionnelle et efficace du début à la fin.",
+      name: "M. Bernard",
+      role: "Propriétaire maison individuelle",
+      testimonial: "Installation rapide et propre. Les techniciens ont bien expliqué le fonctionnement de la pompe à chaleur. On commence à voir la différence sur les factures.",
+      rating: 4
+    },
+    {
+      name: "Famille Rousseau", 
+      role: "Propriétaires depuis 8 ans",
+      testimonial: "Nous hésitions pour l'isolation des combles. Finalement très content du résultat, la maison garde mieux la chaleur cet hiver.",
       rating: 5
     },
     {
-      name: "Jean Martin",
-      role: "Dirigeant d'entreprise",
-      testimonial: "Excellent accompagnement pour la rénovation énergétique de nos locaux. Travail soigné et équipe à l'écoute de nos besoins spécifiques.",
-      rating: 5
-    },
-    {
-      name: "Sophie Leroux",
-      role: "Propriétaire à Lyon",
-      testimonial: "Je recommande vivement SupremEnergies pour leur expertise et leur service client exceptionnel. Installation de panneaux solaires parfaite !",
+      name: "Mme Petit",
+      role: "Retraitée",
+      testimonial: "Service sérieux, devis clair. L'installateur a pris le temps de tout expliquer pour les aides financières. Ça aide beaucoup à notre âge.",
       rating: 4
     }
   ];
