@@ -251,8 +251,7 @@ const Services = () => {
               </Button>
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
-                  <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/images_upscayl_5x_ultramix-balanced-4x.png" alt="upscayl image"
-                     alt="Eau Chaude Sanitaire"
+                  <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/images_upscayl_5x_ultramix-balanced-4x.png" alt="Eau Chaude Sanitaire"
                 className="w-full h-full object-cover"
               />   
             </div>
