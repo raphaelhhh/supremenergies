@@ -117,7 +117,7 @@ const Index = () => {
         subtitle="Experts en rénovation énergétique pour un avenir plus durable et économique"
         buttonText="Découvrir nos solutions"
         buttonLink="/services"
-        imageSrc="/src/assets/hero-maison-renovation.jpg"
+        imageSrc="/src/assets/hero-maison-sans-personnes.jpg"
         imageAlt="Rénovation énergétique et isolation thermique"
       />
 
