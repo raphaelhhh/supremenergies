@@ -31,6 +31,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-lg">Adresse</h3>
                     <p className="text-gray-600">55 rue cartier bresson, 93500 pantin, France</p>
+                    <p className="text-gray-600">Téléphone: 01 86 04 68 89</p>
                   </div>
                 </div>
 
@@ -55,7 +56,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-lg">Horaires d'ouverture</h3>
                     <p className="text-gray-600">Lundi - Vendredi: 9h00 - 18h00</p>
-                    <p className="text-gray-600">Samedi: 9h00 - 12h00</p>
+                    <p className="text-gray-600">Samedi: Fermé</p>
                     <p className="text-gray-600">Dimanche: Fermé</p>
                   </div>
                 </div>
@@ -99,7 +100,7 @@ const Contact = () => {
             <div className="bg-white rounded-lg p-6 shadow-md">
               <h3 className="text-xl font-semibold mb-3">Comment obtenir un devis ?</h3>
               <p className="text-gray-600">
-                Vous pouvez obtenir un devis gratuit en remplissant notre formulaire de contact, en nous appelant directement ou en nous rendant visite dans nos bureaux. Un conseiller prendra contact avec vous pour organiser une visite technique si nécessaire.
+                Vous pouvez obtenir un devis gratuit en remplissant notre formulaire de contact ou en nous contactant par mail. Un conseiller prendra contact avec vous pour organiser une visite technique si nécessaire.
               </p>
             </div>
 
@@ -125,9 +126,9 @@ const Contact = () => {
             </div>
 
             <div className="bg-white rounded-lg p-6 shadow-md">
-              <h3 className="text-xl font-semibold mb-3">Êtes-vous certifiés RGE ?</h3>
+              <h3 className="text-xl font-semibold mb-3">Quelles garanties proposez-vous ?</h3>
               <p className="text-gray-600">
-                Oui, SupremEnergies est certifiée RGE (Reconnu Garant de l'Environnement), ce qui garantit notre expertise et vous permet de bénéficier des aides financières pour vos travaux de rénovation énergétique.
+                Nous proposons une garantie décennale sur tous nos travaux d'installation et une garantie de parfait achèvement d'un an. De plus, nous travaillons exclusivement avec des équipementiers reconnus offrant leurs propres garanties constructeur.
               </p>
             </div>
 

@@ -44,13 +44,13 @@ const About = () => {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-supreme-primary">Notre Histoire</h2>
               <p className="text-lg mb-4 text-gray-700">
-                Fondée en 2010, SupremEnergies est née de la vision d'un groupe d'experts en efficacité énergétique qui souhaitaient offrir des solutions innovantes et durables pour réduire l'empreinte carbone des bâtiments.
+                Née d'une structure parisienne réunissant des experts passionnés par la performance énergétique, SupremEnergies s'est construite autour d'une vision claire : proposer des solutions innovantes et durables pour réduire l'empreinte carbone des bâtiments.
               </p>
               <p className="text-lg mb-4 text-gray-700">
-                Au fil des années, nous avons développé notre expertise dans différents domaines de la rénovation énergétique, de l'isolation thermique à l'installation de systèmes de production d'énergie renouvelable.
+                Portée par une forte exigence technique et un engagement écologique, notre équipe a progressivement élargi ses domaines d'expertise, de l'isolation thermique à l'installation de systèmes à énergie renouvelable.
               </p>
               <p className="text-lg mb-4 text-gray-700">
-                Aujourd'hui, SupremEnergies est reconnue comme un acteur majeur de la transition énergétique en France, avec plus de 1000 projets réalisés pour des particuliers et des entreprises.
+                Aujourd'hui, SupremEnergies s'impose comme un acteur incontournable de la transition énergétique en France, avec plus de 1000 projets menés à bien auprès de particuliers comme d'entreprises.
               </p>
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
