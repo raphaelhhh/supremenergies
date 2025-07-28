@@ -34,12 +34,37 @@ const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.consent) {
+      toast.error("Vous devez accepter la politique de confidentialité pour continuer.");
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simuler un envoi de formulaire
-    setTimeout(() => {
+    try {
+      const zapierData = {
+        timestamp: new Date().toISOString(),
+        nom: formData.name,
+        email: formData.email,
+        telephone: formData.phone,
+        sujet: formData.subject,
+        message: formData.message,
+        type: "Formulaire de contact",
+        source: "Site web SupremEnergies"
+      };
+
+      const response = await fetch("https://hooks.zapier.com/hooks/catch/23975075/uulr9bm/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+        body: JSON.stringify(zapierData),
+      });
+
       toast.success("Message envoyé avec succès ! Nous vous contacterons bientôt.");
       setFormData({
         name: "",
@@ -49,8 +74,12 @@ const ContactForm = () => {
         message: "",
         consent: false,
       });
+    } catch (error) {
+      console.error("Erreur lors de l'envoi:", error);
+      toast.error("Erreur lors de l'envoi. Veuillez réessayer.");
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (

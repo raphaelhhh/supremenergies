@@ -13,8 +13,42 @@ const Footer = () => {
               </p>
             </div>
             <div>
-              <form className="flex flex-col sm:flex-row gap-2">
-                <input type="email" placeholder="Votre adresse email" className="flex-grow p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-supreme-primary" required />
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                const email = formData.get('email') as string;
+                
+                if (!email) {
+                  alert('Veuillez saisir votre email');
+                  return;
+                }
+
+                try {
+                  await fetch("https://hooks.zapier.com/hooks/catch/23975075/uulr9bm/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    mode: "no-cors",
+                    body: JSON.stringify({
+                      timestamp: new Date().toISOString(),
+                      email: email,
+                      type: "Newsletter",
+                      source: "Footer site web"
+                    }),
+                  });
+                  
+                  alert('Inscription réussie !');
+                  e.currentTarget.reset();
+                } catch (error) {
+                  alert('Erreur lors de l\'inscription');
+                }
+              }} className="flex flex-col sm:flex-row gap-2">
+                <input 
+                  type="email" 
+                  name="email"
+                  placeholder="Votre adresse email" 
+                  className="flex-grow p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-supreme-primary" 
+                  required 
+                />
                 <button type="submit" className="bg-supreme-primary hover:bg-supreme-primary/90 text-white px-6 py-3 rounded-md transition-colors flex-shrink-0 flex items-center justify-center">
                   S'inscrire <ArrowRight size={16} className="ml-2" />
                 </button>
