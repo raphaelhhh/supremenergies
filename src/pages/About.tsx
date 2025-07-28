@@ -50,7 +50,7 @@ const About = () => {
                 Portée par une forte exigence technique et un engagement écologique, notre équipe a progressivement élargi ses domaines d'expertise, de l'isolation thermique à l'installation de systèmes à énergie renouvelable.
               </p>
               <p className="text-lg mb-4 text-gray-700">
-                Aujourd'hui, SupremEnergies s'impose comme un acteur incontournable de la transition énergétique en France, avec plus de 1000 projets menés à bien auprès de particuliers comme d'entreprises.
+                Aujourd'hui, SupremEnergies s'impose comme un acteur incontournable de la transition énergétique en France, avec plus de <strong>1000</strong> projets menés à bien auprès de particuliers comme d'entreprises.
               </p>
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
