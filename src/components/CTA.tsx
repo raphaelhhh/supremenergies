@@ -17,7 +17,7 @@ const CTA = ({
   title = "Prêt à réduire votre empreinte énergétique ?",
   subtitle = "Contactez-nous pour obtenir un devis personnalisé et découvrir les aides financières disponibles pour votre projet.",
   primaryButtonText = "Demander un devis",
-  primaryButtonLink = "/contact#formulaire",
+  primaryButtonLink = "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header",
   secondaryButtonText = "Nos services",
   secondaryButtonLink = "/services",
   backgroundClassName = "bg-supreme-primary",
@@ -36,10 +36,10 @@ const CTA = ({
             asChild 
             className="bg-supreme-accent hover:bg-supreme-accent/90 text-white px-6 py-6 rounded-md text-lg"
           >
-            <Link to={primaryButtonLink} className="flex items-center gap-2">
+            <a href={primaryButtonLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
               {primaryButtonText}
               <ArrowRight size={18} />
-            </Link>
+            </a>
           </Button>
           <Button 
             asChild 
