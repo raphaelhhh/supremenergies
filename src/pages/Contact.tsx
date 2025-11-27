@@ -2,15 +2,18 @@ import Hero from "@/components/Hero";
 import ContactForm from "@/components/ContactForm";
 import { Mail, MapPin, Clock } from "lucide-react";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Contact = () => {
+  const location = useLocation();
+
   useEffect(() => {
-    if (window.location.hash === '#formulaire') {
+    if (location.hash === '#formulaire') {
       setTimeout(() => {
         document.getElementById('formulaire')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 100);
     }
-  }, []);
+  }, [location]);
 
   return (
     <div>
