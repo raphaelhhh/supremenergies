@@ -1,8 +1,17 @@
 import Hero from "@/components/Hero";
 import ContactForm from "@/components/ContactForm";
 import { Mail, MapPin, Clock } from "lucide-react";
+import { useEffect } from "react";
 
 const Contact = () => {
+  useEffect(() => {
+    if (window.location.hash === '#formulaire') {
+      setTimeout(() => {
+        document.getElementById('formulaire')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }, []);
+
   return (
     <div>
       <Hero 
@@ -78,7 +87,7 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div>
+            <div id="formulaire">
               <h2 className="text-3xl font-bold mb-6 text-supreme-primary">Formulaire de Contact</h2>
               <p className="text-lg mb-8 text-gray-700">
                 Remplissez le formulaire ci-dessous pour nous faire part de votre projet. Un conseiller vous recontactera dans les 24h pour étudier votre demande.
