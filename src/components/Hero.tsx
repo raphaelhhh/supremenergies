@@ -23,7 +23,7 @@ const Hero = ({
   buttonText = "En savoir plus",
   buttonLink = "/services",
   secondaryButtonText = "Demander un devis",
-  secondaryButtonLink = "/contact",
+  secondaryButtonLink = "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header",
   imageSrc = "/lovable-uploads/1f265e75-25a0-4d31-a5a9-181684274f50.png",
   imageAlt = "Rénovation énergétique et isolation thermique",
   overlay = true,
@@ -59,7 +59,11 @@ const Hero = ({
                 </Link>
               </Button>
               <Button asChild variant="outline" className="bg-white hover:bg-gray-100 text-supreme-primary border-supreme-primary px-6 py-6 rounded-md text-lg">
-                <Link to={secondaryButtonLink}>{secondaryButtonText}</Link>
+                {secondaryButtonLink.startsWith('http') ? (
+                  <a href={secondaryButtonLink} target="_blank" rel="noopener noreferrer">{secondaryButtonText}</a>
+                ) : (
+                  <Link to={secondaryButtonLink}>{secondaryButtonText}</Link>
+                )}
               </Button>
             </div>
           </div>
