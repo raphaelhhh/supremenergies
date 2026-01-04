@@ -16,7 +16,7 @@ const BlogPost = () => {
       id: "1",
       title: "Comment choisir la meilleure isolation pour votre maison",
       excerpt: "Découvrez les différents types d'isolation et leurs avantages pour faire le choix le plus adapté à votre habitation et votre budget.",
-      date: "15 Mai 2023",
+      date: "15 Novembre 2025",
       author: "Pierre Durand",
       imageSrc: "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
       content: `
@@ -94,7 +94,7 @@ const BlogPost = () => {
       id: "2",
       title: "Les pompes à chaleur : guide complet pour comprendre leur fonctionnement",
       excerpt: "Tout ce que vous devez savoir sur les pompes à chaleur : principes de fonctionnement, différents types, avantages et points d'attention.",
-      date: "28 Avril 2023",
+      date: "28 Octobre 2025",
       author: "Marie Laurent",
       imageSrc: "https://images.unsplash.com/photo-1643756055617-608c1492f932?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
       content: `
@@ -220,9 +220,9 @@ const BlogPost = () => {
     },
     {
       id: "3",
-      title: "Les aides financières pour la rénovation énergétique en 2023",
+      title: "Les aides financières pour la rénovation énergétique en 2026",
       excerpt: "Le point sur toutes les aides disponibles cette année pour financer vos travaux de rénovation énergétique et maximiser vos économies.",
-      date: "10 Avril 2023",
+      date: "10 Octobre 2025",
       author: "Sophie Bernard",
       imageSrc: "https://images.unsplash.com/photo-1621551711576-89c8861760b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80",
       content: ""
@@ -231,7 +231,7 @@ const BlogPost = () => {
       id: "4",
       title: "Panneaux solaires : autoconsommation ou revente totale ?",
       excerpt: "Analyse comparative des deux modèles économiques pour votre installation photovoltaïque et conseils pour faire le meilleur choix.",
-      date: "2 Avril 2023",
+      date: "2 Septembre 2025",
       author: "Thomas Martin",
       imageSrc: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80",
       content: ""
@@ -240,7 +240,7 @@ const BlogPost = () => {
       id: "5",
       title: "Rénovation globale : pourquoi opter pour une approche complète ?",
       excerpt: "Les avantages d'une rénovation énergétique globale par rapport à des travaux séparés, tant en termes de performance que de rentabilité.",
-      date: "20 Mars 2023",
+      date: "20 Août 2025",
       author: "Pierre Durand",
       imageSrc: "https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
       content: ""
@@ -249,7 +249,7 @@ const BlogPost = () => {
       id: "6",
       title: "Comment réduire la consommation énergétique de votre entreprise",
       excerpt: "Stratégies et solutions pratiques pour les entreprises souhaitant diminuer leur facture énergétique et leur impact environnemental.",
-      date: "5 Mars 2023",
+      date: "5 Juillet 2025",
       author: "Marie Laurent",
       imageSrc: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
       content: ""
