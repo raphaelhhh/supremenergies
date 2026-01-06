@@ -64,7 +64,7 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-6 text-white">SupremEnergies</h3>
             <p className="mb-6 text-gray-300">
               Experts en rénovation énergétique pour particuliers et professionnels.
-              Qualification RGE, garantie décennale et accompagnement personnalisé.
+              Garantie décennale et accompagnement personnalisé.
             </p>
             <div className="flex space-x-4">
               <a href="https://facebook.com" aria-label="Facebook" className="text-gray-300 hover:text-white transition-colors">
@@ -176,57 +176,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Certifications Section with Real RGE Logos */}
-        <div className="py-6 border-t border-gray-800">
-          <h4 className="text-center text-lg font-medium mb-4 text-white">Nos certifications</h4>
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
-            <div className="flex flex-col items-center">
-              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{
-              width: '120px',
-              height: '120px'
-            }}>
-                <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/components/logo-QualiPAC-2025-RGE_sc.png" alt="QualiPAC RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
-              </div>
-              <span className="text-gray-300 text-xs mt-1"></span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{
-              width: '120px',
-              height: '120px'
-            }}>
-                <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/components/download-Photoroom.png" alt="QualiSol RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
-              </div>
-              <span className="text-gray-300 text-xs mt-1"></span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{
-              width: '120px',
-              height: '120px'
-            }}>
-                <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/components/download-1.png" alt="QualiBois RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
-              </div>
-              <span className="text-gray-300 text-xs mt-1"></span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{
-              width: '120px',
-              height: '120px'
-            }}>
-                <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/components/download-Photoroom%20(1).png" alt="Qualibat RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
-              </div>
-              <span className="text-gray-300 text-xs mt-1"></span>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-transparent p-2 rounded-lg flex items-center justify-center" style={{
-              width: '120px',
-              height: '120px'
-            }}>
-                <img src="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/download-Photoroom123456.png" alt="QualiPV RGE" className="max-w-full max-h-full object-contain drop-shadow-md" />
-              </div>
-              <span className="text-gray-300 text-xs mt-1"></span>
-            </div>
-          </div>
-        </div>
 
         {/* Footer Bottom - Copyright */}
         <div className="py-6 border-t border-gray-800 text-center text-gray-400">

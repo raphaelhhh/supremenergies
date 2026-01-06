@@ -128,58 +128,50 @@ const About = () => {
         </div>
       </section>
 
-      {/* Certifications */}
+      {/* Nos Garanties */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-supreme-primary">Nos Certifications</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-supreme-primary">Nos Garanties</h2>
               <p className="text-lg mb-6 text-gray-700">
-                SupremEnergies est fière de détenir les certifications qui attestent de notre expertise et de notre engagement envers la qualité et la durabilité.
+                SupremEnergies s'engage à vous fournir des prestations de qualité avec des garanties solides pour votre tranquillité d'esprit.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                  <div className="h-16 w-16 flex-shrink-0">
-                    <img src="https://www.qualit-enr.org/wp-content/uploads/2021/11/RGE_Quali_EnR_2022_RVB.png" 
-                         alt="Certification RGE" 
-                         className="w-full h-full object-contain" />
+                  <div className="h-12 w-12 flex-shrink-0 bg-supreme-primary/10 rounded-full flex items-center justify-center">
+                    <Shield size={24} className="text-supreme-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Certification RGE</h3>
-                    <p className="text-gray-600">Reconnu Garant de l'Environnement</p>
+                    <h3 className="font-semibold text-lg">Garantie Décennale</h3>
+                    <p className="text-gray-600">Protection de 10 ans sur tous nos travaux d'installation</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                  <div className="h-16 w-16 flex-shrink-0">
-                    <img src="https://www.qualibat.com/wp-content/uploads/2021/08/logo-qualibat-rge.jpg" 
-                         alt="Qualibat" 
-                         className="w-full h-full object-contain" />
+                  <div className="h-12 w-12 flex-shrink-0 bg-supreme-primary/10 rounded-full flex items-center justify-center">
+                    <Award size={24} className="text-supreme-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Qualibat</h3>
-                    <p className="text-gray-600">Certifié pour la qualité de nos travaux</p>
+                    <h3 className="font-semibold text-lg">Équipements Certifiés</h3>
+                    <p className="text-gray-600">Matériaux et équipements de marques reconnues avec garantie constructeur</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                  <div className="h-16 w-16 flex-shrink-0">
-                    <img src="https://www.qualit-enr.org/wp-content/uploads/2021/11/QualiSol_RGE_2022_RVB.png" 
-                         alt="Qualisol" 
-                         className="w-full h-full object-contain" />
+                  <div className="h-12 w-12 flex-shrink-0 bg-supreme-primary/10 rounded-full flex items-center justify-center">
+                    <Users size={24} className="text-supreme-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Qualisol</h3>
-                    <p className="text-gray-600">Spécialiste des installations solaires</p>
+                    <h3 className="font-semibold text-lg">Équipe Qualifiée</h3>
+                    <p className="text-gray-600">Techniciens formés et expérimentés pour des installations conformes</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                  <div className="h-16 w-16 flex-shrink-0">
-                    <img src="https://www.qualit-enr.org/wp-content/uploads/2021/11/QualiPAC_RGE_2022_RVB.png" 
-                         alt="Qualipac" 
-                         className="w-full h-full object-contain" />
+                  <div className="h-12 w-12 flex-shrink-0 bg-supreme-primary/10 rounded-full flex items-center justify-center">
+                    <ThumbsUp size={24} className="text-supreme-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Qualipac</h3>
-                    <p className="text-gray-600">Expert en pompes à chaleur</p>
+                    <h3 className="font-semibold text-lg">Satisfaction Client</h3>
+                    <p className="text-gray-600">Service après-vente réactif et accompagnement personnalisé</p>
                   </div>
                 </div>
               </div>
@@ -187,7 +179,7 @@ const About = () => {
             <div className="rounded-lg overflow-hidden shadow-xl">
               <img 
                 src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-                alt="Nos Certifications"
+                alt="Nos Garanties"
                 className="w-full h-full object-cover"
               />
             </div>

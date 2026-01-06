@@ -11,7 +11,7 @@ import { Search } from "lucide-react";
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Mock blog posts data
+  // Blog posts data
   const blogPosts = [
     {
       id: "1",
@@ -60,6 +60,54 @@ const Blog = () => {
       date: "5 Juillet 2025",
       author: "Marie Laurent",
       imageSrc: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+      id: "7",
+      title: "MaPrimeRénov' 2026 : ce qui change cette année",
+      excerpt: "Découvrez les nouvelles modalités de MaPrimeRénov' en 2026, les montants des aides et les conditions d'éligibilité mises à jour.",
+      date: "2 Janvier 2026",
+      author: "Sophie Bernard",
+      imageSrc: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80"
+    },
+    {
+      id: "8",
+      title: "Chaleur record en 2025 : comment préparer votre maison pour l'été 2026",
+      excerpt: "Après un été 2025 caniculaire, découvrez les solutions pour garder votre logement frais sans climatisation énergivore.",
+      date: "18 Décembre 2025",
+      author: "Thomas Martin",
+      imageSrc: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+    },
+    {
+      id: "9",
+      title: "L'adoucisseur d'eau : un investissement rentable pour votre foyer",
+      excerpt: "Protégez vos équipements, réduisez vos dépenses et améliorez votre quotidien grâce à l'installation d'un adoucisseur d'eau.",
+      date: "5 Décembre 2025",
+      author: "Pierre Durand",
+      imageSrc: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+      id: "10",
+      title: "Chauffe-eau thermodynamique vs chauffe-eau solaire : le comparatif",
+      excerpt: "Quelle solution choisir pour produire votre eau chaude sanitaire de manière économique et écologique ? Notre analyse détaillée.",
+      date: "22 Novembre 2025",
+      author: "Marie Laurent",
+      imageSrc: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+      id: "11",
+      title: "Les nouvelles normes RE2020 et leur impact sur la rénovation",
+      excerpt: "Comprendre les exigences de la réglementation environnementale et comment elles influencent vos projets de rénovation énergétique.",
+      date: "8 Novembre 2025",
+      author: "Sophie Bernard",
+      imageSrc: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+      id: "12",
+      title: "5 conseils pratiques pour réduire votre facture de chauffage cet hiver",
+      excerpt: "Des gestes simples et des astuces efficaces pour diminuer votre consommation énergétique pendant la saison froide.",
+      date: "1 Novembre 2025",
+      author: "Thomas Martin",
+      imageSrc: "https://images.unsplash.com/photo-1544984243-ec57ea16fe25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80"
     }
   ];
 
