@@ -33,6 +33,13 @@ const Index = () => {
       imageUrl: "https://github.com/raphaelhhh/supremenergies/raw/main/src/pages/chauffe-eau-electrique-blanc-mince-moderne-mur-beton_241146-2250.avif"
     },
     {
+      title: "Adoucisseur d'Eau",
+      description: "Protégez vos équipements du calcaire et améliorez la qualité de votre eau pour plus de confort au quotidien.",
+      icon: <Waves size={32} />,
+      link: "/services#adoucisseur",
+      imageUrl: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
       title: "Panneaux Solaires",
       description: "Production d'électricité verte grâce aux panneaux photovoltaïques. Réduisez vos factures et votre empreinte carbone.",
       icon: <SunMedium size={32} />,
@@ -45,13 +52,6 @@ const Index = () => {
       icon: <Building size={32} />,
       link: "/services#renovation",
       imageUrl: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-    },
-    {
-      title: "Adoucisseur d'Eau",
-      description: "Protégez vos équipements du calcaire et améliorez la qualité de votre eau pour plus de confort au quotidien.",
-      icon: <Waves size={32} />,
-      link: "/services#adoucisseur",
-      imageUrl: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
     }
   ];
 
@@ -78,8 +78,8 @@ const Index = () => {
 
   const features = [
     {
-      title: "Expertise Certifiée",
-      description: "Tous nos professionnels sont certifiés RGE (Reconnu Garant de l'Environnement) pour vous garantir un travail de qualité.",
+      title: "Expertise Professionnelle",
+      description: "Nos équipes qualifiées vous garantissent un travail de qualité et conforme aux normes en vigueur.",
       icon: <BadgeCheck size={36} />
     },
     {
@@ -245,7 +245,7 @@ const Index = () => {
               },
               { 
                 title: "Installation", 
-                description: "Travaux réalisés par nos équipes certifiées RGE",
+                description: "Travaux réalisés par nos équipes qualifiées",
                 step: "03"
               },
               { 
