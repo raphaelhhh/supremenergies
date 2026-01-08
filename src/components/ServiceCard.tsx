@@ -1,7 +1,12 @@
-
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
 
 interface ServiceCardProps {
   title: string;
@@ -20,6 +25,15 @@ const ServiceCard = ({
   className,
   imageUrl,
 }: ServiceCardProps) => {
+  const handleServiceClick = () => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('trackCustom', 'ServiceClick', {
+        service_name: title,
+        service_link: link
+      });
+    }
+  };
+
   return (
     <div 
       className={cn(
@@ -44,6 +58,7 @@ const ServiceCard = ({
         <p className="text-gray-600 mb-5">{description}</p>
         <Link 
           to={link}
+          onClick={handleServiceClick}
           className="inline-flex items-center text-supreme-primary font-medium hover:underline group-hover:translate-x-1 transition-transform duration-300"
         >
           En savoir plus <ArrowRight className="ml-2 h-4 w-4" />
