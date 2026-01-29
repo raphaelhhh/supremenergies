@@ -1,4 +1,3 @@
-
 import Hero from "@/components/Hero";
 import SectionHeader from "@/components/SectionHeader";
 import ServiceCard from "@/components/ServiceCard";
@@ -8,7 +7,7 @@ import CTA from "@/components/CTA";
 import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target, Waves } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-
+import heroImage from "@/assets/hero-renovation-energetique.jpg";
 const Index = () => {
   const services = [
     {
@@ -124,7 +123,7 @@ const Index = () => {
         subtitle="Experts en rénovation énergétique pour un avenir plus durable et économique"
         buttonText="Découvrir nos solutions"
         buttonLink="/services"
-        imageSrc="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        imageSrc={heroImage}
         imageAlt="Rénovation énergétique et isolation thermique"
       />
 
