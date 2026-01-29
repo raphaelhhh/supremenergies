@@ -25,6 +25,22 @@ const Contact = () => {
         imageSrc="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
       />
 
+      {/* Contact Form Section - First */}
+      <section className="section-padding bg-gray-50" id="formulaire">
+        <div className="container-custom">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold mb-4 text-supreme-primary text-center">Demandez votre devis gratuit</h2>
+            <p className="text-lg mb-8 text-gray-700 text-center">
+              Remplissez le formulaire ci-dessous pour nous faire part de votre projet. Un conseiller vous recontactera dans les 24h.
+            </p>
+            <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+              <ContactForm />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Information Section */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12">
@@ -72,31 +88,20 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Google Map */}
-              <div className="mt-8 bg-gray-200 rounded-lg overflow-hidden h-[300px] shadow-md">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.142047557097!2d2.3414048768644355!3d48.86150940090647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sPalais%20Royal%2C%2075001%20Paris!5e0!3m2!1sfr!2sfr!4v1682504184416!5m2!1sfr!2sfr" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Carte Google Maps de SupremEnergies"
-                ></iframe>
-              </div>
             </div>
 
-            {/* Contact Form */}
-            <div id="formulaire">
-              <h2 className="text-3xl font-bold mb-6 text-supreme-primary">Formulaire de Contact</h2>
-              <p className="text-lg mb-8 text-gray-700">
-                Remplissez le formulaire ci-dessous pour nous faire part de votre projet. Un conseiller vous recontactera dans les 24h pour étudier votre demande.
-              </p>
-              <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
-                <ContactForm />
-              </div>
+            {/* Google Map */}
+            <div className="bg-gray-200 rounded-lg overflow-hidden h-[400px] shadow-md">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.142047557097!2d2.3414048768644355!3d48.86150940090647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sPalais%20Royal%2C%2075001%20Paris!5e0!3m2!1sfr!2sfr!4v1682504184416!5m2!1sfr!2sfr" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Carte Google Maps de SupremEnergies"
+              ></iframe>
             </div>
           </div>
         </div>

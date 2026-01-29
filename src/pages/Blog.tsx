@@ -129,22 +129,23 @@ const Blog = () => {
       />
 
       {/* Search Section */}
-      <section className="py-8 bg-supreme-light">
+      <section className="py-10 bg-supreme-light">
         <div className="container-custom">
-          <div className="max-w-xl mx-auto">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-2xl font-bold text-center mb-6 text-supreme-primary">Rechercher un article</h2>
             <div className="relative">
               <Input
                 type="text"
                 placeholder="Rechercher un article..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 py-6 bg-white"
+                className="pl-12 py-6 bg-white text-lg rounded-xl shadow-sm border-gray-200 focus:border-supreme-primary"
               />
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               {searchTerm && (
                 <Button
                   variant="ghost"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                   onClick={() => setSearchTerm("")}
                 >
                   Effacer
@@ -156,16 +157,27 @@ const Blog = () => {
       </section>
 
       {/* Blog Posts Section */}
-      <section className="section-padding">
+      <section className="py-16 md:py-20">
         <div className="container-custom">
           {filteredPosts.length > 0 ? (
             <>
-              <SectionHeader 
-                title={searchTerm ? `Résultats de recherche pour "${searchTerm}"` : "Nos Derniers Articles"}
-                subtitle={searchTerm ? `${filteredPosts.length} article(s) trouvé(s)` : "Découvrez nos articles, guides et conseils sur la rénovation énergétique et les énergies renouvelables."}
-              />
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  {searchTerm ? (
+                    <>Résultats pour "<span className="text-supreme-primary">{searchTerm}</span>"</>
+                  ) : (
+                    <>Nos <span className="text-supreme-primary">Derniers</span> Articles</>
+                  )}
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  {searchTerm 
+                    ? `${filteredPosts.length} article(s) trouvé(s)` 
+                    : "Découvrez nos articles, guides et conseils sur la rénovation énergétique et les énergies renouvelables."
+                  }
+                </p>
+              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                 {filteredPosts.map((post) => (
                   <BlogCard
                     key={post.id}
@@ -180,9 +192,9 @@ const Blog = () => {
               </div>
             </>
           ) : (
-            <div className="text-center py-12">
+            <div className="text-center py-16">
               <h2 className="text-2xl font-bold mb-4">Aucun résultat trouvé pour "{searchTerm}"</h2>
-              <p className="text-gray-600 mb-6">Essayez avec d'autres termes ou parcourez nos catégories.</p>
+              <p className="text-gray-600 mb-8">Essayez avec d'autres termes ou parcourez nos catégories.</p>
               <Button onClick={() => setSearchTerm("")} className="bg-supreme-primary hover:bg-supreme-primary/90">
                 Voir tous les articles
               </Button>
@@ -192,84 +204,88 @@ const Blog = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="py-16 md:py-20 bg-gray-50">
         <div className="container-custom">
-          <SectionHeader 
-            title="Catégories" 
-            subtitle="Explorez nos articles par thème pour trouver facilement les informations qui vous intéressent."
-          />
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Explorer par <span className="text-supreme-primary">Catégorie</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Trouvez facilement les informations qui vous intéressent.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             <Button
               variant="outline"
-              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-8 h-auto flex flex-col"
+              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-6 md:py-8 h-auto flex flex-col rounded-xl shadow-sm transition-all duration-300 hover:shadow-md"
               onClick={() => setSearchTerm("isolation")}
             >
-              <span className="text-lg font-semibold">Isolation</span>
-              <span className="text-sm text-gray-500 mt-1">12 articles</span>
+              <span className="text-base md:text-lg font-semibold">Isolation</span>
+              <span className="text-xs md:text-sm text-gray-500 mt-1">12 articles</span>
             </Button>
             
             <Button
               variant="outline"
-              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-8 h-auto flex flex-col"
+              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-6 md:py-8 h-auto flex flex-col rounded-xl shadow-sm transition-all duration-300 hover:shadow-md"
               onClick={() => setSearchTerm("chauffage")}
             >
-              <span className="text-lg font-semibold">Chauffage</span>
-              <span className="text-sm text-gray-500 mt-1">9 articles</span>
+              <span className="text-base md:text-lg font-semibold">Chauffage</span>
+              <span className="text-xs md:text-sm text-gray-500 mt-1">9 articles</span>
             </Button>
             
             <Button
               variant="outline"
-              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-8 h-auto flex flex-col"
+              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-6 md:py-8 h-auto flex flex-col rounded-xl shadow-sm transition-all duration-300 hover:shadow-md"
               onClick={() => setSearchTerm("solaire")}
             >
-              <span className="text-lg font-semibold">Énergie Solaire</span>
-              <span className="text-sm text-gray-500 mt-1">7 articles</span>
+              <span className="text-base md:text-lg font-semibold">Énergie Solaire</span>
+              <span className="text-xs md:text-sm text-gray-500 mt-1">7 articles</span>
             </Button>
             
             <Button
               variant="outline"
-              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-8 h-auto flex flex-col"
+              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-6 md:py-8 h-auto flex flex-col rounded-xl shadow-sm transition-all duration-300 hover:shadow-md"
               onClick={() => setSearchTerm("aides")}
             >
-              <span className="text-lg font-semibold">Aides Financières</span>
-              <span className="text-sm text-gray-500 mt-1">5 articles</span>
+              <span className="text-base md:text-lg font-semibold">Aides Financières</span>
+              <span className="text-xs md:text-sm text-gray-500 mt-1">5 articles</span>
             </Button>
             
             <Button
               variant="outline"
-              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-8 h-auto flex flex-col"
+              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-6 md:py-8 h-auto flex flex-col rounded-xl shadow-sm transition-all duration-300 hover:shadow-md"
               onClick={() => setSearchTerm("rénovation")}
             >
-              <span className="text-lg font-semibold">Rénovation Globale</span>
-              <span className="text-sm text-gray-500 mt-1">4 articles</span>
+              <span className="text-base md:text-lg font-semibold">Rénovation Globale</span>
+              <span className="text-xs md:text-sm text-gray-500 mt-1">4 articles</span>
             </Button>
             
             <Button
               variant="outline"
-              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-8 h-auto flex flex-col"
+              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-6 md:py-8 h-auto flex flex-col rounded-xl shadow-sm transition-all duration-300 hover:shadow-md"
               onClick={() => setSearchTerm("entreprise")}
             >
-              <span className="text-lg font-semibold">Solutions Entreprises</span>
-              <span className="text-sm text-gray-500 mt-1">6 articles</span>
+              <span className="text-base md:text-lg font-semibold">Solutions Entreprises</span>
+              <span className="text-xs md:text-sm text-gray-500 mt-1">6 articles</span>
             </Button>
             
             <Button
               variant="outline"
-              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-8 h-auto flex flex-col"
+              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-6 md:py-8 h-auto flex flex-col rounded-xl shadow-sm transition-all duration-300 hover:shadow-md"
               onClick={() => setSearchTerm("conseils")}
             >
-              <span className="text-lg font-semibold">Conseils Pratiques</span>
-              <span className="text-sm text-gray-500 mt-1">10 articles</span>
+              <span className="text-base md:text-lg font-semibold">Conseils Pratiques</span>
+              <span className="text-xs md:text-sm text-gray-500 mt-1">10 articles</span>
             </Button>
             
             <Button
               variant="outline"
-              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-8 h-auto flex flex-col"
+              className="bg-white border-gray-200 hover:bg-supreme-light hover:text-supreme-primary hover:border-supreme-primary py-6 md:py-8 h-auto flex flex-col rounded-xl shadow-sm transition-all duration-300 hover:shadow-md"
               onClick={() => setSearchTerm("actualités")}
             >
-              <span className="text-lg font-semibold">Actualités</span>
-              <span className="text-sm text-gray-500 mt-1">8 articles</span>
+              <span className="text-base md:text-lg font-semibold">Actualités</span>
+              <span className="text-xs md:text-sm text-gray-500 mt-1">8 articles</span>
             </Button>
           </div>
         </div>
