@@ -84,6 +84,9 @@ const UNSPLASH_IMAGES = [
   "https://images.unsplash.com/photo-1473742254-91939c5d5765?auto=format&fit=crop&w=1170&q=80",
 ];
 
+const DEVIS_URL = "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform";
+const PHONE = "01 86 04 68 89";
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -92,6 +95,60 @@ function slugify(text: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 80);
+}
+
+async function searchWeb(query: string, apiKey: string): Promise<string> {
+  try {
+    // Use Lovable AI to summarize current web info about the topic
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [
+          {
+            role: "system",
+            content: "Tu es un assistant de recherche. Résume les informations les plus récentes et pertinentes sur le sujet donné en rapport avec la rénovation énergétique en France. Inclus les dernières actualités, chiffres, réglementations et tendances de 2025-2026. Sois factuel et concis (300 mots max)."
+          },
+          {
+            role: "user",
+            content: `Recherche les dernières actualités et informations sur : "${query}" en France en 2026. Inclus les montants d'aides actuels, les nouvelles réglementations, les évolutions récentes du marché.`
+          },
+        ],
+        tools: [
+          {
+            type: "function",
+            function: {
+              name: "web_search",
+              description: "Search the web for current information",
+              parameters: {
+                type: "object",
+                properties: {
+                  query: { type: "string" }
+                },
+                required: ["query"]
+              }
+            }
+          }
+        ],
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("Web search AI call failed:", response.status);
+      return "";
+    }
+
+    const result = await response.json();
+    const content = result.choices?.[0]?.message?.content;
+    return content || "";
+  } catch (e) {
+    console.error("Web search error:", e);
+    return "";
+  }
 }
 
 serve(async (req) => {
@@ -125,6 +182,14 @@ serve(async (req) => {
       ? availableTopics[Math.floor(Math.random() * availableTopics.length)]
       : TOPICS[Math.floor(Math.random() * TOPICS.length)];
 
+    // Step 1: Web research on the chosen topic
+    console.log(`Researching topic: ${topic.theme}`);
+    const webResearch = await searchWeb(
+      `rénovation énergétique ${topic.theme} actualité 2026`,
+      LOVABLE_API_KEY
+    );
+    console.log(`Research completed, got ${webResearch.length} chars of context`);
+
     const systemPrompt = `Tu es un rédacteur web expert en rénovation énergétique pour SupremEnergies, une entreprise française spécialisée en isolation thermique, pompes à chaleur, panneaux solaires et rénovation globale en Île-de-France.
 
 Rédige un article de blog complet et professionnel (800-1200 mots) sur le sujet donné.
@@ -133,25 +198,35 @@ Règles :
 - Ton professionnel mais accessible, pas de jargon excessif
 - Structure avec des H2 et H3 bien hiérarchisés
 - Inclure des listes à puces pour les points clés
-- Terminer par un appel à l'action vers SupremEnergies
 - Intégrer naturellement les mots-clés SEO fournis
-- Contenu factuel et à jour pour 2026
+- Contenu factuel et à jour pour 2026, en t'appuyant sur les informations d'actualité fournies
 - Format : HTML valide (p, h2, h3, ul, li, ol, strong)
 - NE PAS inclure de balise h1 (le titre est géré séparément)
 - NE PAS inclure de balises html, head, body
+- OBLIGATOIRE : Termine l'article par un encadré d'appel à l'action HTML avec ce format exact :
+  <div style="background: linear-gradient(135deg, #e8f5e9 0%, #fff8e1 100%); border-radius: 16px; padding: 32px; text-align: center; margin-top: 40px; border: 1px solid #c8e6c9;">
+    <h3 style="color: #2e7d32; margin-bottom: 12px;">🏡 Vous avez un projet de rénovation énergétique ?</h3>
+    <p style="color: #555; margin-bottom: 20px;">Les experts SupremEnergies vous accompagnent de A à Z dans vos travaux. Bénéficiez d'un diagnostic gratuit et d'un devis personnalisé.</p>
+    <a href="${DEVIS_URL}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #2e7d32; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 12px;">📋 Demander un devis gratuit</a>
+    <p style="color: #777; margin-top: 12px;">Ou appelez-nous au <a href="tel:+33186046889" style="color: #2e7d32; font-weight: bold;">${PHONE}</a></p>
+  </div>
 
 Réponds avec un JSON contenant exactement ces champs :
 - title: titre accrocheur et SEO-friendly (max 70 caractères)
 - excerpt: résumé engageant (max 160 caractères)  
 - meta_description: description SEO optimisée (max 155 caractères)
-- content: contenu HTML de l'article`;
+- content: contenu HTML de l'article (incluant le CTA final)`;
+
+    const researchContext = webResearch 
+      ? `\n\nContexte d'actualité récente (utilise ces informations pour rendre l'article pertinent et à jour) :\n${webResearch}`
+      : "";
 
     const userPrompt = `Rédige un article sur : "${topic.theme}"
 Angle : ${topic.angle}
 Mots-clés à intégrer : ${topic.keywords.join(", ")}
-Articles existants (à ne pas dupliquer) : ${existingTitles.slice(0, 5).join(", ")}`;
+Articles existants (à ne pas dupliquer) : ${existingTitles.slice(0, 5).join(", ")}${researchContext}`;
 
-    // Call Lovable AI with tool calling for structured output
+    // Step 2: Generate the article with AI
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -176,7 +251,7 @@ Articles existants (à ne pas dupliquer) : ${existingTitles.slice(0, 5).join(", 
                   title: { type: "string", description: "SEO-friendly title, max 70 chars" },
                   excerpt: { type: "string", description: "Short summary, max 160 chars" },
                   meta_description: { type: "string", description: "SEO meta description, max 155 chars" },
-                  content: { type: "string", description: "Full HTML content of the article" },
+                  content: { type: "string", description: "Full HTML content of the article including CTA" },
                 },
                 required: ["title", "excerpt", "meta_description", "content"],
                 additionalProperties: false,

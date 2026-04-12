@@ -146,13 +146,16 @@ const BlogPost = () => {
 
             {/* CTA */}
             <div className="mt-12 p-8 bg-supreme-light rounded-2xl text-center">
-              <h3 className="text-2xl font-bold mb-3">Besoin d'un conseil personnalisé ?</h3>
+              <h3 className="text-2xl font-bold mb-3">🏡 Besoin d'un conseil personnalisé ?</h3>
               <p className="text-gray-600 mb-6">
-                Nos experts sont à votre disposition pour répondre à toutes vos questions sur la rénovation énergétique.
+                Nos experts SupremEnergies vous accompagnent de A à Z dans vos travaux de rénovation énergétique. Bénéficiez d'un diagnostic gratuit !
               </p>
-              <Button asChild className="bg-supreme-primary hover:bg-supreme-primary/90 text-white px-8 py-3 rounded-lg">
-                <Link to="/contact">Contactez-nous</Link>
+              <Button asChild className="bg-supreme-primary hover:bg-supreme-primary/90 text-white px-8 py-3 rounded-lg mb-3">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform" target="_blank" rel="noopener noreferrer">📋 Demander un devis gratuit</a>
               </Button>
+              <p className="text-gray-500 text-sm mt-2">
+                Ou appelez-nous au <a href="tel:+33186046889" className="text-supreme-primary font-semibold hover:underline">01 86 04 68 89</a>
+              </p>
             </div>
           </div>
         </div>
