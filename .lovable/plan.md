@@ -1,65 +1,55 @@
 
 
-## Plan SEO complet pour SupremEnergies
+## Génération automatique d'articles de blog par IA
 
-### Problèmes identifiés
+### Concept
 
-1. **Pas de balises Helmet** sur les pages Accueil, À propos, Contact (seules Services et Blog en ont)
-2. **Pas de données structurées (JSON-LD)** sur Accueil, À propos, Contact
-3. **Pas de balises canonical** sur la plupart des pages
-4. **Sitemap incomplet** — les articles de blog individuels (`/blog/1`, `/blog/2`...) ne sont pas listés
-5. **URLs sitemap incorrectes** — `/terms` au lieu de `/terms-of-service`, etc.
-6. **Pas de page dédiée par service** — tout est sur une seule page `/services` avec des ancres, ce qui dilue le SEO
-7. **GTM supprimé** du `index.html` (remplacé par Meta Pixel uniquement)
-8. **Titre `index.html` générique** — juste "SupremEnergies" sans mots-clés
+Mettre en place un système qui, tous les 3 jours, génère automatiquement un article de blog sur la rénovation énergétique en s'appuyant sur l'actualité du secteur, puis le publie directement sur le site.
 
-### Actions prévues
+### Architecture technique
 
-#### 1. Balises SEO sur toutes les pages (Helmet)
-Ajouter `<Helmet>` avec `title`, `meta description`, `canonical`, `og:*` et données structurées JSON-LD sur :
-- **Accueil** : "Rénovation Énergétique | SupremEnergies — Isolation, Pompes à Chaleur, Solaire"
-- **À propos** : "À Propos de SupremEnergies | Expert Rénovation Énergétique"
-- **Contact** : "Contactez SupremEnergies | Devis Gratuit Rénovation Énergétique"
+```text
+┌─────────────┐    ┌──────────────────┐    ┌──────────────┐    ┌─────────┐
+│  pg_cron     │───▶│ Edge Function    │───▶│ Lovable AI   │───▶│  Table  │
+│ (tous les   │    │ generate-blog    │    │ (rédaction)  │    │  blog_  │
+│  3 jours)   │    │                  │    │              │    │  posts  │
+│             │    │  - choisit sujet │    └──────────────┘    └─────────┘
+│             │    │  - recherche web │                              │
+│             │    │  - génère article│                              ▼
+│             │    │  - sauve en BDD  │                     Blog.tsx / BlogPost.tsx
+└─────────────┘    └──────────────────┘                     (lecture dynamique)
+```
 
-#### 2. Données structurées JSON-LD enrichies
-- **Accueil** : `Organization` + `LocalBusiness` avec adresse, téléphone, zone de service
-- **Services** : enrichir le `Service` existant avec chaque sous-service
-- **Blog** : `BlogPosting` sur chaque article avec `author`, `datePublished`, `image`
-- **Contact** : `ContactPage` avec coordonnées
+### Étapes
 
-#### 3. Pages dédiées par service (SEO long-tail)
-Créer des pages individuelles pour les requêtes à fort volume :
-- `/services/isolation-thermique`
-- `/services/pompe-a-chaleur`
-- `/services/panneaux-solaires`
-- `/services/renovation-globale`
+#### 1. Créer la table `blog_posts` en base de données
+Stocker les articles (titre, contenu HTML, extrait, date, image, slug, statut publié/brouillon) au lieu des données codées en dur actuellement.
 
-Chacune avec contenu unique, H1 optimisé, FAQ structurée (`FAQPage` schema), et CTA vers le formulaire contact.
+#### 2. Migrer les 8 articles existants dans la table
+Insérer les articles actuellement hardcodés pour ne perdre aucun contenu.
 
-#### 4. Sitemap corrigé et enrichi
-- Ajouter les URLs des articles de blog (`/blog/1` à `/blog/8`)
-- Ajouter les nouvelles pages services individuelles
-- Corriger les URLs légales (`/terms` → supprimer ou rediriger)
+#### 3. Créer l'edge function `generate-blog-post`
+- Choisit un sujet parmi une liste tournante (MaPrimeRénov', CEE, pompes à chaleur, isolation, solaire, réglementation, DPE, aides locales...)
+- Utilise Lovable AI pour générer un article complet (~800-1200 mots) avec titre, extrait et contenu HTML
+- Sauvegarde l'article dans la table `blog_posts`
 
-#### 5. Améliorer le `index.html` par défaut
-- Title : "SupremEnergies | Rénovation Énergétique, Isolation & Pompes à Chaleur"
-- Meta description plus ciblée avec mots-clés locaux
-- Remettre le GTM si souhaité
+#### 4. Planifier l'exécution automatique (pg_cron)
+Un job cron déclenche la fonction tous les 3 jours.
 
-#### 6. FAQ structurée sur les pages clés
-Ajouter une section FAQ sur Accueil et Services avec schema `FAQPage` — ces questions apparaissent directement dans les résultats Google :
-- "Quelles aides pour la rénovation énergétique en 2026 ?"
-- "Combien coûte l'isolation des combles ?"
-- "Quelle pompe à chaleur choisir ?"
+#### 5. Adapter Blog.tsx et BlogPost.tsx
+Remplacer les données hardcodées par des requêtes vers la table `blog_posts`. Le blog devient entièrement dynamique.
 
-### Impact attendu
-- Meilleure indexation de chaque service individuellement
-- Rich snippets (FAQ, avis, services) dans les résultats Google
-- Mots-clés long-tail captés via les pages services dédiées
-- Meilleure couverture du sitemap
+### Points d'attention
 
-### Détails techniques
-- Fichiers modifiés : `index.html`, `src/App.tsx`, toutes les pages dans `src/pages/`, `public/sitemap.xml`
-- Fichiers créés : 4 nouvelles pages services dans `src/pages/services/`
-- Dépendances : aucune nouvelle (react-helmet-async déjà installé)
+- **Qualité du contenu** : Un bon prompt système avec les consignes de style, ton professionnel, et mots-clés SEO pertinents garantit des articles de qualité
+- **Pas de duplicate** : La fonction vérifie les sujets déjà traités pour varier les thèmes
+- **SEO** : Chaque article généré inclut un title et une meta description optimisés
+- **Images** : Utilisation d'images Unsplash pertinentes sélectionnées par l'IA selon le sujet
+- **Coût** : Utilise Lovable AI (inclus dans votre plan), donc pas de coût API supplémentaire pour la génération de texte
+
+### Fichiers concernés
+
+- **Créés** : `supabase/functions/generate-blog-post/index.ts`
+- **Modifiés** : `src/pages/Blog.tsx`, `src/pages/BlogPost.tsx` (lecture depuis la BDD)
+- **Migration SQL** : création table `blog_posts` + insertion des 8 articles existants + job cron
 
