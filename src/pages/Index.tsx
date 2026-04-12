@@ -15,7 +15,7 @@ const Index = () => {
       description: "Solutions d'isolation pour combles, murs, fenêtres et planchers pour maximiser votre confort et réduire vos factures.",
       icon: <ThermometerSun size={32} />,
       link: "/services#isolation",
-      imageUrl: "/images/energy-label.png"
+      imageUrl: "https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/gettyimages-2210519115-612x612.jpg"
     },
     {
       title: "Pompes à Chaleur",
