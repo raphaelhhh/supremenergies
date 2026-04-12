@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
 import SectionHeader from "@/components/SectionHeader";
 import ServiceCard from "@/components/ServiceCard";
@@ -8,20 +9,40 @@ import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, Badg
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/energy-label.png";
+
+const faqItems = [
+  {
+    question: "Quelles aides pour la rénovation énergétique en 2026 ?",
+    answer: "En 2026, vous pouvez bénéficier de MaPrimeRénov' (jusqu'à 90% du coût selon vos revenus), des CEE, de l'éco-PTZ jusqu'à 50 000 €, et de la TVA à 5,5%. SupremEnergies vous accompagne dans toutes les démarches."
+  },
+  {
+    question: "Combien coûte l'isolation des combles ?",
+    answer: "Le coût de l'isolation des combles varie de 20 à 60 €/m² selon la technique utilisée. Avec les aides (MaPrimeRénov' + CEE), le reste à charge peut être très faible, parfois moins de 10 €/m²."
+  },
+  {
+    question: "Quelle pompe à chaleur choisir ?",
+    answer: "Le choix dépend de votre logement : la PAC air/eau est idéale pour remplacer une chaudière, la PAC air/air convient pour chauffer et climatiser, et la PAC géothermique offre le meilleur rendement. Nos experts réalisent un diagnostic gratuit."
+  },
+  {
+    question: "Intervenez-vous en Île-de-France ?",
+    answer: "Oui, notre zone d'intervention principale couvre toute l'Île-de-France. Nous intervenons aussi dans d'autres régions pour des projets spécifiques. Contactez-nous pour vérifier notre disponibilité."
+  }
+];
+
 const Index = () => {
   const services = [
     {
       title: "Isolation Thermique",
       description: "Solutions d'isolation pour combles, murs, fenêtres et planchers pour maximiser votre confort et réduire vos factures.",
       icon: <ThermometerSun size={32} />,
-      link: "/services#isolation",
+      link: "/services/isolation-thermique",
       imageUrl: "https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/gettyimages-2210519115-612x612.jpg"
     },
     {
       title: "Pompes à Chaleur",
       description: "Des systèmes performants et économiques pour chauffer votre habitation tout en réduisant votre consommation d'énergie.",
       icon: <Home size={32} />,
-      link: "/services#chauffage",
+      link: "/services/pompe-a-chaleur",
       imageUrl: "https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/gettyimages-2214842911-612x612.jpg"
     },
     {
@@ -42,14 +63,14 @@ const Index = () => {
       title: "Panneaux Solaires",
       description: "Production d'électricité verte grâce aux panneaux photovoltaïques. Réduisez vos factures et votre empreinte carbone.",
       icon: <SunMedium size={32} />,
-      link: "/services#solaire",
+      link: "/services/panneaux-solaires",
       imageUrl: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     },
     {
       title: "Rénovation Globale",
       description: "Accompagnement complet pour votre projet de rénovation énergétique dans le cadre des programmes de l'ANAH.",
       icon: <Building size={32} />,
-      link: "/services#renovation",
+      link: "/services/renovation-globale",
       imageUrl: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
     }
   ];
@@ -116,8 +137,62 @@ const Index = () => {
     }
   ];
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "SupremEnergies",
+    "description": "Expert en rénovation énergétique : isolation thermique, pompes à chaleur, panneaux solaires et rénovation globale en Île-de-France.",
+    "url": "https://supremenergies.com",
+    "telephone": "01 86 04 68 89",
+    "email": "contact@supremenergies.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "55 rue Cartier Bresson",
+      "addressLocality": "Pantin",
+      "postalCode": "93500",
+      "addressCountry": "FR"
+    },
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 48.8566, "longitude": 2.3522 },
+      "geoRadius": "100000"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "19:00"
+    },
+    "sameAs": []
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqItems.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  };
+
   return (
     <div>
+      <Helmet>
+        <title>Rénovation Énergétique | SupremEnergies — Isolation, Pompes à Chaleur, Solaire</title>
+        <meta name="description" content="SupremEnergies, expert en rénovation énergétique en Île-de-France. Isolation thermique, pompes à chaleur, panneaux solaires, rénovation globale. Devis gratuit, aides MaPrimeRénov' 2026." />
+        <link rel="canonical" href="https://supremenergies.com/" />
+        <meta property="og:title" content="Rénovation Énergétique | SupremEnergies — Isolation, Pompes à Chaleur, Solaire" />
+        <meta property="og:description" content="Expert en rénovation énergétique en Île-de-France. Isolation, pompes à chaleur, panneaux solaires. Devis gratuit." />
+        <meta property="og:url" content="https://supremenergies.com/" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      </Helmet>
+
       <Hero 
         title="Transformez votre habitat et réduisez vos factures énergétiques"
         subtitle="Experts en rénovation énergétique pour un avenir plus durable et économique"
@@ -232,26 +307,10 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { 
-                title: "Consultation", 
-                description: "Évaluation gratuite de vos besoins et objectifs énergétiques",
-                step: "01"
-              },
-              { 
-                title: "Proposition", 
-                description: "Solutions personnalisées et devis transparent sans engagement",
-                step: "02"
-              },
-              { 
-                title: "Installation", 
-                description: "Travaux réalisés par nos équipes qualifiées",
-                step: "03"
-              },
-              { 
-                title: "Suivi", 
-                description: "Accompagnement continu et service après-vente réactif",
-                step: "04"
-              }
+              { title: "Consultation", description: "Évaluation gratuite de vos besoins et objectifs énergétiques", step: "01" },
+              { title: "Proposition", description: "Solutions personnalisées et devis transparent sans engagement", step: "02" },
+              { title: "Installation", description: "Travaux réalisés par nos équipes qualifiées", step: "03" },
+              { title: "Suivi", description: "Accompagnement continu et service après-vente réactif", step: "04" }
             ].map((process, index) => (
               <div key={index} className="bg-white p-8 rounded-lg shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
                 <div className="absolute -right-4 -top-4 text-8xl font-bold text-supreme-light/70 group-hover:text-supreme-light transition-colors">
@@ -331,6 +390,25 @@ const Index = () => {
                 <Link to="/services#business">Solutions B2B</Link>
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <SectionHeader 
+            title="Questions Fréquentes" 
+            subtitle="Les réponses aux questions les plus posées sur la rénovation énergétique"
+            highlightedWord="Fréquentes"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {faqItems.map((item, index) => (
+              <div key={index} className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+                <h3 className="text-lg font-semibold mb-3 text-supreme-primary">{item.question}</h3>
+                <p className="text-gray-600">{item.answer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
