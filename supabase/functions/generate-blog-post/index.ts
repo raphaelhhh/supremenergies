@@ -10,78 +10,75 @@ const TOPICS = [
   {
     theme: "MaPrimeRénov'",
     keywords: ["MaPrimeRénov'", "aides rénovation", "subventions", "prime énergie"],
-    angle: "Actualité et évolutions de MaPrimeRénov' : nouveaux barèmes, conditions d'éligibilité, démarches à suivre."
+    angle: "Actualité et évolutions de MaPrimeRénov' : nouveaux barèmes, conditions d'éligibilité, démarches à suivre.",
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Certificats d'Économies d'Énergie (CEE)",
     keywords: ["CEE", "certificats économies énergie", "prime énergie", "fournisseurs énergie"],
-    angle: "Comment fonctionnent les CEE, comment en bénéficier et les cumuler avec d'autres aides."
+    angle: "Comment fonctionnent les CEE, comment en bénéficier et les cumuler avec d'autres aides.",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Pompe à chaleur",
     keywords: ["pompe à chaleur", "PAC", "chauffage", "COP", "air/eau"],
-    angle: "Conseils techniques sur les pompes à chaleur : choix, entretien, performance, innovations."
+    angle: "Conseils techniques sur les pompes à chaleur : choix, entretien, performance, innovations.",
+    image: "https://images.unsplash.com/photo-1635070040884-957a0b4fed66?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Isolation thermique",
     keywords: ["isolation", "ITE", "ITI", "combles", "thermique"],
-    angle: "Techniques d'isolation, matériaux innovants, retours d'expérience et bonnes pratiques."
+    angle: "Techniques d'isolation, matériaux innovants, retours d'expérience et bonnes pratiques.",
+    image: "https://images.unsplash.com/photo-1607400201889-565b1ee75f8e?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Panneaux solaires photovoltaïques",
     keywords: ["panneaux solaires", "photovoltaïque", "autoconsommation", "énergie solaire"],
-    angle: "Rendement, nouvelles technologies, rentabilité et réglementations des installations solaires."
+    angle: "Rendement, nouvelles technologies, rentabilité et réglementations des installations solaires.",
+    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "DPE et réglementation",
     keywords: ["DPE", "diagnostic performance énergétique", "RE2020", "passoire thermique"],
-    angle: "Évolution du DPE, interdictions de location, obligations légales et impact sur l'immobilier."
+    angle: "Évolution du DPE, interdictions de location, obligations légales et impact sur l'immobilier.",
+    image: "https://images.unsplash.com/photo-1460472178825-e5240623afd5?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Rénovation globale",
     keywords: ["rénovation globale", "bouquet travaux", "performance énergétique"],
-    angle: "Avantages d'une approche globale, retours d'expérience, aides spécifiques."
+    angle: "Avantages d'une approche globale, retours d'expérience, aides spécifiques.",
+    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Chauffe-eau thermodynamique",
     keywords: ["chauffe-eau thermodynamique", "eau chaude sanitaire", "ballon thermodynamique"],
-    angle: "Technologies, installation, économies et aides pour le chauffe-eau thermodynamique."
+    angle: "Technologies, installation, économies et aides pour le chauffe-eau thermodynamique.",
+    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "VMC et ventilation",
     keywords: ["VMC", "ventilation", "qualité air", "double flux"],
-    angle: "Importance de la ventilation, types de VMC, lien avec l'isolation et la qualité de l'air."
+    angle: "Importance de la ventilation, types de VMC, lien avec l'isolation et la qualité de l'air.",
+    image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Éco-PTZ et financement",
     keywords: ["éco-PTZ", "financement", "prêt travaux", "crédit rénovation"],
-    angle: "Solutions de financement pour la rénovation : éco-PTZ, prêts aidés, tiers-financement."
+    angle: "Solutions de financement pour la rénovation : éco-PTZ, prêts aidés, tiers-financement.",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Fenêtres et menuiseries",
     keywords: ["fenêtres", "double vitrage", "triple vitrage", "menuiseries"],
-    angle: "Remplacement de fenêtres : matériaux, performances, aides et retour sur investissement."
+    angle: "Remplacement de fenêtres : matériaux, performances, aides et retour sur investissement.",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Audit énergétique",
     keywords: ["audit énergétique", "bilan thermique", "diagnostic", "travaux prioritaires"],
-    angle: "Pourquoi et comment réaliser un audit énergétique avant de rénover."
+    angle: "Pourquoi et comment réaliser un audit énergétique avant de rénover.",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1170&q=80"
   }
-];
-
-const UNSPLASH_IMAGES = [
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1170&q=80",
-  "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=1170&q=80",
-  "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1172&q=80",
-  "https://images.unsplash.com/photo-1643756055617-608c1492f932?auto=format&fit=crop&w=1170&q=80",
-  "https://images.unsplash.com/photo-1534237710431-e2fc698436d0?auto=format&fit=crop&w=1170&q=80",
-  "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1172&q=80",
-  "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1170&q=80",
-  "https://images.unsplash.com/photo-1544984243-ec57ea16fe25?auto=format&fit=crop&w=1174&q=80",
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1170&q=80",
-  "https://images.unsplash.com/photo-1460472178825-e5240623afd5?auto=format&fit=crop&w=1170&q=80",
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1170&q=80",
-  "https://images.unsplash.com/photo-1473742254-91939c5d5765?auto=format&fit=crop&w=1170&q=80",
 ];
 
 const DEVIS_URL = "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform";
@@ -286,8 +283,8 @@ Articles existants (à ne pas dupliquer) : ${existingTitles.slice(0, 5).join(", 
       slug = `${slugify(article.title)}-${slugSuffix}`;
     }
 
-    // Pick an image
-    const imageIndex = Math.floor(Math.random() * UNSPLASH_IMAGES.length);
+    // Use the topic's associated image
+    const imageSrc = topic.image;
 
     // Insert into database
     const { data: newPost, error: insertError } = await supabase
@@ -299,7 +296,7 @@ Articles existants (à ne pas dupliquer) : ${existingTitles.slice(0, 5).join(", 
         content: article.content,
         meta_description: article.meta_description,
         author: "SupremEnergies",
-        image_src: UNSPLASH_IMAGES[imageIndex],
+        image_src: imageSrc,
         published: true,
         published_at: new Date().toISOString(),
       })
