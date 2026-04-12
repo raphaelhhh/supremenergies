@@ -17,19 +17,11 @@ const Contact = () => {
 
   return (
     <div>
-      <Hero 
-        title="Contactez SupremEnergies"
-        subtitle="Notre équipe d'experts est à votre écoute pour tous vos projets de rénovation énergétique. N'hésitez pas à nous solliciter pour un devis gratuit ou des conseils personnalisés."
-        buttonText="Découvrir nos services"
-        buttonLink="/services"
-        imageSrc="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-      />
-
       {/* Contact Form Section - First */}
-      <section className="section-padding bg-gray-50" id="formulaire">
+      <section className="section-padding bg-gray-50 pt-32" id="formulaire">
         <div className="container-custom">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4 text-supreme-primary text-center">Demandez votre devis gratuit</h2>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-supreme-primary text-center">Contactez SupremEnergies</h1>
             <p className="text-lg mb-8 text-gray-700 text-center">
               Remplissez le formulaire ci-dessous pour nous faire part de votre projet. Un conseiller vous recontactera dans les 24h.
             </p>
