@@ -11,73 +11,73 @@ const TOPICS = [
     theme: "MaPrimeRénov'",
     keywords: ["MaPrimeRénov'", "aides rénovation", "subventions", "prime énergie"],
     angle: "Actualité et évolutions de MaPrimeRénov' : nouveaux barèmes, conditions d'éligibilité, démarches à suivre.",
-    image: "https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/maprimenov-aides.jpg"
   },
   {
     theme: "Certificats d'Économies d'Énergie (CEE)",
     keywords: ["CEE", "certificats économies énergie", "prime énergie", "fournisseurs énergie"],
     angle: "Comment fonctionnent les CEE, comment en bénéficier et les cumuler avec d'autres aides.",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/maprimenov-aides.jpg"
   },
   {
     theme: "Pompe à chaleur",
     keywords: ["pompe à chaleur", "PAC", "chauffage", "COP", "air/eau"],
     angle: "Conseils techniques sur les pompes à chaleur : choix, entretien, performance, innovations.",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/pompe-a-chaleur.jpg"
   },
   {
     theme: "Isolation thermique",
     keywords: ["isolation", "ITE", "ITI", "combles", "thermique"],
     angle: "Techniques d'isolation, matériaux innovants, retours d'expérience et bonnes pratiques.",
-    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/isolation-thermique.jpg"
   },
   {
     theme: "Panneaux solaires photovoltaïques",
     keywords: ["panneaux solaires", "photovoltaïque", "autoconsommation", "énergie solaire"],
     angle: "Rendement, nouvelles technologies, rentabilité et réglementations des installations solaires.",
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/panneaux-solaires.jpg"
   },
   {
     theme: "DPE et réglementation",
     keywords: ["DPE", "diagnostic performance énergétique", "RE2020", "passoire thermique"],
     angle: "Évolution du DPE, interdictions de location, obligations légales et impact sur l'immobilier.",
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/dpe-reglementation.jpg"
   },
   {
     theme: "Rénovation globale",
     keywords: ["rénovation globale", "bouquet travaux", "performance énergétique"],
     angle: "Avantages d'une approche globale, retours d'expérience, aides spécifiques.",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/renovation-globale.jpg"
   },
   {
     theme: "Chauffe-eau thermodynamique",
     keywords: ["chauffe-eau thermodynamique", "eau chaude sanitaire", "ballon thermodynamique"],
     angle: "Technologies, installation, économies et aides pour le chauffe-eau thermodynamique.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/chauffe-eau.jpg"
   },
   {
     theme: "VMC et ventilation",
     keywords: ["VMC", "ventilation", "qualité air", "double flux"],
     angle: "Importance de la ventilation, types de VMC, lien avec l'isolation et la qualité de l'air.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/vmc-ventilation.jpg"
   },
   {
     theme: "Éco-PTZ et financement",
     keywords: ["éco-PTZ", "financement", "prêt travaux", "crédit rénovation"],
     angle: "Solutions de financement pour la rénovation : éco-PTZ, prêts aidés, tiers-financement.",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/maprimenov-aides.jpg"
   },
   {
     theme: "Fenêtres et menuiseries",
     keywords: ["fenêtres", "double vitrage", "triple vitrage", "menuiseries"],
     angle: "Remplacement de fenêtres : matériaux, performances, aides et retour sur investissement.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/isolation-maison.jpg"
   },
   {
     theme: "Audit énergétique",
     keywords: ["audit énergétique", "bilan thermique", "diagnostic", "travaux prioritaires"],
     angle: "Pourquoi et comment réaliser un audit énergétique avant de rénover.",
-    image: "https://images.unsplash.com/photo-1585128792020-803d29415281?auto=format&fit=crop&w=1170&q=80"
+    image: "/images/blog/dpe-reglementation.jpg"
   }
 ];
 
