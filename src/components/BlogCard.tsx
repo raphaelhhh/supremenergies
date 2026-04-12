@@ -34,6 +34,9 @@ const BlogCard = ({
           src={imageSrc}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=1170&q=80";
+          }}
         />
       </Link>
       <div className="p-6 flex flex-col flex-grow">
