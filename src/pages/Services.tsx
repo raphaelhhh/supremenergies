@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
 import SectionHeader from "@/components/SectionHeader";
 import CTA from "@/components/CTA";
@@ -45,6 +46,34 @@ const Services = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Services de Rénovation Énergétique | SupremEnergies</title>
+        <meta name="description" content="Découvrez nos services de rénovation énergétique : isolation thermique, pompes à chaleur, eau chaude sanitaire, panneaux solaires, rénovation globale. Devis gratuit en Île-de-France." />
+        <link rel="canonical" href="https://supremenergies.com/services" />
+        <meta property="og:title" content="Services de Rénovation Énergétique | SupremEnergies" />
+        <meta property="og:description" content="Isolation, pompes à chaleur, eau chaude, solaire et rénovation globale. Solutions complètes pour réduire vos factures énergétiques." />
+        <meta property="og:url" content="https://supremenergies.com/services" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "SupremEnergies",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "55 rue Cartier Bresson",
+              "addressLocality": "Pantin",
+              "postalCode": "93500",
+              "addressCountry": "FR"
+            },
+            "telephone": "01 86 04 68 89"
+          },
+          "serviceType": ["Isolation thermique", "Pompes à chaleur", "Eau chaude sanitaire", "Panneaux solaires", "Rénovation globale", "Adoucisseur d'eau"],
+          "areaServed": "Île-de-France",
+          "description": "Services de rénovation énergétique pour particuliers et professionnels"
+        })}</script>
+      </Helmet>
       <Hero 
         title="Nos Services de Rénovation Énergétique"
         subtitle="Des solutions complètes et efficaces pour réduire votre consommation d'énergie et améliorer votre confort."
