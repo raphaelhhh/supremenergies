@@ -283,8 +283,8 @@ Articles existants (à ne pas dupliquer) : ${existingTitles.slice(0, 5).join(", 
       slug = `${slugify(article.title)}-${slugSuffix}`;
     }
 
-    // Pick an image
-    const imageIndex = Math.floor(Math.random() * UNSPLASH_IMAGES.length);
+    // Use the topic's associated image
+    const imageSrc = topic.image;
 
     // Insert into database
     const { data: newPost, error: insertError } = await supabase
@@ -296,7 +296,7 @@ Articles existants (à ne pas dupliquer) : ${existingTitles.slice(0, 5).join(", 
         content: article.content,
         meta_description: article.meta_description,
         author: "SupremEnergies",
-        image_src: UNSPLASH_IMAGES[imageIndex],
+        image_src: imageSrc,
         published: true,
         published_at: new Date().toISOString(),
       })
