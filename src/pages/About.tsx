@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
 import SectionHeader from "@/components/SectionHeader";
 import CTA from "@/components/CTA";
@@ -28,8 +29,33 @@ const About = () => {
     }
   ];
 
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "SupremEnergies",
+      "description": "Expert en rénovation énergétique en Île-de-France. Isolation thermique, pompes à chaleur, panneaux solaires et rénovation globale.",
+      "url": "https://supremenergies.com",
+      "foundingLocation": "Pantin, France",
+      "areaServed": "Île-de-France",
+      "numberOfEmployees": { "@type": "QuantitativeValue", "value": "50+" }
+    }
+  };
+
   return (
     <div>
+      <Helmet>
+        <title>À Propos de SupremEnergies | Expert Rénovation Énergétique</title>
+        <meta name="description" content="Découvrez SupremEnergies, votre expert en rénovation énergétique en Île-de-France. Plus de 1000 projets réalisés. Isolation, pompes à chaleur, panneaux solaires." />
+        <link rel="canonical" href="https://supremenergies.com/about" />
+        <meta property="og:title" content="À Propos de SupremEnergies | Expert Rénovation Énergétique" />
+        <meta property="og:description" content="Expert en rénovation énergétique en Île-de-France. Plus de 1000 projets réalisés." />
+        <meta property="og:url" content="https://supremenergies.com/about" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify(aboutSchema)}</script>
+      </Helmet>
+
       <Hero 
         title="À Propos de SupremEnergies"
         subtitle="Découvrez qui nous sommes et comment nous contribuons à un avenir plus durable grâce à nos solutions de rénovation énergétique."

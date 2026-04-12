@@ -17,6 +17,10 @@ import NotFound from "./pages/NotFound";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import LegalNotices from "./pages/LegalNotices";
+import IsolationThermique from "./pages/services/IsolationThermique";
+import PompeAChaleur from "./pages/services/PompeAChaleur";
+import PanneauxSolaires from "./pages/services/PanneauxSolaires";
+import RenovationGlobale from "./pages/services/RenovationGlobale";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +38,10 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/services" element={<Services />} />
+                <Route path="/services/isolation-thermique" element={<IsolationThermique />} />
+                <Route path="/services/pompe-a-chaleur" element={<PompeAChaleur />} />
+                <Route path="/services/panneaux-solaires" element={<PanneauxSolaires />} />
+                <Route path="/services/renovation-globale" element={<RenovationGlobale />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
