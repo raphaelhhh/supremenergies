@@ -11,7 +11,7 @@ const TOPICS = [
     theme: "MaPrimeRénov'",
     keywords: ["MaPrimeRénov'", "aides rénovation", "subventions", "prime énergie"],
     angle: "Actualité et évolutions de MaPrimeRénov' : nouveaux barèmes, conditions d'éligibilité, démarches à suivre.",
-    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1170&q=80"
+    image: "https://images.unsplash.com/photo-1434082033009-b81d41d32e1c?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Certificats d'Économies d'Énergie (CEE)",
@@ -23,13 +23,13 @@ const TOPICS = [
     theme: "Pompe à chaleur",
     keywords: ["pompe à chaleur", "PAC", "chauffage", "COP", "air/eau"],
     angle: "Conseils techniques sur les pompes à chaleur : choix, entretien, performance, innovations.",
-    image: "https://images.unsplash.com/photo-1635070040884-957a0b4fed66?auto=format&fit=crop&w=1170&q=80"
+    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Isolation thermique",
     keywords: ["isolation", "ITE", "ITI", "combles", "thermique"],
     angle: "Techniques d'isolation, matériaux innovants, retours d'expérience et bonnes pratiques.",
-    image: "https://images.unsplash.com/photo-1607400201889-565b1ee75f8e?auto=format&fit=crop&w=1170&q=80"
+    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Panneaux solaires photovoltaïques",
@@ -41,31 +41,31 @@ const TOPICS = [
     theme: "DPE et réglementation",
     keywords: ["DPE", "diagnostic performance énergétique", "RE2020", "passoire thermique"],
     angle: "Évolution du DPE, interdictions de location, obligations légales et impact sur l'immobilier.",
-    image: "https://images.unsplash.com/photo-1460472178825-e5240623afd5?auto=format&fit=crop&w=1170&q=80"
+    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Rénovation globale",
     keywords: ["rénovation globale", "bouquet travaux", "performance énergétique"],
     angle: "Avantages d'une approche globale, retours d'expérience, aides spécifiques.",
-    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1170&q=80"
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Chauffe-eau thermodynamique",
     keywords: ["chauffe-eau thermodynamique", "eau chaude sanitaire", "ballon thermodynamique"],
     angle: "Technologies, installation, économies et aides pour le chauffe-eau thermodynamique.",
-    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1170&q=80"
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "VMC et ventilation",
     keywords: ["VMC", "ventilation", "qualité air", "double flux"],
     angle: "Importance de la ventilation, types de VMC, lien avec l'isolation et la qualité de l'air.",
-    image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=1170&q=80"
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Éco-PTZ et financement",
     keywords: ["éco-PTZ", "financement", "prêt travaux", "crédit rénovation"],
     angle: "Solutions de financement pour la rénovation : éco-PTZ, prêts aidés, tiers-financement.",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1170&q=80"
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1170&q=80"
   },
   {
     theme: "Fenêtres et menuiseries",
@@ -77,7 +77,7 @@ const TOPICS = [
     theme: "Audit énergétique",
     keywords: ["audit énergétique", "bilan thermique", "diagnostic", "travaux prioritaires"],
     angle: "Pourquoi et comment réaliser un audit énergétique avant de rénover.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1170&q=80"
+    image: "https://images.unsplash.com/photo-1585128792020-803d29415281?auto=format&fit=crop&w=1170&q=80"
   }
 ];
 
