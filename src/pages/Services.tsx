@@ -438,7 +438,7 @@ const Services = () => {
             </div>
             <div className="rounded-lg overflow-hidden shadow-xl">
               <img 
-                src="/images/energy-label.png" 
+                src="/images/renovation-globale.jpg" 
                 alt="Rénovation Globale"
                 className="w-full h-full object-cover"
               />
