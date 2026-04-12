@@ -1,55 +1,29 @@
 
 
-## Génération automatique d'articles de blog par IA
+## Améliorations du générateur d'articles de blog
 
-### Concept
+### Ce qui change
 
-Mettre en place un système qui, tous les 3 jours, génère automatiquement un article de blog sur la rénovation énergétique en s'appuyant sur l'actualité du secteur, puis le publie directement sur le site.
+#### 1. Recherche web avant rédaction
+L'edge function `generate-blog-post` va d'abord effectuer une recherche Google sur le sujet choisi (via l'outil `web_search` de Lovable AI ou via une recherche web directe) pour récupérer les dernières actualités et informations pertinentes. Ces résultats seront injectés dans le prompt de l'IA pour que l'article soit basé sur des faits récents et l'actualité du secteur.
 
-### Architecture technique
+**Méthode** : Utiliser `google/gemini-2.5-flash` avec un outil de recherche web (grounding) via l'API Lovable AI, ou faire un appel intermédiaire pour récupérer des sources avant de rédiger. Concrètement, on ajoutera une étape de recherche web dans la fonction :
+- Rechercher `"rénovation énergétique {sujet} 2026 actualité"` 
+- Extraire les résumés des 5 premiers résultats
+- Les passer dans le prompt utilisateur comme contexte d'actualité
 
-```text
-┌─────────────┐    ┌──────────────────┐    ┌──────────────┐    ┌─────────┐
-│  pg_cron     │───▶│ Edge Function    │───▶│ Lovable AI   │───▶│  Table  │
-│ (tous les   │    │ generate-blog    │    │ (rédaction)  │    │  blog_  │
-│  3 jours)   │    │                  │    │              │    │  posts  │
-│             │    │  - choisit sujet │    └──────────────┘    └─────────┘
-│             │    │  - recherche web │                              │
-│             │    │  - génère article│                              ▼
-│             │    │  - sauve en BDD  │                     Blog.tsx / BlogPost.tsx
-└─────────────┘    └──────────────────┘                     (lecture dynamique)
-```
+#### 2. CTA avec lien devis en fin d'article
+Modifier le prompt système pour que chaque article généré se termine par un bloc HTML d'appel à l'action contenant :
+- Un lien vers le formulaire de devis Google Forms
+- Un lien téléphone (01 86 04 68 89)
 
-### Étapes
+En plus, le CTA déjà présent dans `BlogPost.tsx` (ligne 148-156) sera mis à jour pour pointer vers le formulaire de devis au lieu de `/contact`.
 
-#### 1. Créer la table `blog_posts` en base de données
-Stocker les articles (titre, contenu HTML, extrait, date, image, slug, statut publié/brouillon) au lieu des données codées en dur actuellement.
+### Fichiers modifiés
+- `supabase/functions/generate-blog-post/index.ts` : ajout recherche web + CTA dans le prompt
+- `src/pages/BlogPost.tsx` : bouton CTA vers le formulaire de devis
 
-#### 2. Migrer les 8 articles existants dans la table
-Insérer les articles actuellement hardcodés pour ne perdre aucun contenu.
-
-#### 3. Créer l'edge function `generate-blog-post`
-- Choisit un sujet parmi une liste tournante (MaPrimeRénov', CEE, pompes à chaleur, isolation, solaire, réglementation, DPE, aides locales...)
-- Utilise Lovable AI pour générer un article complet (~800-1200 mots) avec titre, extrait et contenu HTML
-- Sauvegarde l'article dans la table `blog_posts`
-
-#### 4. Planifier l'exécution automatique (pg_cron)
-Un job cron déclenche la fonction tous les 3 jours.
-
-#### 5. Adapter Blog.tsx et BlogPost.tsx
-Remplacer les données hardcodées par des requêtes vers la table `blog_posts`. Le blog devient entièrement dynamique.
-
-### Points d'attention
-
-- **Qualité du contenu** : Un bon prompt système avec les consignes de style, ton professionnel, et mots-clés SEO pertinents garantit des articles de qualité
-- **Pas de duplicate** : La fonction vérifie les sujets déjà traités pour varier les thèmes
-- **SEO** : Chaque article généré inclut un title et une meta description optimisés
-- **Images** : Utilisation d'images Unsplash pertinentes sélectionnées par l'IA selon le sujet
-- **Coût** : Utilise Lovable AI (inclus dans votre plan), donc pas de coût API supplémentaire pour la génération de texte
-
-### Fichiers concernés
-
-- **Créés** : `supabase/functions/generate-blog-post/index.ts`
-- **Modifiés** : `src/pages/Blog.tsx`, `src/pages/BlogPost.tsx` (lecture depuis la BDD)
-- **Migration SQL** : création table `blog_posts` + insertion des 8 articles existants + job cron
+### Détail technique
+- Recherche web via `fetch("https://www.googleapis.com/customsearch/v1?...")` ou en utilisant le modèle Gemini avec grounding activé
+- Le prompt inclura : "Termine l'article par un encadré CTA avec un lien vers https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform et le numéro 01 86 04 68 89"
 
