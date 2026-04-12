@@ -7,7 +7,7 @@ import CTA from "@/components/CTA";
 import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target, Waves } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-isolation-facade.jpg";
+import heroImage from "@/assets/energy-label.png";
 const Index = () => {
   const services = [
     {
