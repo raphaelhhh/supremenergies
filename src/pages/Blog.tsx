@@ -39,12 +39,38 @@ const Blog = () => {
     });
   };
 
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Blog SupremEnergies — Conseils et guides rénovation énergétique",
+    "description": "Guides, conseils et actualités sur la rénovation énergétique : isolation, pompes à chaleur, panneaux solaires, MaPrimeRénov'.",
+    "url": "https://supremenergies.com/blog",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "SupremEnergies",
+      "url": "https://supremenergies.com"
+    },
+    "hasPart": blogPosts.slice(0, 10).map((p) => ({
+      "@type": "BlogPosting",
+      "headline": p.title,
+      "url": `https://supremenergies.com/blog/${p.slug}`,
+      "image": p.image_src,
+      "datePublished": p.published_at,
+      "author": { "@type": "Organization", "name": p.author }
+    }))
+  };
+
   return (
     <div>
       <Helmet>
         <title>Blog Rénovation Énergétique | Conseils et Guides | SupremEnergies</title>
         <meta name="description" content="Guides, conseils et actualités sur la rénovation énergétique : isolation, pompes à chaleur, panneaux solaires, aides financières. Par SupremEnergies." />
         <link rel="canonical" href="https://supremenergies.com/blog" />
+        <meta property="og:title" content="Blog Rénovation Énergétique | SupremEnergies" />
+        <meta property="og:description" content="Guides et conseils d'experts pour réussir votre rénovation énergétique." />
+        <meta property="og:url" content="https://supremenergies.com/blog" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify(collectionSchema)}</script>
       </Helmet>
 
       <Hero 

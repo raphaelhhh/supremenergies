@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, Calendar, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BlogCard from "@/components/BlogCard";
+import Breadcrumb from "@/components/Breadcrumb";
+import RelatedServices from "@/components/RelatedServices";
 import { supabase } from "@/integrations/supabase/client";
 
 const BlogPost = () => {
@@ -135,6 +137,13 @@ const BlogPost = () => {
         </div>
       </div>
 
+      <Breadcrumb
+        items={[
+          { label: "Blog", href: "/blog" },
+          { label: post.title },
+        ]}
+      />
+
       {/* Content */}
       <section className="py-12 md:py-16">
         <div className="container-custom">
@@ -160,6 +169,9 @@ const BlogPost = () => {
           </div>
         </div>
       </section>
+
+      {/* Services associés (maillage interne SEO) */}
+      <RelatedServices title="Nos services associés" />
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
