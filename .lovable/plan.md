@@ -1,91 +1,99 @@
 
 
-## Plan SEO : améliorer l'indexation et générer de la demande entrante
+## Plan SEO avancé : booster la visibilité Google et générer plus de demandes
 
-### Constat actuel (rapport GSC du 19/04)
-- Seulement **4 pages indexées sur 23**
-- 15 pages "Découvertes mais non indexées" → manque de signal de qualité
-- 3 pages "Page avec redirection" → sitemap obsolète
-- Pas de données structurées Schema.org sur les pages
-- Maillage interne faible entre blog et pages services
+### Constat
+Le socle technique SEO est en place (sitemap dynamique, JSON-LD, maillage interne, blog auto). Pour passer au niveau supérieur et capter de la demande entrante qualifiée, il faut maintenant attaquer **3 leviers à fort ROI** : pages géolocalisées, outils interactifs (lead magnets), et signaux de confiance E-E-A-T.
 
-### Stratégie en 4 axes
+### Axe 1 — Pages de localisation (capter "[service] + [ville]")
 
-#### 1. Données structurées Schema.org (impact fort, rapide)
-Ajouter du JSON-LD sur toutes les pages via `react-helmet-async` :
-- **LocalBusiness** sur toutes les pages (NAP : SupremEnergies, 01 86 04 68 89, zone d'intervention)
-- **Service** sur chaque page service (Isolation, PAC, Solaire, Rénovation Globale) avec prix, zone, description
-- **FAQPage** sur les pages services (questions fréquentes)
-- **Article + BreadcrumbList** sur les articles de blog (auteur, date, image)
-- **Organization** + sameAs (réseaux sociaux) sur la home
+Les requêtes locales convertissent 5x mieux. Créer des landing pages dédiées par ville cible en Île-de-France :
+- `/zones/paris`, `/zones/versailles`, `/zones/boulogne-billancourt`, `/zones/saint-denis`, `/zones/nanterre`, `/zones/montreuil`
+- Chaque page contient : intro géolocalisée, services dispo dans cette ville, aides locales (Île-de-France Énergies, éco-PTZ régional), témoignage local, FAQ ville-spécifique, JSON-LD `LocalBusiness` avec `areaServed`
+- Combinaisons service × ville (optionnel phase 2) : `/services/pompe-a-chaleur/paris` (forte intention d'achat)
 
-#### 2. Enrichissement contenu pages services (résout "Discovered – not indexed")
-Google ignore les pages jugées "thin content". Pour chaque page service :
-- Ajouter une section **FAQ** (6-8 questions) avec accordéon
-- Ajouter une section **"Pourquoi choisir SupremEnergies"** avec bénéfices détaillés
-- Ajouter une section **"Notre processus"** (étapes 1-2-3-4)
-- Ajouter **liens internes contextuels** vers les autres services et articles de blog pertinents
-- Cibler des **mots-clés longue traîne** dans les H2/H3 (ex : "prix pompe à chaleur air-eau Île-de-France 2026")
+### Axe 2 — Lead magnets interactifs (aimants à backlinks + conversions)
 
-#### 3. Maillage interne renforcé
-- **Footer** : ajouter une colonne "Articles populaires" avec 4-5 derniers articles
-- **Pages services** : bloc "Articles liés" en bas (3 articles du blog filtrés par thème)
-- **Articles de blog** : bloc "Services associés" + "Articles similaires" en bas
-- **BlogPost** : breadcrumb visible (Accueil > Blog > Article)
+#### a) Simulateur MaPrimeRénov' 2026
+- Page `/simulateur-aides` : formulaire en 4 étapes (revenus, type travaux, foyer, zone) → estimation d'aides en temps réel
+- Génère beaucoup de partages, backlinks naturels, et leads ultra-qualifiés (capture email avant résultat détaillé)
+- Données stockées dans une nouvelle table `simulations` Supabase + envoi Zapier
 
-#### 4. Sitemap & technique
-- **Régénérer `public/sitemap.xml`** dynamiquement (ou à jour manuellement) avec :
-  - Toutes les pages services
-  - Tous les articles de blog (lus depuis Supabase au build, ou liste statique mise à jour)
-  - Suppression des URLs en redirect
-  - `lastmod`, `priority` et `changefreq` corrects
-- **Edge function `generate-sitemap`** : génère un sitemap XML dynamique à partir de la table `blog_posts` (servi sur `/sitemap.xml` via redirect Netlify ou route React)
-- Vérifier que les meta `description` sont uniques et < 160 caractères sur chaque page
-- Ajouter balises **canonical** sur toutes les pages
-- Ajouter **Open Graph** spécifique par page (pas seulement le défaut)
+#### b) Calculateur d'économies d'énergie
+- Page `/economies-energie` : entrée surface + type chauffage actuel → estimation économies annuelles avec PAC ou isolation
+- Excellent pour le partage et les requêtes "combien j'économise avec une pompe à chaleur"
+
+### Axe 3 — Signaux E-E-A-T et autorité
+
+#### a) Page "À propos" enrichie
+- Photos équipe, années d'expérience, certifications/qualifications (sans mentionner RGE), partenaires fabricants
+- JSON-LD `Organization` complet avec `founder`, `foundingDate`, `numberOfEmployees`
+
+#### b) Page témoignages clients
+- `/temoignages` : 10-15 témoignages détaillés avec photos chantiers, ville, type travaux, économies réalisées
+- JSON-LD `Review` + `AggregateRating` → étoiles dans les SERP
+- Table Supabase `testimonials` pour gestion dynamique
+
+#### c) Page "Réalisations / Études de cas"
+- `/realisations` : 6-8 cas clients détaillés (avant/après, devis, économies, durée chantier)
+- Schema `CreativeWork` ou `Article` pour chaque cas
+
+### Axe 4 — Contenu pilier longue traîne
+
+Créer 3-4 articles **piliers** (3000+ mots) qui ciblent des requêtes très concurrentielles :
+- "Guide complet MaPrimeRénov' 2026 : montants, conditions, démarches"
+- "Pompe à chaleur air-eau ou air-air : comparatif complet"
+- "Coût rénovation énergétique maison : tous les prix 2026"
+- "Isolation extérieure ITE : prix, aides et étapes"
+
+Ces piliers reçoivent les liens internes des articles courts du blog auto → boost d'autorité topique.
+
+### Axe 5 — Optimisations techniques additionnelles
+
+- **Image optimization** : convertir les images blog en WebP, ajouter `loading="lazy"` et dimensions explicites
+- **Core Web Vitals** : précharger la police hero, optimiser le LCP de la home
+- **Breadcrumbs visibles** sur toutes les pages services (déjà sur blog)
+- **404 personnalisée SEO-friendly** avec liens vers pages populaires
+- **Hreflang `fr-FR`** explicite sur toutes les pages
+- **Schema HowTo** sur les articles tutoriels (étapes pour rénover, demander une aide…)
 
 ### Architecture technique
 
 ```text
-Pages services (Isolation, PAC, Solaire, Rénov)
-    ├── <Helmet> JSON-LD Service + FAQPage
-    ├── <FAQSection /> (nouveau composant)
-    ├── <ProcessSteps /> (nouveau composant)
-    └── <RelatedArticles theme="..." /> (nouveau composant, query Supabase)
+Nouvelles routes
+├── /zones/:ville              → ZoneLocale.tsx (template + data ville)
+├── /simulateur-aides          → SimulateurAides.tsx
+├── /economies-energie         → CalculateurEconomies.tsx
+├── /temoignages               → Temoignages.tsx
+├── /realisations              → Realisations.tsx
 
-Pages blog
-    ├── <Helmet> JSON-LD Article + BreadcrumbList
-    ├── <Breadcrumb />
-    ├── <RelatedServices /> (CTA contextuel)
-    └── <RelatedArticles excludeId={...} />
+Nouvelles tables Supabase
+├── simulations (id, email, inputs jsonb, result jsonb, created_at)
+├── testimonials (id, name, city, service, content, rating, photo_url, published)
+└── case_studies (id, slug, title, city, before/after, savings, content)
 
-Footer
-    └── Colonne "Articles populaires" (5 derniers)
-
-Edge function generate-sitemap
-    └── Lit blog_posts → génère XML → sert /sitemap.xml
+Nouveaux composants
+├── LocalSEOPage.tsx           (template ville)
+├── SimulatorWizard.tsx        (multi-step form)
+├── TestimonialsList.tsx       + JSON-LD AggregateRating
+└── CaseStudyCard.tsx
 ```
 
-### Fichiers concernés
-- **Créés** : 
-  - `src/components/FAQSection.tsx`
-  - `src/components/ProcessSteps.tsx`
-  - `src/components/RelatedArticles.tsx`
-  - `src/components/RelatedServices.tsx`
-  - `src/components/SEO.tsx` (wrapper Helmet + JSON-LD réutilisable)
-  - `supabase/functions/generate-sitemap/index.ts`
-- **Modifiés** : 
-  - 4 pages services (`src/pages/services/*.tsx`) — ajout FAQ, process, JSON-LD, contenu enrichi
-  - `src/pages/BlogPost.tsx` — breadcrumb, JSON-LD Article, blocs liés
-  - `src/pages/Blog.tsx` — JSON-LD CollectionPage
-  - `src/pages/Index.tsx` — JSON-LD LocalBusiness + Organization
-  - `src/components/Footer.tsx` — colonne articles populaires
-  - `public/_redirects` — rediriger `/sitemap.xml` vers l'edge function
-  - `public/sitemap.xml` — supprimer (remplacé par edge function)
+### Priorisation suggérée (fait en 2 phases)
+
+**Phase 1 (impact max, à faire maintenant)**
+1. 6 pages de localisation Île-de-France
+2. Simulateur MaPrimeRénov'
+3. Page témoignages avec AggregateRating
+4. 2 articles piliers longue traîne
+
+**Phase 2 (à faire après mesure)**
+- Calculateur économies, page réalisations, combinaisons service × ville, optimisations Core Web Vitals
 
 ### Résultat attendu
-- Indexation : passer de 4 à 20+ pages indexées sous 4-6 semaines
-- Apparition en SERP sur des requêtes longue traîne (ex : "prix pompe à chaleur Paris", "MaPrimeRénov 2026 conditions")
-- Rich snippets (FAQ, breadcrumb, étoiles) visibles dans Google
-- Plus de demandes entrantes via le formulaire grâce aux CTA contextuels dans les articles et pages enrichies
+- **+30 à +50 pages indexées** d'ici 8 semaines
+- Apparition sur des requêtes locales à forte intention d'achat
+- **2-3x plus de demandes entrantes** via le simulateur (lead magnet) et les pages locales
+- Étoiles dans les SERP (témoignages) → CTR amélioré
+- Backlinks naturels grâce au simulateur partageable
 
