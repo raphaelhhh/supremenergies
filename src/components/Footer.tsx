@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin, Facebook, Instagram, Linkedin, Twitter, ArrowRight } from "lucide-react";
+import FooterPopularArticles from "./FooterPopularArticles";
 const Footer = () => {
   return <footer className="bg-gray-900 text-white">
       <div className="container-custom">
@@ -58,7 +59,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Main Content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold mb-6 text-white">SupremEnergies</h3>
@@ -155,6 +156,9 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+
+          {/* Articles récents (SEO maillage interne) */}
+          <FooterPopularArticles />
 
           {/* Contact Info */}
           <div>

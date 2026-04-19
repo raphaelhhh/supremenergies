@@ -1,6 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
+import Breadcrumb from "@/components/Breadcrumb";
+import RelatedArticles from "@/components/RelatedArticles";
+import RelatedServices from "@/components/RelatedServices";
 import { SunMedium, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -60,6 +63,8 @@ const PanneauxSolaires = () => {
         imageSrc="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
         imageAlt="Installation de panneaux solaires photovoltaïques"
       />
+
+      <Breadcrumb items={[{ label: "Services", href: "/services" }, { label: "Panneaux Solaires" }]} />
 
       <section className="section-padding">
         <div className="container-custom">
@@ -153,6 +158,13 @@ const PanneauxSolaires = () => {
           </div>
         </div>
       </section>
+
+      <RelatedArticles
+        keywords={["panneaux solaires", "photovoltaïque", "autoconsommation", "solaire"]}
+        title="Pour aller plus loin sur le solaire"
+      />
+
+      <RelatedServices excludeSlug="panneaux-solaires" title="Découvrez aussi" />
 
       <CTA title="Prêt à produire votre propre énergie ?" subtitle="Contactez-nous pour une étude de faisabilité gratuite et découvrez le potentiel solaire de votre toiture." />
     </div>
