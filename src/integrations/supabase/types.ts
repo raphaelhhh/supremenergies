@@ -59,6 +59,96 @@ export type Database = {
         }
         Relationships: []
       }
+      simulations: {
+        Row: {
+          created_at: string
+          email: string
+          estimated_aid: number | null
+          household_size: number | null
+          housing_type: string | null
+          id: string
+          income_category: string | null
+          inputs: Json | null
+          phone: string | null
+          postal_code: string | null
+          result: Json | null
+          work_types: string[] | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          estimated_aid?: number | null
+          household_size?: number | null
+          housing_type?: string | null
+          id?: string
+          income_category?: string | null
+          inputs?: Json | null
+          phone?: string | null
+          postal_code?: string | null
+          result?: Json | null
+          work_types?: string[] | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          estimated_aid?: number | null
+          household_size?: number | null
+          housing_type?: string | null
+          id?: string
+          income_category?: string | null
+          inputs?: Json | null
+          phone?: string | null
+          postal_code?: string | null
+          result?: Json | null
+          work_types?: string[] | null
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          city: string
+          content: string
+          created_at: string
+          display_order: number
+          id: string
+          name: string
+          photo_url: string | null
+          published: boolean
+          rating: number
+          savings: string | null
+          service: string
+          updated_at: string
+        }
+        Insert: {
+          city: string
+          content: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          name: string
+          photo_url?: string | null
+          published?: boolean
+          rating?: number
+          savings?: string | null
+          service: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string
+          content?: string
+          created_at?: string
+          display_order?: number
+          id?: string
+          name?: string
+          photo_url?: string | null
+          published?: boolean
+          rating?: number
+          savings?: string | null
+          service?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

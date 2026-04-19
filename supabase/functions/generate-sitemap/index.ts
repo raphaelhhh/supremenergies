@@ -8,6 +8,15 @@ const corsHeaders = {
 
 const SITE_URL = "https://supremenergies.com";
 
+const ZONE_SLUGS = [
+  "paris",
+  "versailles",
+  "boulogne-billancourt",
+  "saint-denis",
+  "nanterre",
+  "montreuil",
+];
+
 const STATIC_URLS: Array<{
   loc: string;
   changefreq: string;
@@ -20,11 +29,18 @@ const STATIC_URLS: Array<{
   { loc: "/services/pompe-a-chaleur", changefreq: "monthly", priority: "0.9" },
   { loc: "/services/panneaux-solaires", changefreq: "monthly", priority: "0.9" },
   { loc: "/services/renovation-globale", changefreq: "monthly", priority: "0.9" },
+  { loc: "/simulateur-aides", changefreq: "monthly", priority: "0.9" },
+  { loc: "/temoignages", changefreq: "monthly", priority: "0.7" },
   { loc: "/blog", changefreq: "weekly", priority: "0.7" },
   { loc: "/contact", changefreq: "monthly", priority: "0.8" },
   { loc: "/mentions-legales", changefreq: "yearly", priority: "0.3" },
   { loc: "/privacy", changefreq: "yearly", priority: "0.3" },
   { loc: "/terms", changefreq: "yearly", priority: "0.3" },
+  ...ZONE_SLUGS.map((slug) => ({
+    loc: `/zones/${slug}`,
+    changefreq: "monthly",
+    priority: "0.8",
+  })),
 ];
 
 Deno.serve(async (req) => {

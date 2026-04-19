@@ -21,6 +21,9 @@ import IsolationThermique from "./pages/services/IsolationThermique";
 import PompeAChaleur from "./pages/services/PompeAChaleur";
 import PanneauxSolaires from "./pages/services/PanneauxSolaires";
 import RenovationGlobale from "./pages/services/RenovationGlobale";
+import ZoneLocale from "./pages/ZoneLocale";
+import SimulateurAides from "./pages/SimulateurAides";
+import Temoignages from "./pages/Temoignages";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +48,9 @@ const App = () => (
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/zones/:ville" element={<ZoneLocale />} />
+                <Route path="/simulateur-aides" element={<SimulateurAides />} />
+                <Route path="/temoignages" element={<Temoignages />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/legal" element={<LegalNotices />} />

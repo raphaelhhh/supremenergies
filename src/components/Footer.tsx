@@ -100,9 +100,15 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-300 hover:text-white transition-colors flex items-center">
+                <Link to="/simulateur-aides" className="text-gray-300 hover:text-white transition-colors flex items-center">
                   <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  À propos
+                  Simulateur d'aides
+                </Link>
+              </li>
+              <li>
+                <Link to="/temoignages" className="text-gray-300 hover:text-white transition-colors flex items-center">
+                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
+                  Témoignages
                 </Link>
               </li>
               <li>
@@ -154,6 +160,28 @@ const Footer = () => {
                   Rénovation Globale
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          {/* Zones d'intervention (SEO local) */}
+          <div>
+            <h3 className="text-xl font-bold mb-6 text-white">Zones d'intervention</h3>
+            <ul className="space-y-3">
+              {[
+                { slug: "paris", name: "Paris" },
+                { slug: "versailles", name: "Versailles" },
+                { slug: "boulogne-billancourt", name: "Boulogne-Billancourt" },
+                { slug: "saint-denis", name: "Saint-Denis" },
+                { slug: "nanterre", name: "Nanterre" },
+                { slug: "montreuil", name: "Montreuil" },
+              ].map((z) => (
+                <li key={z.slug}>
+                  <Link to={`/zones/${z.slug}`} className="text-gray-300 hover:text-white transition-colors flex items-center">
+                    <ArrowRight size={16} className="mr-2 text-supreme-accent" />
+                    {z.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
