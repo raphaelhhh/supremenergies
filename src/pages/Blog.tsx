@@ -63,11 +63,11 @@ const Blog = () => {
   return (
     <div>
       <Helmet>
-        <title>Blog Rénovation Énergétique | Conseils et Guides | SupremEnergies</title>
-        <meta name="description" content="Guides, conseils et actualités sur la rénovation énergétique : isolation, pompes à chaleur, panneaux solaires, aides financières. Par SupremEnergies." />
+        <title>Blog Rénovation Énergétique 2026 ★ Aides, Prix et Conseils Experts</title>
+        <meta name="description" content="✓ Guides pratiques 2026 : MaPrimeRénov', prix pompe à chaleur, isolation, panneaux solaires. Conseils d'experts pour réduire vos factures. Mis à jour chaque semaine." />
         <link rel="canonical" href="https://supremenergies.com/blog" />
-        <meta property="og:title" content="Blog Rénovation Énergétique | SupremEnergies" />
-        <meta property="og:description" content="Guides et conseils d'experts pour réussir votre rénovation énergétique." />
+        <meta property="og:title" content="Blog Rénovation Énergétique 2026 ★ Aides, Prix et Conseils Experts" />
+        <meta property="og:description" content="Guides et conseils 2026 pour réussir votre rénovation énergétique." />
         <meta property="og:url" content="https://supremenergies.com/blog" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(collectionSchema)}</script>

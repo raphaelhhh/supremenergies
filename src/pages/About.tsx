@@ -46,11 +46,11 @@ const About = () => {
   return (
     <div>
       <Helmet>
-        <title>À Propos de SupremEnergies | Expert Rénovation Énergétique</title>
-        <meta name="description" content="Découvrez SupremEnergies, votre expert en rénovation énergétique en Île-de-France. Plus de 1000 projets réalisés. Isolation, pompes à chaleur, panneaux solaires." />
+        <title>SupremEnergies ★ Expert Rénovation Énergétique Île-de-France | +1000 projets</title>
+        <meta name="description" content="✓ +1000 projets réalisés ✓ Garantie décennale. Expert rénovation énergétique en Île-de-France depuis plus de 10 ans. Isolation, pompe à chaleur, solaire." />
         <link rel="canonical" href="https://supremenergies.com/about" />
-        <meta property="og:title" content="À Propos de SupremEnergies | Expert Rénovation Énergétique" />
-        <meta property="og:description" content="Expert en rénovation énergétique en Île-de-France. Plus de 1000 projets réalisés." />
+        <meta property="og:title" content="SupremEnergies ★ Expert Rénovation Énergétique Île-de-France" />
+        <meta property="og:description" content="+1000 projets réalisés. Expert en rénovation énergétique en Île-de-France." />
         <meta property="og:url" content="https://supremenergies.com/about" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(aboutSchema)}</script>

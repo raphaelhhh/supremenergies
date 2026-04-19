@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
+import SocialProof from "@/components/SocialProof";
 import SectionHeader from "@/components/SectionHeader";
 import ServiceCard from "@/components/ServiceCard";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -201,6 +202,8 @@ const Index = () => {
         imageSrc={heroImage}
         imageAlt="Rénovation énergétique et isolation thermique"
       />
+
+      <SocialProof />
 
       {/* Services Section */}
       <section className="section-padding">
