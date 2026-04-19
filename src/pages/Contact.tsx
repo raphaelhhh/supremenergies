@@ -62,11 +62,11 @@ const Contact = () => {
   return (
     <div>
       <Helmet>
-        <title>Contactez SupremEnergies | Devis Gratuit Rénovation Énergétique</title>
-        <meta name="description" content="Contactez SupremEnergies pour un devis gratuit. Expert en rénovation énergétique en Île-de-France : isolation, pompes à chaleur, panneaux solaires. Réponse sous 24h." />
+        <title>Devis Gratuit Rénovation Énergétique 48h ★ SupremEnergies</title>
+        <meta name="description" content="✓ Devis gratuit en 48h ✓ Conseiller dédié. Pompe à chaleur, isolation, solaire en Île-de-France. Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026." />
         <link rel="canonical" href="https://supremenergies.com/contact" />
-        <meta property="og:title" content="Contactez SupremEnergies | Devis Gratuit Rénovation Énergétique" />
-        <meta property="og:description" content="Devis gratuit pour vos travaux de rénovation énergétique. Réponse sous 24h." />
+        <meta property="og:title" content="Devis Gratuit Rénovation Énergétique 48h ★ SupremEnergies" />
+        <meta property="og:description" content="Devis gratuit pour vos travaux de rénovation énergétique. Réponse sous 48h." />
         <meta property="og:url" content="https://supremenergies.com/contact" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(contactSchema)}</script>

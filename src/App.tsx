@@ -24,6 +24,7 @@ import RenovationGlobale from "./pages/services/RenovationGlobale";
 import ZoneLocale from "./pages/ZoneLocale";
 import SimulateurAides from "./pages/SimulateurAides";
 import Temoignages from "./pages/Temoignages";
+import DevisGratuit from "./pages/DevisGratuit";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
                 <Route path="/zones/:ville" element={<ZoneLocale />} />
                 <Route path="/simulateur-aides" element={<SimulateurAides />} />
                 <Route path="/temoignages" element={<Temoignages />} />
+                <Route path="/devis-gratuit" element={<DevisGratuit />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/legal" element={<LegalNotices />} />

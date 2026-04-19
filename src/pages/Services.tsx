@@ -47,11 +47,11 @@ const Services = () => {
   return (
     <div>
       <Helmet>
-        <title>Services de Rénovation Énergétique | SupremEnergies</title>
-        <meta name="description" content="Découvrez nos services de rénovation énergétique : isolation thermique, pompes à chaleur, eau chaude sanitaire, panneaux solaires, rénovation globale. Devis gratuit en Île-de-France." />
+        <title>Services Rénovation Énergétique ★ Pompe à Chaleur, Isolation, Solaire</title>
+        <meta name="description" content="✓ Pompe à chaleur dès 0€ reste à charge ✓ Isolation, solaire, rénovation globale. Devis gratuit 48h en Île-de-France. Aides MaPrimeRénov' 2026 incluses." />
         <link rel="canonical" href="https://supremenergies.com/services" />
-        <meta property="og:title" content="Services de Rénovation Énergétique | SupremEnergies" />
-        <meta property="og:description" content="Isolation, pompes à chaleur, eau chaude, solaire et rénovation globale. Solutions complètes pour réduire vos factures énergétiques." />
+        <meta property="og:title" content="Services Rénovation Énergétique ★ Pompe à Chaleur, Isolation, Solaire" />
+        <meta property="og:description" content="Pompe à chaleur, isolation, solaire. Devis gratuit 48h en Île-de-France. Aides MaPrimeRénov' 2026." />
         <meta property="og:url" content="https://supremenergies.com/services" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify({
