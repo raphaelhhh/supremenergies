@@ -182,11 +182,11 @@ const Index = () => {
   return (
     <div>
       <Helmet>
-        <title>Rénovation Énergétique | SupremEnergies — Isolation, Pompes à Chaleur, Solaire</title>
-        <meta name="description" content="SupremEnergies, expert en rénovation énergétique en Île-de-France. Isolation thermique, pompes à chaleur, panneaux solaires, rénovation globale. Devis gratuit, aides MaPrimeRénov' 2026." />
+        <title>Rénovation Énergétique Île-de-France ★ Jusqu'à 11 000€ d'aides 2026</title>
+        <meta name="description" content="✓ Devis gratuit en 48h ✓ Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. Pompe à chaleur, isolation, panneaux solaires. Experts certifiés en Île-de-France. ★ 4.8/5" />
         <link rel="canonical" href="https://supremenergies.com/" />
-        <meta property="og:title" content="Rénovation Énergétique | SupremEnergies — Isolation, Pompes à Chaleur, Solaire" />
-        <meta property="og:description" content="Expert en rénovation énergétique en Île-de-France. Isolation, pompes à chaleur, panneaux solaires. Devis gratuit." />
+        <meta property="og:title" content="Rénovation Énergétique Île-de-France ★ Jusqu'à 11 000€ d'aides 2026" />
+        <meta property="og:description" content="Devis gratuit en 48h. Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. Experts en Île-de-France." />
         <meta property="og:url" content="https://supremenergies.com/" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
