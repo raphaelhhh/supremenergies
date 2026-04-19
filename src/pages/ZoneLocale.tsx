@@ -206,7 +206,10 @@ const ZoneLocale = () => {
         </div>
       </section>
 
-      <RelatedArticles theme={zone.name} />
+      <RelatedArticles
+        keywords={[zone.name, "rénovation", "MaPrimeRénov"]}
+        title={`Articles utiles pour ${zone.name}`}
+      />
 
       <CTA
         title={`Démarrez votre projet à ${zone.name}`}
