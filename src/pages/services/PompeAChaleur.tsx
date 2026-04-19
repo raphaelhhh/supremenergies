@@ -65,6 +65,8 @@ const PompeAChaleur = () => {
       />
 
       <Breadcrumb items={[{ label: "Services", href: "/services" }, { label: "Pompe à Chaleur" }]} />
+
+      <section className="section-padding">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
