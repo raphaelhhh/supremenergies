@@ -1,6 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
+import Breadcrumb from "@/components/Breadcrumb";
+import RelatedArticles from "@/components/RelatedArticles";
+import RelatedServices from "@/components/RelatedServices";
 import { Building, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -60,6 +63,8 @@ const RenovationGlobale = () => {
         imageSrc="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
         imageAlt="Rénovation énergétique globale d'une maison"
       />
+
+      <Breadcrumb items={[{ label: "Services", href: "/services" }, { label: "Rénovation Globale" }]} />
 
       <section className="section-padding">
         <div className="container-custom">
@@ -152,6 +157,13 @@ const RenovationGlobale = () => {
           </div>
         </div>
       </section>
+
+      <RelatedArticles
+        keywords={["rénovation", "MaPrimeRénov", "DPE", "passoire thermique", "audit"]}
+        title="Pour aller plus loin sur la rénovation globale"
+      />
+
+      <RelatedServices excludeSlug="renovation-globale" title="Découvrez aussi" />
 
       <CTA title="Prêt à rénover votre logement ?" subtitle="Contactez-nous pour un audit énergétique gratuit et découvrez les aides auxquelles vous avez droit." />
     </div>

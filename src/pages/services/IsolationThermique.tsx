@@ -1,6 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
+import Breadcrumb from "@/components/Breadcrumb";
+import RelatedArticles from "@/components/RelatedArticles";
+import RelatedServices from "@/components/RelatedServices";
 import { ThermometerSun, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -60,6 +63,8 @@ const IsolationThermique = () => {
         imageSrc="https://github.com/raphaelhhh/supremenergies/raw/main/src/pages/travailleur-lunettes-protection-respirateur-isolant-isolant-laine-roche-dans-cadre-bois-pour-futurs-murs-maison-pour-barriere-contre-froid-concept-accueil-economie-construction-renovation-chaleureux-confortable_127089-6625.avif"
         imageAlt="Isolation thermique des murs et combles"
       />
+
+      <Breadcrumb items={[{ label: "Services", href: "/services" }, { label: "Isolation Thermique" }]} />
 
       {/* Content */}
       <section className="section-padding">
@@ -150,6 +155,13 @@ const IsolationThermique = () => {
           </div>
         </div>
       </section>
+
+      <RelatedArticles
+        keywords={["isolation", "combles", "ITE", "DPE"]}
+        title="Pour aller plus loin sur l'isolation"
+      />
+
+      <RelatedServices excludeSlug="isolation-thermique" title="Découvrez aussi" />
 
       <CTA title="Prêt à isoler votre logement ?" subtitle="Contactez-nous pour un diagnostic gratuit et un devis personnalisé. Nos experts vous accompagnent de A à Z." />
     </div>

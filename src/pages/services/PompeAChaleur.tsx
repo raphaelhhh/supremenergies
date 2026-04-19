@@ -1,6 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
+import Breadcrumb from "@/components/Breadcrumb";
+import RelatedArticles from "@/components/RelatedArticles";
+import RelatedServices from "@/components/RelatedServices";
 import { Home, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -61,7 +64,7 @@ const PompeAChaleur = () => {
         imageAlt="Installation de pompe à chaleur"
       />
 
-      <section className="section-padding">
+      <Breadcrumb items={[{ label: "Services", href: "/services" }, { label: "Pompe à Chaleur" }]} />
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
@@ -149,6 +152,13 @@ const PompeAChaleur = () => {
           </div>
         </div>
       </section>
+
+      <RelatedArticles
+        keywords={["pompe à chaleur", "PAC", "chauffage", "MaPrimeRénov"]}
+        title="Pour aller plus loin sur la pompe à chaleur"
+      />
+
+      <RelatedServices excludeSlug="pompe-a-chaleur" title="Découvrez aussi" />
 
       <CTA title="Prêt à passer à la pompe à chaleur ?" subtitle="Contactez-nous pour un diagnostic gratuit et découvrez combien vous pouvez économiser." />
     </div>
