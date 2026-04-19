@@ -100,9 +100,15 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-300 hover:text-white transition-colors flex items-center">
+                <Link to="/simulateur-aides" className="text-gray-300 hover:text-white transition-colors flex items-center">
                   <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  À propos
+                  Simulateur d'aides
+                </Link>
+              </li>
+              <li>
+                <Link to="/temoignages" className="text-gray-300 hover:text-white transition-colors flex items-center">
+                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
+                  Témoignages
                 </Link>
               </li>
               <li>
