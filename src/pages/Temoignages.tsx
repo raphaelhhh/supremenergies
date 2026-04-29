@@ -87,10 +87,10 @@ const Temoignages = () => {
         )}
       </Helmet>
 
-      <section className="bg-gradient-to-br from-supreme-primary to-supreme-primary/80 text-white py-12">
+      <section className="bg-gradient-to-br from-supreme-primary to-supreme-primary/90 text-white pt-32 pb-12">
         <div className="container-custom">
           <Breadcrumb items={[{ label: "Témoignages" }]} />
-          <h1 className="text-3xl md:text-4xl font-bold mt-4 mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold mt-6 mb-3 text-white drop-shadow-sm">
             Ils ont fait confiance à SupremEnergies
           </h1>
           <div className="flex items-center gap-3">
@@ -99,7 +99,7 @@ const Temoignages = () => {
                 <Star key={i} size={20} className="fill-yellow-400 text-yellow-400" />
               ))}
             </div>
-            <span className="text-white/90">
+            <span className="text-white/95">
               <strong>{avgRating}/5</strong> sur {items.length} avis clients
             </span>
           </div>
