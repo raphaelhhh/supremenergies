@@ -60,7 +60,7 @@ const SimulateurAides = () => {
 
   const result = useMemo(
     () => calculateAides(profile, selectedGestes, housingAge, ownerStatus, currentHeating),
-    [profile, selectedGestes, housingAge, ownerStatus]
+    [profile, selectedGestes, housingAge, ownerStatus, currentHeating]
   );
 
   const toggleGeste = (id: string) => {
