@@ -105,7 +105,7 @@ const SimulateurAides = () => {
           total: result.total,
           gestes: result.gestes,
         },
-      });
+      }]);
       if (error) throw error;
       setStep(6);
     } catch (e) {
