@@ -92,19 +92,19 @@ const SimulateurAides = () => {
         work_types: selectedGestes.map((g) => g.id),
         housing_type: housingType,
         estimated_aid: result.total,
-        inputs: {
+        inputs: JSON.parse(JSON.stringify({
           firstName: parsed.data.firstName,
           housingType, housingAge, ownerStatus, region, rfr,
           householdSize, postalCode, currentHeating,
           gestes: selectedGestes,
-        },
-        result: {
+        })),
+        result: JSON.parse(JSON.stringify({
           profile,
           totalMPR: result.totalMPR,
           totalCEE: result.totalCEE,
           total: result.total,
           gestes: result.gestes,
-        },
+        })),
       }]);
       if (error) throw error;
       setStep(6);
