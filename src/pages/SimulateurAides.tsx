@@ -59,8 +59,8 @@ const SimulateurAides = () => {
   );
 
   const result = useMemo(
-    () => calculateAides(profile, selectedGestes, housingAge, ownerStatus),
-    [profile, selectedGestes, housingAge, ownerStatus]
+    () => calculateAides(profile, selectedGestes, housingAge, ownerStatus, currentHeating),
+    [profile, selectedGestes, housingAge, ownerStatus, currentHeating]
   );
 
   const toggleGeste = (id: string) => {
@@ -140,19 +140,21 @@ const SimulateurAides = () => {
         <meta property="og:description" content={description} />
       </Helmet>
 
-      <section className="bg-gradient-to-br from-supreme-primary to-supreme-primary/80 text-white py-12">
+      <section className="bg-gradient-to-br from-supreme-primary to-supreme-primary/90 text-white pt-32 pb-12">
         <div className="container-custom">
           <Breadcrumb items={[{ label: "Simulateur d'aides" }]} />
-          <div className="flex items-center gap-3 mt-4 mb-3">
-            <Calculator size={32} />
-            <span className="text-sm uppercase tracking-wide text-white/80">Simulateur officiel — barème ANAH 2026</span>
+          <div className="flex items-center gap-3 mt-6 mb-3">
+            <Calculator size={28} />
+            <span className="text-xs md:text-sm uppercase tracking-wide text-white/90 font-medium">
+              Simulateur officiel — barèmes ANAH &amp; CEE 2026
+            </span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">
-            Estimez vos aides MaPrimeRénov' & CEE 2026
+          <h1 className="text-3xl md:text-4xl font-bold mb-3 text-white drop-shadow-sm">
+            Estimez vos aides MaPrimeRénov' &amp; CEE 2026
           </h1>
-          <p className="text-lg text-white/90 max-w-2xl">
-            Calcul basé sur les <strong>barèmes officiels ANAH 2026</strong> : forfaits par geste, plafonds de dépense, profil
-            de revenus déterminé automatiquement. Résultat précis en 2 minutes.
+          <p className="text-base md:text-lg text-white/95 max-w-2xl">
+            Calcul basé sur les <strong>barèmes officiels ANAH 2026</strong> et les <strong>primes CEE Coup de pouce</strong> :
+            forfaits par geste, plafonds de dépense, profil de revenus déterminé automatiquement. Résultat précis en 2 minutes.
           </p>
         </div>
       </section>

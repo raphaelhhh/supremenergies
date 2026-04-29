@@ -223,10 +223,15 @@ export function calculateAides(
   profile: IncomeProfile,
   gestes: GesteInput[],
   housingAge: ">15" | "<15",
-  ownerStatus: OwnerStatus
+  ownerStatus: OwnerStatus,
+  currentHeating: string = "autre"
 ): SimulationResult {
   const warnings: string[] = [];
   const results: GesteResult[] = [];
+
+  // Le profil Bleu/Jaune est considéré "précaire" pour le Coup de pouce CEE
+  const isPrecaire = profile === "bleu" || profile === "jaune";
+  const isFossile = currentHeating === "fioul" || currentHeating === "gaz";
 
   if (housingAge === "<15") {
     warnings.push("MaPrimeRénov' nécessite un logement de plus de 15 ans (sauf sortie de chauffage fioul/charbon).");
@@ -300,9 +305,24 @@ export function calculateAides(
       if (def.unit === "m2" && input.surface) cee = ceeUnit * input.surface;
       else if (def.unit === "equipement" && input.count) cee = ceeUnit * input.count;
       else cee = ceeUnit;
+
+      // Bonus Coup de pouce "Chauffage" : remplacement chaudière fioul/gaz par PAC
+      // Montants forfaitaires indicatifs (arrêtés CEE 2026)
+      const isPac = def.id === "pac-air-eau" || def.id === "pac-geo";
+      if (isPac && isFossile) {
+        cee += isPrecaire ? 4000 : 2500;
+      }
+      // Bonus sortie fioul pour poêle granulés / CET
+      if ((def.id === "poele-granules" || def.id === "cet") && currentHeating === "fioul") {
+        cee += isPrecaire ? 800 : 500;
+      }
     }
 
     results.push({ id: def.id, label: def.label, mpr: Math.round(mpr), cee: Math.round(cee) });
+  }
+
+  if (isFossile && gestes.some((g) => g.id === "pac-air-eau" || g.id === "pac-geo")) {
+    warnings.push(`Bonus CEE "Coup de pouce Chauffage" appliqué pour le remplacement de votre chauffage ${currentHeating}.`);
   }
 
   if (ownerStatus === "copro") {
