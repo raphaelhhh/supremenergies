@@ -223,10 +223,15 @@ export function calculateAides(
   profile: IncomeProfile,
   gestes: GesteInput[],
   housingAge: ">15" | "<15",
-  ownerStatus: OwnerStatus
+  ownerStatus: OwnerStatus,
+  currentHeating: string = "autre"
 ): SimulationResult {
   const warnings: string[] = [];
   const results: GesteResult[] = [];
+
+  // Le profil Bleu/Jaune est considéré "précaire" pour le Coup de pouce CEE
+  const isPrecaire = profile === "bleu" || profile === "jaune";
+  const isFossile = currentHeating === "fioul" || currentHeating === "gaz";
 
   if (housingAge === "<15") {
     warnings.push("MaPrimeRénov' nécessite un logement de plus de 15 ans (sauf sortie de chauffage fioul/charbon).");
