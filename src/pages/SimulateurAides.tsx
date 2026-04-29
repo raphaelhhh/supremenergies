@@ -83,7 +83,7 @@ const SimulateurAides = () => {
     }
     setSubmitting(true);
     try {
-      const { error } = await supabase.from("simulations").insert({
+      const { error } = await supabase.from("simulations").insert([{
         email: parsed.data.email,
         phone: parsed.data.phone,
         postal_code: postalCode,
