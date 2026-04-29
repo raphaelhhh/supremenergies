@@ -253,17 +253,9 @@ const SimulateurAides = () => {
                         placeholder="75015" maxLength={5} className="mt-2" />
                     </div>
                   </div>
-                  <div>
-                    <Label className="mb-2 block">Région</Label>
-                    <RadioGroup value={region} onValueChange={(v) => setRegion(v as Region)} className="grid grid-cols-2 gap-3">
-                      <label className="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                        <RadioGroupItem value="idf" id="r-idf" /> <span className="font-medium text-sm">Île-de-France</span>
-                      </label>
-                      <label className="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                        <RadioGroupItem value="autres" id="r-autres" /> <span className="font-medium text-sm">Autres régions</span>
-                      </label>
-                    </RadioGroup>
-                  </div>
+                  <p className="text-xs text-gray-500 -mt-2">
+                    Région détectée : <span className="font-medium">{region === "idf" ? "Île-de-France" : "Hors Île-de-France"}</span> (déduite du code postal — les plafonds ANAH diffèrent).
+                  </p>
                   <div>
                     <Label htmlFor="rfr">Revenu fiscal de référence (€/an)</Label>
                     <Input id="rfr" type="number" min={0} step={1000} value={rfr}
