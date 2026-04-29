@@ -323,7 +323,7 @@ const SimulateurAides = () => {
                         return (
                           <div key={g.id} className={`border rounded-lg ${sel ? "border-supreme-primary bg-supreme-primary/5" : ""} ${isExcluded ? "opacity-60" : ""}`}>
                             <label className="flex items-start gap-3 p-3 cursor-pointer hover:bg-gray-50/50">
-                              <Checkbox checked={!!sel} onCheckedChange={() => toggleGeste(g.id)} disabled={isExcluded} className="mt-1" />
+                              <Checkbox checked={!!sel} onCheckedChange={() => toggleGeste(g.id)} className="mt-1" />
                               <div className="flex-1 min-w-0">
                                 <div className="font-medium text-sm">{g.label}</div>
                                 {g.description && <div className="text-xs text-gray-500 mt-0.5">{g.description}</div>}
