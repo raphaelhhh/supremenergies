@@ -54,10 +54,15 @@ const Navbar = () => {
 
   const isServicesActive = location.pathname.startsWith("/services");
 
+  // Pages sans hero sombre/image en haut → navbar toujours opaque blanche
+  const transparentRoutes = ["/"];
+  const allowTransparent = transparentRoutes.includes(location.pathname);
+  const isSolid = scrolled || !allowTransparent;
+
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
-      scrolled 
-        ? "bg-white shadow-md py-2" 
+      isSolid
+        ? "bg-white shadow-md py-2"
         : "bg-transparent py-4"
     }`}>
       <div className="container-custom flex items-center justify-between">
