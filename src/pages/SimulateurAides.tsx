@@ -140,16 +140,18 @@ const SimulateurAides = () => {
         <meta property="og:description" content={description} />
       </Helmet>
 
-      <section className="bg-gradient-to-br from-supreme-primary to-supreme-primary/90 text-white pt-32 pb-12">
+      <section className="bg-gradient-to-br from-supreme-primary to-supreme-primary/90 text-white pt-28 md:pt-36 pb-14 md:pb-20">
         <div className="container-custom">
-          <Breadcrumb items={[{ label: "Simulateur d'aides" }]} />
-          <div className="flex items-center gap-3 mt-6 mb-3">
+          <div className="[&_nav]:py-0 [&_nav]:text-white/80 [&_a]:text-white/80 [&_a:hover]:text-white [&_span]:text-white [&_svg]:text-white/80">
+            <Breadcrumb items={[{ label: "Simulateur d'aides" }]} />
+          </div>
+          <div className="flex items-center gap-3 mt-8 mb-4">
             <Calculator size={28} />
             <span className="text-xs md:text-sm uppercase tracking-wide text-white/90 font-medium">
               Simulateur officiel — barèmes ANAH &amp; CEE 2026
             </span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-3 text-white drop-shadow-sm">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white drop-shadow-sm leading-tight">
             Estimez vos aides MaPrimeRénov' &amp; CEE 2026
           </h1>
           <p className="text-base md:text-lg text-white/95 max-w-2xl">
