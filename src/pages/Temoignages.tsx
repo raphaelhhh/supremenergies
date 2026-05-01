@@ -1,4 +1,4 @@
-import { useEffect, useState, type PointerEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { Helmet } from "react-helmet-async";
 import { Star, Quote, MapPin, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -42,6 +42,7 @@ const Temoignages = () => {
   const [items, setItems] = useState<Testimonial[]>([]);
   const [google, setGoogle] = useState<GoogleReviewsPayload | null>(null);
   const [loading, setLoading] = useState(true);
+  const [googleAction, setGoogleAction] = useState<{ title: string; url: string } | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -81,18 +82,12 @@ const Temoignages = () => {
   const writeReviewUrl = GOOGLE_REVIEW_URL;
   const displayCount = totalCount || items.length;
 
-  const forceGoogleNavigation = (url: string) => (event: PointerEvent<HTMLAnchorElement>) => {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const showGoogleAction = (title: string, url: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
     event.preventDefault();
     event.stopPropagation();
-
-    try {
-      window.top?.location.assign(url);
-      return;
-    } catch {
-      window.location.assign(url);
-    }
+    setGoogleAction({ title, url });
   };
 
   const aggregateSchema = displayCount
