@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type PointerEvent } from "react";
 import { Helmet } from "react-helmet-async";
 import { Star, Quote, MapPin, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -80,6 +80,20 @@ const Temoignages = () => {
   const viewUrl = google?.googleMapsUri || GOOGLE_MAPS_URL;
   const writeReviewUrl = GOOGLE_REVIEW_URL;
   const displayCount = totalCount || items.length;
+
+  const forceGoogleNavigation = (url: string) => (event: PointerEvent<HTMLAnchorElement>) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    try {
+      window.top?.location.assign(url);
+      return;
+    } catch {
+      window.location.assign(url);
+    }
+  };
 
   const aggregateSchema = displayCount
     ? {
@@ -163,6 +177,7 @@ const Temoignages = () => {
             {google && (
               <a
                 href={viewUrl}
+                onPointerDownCapture={forceGoogleNavigation(viewUrl)}
                 className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
                 Voir sur Google <ExternalLink size={14} />
@@ -194,6 +209,7 @@ const Temoignages = () => {
               {google && (
                 <a
                   href={writeReviewUrl}
+                  onPointerDownCapture={forceGoogleNavigation(writeReviewUrl)}
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Laisser un avis <ExternalLink size={14} />
