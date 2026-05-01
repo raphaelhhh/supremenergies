@@ -38,8 +38,15 @@ const Temoignages = () => {
   const [items, setItems] = useState<Testimonial[]>([]);
   const [google, setGoogle] = useState<GoogleReviewsPayload | null>(null);
   const [loading, setLoading] = useState(true);
+  const [externalTarget, setExternalTarget] = useState<"_blank" | "_top">("_blank");
 
   useEffect(() => {
+    try {
+      if (window.self !== window.top) setExternalTarget("_top");
+    } catch {
+      setExternalTarget("_top");
+    }
+
     const load = async () => {
       const [{ data: testimonials }, googleRes] = await Promise.all([
         supabase
@@ -73,7 +80,7 @@ const Temoignages = () => {
         ).toFixed(1)
       : "5.0";
 
-  // Use Google Maps URLs (search.google.com is blocked by X-Frame-Options/CSP)
+  // In Lovable preview the app runs in an iframe: use _top so Google doesn't load inside the sandboxed frame.
   const placeId = google?.placeId;
   const viewUrl =
     google?.googleMapsUri ||
@@ -81,13 +88,9 @@ const Temoignages = () => {
       ? `https://www.google.com/maps/place/?q=place_id:${placeId}`
       : "https://www.google.com/maps/place/SupremEnergies");
   const writeReviewUrl = placeId
-    ? `https://www.google.com/maps/place/?q=place_id:${placeId}&hl=fr`
+    ? `https://search.google.com/local/writereview?placeid=${encodeURIComponent(placeId)}`
     : viewUrl;
-
-  const openExternal = (url: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
+  const externalRel = externalTarget === "_blank" ? "noopener noreferrer" : undefined;
   const displayCount = totalCount || items.length;
 
   const aggregateSchema = displayCount
