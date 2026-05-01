@@ -43,6 +43,7 @@ const Temoignages = () => {
   const [google, setGoogle] = useState<GoogleReviewsPayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [googleAction, setGoogleAction] = useState<{ title: string; url: string } | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -87,6 +88,7 @@ const Temoignages = () => {
 
     event.preventDefault();
     event.stopPropagation();
+    setCopied(false);
     setGoogleAction({ title, url });
   };
 
@@ -301,6 +303,35 @@ const Temoignages = () => {
         title="Rejoignez nos clients satisfaits"
         subtitle="Devis gratuit, accompagnement aides, chantier clé en main partout en Île-de-France."
       />
+
+      {googleAction && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4" role="dialog" aria-modal="true">
+          <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-2xl">
+            <h2 className="mb-2 text-xl font-bold text-gray-900">{googleAction.title}</h2>
+            <p className="mb-5 text-sm text-gray-600">
+              Google peut bloquer l'ouverture dans certaines previews. Utilisez l'ouverture directe ou copiez le lien.
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <a href={googleAction.url} target="_blank" rel="noopener noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-supreme-primary px-4 py-3 text-sm font-semibold text-white hover:bg-supreme-primary/90">
+                Ouvrir Google <ExternalLink size={16} />
+              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  void navigator.clipboard.writeText(googleAction.url);
+                  setCopied(true);
+                }}
+                className="rounded-md border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-800 hover:bg-gray-50"
+              >
+                {copied ? "Lien copié" : "Copier le lien"}
+              </button>
+            </div>
+            <button type="button" onClick={() => setGoogleAction(null)} className="mt-4 text-sm font-semibold text-gray-500 hover:text-gray-800">
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
