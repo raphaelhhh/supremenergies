@@ -92,14 +92,8 @@ const Temoignages = () => {
     if (externalTarget !== "_top") return;
 
     e.preventDefault();
-    try {
-      window.open(url, "_blank", "noopener,noreferrer");
-    } catch {
-      window.location.href = url;
-    }
-    window.setTimeout(() => {
-      window.open(url, "_blank", "noopener,noreferrer");
-    }, 0);
+    const opened = window.open(url, "_blank", "noopener,noreferrer");
+    if (!opened) window.location.href = url;
   };
   const displayCount = totalCount || items.length;
 
