@@ -183,27 +183,6 @@ const Index = () => {
       "opens": "09:00",
       "closes": "19:00"
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "127",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
-    "review": [
-      {
-        "@type": "Review",
-        "author": { "@type": "Person", "name": "Marie L." },
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "reviewBody": "Installation impeccable de notre pompe à chaleur. Équipe professionnelle et accompagnement complet sur les aides MaPrimeRénov'."
-      },
-      {
-        "@type": "Review",
-        "author": { "@type": "Person", "name": "Thomas R." },
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-        "reviewBody": "Excellente isolation des combles, factures de chauffage divisées par deux. Je recommande SupremEnergies."
-      }
-    ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Services de rénovation énergétique",
