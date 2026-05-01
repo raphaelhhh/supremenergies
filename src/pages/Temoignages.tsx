@@ -1,4 +1,4 @@
-import { type MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Star, Quote, MapPin, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -42,8 +42,15 @@ const Temoignages = () => {
   const [items, setItems] = useState<Testimonial[]>([]);
   const [google, setGoogle] = useState<GoogleReviewsPayload | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isFramed, setIsFramed] = useState(false);
 
   useEffect(() => {
+    try {
+      setIsFramed(window.self !== window.top);
+    } catch {
+      setIsFramed(true);
+    }
+
     const load = async () => {
       const [{ data: testimonials }, googleRes] = await Promise.all([
         supabase
@@ -79,11 +86,7 @@ const Temoignages = () => {
 
   const viewUrl = GOOGLE_MAPS_URL;
   const writeReviewUrl = GOOGLE_REVIEW_URL;
-  const openExternal = (url: string) => (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const opened = window.open(url, "_blank", "noopener,noreferrer");
-    if (!opened) window.location.href = url;
-  };
+  const externalTarget = isFramed ? "_top" : "_blank";
   const displayCount = totalCount || items.length;
 
   const aggregateSchema = displayCount
@@ -168,8 +171,7 @@ const Temoignages = () => {
             {google && (
               <a
                 href={viewUrl}
-                onClick={openExternal(viewUrl)}
-                target="_blank"
+                target={externalTarget}
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
@@ -202,8 +204,7 @@ const Temoignages = () => {
               {google && (
                 <a
                   href={writeReviewUrl}
-                  onClick={openExternal(writeReviewUrl)}
-                  target="_blank"
+                  target={externalTarget}
                   rel="noopener noreferrer"
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
