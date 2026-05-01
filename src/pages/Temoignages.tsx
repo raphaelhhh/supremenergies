@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Star, Quote, MapPin } from "lucide-react";
+import { Star, Quote, MapPin, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Breadcrumb from "@/components/Breadcrumb";
 import CTA from "@/components/CTA";
@@ -16,29 +16,64 @@ interface Testimonial {
   photo_url: string | null;
 }
 
+interface GoogleReview {
+  author: string;
+  photo: string | null;
+  rating: number;
+  text: string;
+  relativeTime: string;
+  publishTime: string | null;
+}
+
+interface GoogleReviewsPayload {
+  name: string;
+  rating: number | null;
+  totalReviews: number;
+  googleMapsUri: string | null;
+  reviews: GoogleReview[];
+}
+
 const Temoignages = () => {
   const [items, setItems] = useState<Testimonial[]>([]);
+  const [google, setGoogle] = useState<GoogleReviewsPayload | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
-      const { data } = await supabase
-        .from("testimonials")
-        .select("id,name,city,service,content,rating,savings,photo_url")
-        .eq("published", true)
-        .order("display_order", { ascending: true });
-      setItems(data || []);
+      const [{ data: testimonials }, googleRes] = await Promise.all([
+        supabase
+          .from("testimonials")
+          .select("id,name,city,service,content,rating,savings,photo_url")
+          .eq("published", true)
+          .order("display_order", { ascending: true }),
+        supabase.functions.invoke<GoogleReviewsPayload>("google-reviews"),
+      ]);
+      setItems(testimonials || []);
+      if (googleRes.data && !("error" in googleRes.data)) {
+        setGoogle(googleRes.data);
+      }
       setLoading(false);
     };
     load();
   }, []);
 
-  const avgRating =
+  const googleRating = google?.rating ?? 5;
+  const googleCount = google?.totalReviews ?? 0;
+  const internalAvg =
     items.length > 0
-      ? (items.reduce((s, t) => s + t.rating, 0) / items.length).toFixed(1)
+      ? items.reduce((s, t) => s + t.rating, 0) / items.length
+      : 5;
+  const totalCount = googleCount + items.length;
+  const blendedRating =
+    totalCount > 0
+      ? (
+          (googleRating * googleCount + internalAvg * items.length) /
+          totalCount
+        ).toFixed(1)
       : "5.0";
+  const displayCount = totalCount || items.length;
 
-  const aggregateSchema = items.length
+  const aggregateSchema = displayCount
     ? {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
@@ -52,27 +87,40 @@ const Temoignages = () => {
         },
         aggregateRating: {
           "@type": "AggregateRating",
-          ratingValue: avgRating,
-          reviewCount: items.length,
+          ratingValue: blendedRating,
+          reviewCount: displayCount,
           bestRating: "5",
           worstRating: "1",
         },
-        review: items.slice(0, 10).map((t) => ({
-          "@type": "Review",
-          author: { "@type": "Person", name: t.name },
-          reviewRating: {
-            "@type": "Rating",
-            ratingValue: t.rating,
-            bestRating: "5",
-          },
-          reviewBody: t.content,
-          itemReviewed: { "@type": "Service", name: t.service },
-        })),
+        review: [
+          ...(google?.reviews || []).slice(0, 5).map((r) => ({
+            "@type": "Review",
+            author: { "@type": "Person", name: r.author },
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: r.rating,
+              bestRating: "5",
+            },
+            reviewBody: r.text,
+            datePublished: r.publishTime,
+          })),
+          ...items.slice(0, 5).map((t) => ({
+            "@type": "Review",
+            author: { "@type": "Person", name: t.name },
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: t.rating,
+              bestRating: "5",
+            },
+            reviewBody: t.content,
+            itemReviewed: { "@type": "Service", name: t.service },
+          })),
+        ],
       }
     : null;
 
-  const title = "Témoignages clients SupremEnergies | Avis rénovation énergétique";
-  const description = `Découvrez ${items.length || "nos"} témoignages de clients satisfaits en Île-de-France : pompes à chaleur, isolation, panneaux solaires. Note moyenne ${avgRating}/5.`;
+  const title = "Témoignages clients SupremEnergies | Avis Google rénovation énergétique";
+  const description = `Découvrez ${displayCount || "nos"} avis clients (Google + témoignages) en Île-de-France : pompes à chaleur, isolation, panneaux solaires. Note moyenne ${blendedRating}/5.`;
 
   return (
     <div>
@@ -89,58 +137,150 @@ const Temoignages = () => {
 
       <section className="bg-gradient-to-br from-supreme-primary to-supreme-primary/90 text-white pt-32 pb-12">
         <div className="container-custom">
-          <Breadcrumb items={[{ label: "Témoignages" }]} />
+          <div className="[&_nav]:py-0 [&_nav]:text-white/80 [&_a]:text-white/80 [&_a:hover]:text-white [&_span]:text-white [&_svg]:text-white/80">
+            <Breadcrumb items={[{ label: "Témoignages" }]} />
+          </div>
           <h1 className="text-3xl md:text-4xl font-bold mt-6 mb-3 text-white drop-shadow-sm">
             Ils ont fait confiance à SupremEnergies
           </h1>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <div className="flex">
               {[1, 2, 3, 4, 5].map((i) => (
                 <Star key={i} size={20} className="fill-yellow-400 text-yellow-400" />
               ))}
             </div>
             <span className="text-white/95">
-              <strong>{avgRating}/5</strong> sur {items.length} avis clients
+              <strong>{blendedRating}/5</strong> sur {displayCount} avis vérifiés
             </span>
+            {google?.googleMapsUri && (
+              <a
+                href={google.googleMapsUri}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium"
+              >
+                Voir sur Google <ExternalLink size={14} />
+              </a>
+            )}
           </div>
         </div>
       </section>
 
-      <section className="py-12 bg-gray-50">
-        <div className="container-custom">
-          {loading ? (
-            <p className="text-center text-gray-500">Chargement des témoignages…</p>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {items.map((t) => (
-                <article
-                  key={t.id}
-                  className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col"
+      {/* Google Reviews block */}
+      {google && google.reviews.length > 0 && (
+        <section className="py-12 bg-white">
+          <div className="container-custom">
+            <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
+              <div className="flex items-center gap-3">
+                <img
+                  src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png"
+                  alt="Google"
+                  className="w-7 h-7"
+                  loading="lazy"
+                />
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Avis Google récents
+                </h2>
+                <span className="text-sm text-gray-600">
+                  ({google.rating}/5 · {google.totalReviews} avis)
+                </span>
+              </div>
+              {google.googleMapsUri && (
+                <a
+                  href={google.googleMapsUri}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1"
                 >
-                  <Quote className="text-supreme-primary mb-3" size={24} />
+                  Laisser un avis <ExternalLink size={14} />
+                </a>
+              )}
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {google.reviews.map((r, idx) => (
+                <article
+                  key={idx}
+                  className="bg-gray-50 rounded-xl border border-gray-100 p-6 flex flex-col"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    {r.photo ? (
+                      <img
+                        src={r.photo}
+                        alt={r.author}
+                        className="w-10 h-10 rounded-full object-cover"
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-supreme-primary/15 text-supreme-primary flex items-center justify-center font-semibold">
+                        {r.author.charAt(0)}
+                      </div>
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <div className="font-semibold text-gray-900 truncate">{r.author}</div>
+                      <div className="text-xs text-gray-500">{r.relativeTime}</div>
+                    </div>
+                    <img
+                      src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png"
+                      alt=""
+                      className="w-4 h-4 opacity-70"
+                      loading="lazy"
+                    />
+                  </div>
                   <div className="flex mb-3">
-                    {Array.from({ length: t.rating }).map((_, i) => (
+                    {Array.from({ length: r.rating }).map((_, i) => (
                       <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-gray-700 mb-4 italic flex-1">« {t.content} »</p>
-                  {t.savings && (
-                    <div className="bg-supreme-primary/5 text-supreme-primary text-sm font-semibold px-3 py-2 rounded-lg mb-3">
-                      💡 Économies : {t.savings}
-                    </div>
-                  )}
-                  <div className="border-t border-gray-100 pt-3 mt-auto">
-                    <div className="font-semibold text-gray-900">{t.name}</div>
-                    <div className="flex items-center gap-1 text-sm text-gray-600">
-                      <MapPin size={14} /> {t.city} · {t.service}
-                    </div>
-                  </div>
+                  <p className="text-gray-700 text-sm whitespace-pre-line">{r.text}</p>
                 </article>
               ))}
             </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
+
+      {/* Internal testimonials */}
+      {items.length > 0 && (
+        <section className="py-12 bg-gray-50">
+          <div className="container-custom">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              Témoignages détaillés de nos chantiers
+            </h2>
+            {loading ? (
+              <p className="text-center text-gray-500">Chargement…</p>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {items.map((t) => (
+                  <article
+                    key={t.id}
+                    className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col"
+                  >
+                    <Quote className="text-supreme-primary mb-3" size={24} />
+                    <div className="flex mb-3">
+                      {Array.from({ length: t.rating }).map((_, i) => (
+                        <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 mb-4 italic flex-1">« {t.content} »</p>
+                    {t.savings && (
+                      <div className="bg-supreme-primary/5 text-supreme-primary text-sm font-semibold px-3 py-2 rounded-lg mb-3">
+                        💡 Économies : {t.savings}
+                      </div>
+                    )}
+                    <div className="border-t border-gray-100 pt-3 mt-auto">
+                      <div className="font-semibold text-gray-900">{t.name}</div>
+                      <div className="flex items-center gap-1 text-sm text-gray-600">
+                        <MapPin size={14} /> {t.city} · {t.service}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       <CTA
         title="Rejoignez nos clients satisfaits"
