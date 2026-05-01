@@ -172,7 +172,7 @@ const Temoignages = () => {
             {google && (
               <a
                 href={viewUrl}
-                onPointerDownCapture={forceGoogleNavigation(viewUrl)}
+                onClick={showGoogleAction("Voir SupremEnergies sur Google", viewUrl)}
                 className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
                 Voir sur Google <ExternalLink size={14} />
@@ -204,7 +204,7 @@ const Temoignages = () => {
               {google && (
                 <a
                   href={writeReviewUrl}
-                  onPointerDownCapture={forceGoogleNavigation(writeReviewUrl)}
+                  onClick={showGoogleAction("Laisser un avis Google", writeReviewUrl)}
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Laisser un avis <ExternalLink size={14} />
