@@ -26,6 +26,7 @@ interface GoogleReview {
 }
 
 interface GoogleReviewsPayload {
+  placeId?: string;
   name: string;
   rating: number | null;
   totalReviews: number;
