@@ -71,6 +71,20 @@ const Temoignages = () => {
           totalCount
         ).toFixed(1)
       : "5.0";
+
+  // Stable URLs based on placeId (more reliable than googleMapsUri in iframes)
+  const placeId = (google as any)?.placeId as string | undefined;
+  const viewUrl = placeId
+    ? `https://search.google.com/local/reviews?placeid=${placeId}`
+    : google?.googleMapsUri || "https://www.google.com/maps/place/SupremEnergies";
+  const writeReviewUrl = placeId
+    ? `https://search.google.com/local/writereview?placeid=${placeId}`
+    : viewUrl;
+
+  const openExternal = (url: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
   const displayCount = totalCount || items.length;
 
   const aggregateSchema = displayCount
