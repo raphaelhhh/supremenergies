@@ -201,12 +201,13 @@ const Temoignages = () => {
                   ({google.rating}/5 · {google.totalReviews} avis)
                 </span>
               </div>
-              {google.googleMapsUri && (
+              {google && (
                 <a
-                  href={google.googleMapsUri}
+                  href={writeReviewUrl}
+                  onClick={openExternal(writeReviewUrl)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1"
+                  className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Laisser un avis <ExternalLink size={14} />
                 </a>
