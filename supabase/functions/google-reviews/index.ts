@@ -1,6 +1,10 @@
 // Edge function: fetches Google reviews for SupremEnergies via Places API (New)
 // Public endpoint, in-memory cache 1h to save quota
-import { corsHeaders } from "@supabase/supabase-js/cors";
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
+};
 
 // CID extracted from Google Maps URL: 0x7f5305b900359074 = decimal 9174422162624577652
 // Place ID is resolved on first call using Places API Text Search, then cached.
