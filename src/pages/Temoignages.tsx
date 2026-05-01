@@ -42,15 +42,8 @@ const Temoignages = () => {
   const [items, setItems] = useState<Testimonial[]>([]);
   const [google, setGoogle] = useState<GoogleReviewsPayload | null>(null);
   const [loading, setLoading] = useState(true);
-  const [externalTarget, setExternalTarget] = useState<"_blank" | "_top">("_blank");
 
   useEffect(() => {
-    try {
-      if (window.self !== window.top) setExternalTarget("_top");
-    } catch {
-      setExternalTarget("_top");
-    }
-
     const load = async () => {
       const [{ data: testimonials }, googleRes] = await Promise.all([
         supabase
@@ -84,13 +77,9 @@ const Temoignages = () => {
         ).toFixed(1)
       : "5.0";
 
-  // In Lovable preview the app runs in an iframe: use _top so Google doesn't load inside the sandboxed frame.
   const viewUrl = GOOGLE_MAPS_URL;
   const writeReviewUrl = GOOGLE_REVIEW_URL;
-  const externalRel = externalTarget === "_blank" ? "noopener noreferrer" : undefined;
   const openExternal = (url: string) => (e: MouseEvent<HTMLAnchorElement>) => {
-    if (externalTarget !== "_top") return;
-
     e.preventDefault();
     const opened = window.open(url, "_blank", "noopener,noreferrer");
     if (!opened) window.location.href = url;
@@ -180,8 +169,8 @@ const Temoignages = () => {
               <a
                 href={viewUrl}
                 onClick={openExternal(viewUrl)}
-                target={externalTarget}
-                rel={externalRel}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
                 Voir sur Google <ExternalLink size={14} />
@@ -214,8 +203,8 @@ const Temoignages = () => {
                 <a
                   href={writeReviewUrl}
                   onClick={openExternal(writeReviewUrl)}
-                  target={externalTarget}
-                  rel={externalRel}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Laisser un avis <ExternalLink size={14} />
