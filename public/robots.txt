@@ -1,16 +1,8 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
 
-Sitemap: https://epeomgifqjbgzyurcnaz.supabase.co/functions/v1/generate-sitemap
+# Bloquer les routes privées / techniques
+Disallow: /auth
+Disallow: /admin
+
+Sitemap: https://supremenergies.com/sitemap.xml

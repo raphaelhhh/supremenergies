@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import Breadcrumb from "@/components/Breadcrumb";
 import RelatedArticles from "@/components/RelatedArticles";
+import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 import RelatedServices from "@/components/RelatedServices";
 import { Home, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -43,6 +44,11 @@ const PompeAChaleur = () => {
 
   return (
     <div>
+      <SeoBreadcrumb items={[
+        { name: "Accueil", url: "/" },
+        { name: "Services", url: "/services" },
+        { name: "Pompe à chaleur", url: "/services/pompe-a-chaleur" },
+      ]} />
       <Helmet>
         <title>Pompe à Chaleur en Île-de-France | Installation PAC | SupremEnergies</title>
         <meta name="description" content="Installation de pompes à chaleur air/eau, air/air et géothermiques en Île-de-France. Économisez 50 à 75% sur votre chauffage. Devis gratuit, aides MaPrimeRénov' 2026." />

@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import Breadcrumb from "@/components/Breadcrumb";
 import RelatedArticles from "@/components/RelatedArticles";
+import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 import RelatedServices from "@/components/RelatedServices";
 import { Building, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -43,6 +44,11 @@ const RenovationGlobale = () => {
 
   return (
     <div>
+      <SeoBreadcrumb items={[
+        { name: "Accueil", url: "/" },
+        { name: "Services", url: "/services" },
+        { name: "Rénovation globale", url: "/services/renovation-globale" },
+      ]} />
       <Helmet>
         <title>Rénovation Globale en Île-de-France | SupremEnergies</title>
         <meta name="description" content="Rénovation énergétique globale en Île-de-France. Isolation + chauffage + ventilation en un seul chantier. Économies de 60 à 80%. Aides bonifiées MaPrimeRénov' jusqu'à 63 000 €. Devis gratuit." />
