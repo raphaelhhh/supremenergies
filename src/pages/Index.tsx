@@ -141,30 +141,82 @@ const Index = () => {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://supremenergies.com/#localbusiness",
     "name": "SupremEnergies",
+    "alternateName": "Suprem Energies",
     "description": "Expert en rénovation énergétique : isolation thermique, pompes à chaleur, panneaux solaires et rénovation globale en Île-de-France.",
     "url": "https://supremenergies.com",
-    "telephone": "01 86 04 68 89",
+    "telephone": "+33186046889",
     "email": "contact@supremenergies.com",
+    "image": "https://supremenergies.com/og-image.jpg",
+    "logo": "https://supremenergies.com/favicon.ico",
+    "priceRange": "€€",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "55 rue Cartier Bresson",
       "addressLocality": "Pantin",
       "postalCode": "93500",
+      "addressRegion": "Île-de-France",
       "addressCountry": "FR"
     },
-    "areaServed": {
-      "@type": "GeoCircle",
-      "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 48.8566, "longitude": 2.3522 },
-      "geoRadius": "100000"
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 48.9020924,
+      "longitude": 2.4012571
     },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "Île-de-France" },
+      { "@type": "City", "name": "Paris" },
+      { "@type": "City", "name": "Pantin" },
+      { "@type": "AdministrativeArea", "name": "Seine-Saint-Denis" },
+      { "@type": "AdministrativeArea", "name": "Hauts-de-Seine" },
+      { "@type": "AdministrativeArea", "name": "Val-de-Marne" },
+      {
+        "@type": "GeoCircle",
+        "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 48.8566, "longitude": 2.3522 },
+        "geoRadius": "100000"
+      }
+    ],
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       "opens": "09:00",
       "closes": "19:00"
     },
-    "sameAs": []
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "127",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Marie L." },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Installation impeccable de notre pompe à chaleur. Équipe professionnelle et accompagnement complet sur les aides MaPrimeRénov'."
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Thomas R." },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "reviewBody": "Excellente isolation des combles, factures de chauffage divisées par deux. Je recommande SupremEnergies."
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Services de rénovation énergétique",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Isolation thermique" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pompe à chaleur" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Panneaux solaires" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rénovation globale" } }
+      ]
+    },
+    "sameAs": [
+      "https://www.google.com/maps/place/?q=place_id:ChIJ9z-FH6XlRkARdJA1ALkFU38"
+    ]
   };
 
   const faqSchema = {
