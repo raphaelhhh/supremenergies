@@ -42,15 +42,8 @@ const Temoignages = () => {
   const [items, setItems] = useState<Testimonial[]>([]);
   const [google, setGoogle] = useState<GoogleReviewsPayload | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isFramed, setIsFramed] = useState(false);
 
   useEffect(() => {
-    try {
-      setIsFramed(window.self !== window.top);
-    } catch {
-      setIsFramed(true);
-    }
-
     const load = async () => {
       const [{ data: testimonials }, googleRes] = await Promise.all([
         supabase
@@ -84,9 +77,8 @@ const Temoignages = () => {
         ).toFixed(1)
       : "5.0";
 
-  const viewUrl = GOOGLE_MAPS_URL;
+  const viewUrl = google?.googleMapsUri || GOOGLE_MAPS_URL;
   const writeReviewUrl = GOOGLE_REVIEW_URL;
-  const externalTarget = isFramed ? "_top" : "_blank";
   const displayCount = totalCount || items.length;
 
   const aggregateSchema = displayCount
@@ -171,8 +163,6 @@ const Temoignages = () => {
             {google && (
               <a
                 href={viewUrl}
-                target={externalTarget}
-                rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
                 Voir sur Google <ExternalLink size={14} />
@@ -204,8 +194,6 @@ const Temoignages = () => {
               {google && (
                 <a
                   href={writeReviewUrl}
-                  target={externalTarget}
-                  rel="noopener noreferrer"
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Laisser un avis <ExternalLink size={14} />
