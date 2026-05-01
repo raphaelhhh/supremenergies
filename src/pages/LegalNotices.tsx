@@ -53,9 +53,9 @@ const LegalNotices = () => {
               - Rénovation globale
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-gray-800">Certifications</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">Qualifications</h2>
             <p className="mb-6">
-              <strong>RGE (Reconnu Garant de l'Environnement) :</strong> [NUMÉRO DE CERTIFICATION]<br/>
+              <strong>Qualifications professionnelles :</strong> informations communiquées sur demande selon le type de chantier<br/>
               <strong>Assurance décennale :</strong> [NOM DE L'ASSUREUR - NUMÉRO DE POLICE]<br/>
               <strong>Garantie de parfait achèvement :</strong> [DÉTAILS]
             </p>
