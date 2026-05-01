@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { type MouseEvent, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Star, Quote, MapPin, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -38,8 +38,15 @@ const Temoignages = () => {
   const [items, setItems] = useState<Testimonial[]>([]);
   const [google, setGoogle] = useState<GoogleReviewsPayload | null>(null);
   const [loading, setLoading] = useState(true);
+  const [externalTarget, setExternalTarget] = useState<"_blank" | "_top">("_blank");
 
   useEffect(() => {
+    try {
+      if (window.self !== window.top) setExternalTarget("_top");
+    } catch {
+      setExternalTarget("_top");
+    }
+
     const load = async () => {
       const [{ data: testimonials }, googleRes] = await Promise.all([
         supabase
@@ -73,7 +80,7 @@ const Temoignages = () => {
         ).toFixed(1)
       : "5.0";
 
-  // Use Google Maps URLs (search.google.com is blocked by X-Frame-Options/CSP)
+  // In Lovable preview the app runs in an iframe: use _top so Google doesn't load inside the sandboxed frame.
   const placeId = google?.placeId;
   const viewUrl =
     google?.googleMapsUri ||
@@ -81,12 +88,18 @@ const Temoignages = () => {
       ? `https://www.google.com/maps/place/?q=place_id:${placeId}`
       : "https://www.google.com/maps/place/SupremEnergies");
   const writeReviewUrl = placeId
-    ? `https://www.google.com/maps/place/?q=place_id:${placeId}&hl=fr`
+    ? `https://search.google.com/local/writereview?placeid=${encodeURIComponent(placeId)}`
     : viewUrl;
+  const externalRel = externalTarget === "_blank" ? "noopener noreferrer" : undefined;
+  const openExternal = (url: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+    if (externalTarget !== "_top") return;
 
-  const openExternal = (url: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    window.open(url, "_blank", "noopener,noreferrer");
+    try {
+      window.top?.location.assign(url);
+    } catch {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
   };
   const displayCount = totalCount || items.length;
 
@@ -173,8 +186,8 @@ const Temoignages = () => {
               <a
                 href={viewUrl}
                 onClick={openExternal(viewUrl)}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={externalTarget}
+                rel={externalRel}
                 className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
                 Voir sur Google <ExternalLink size={14} />
@@ -207,8 +220,8 @@ const Temoignages = () => {
                 <a
                   href={writeReviewUrl}
                   onClick={openExternal(writeReviewUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={externalTarget}
+                  rel={externalRel}
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Laisser un avis <ExternalLink size={14} />
