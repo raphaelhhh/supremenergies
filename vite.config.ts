@@ -4,10 +4,13 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { spawnSync } from "node:child_process";
 
-// Plugin Vite : régénère public/sitemap.xml au build pour le SEO
-function sitemapPlugin() {
+// Plugin Vite SEO :
+// - buildStart : régénère public/sitemap.xml (toutes les routes + blog)
+// - closeBundle : crée un index.html pré-rendu par route dans dist/ pour
+//   que Googlebot indexe le contenu sans exécuter le JS (SPA fallback).
+function seoPlugin() {
   return {
-    name: "supremenergies-sitemap",
+    name: "supremenergies-seo",
     apply: "build" as const,
     buildStart() {
       const result = spawnSync(
@@ -17,6 +20,16 @@ function sitemapPlugin() {
       );
       if (result.status !== 0) {
         console.warn("[sitemap] generation failed (non-blocking)");
+      }
+    },
+    closeBundle() {
+      const result = spawnSync(
+        "node",
+        [path.resolve(__dirname, "scripts/prerender.mjs")],
+        { stdio: "inherit" },
+      );
+      if (result.status !== 0) {
+        console.warn("[prerender] generation failed (non-blocking)");
       }
     },
   };
@@ -30,7 +43,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    sitemapPlugin(),
+    seoPlugin(),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
