@@ -175,9 +175,8 @@ const Temoignages = () => {
             {google && (
               <a
                 href={viewUrl}
-                onClick={openExternal(viewUrl)}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={externalTarget}
+                rel={externalRel}
                 className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
                 Voir sur Google <ExternalLink size={14} />
@@ -209,9 +208,8 @@ const Temoignages = () => {
               {google && (
                 <a
                   href={writeReviewUrl}
-                  onClick={openExternal(writeReviewUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={externalTarget}
+                  rel={externalRel}
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Laisser un avis <ExternalLink size={14} />
