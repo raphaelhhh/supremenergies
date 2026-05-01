@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import Breadcrumb from "@/components/Breadcrumb";
 import RelatedArticles from "@/components/RelatedArticles";
+import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 import RelatedServices from "@/components/RelatedServices";
 import { ThermometerSun, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -43,6 +44,11 @@ const IsolationThermique = () => {
 
   return (
     <div>
+      <SeoBreadcrumb items={[
+        { name: "Accueil", url: "/" },
+        { name: "Services", url: "/services" },
+        { name: "Isolation thermique", url: "/services/isolation-thermique" },
+      ]} />
       <Helmet>
         <title>Isolation Thermique en Île-de-France | SupremEnergies</title>
         <meta name="description" content="Expert en isolation thermique : combles, murs (ITE/ITI), fenêtres, planchers. Réduisez vos factures de 25 à 50%. Devis gratuit, aides MaPrimeRénov' 2026. SupremEnergies, Île-de-France." />
