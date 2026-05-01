@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { Helmet } from "react-helmet-async";
 import { Star, Quote, MapPin, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -42,15 +42,10 @@ const Temoignages = () => {
   const [items, setItems] = useState<Testimonial[]>([]);
   const [google, setGoogle] = useState<GoogleReviewsPayload | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isFramed, setIsFramed] = useState(false);
+  const [googleAction, setGoogleAction] = useState<{ title: string; url: string } | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    try {
-      setIsFramed(window.self !== window.top);
-    } catch {
-      setIsFramed(true);
-    }
-
     const load = async () => {
       const [{ data: testimonials }, googleRes] = await Promise.all([
         supabase
@@ -84,10 +79,18 @@ const Temoignages = () => {
         ).toFixed(1)
       : "5.0";
 
-  const viewUrl = GOOGLE_MAPS_URL;
+  const viewUrl = google?.googleMapsUri || GOOGLE_MAPS_URL;
   const writeReviewUrl = GOOGLE_REVIEW_URL;
-  const externalTarget = isFramed ? "_top" : "_blank";
   const displayCount = totalCount || items.length;
+
+  const showGoogleAction = (title: string, url: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    setCopied(false);
+    setGoogleAction({ title, url });
+  };
 
   const aggregateSchema = displayCount
     ? {
@@ -171,8 +174,7 @@ const Temoignages = () => {
             {google && (
               <a
                 href={viewUrl}
-                target={externalTarget}
-                rel="noopener noreferrer"
+                onClick={showGoogleAction("Voir SupremEnergies sur Google", viewUrl)}
                 className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
                 Voir sur Google <ExternalLink size={14} />
@@ -204,8 +206,7 @@ const Temoignages = () => {
               {google && (
                 <a
                   href={writeReviewUrl}
-                  target={externalTarget}
-                  rel="noopener noreferrer"
+                  onClick={showGoogleAction("Laisser un avis Google", writeReviewUrl)}
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Laisser un avis <ExternalLink size={14} />
@@ -302,6 +303,35 @@ const Temoignages = () => {
         title="Rejoignez nos clients satisfaits"
         subtitle="Devis gratuit, accompagnement aides, chantier clé en main partout en Île-de-France."
       />
+
+      {googleAction && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4" role="dialog" aria-modal="true">
+          <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-2xl">
+            <h2 className="mb-2 text-xl font-bold text-gray-900">{googleAction.title}</h2>
+            <p className="mb-5 text-sm text-gray-600">
+              Google peut bloquer l'ouverture dans certaines previews. Utilisez l'ouverture directe ou copiez le lien.
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <a href={googleAction.url} target="_blank" rel="noopener noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-supreme-primary px-4 py-3 text-sm font-semibold text-white hover:bg-supreme-primary/90">
+                Ouvrir Google <ExternalLink size={16} />
+              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  void navigator.clipboard.writeText(googleAction.url);
+                  setCopied(true);
+                }}
+                className="rounded-md border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-800 hover:bg-gray-50"
+              >
+                {copied ? "Lien copié" : "Copier le lien"}
+              </button>
+            </div>
+            <button type="button" onClick={() => setGoogleAction(null)} className="mt-4 text-sm font-semibold text-gray-500 hover:text-gray-800">
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
