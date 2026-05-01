@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { type MouseEvent, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Star, Quote, MapPin, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -91,6 +91,16 @@ const Temoignages = () => {
     ? `https://search.google.com/local/writereview?placeid=${encodeURIComponent(placeId)}`
     : viewUrl;
   const externalRel = externalTarget === "_blank" ? "noopener noreferrer" : undefined;
+  const openExternal = (url: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+    if (externalTarget !== "_top") return;
+
+    e.preventDefault();
+    try {
+      window.top?.location.assign(url);
+    } catch {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  };
   const displayCount = totalCount || items.length;
 
   const aggregateSchema = displayCount
@@ -175,6 +185,7 @@ const Temoignages = () => {
             {google && (
               <a
                 href={viewUrl}
+                onClick={openExternal(viewUrl)}
                 target={externalTarget}
                 rel={externalRel}
                 className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
@@ -208,6 +219,7 @@ const Temoignages = () => {
               {google && (
                 <a
                   href={writeReviewUrl}
+                  onClick={openExternal(writeReviewUrl)}
                   target={externalTarget}
                   rel={externalRel}
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
