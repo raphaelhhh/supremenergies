@@ -73,13 +73,15 @@ const Temoignages = () => {
         ).toFixed(1)
       : "5.0";
 
-  // Stable URLs based on placeId (more reliable than googleMapsUri in iframes)
-  const placeId = (google as any)?.placeId as string | undefined;
-  const viewUrl = placeId
-    ? `https://search.google.com/local/reviews?placeid=${placeId}`
-    : google?.googleMapsUri || "https://www.google.com/maps/place/SupremEnergies";
+  // Use Google Maps URLs (search.google.com is blocked by X-Frame-Options/CSP)
+  const placeId = google?.placeId;
+  const viewUrl =
+    google?.googleMapsUri ||
+    (placeId
+      ? `https://www.google.com/maps/place/?q=place_id:${placeId}`
+      : "https://www.google.com/maps/place/SupremEnergies");
   const writeReviewUrl = placeId
-    ? `https://search.google.com/local/writereview?placeid=${placeId}`
+    ? `https://www.google.com/maps/place/?q=place_id:${placeId}&hl=fr`
     : viewUrl;
 
   const openExternal = (url: string) => (e: React.MouseEvent) => {
