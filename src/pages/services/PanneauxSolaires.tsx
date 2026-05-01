@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import CTA from "@/components/CTA";
 import Breadcrumb from "@/components/Breadcrumb";
 import RelatedArticles from "@/components/RelatedArticles";
+import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 import RelatedServices from "@/components/RelatedServices";
 import { SunMedium, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -43,6 +44,11 @@ const PanneauxSolaires = () => {
 
   return (
     <div>
+      <SeoBreadcrumb items={[
+        { name: "Accueil", url: "/" },
+        { name: "Services", url: "/services" },
+        { name: "Panneaux solaires", url: "/services/panneaux-solaires" },
+      ]} />
       <Helmet>
         <title>Panneaux Solaires en Île-de-France | Installation Photovoltaïque | SupremEnergies</title>
         <meta name="description" content="Installation de panneaux solaires photovoltaïques en Île-de-France. Autoconsommation ou revente. Produisez votre électricité verte et réduisez vos factures. Devis gratuit." />
