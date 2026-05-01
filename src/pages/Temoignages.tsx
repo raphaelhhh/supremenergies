@@ -167,12 +167,13 @@ const Temoignages = () => {
             <span className="text-white/95">
               <strong>{blendedRating}/5</strong> sur {displayCount} avis vérifiés
             </span>
-            {google?.googleMapsUri && (
+            {google && (
               <a
-                href={google.googleMapsUri}
+                href={viewUrl}
+                onClick={openExternal(viewUrl)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium"
+                className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
                 Voir sur Google <ExternalLink size={14} />
               </a>
