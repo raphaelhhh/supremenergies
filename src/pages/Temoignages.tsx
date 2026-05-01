@@ -26,6 +26,7 @@ interface GoogleReview {
 }
 
 interface GoogleReviewsPayload {
+  placeId?: string;
   name: string;
   rating: number | null;
   totalReviews: number;
@@ -71,6 +72,20 @@ const Temoignages = () => {
           totalCount
         ).toFixed(1)
       : "5.0";
+
+  // Stable URLs based on placeId (more reliable than googleMapsUri in iframes)
+  const placeId = (google as any)?.placeId as string | undefined;
+  const viewUrl = placeId
+    ? `https://search.google.com/local/reviews?placeid=${placeId}`
+    : google?.googleMapsUri || "https://www.google.com/maps/place/SupremEnergies";
+  const writeReviewUrl = placeId
+    ? `https://search.google.com/local/writereview?placeid=${placeId}`
+    : viewUrl;
+
+  const openExternal = (url: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
   const displayCount = totalCount || items.length;
 
   const aggregateSchema = displayCount
@@ -152,12 +167,13 @@ const Temoignages = () => {
             <span className="text-white/95">
               <strong>{blendedRating}/5</strong> sur {displayCount} avis vérifiés
             </span>
-            {google?.googleMapsUri && (
+            {google && (
               <a
-                href={google.googleMapsUri}
+                href={viewUrl}
+                onClick={openExternal(viewUrl)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium"
+                className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
                 Voir sur Google <ExternalLink size={14} />
               </a>
@@ -185,12 +201,13 @@ const Temoignages = () => {
                   ({google.rating}/5 · {google.totalReviews} avis)
                 </span>
               </div>
-              {google.googleMapsUri && (
+              {google && (
                 <a
-                  href={google.googleMapsUri}
+                  href={writeReviewUrl}
+                  onClick={openExternal(writeReviewUrl)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1"
+                  className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Laisser un avis <ExternalLink size={14} />
                 </a>
