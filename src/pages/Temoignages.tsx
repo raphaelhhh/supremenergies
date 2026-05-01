@@ -34,6 +34,10 @@ interface GoogleReviewsPayload {
   reviews: GoogleReview[];
 }
 
+const GOOGLE_PLACE_ID = "ChIJ97OFox-lXgERdJA1ALkFU38";
+const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=SupremEnergies%2055%20rue%20Cartier%20Bresson%2093500%20Pantin&query_place_id=${GOOGLE_PLACE_ID}`;
+const GOOGLE_REVIEW_URL = `https://search.google.com/local/writereview?placeid=${GOOGLE_PLACE_ID}`;
+
 const Temoignages = () => {
   const [items, setItems] = useState<Testimonial[]>([]);
   const [google, setGoogle] = useState<GoogleReviewsPayload | null>(null);
@@ -81,25 +85,21 @@ const Temoignages = () => {
       : "5.0";
 
   // In Lovable preview the app runs in an iframe: use _top so Google doesn't load inside the sandboxed frame.
-  const placeId = google?.placeId;
-  const viewUrl =
-    google?.googleMapsUri ||
-    (placeId
-      ? `https://www.google.com/maps/place/?q=place_id:${placeId}`
-      : "https://www.google.com/maps/place/SupremEnergies");
-  const writeReviewUrl = placeId
-    ? `https://search.google.com/local/writereview?placeid=${encodeURIComponent(placeId)}`
-    : viewUrl;
+  const viewUrl = GOOGLE_MAPS_URL;
+  const writeReviewUrl = GOOGLE_REVIEW_URL;
   const externalRel = externalTarget === "_blank" ? "noopener noreferrer" : undefined;
   const openExternal = (url: string) => (e: MouseEvent<HTMLAnchorElement>) => {
     if (externalTarget !== "_top") return;
 
     e.preventDefault();
     try {
-      window.top?.location.assign(url);
-    } catch {
       window.open(url, "_blank", "noopener,noreferrer");
+    } catch {
+      window.location.href = url;
     }
+    window.setTimeout(() => {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }, 0);
   };
   const displayCount = totalCount || items.length;
 
