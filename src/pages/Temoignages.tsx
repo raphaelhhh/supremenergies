@@ -184,13 +184,13 @@ const Temoignages = () => {
               <strong>{blendedRating}/5</strong> sur {displayCount} avis vérifiés
             </span>
             {google && (
-              <a
-                href={viewUrl}
-                onClick={showGoogleAction("Voir SupremEnergies sur Google", viewUrl)}
+              <button
+                type="button"
+                onClick={() => showGoogleAction("Voir SupremEnergies sur Google", viewUrl)}
                 className="inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 transition-colors px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer"
               >
                 Voir sur Google <ExternalLink size={14} />
-              </a>
+              </button>
             )}
           </div>
         </div>
@@ -216,13 +216,13 @@ const Temoignages = () => {
                 </span>
               </div>
               {google && (
-                <a
-                  href={writeReviewUrl}
-                  onClick={showGoogleAction("Laisser un avis Google", writeReviewUrl)}
+                <button
+                  type="button"
+                  onClick={() => showGoogleAction("Laisser un avis Google", writeReviewUrl)}
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Laisser un avis <ExternalLink size={14} />
-                </a>
+                </button>
               )}
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
