@@ -1,4 +1,4 @@
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Star, Quote, MapPin, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -83,13 +83,25 @@ const Temoignages = () => {
   const writeReviewUrl = GOOGLE_REVIEW_URL;
   const displayCount = totalCount || items.length;
 
-  const showGoogleAction = (title: string, url: string) => (event: MouseEvent<HTMLAnchorElement>) => {
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-    event.preventDefault();
-    event.stopPropagation();
+  const showGoogleAction = (title: string, url: string) => {
     setCopied(false);
     setGoogleAction({ title, url });
+  };
+
+  const copyGoogleUrl = async (url: string) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  const openGoogleOutsidePreview = async (url: string) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (!newWindow) {
+      await copyGoogleUrl(url);
+    }
   };
 
   const aggregateSchema = displayCount
