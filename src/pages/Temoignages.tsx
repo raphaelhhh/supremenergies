@@ -321,18 +321,15 @@ const Temoignages = () => {
           <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-2xl">
             <h2 className="mb-2 text-xl font-bold text-gray-900">{googleAction.title}</h2>
             <p className="mb-5 text-sm text-gray-600">
-              Google peut bloquer l'ouverture dans certaines previews. Utilisez l'ouverture directe ou copiez le lien.
+              Le lien Google est prêt. Si votre navigateur bloque l’ouverture automatique, le lien sera copié pour le coller dans un nouvel onglet.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <a href={googleAction.url} target="_blank" rel="noopener noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-supreme-primary px-4 py-3 text-sm font-semibold text-white hover:bg-supreme-primary/90">
+              <button type="button" onClick={() => void openGoogleOutsidePreview(googleAction.url)} className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-supreme-primary px-4 py-3 text-sm font-semibold text-white hover:bg-supreme-primary/90">
                 Ouvrir Google <ExternalLink size={16} />
-              </a>
+              </button>
               <button
                 type="button"
-                onClick={() => {
-                  void navigator.clipboard.writeText(googleAction.url);
-                  setCopied(true);
-                }}
+                onClick={() => void copyGoogleUrl(googleAction.url)}
                 className="rounded-md border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-800 hover:bg-gray-50"
               >
                 {copied ? "Lien copié" : "Copier le lien"}
