@@ -5,9 +5,5 @@ Allow: /
 Disallow: /auth
 Disallow: /admin
 
-# Sitemap statique régénéré à chaque build (pages + articles publiés)
+# Sitemap index : référence les sous-sitemaps (pages, blog) + le sitemap dynamique
 Sitemap: https://supremenergies.com/sitemap.xml
-
-# Sitemap dynamique (edge function) : reflète en temps réel les nouveaux articles
-# générés automatiquement entre deux déploiements.
-Sitemap: https://epeomgifqjbgzyurcnaz.supabase.co/functions/v1/generate-sitemap
