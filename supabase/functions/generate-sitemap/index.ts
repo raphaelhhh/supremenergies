@@ -76,7 +76,7 @@ Deno.serve(async (req) => {
     const staticEntries = STATIC_URLS.map(
       (u) => `  <url>
     <loc>${SITE_URL}${u.loc}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${u.lastmod}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`
@@ -84,7 +84,8 @@ Deno.serve(async (req) => {
 
     const blogEntries = (posts || [])
       .map((post) => {
-        const lastmod = (post.updated_at || post.published_at).split("T")[0];
+        const raw = post.updated_at || post.published_at;
+        const lastmod = raw ? new Date(raw).toISOString() : `${today}T00:00:00Z`;
         return `  <url>
     <loc>${SITE_URL}/blog/${post.slug}</loc>
     <lastmod>${lastmod}</lastmod>
