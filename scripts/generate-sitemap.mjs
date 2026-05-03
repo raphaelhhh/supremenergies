@@ -1,5 +1,7 @@
-// Génère public/sitemap.xml au build avec toutes les routes connues
-// + les articles de blog publiés (lecture via API REST Supabase publique).
+// Génère un sitemap index + sous-sitemaps dans public/ au build :
+//   - public/sitemap.xml         → index qui référence les sous-sitemaps
+//   - public/sitemap-pages.xml   → pages statiques (services, zones, légales, etc.)
+//   - public/sitemap-blog.xml    → articles de blog publiés (lus depuis Supabase)
 import { writeFileSync, mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,6 +10,10 @@ const SITE_URL = "https://supremenergies.com";
 const SUPABASE_URL = "https://epeomgifqjbgzyurcnaz.supabase.co";
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwZW9tZ2lmcWpiZ3p5dXJjbmF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5OTUyOTEsImV4cCI6MjA5MTU3MTI5MX0.7WTHMDXIKtK007D_g_z3iHRWGe-K3_RRmDkCIXJWgGQ";
+
+// URL de la edge function qui sert un sitemap blog en temps réel
+// (filet de sécurité entre deux déploiements pour les articles auto-générés)
+const DYNAMIC_BLOG_SITEMAP_URL = `${SUPABASE_URL}/functions/v1/generate-sitemap`;
 
 const ZONE_SLUGS = [
   "paris",
@@ -72,30 +78,63 @@ function urlEntry(loc, lastmod, changefreq, priority) {
   </url>`;
 }
 
+function urlsetXml(entries) {
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${entries}
+</urlset>
+`;
+}
+
+function sitemapIndexXml(items) {
+  const inner = items
+    .map(
+      (it) => `  <sitemap>
+    <loc>${it.loc}</loc>
+    <lastmod>${it.lastmod}</lastmod>
+  </sitemap>`,
+    )
+    .join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${inner}
+</sitemapindex>
+`;
+}
+
 const today = new Date().toISOString().split("T")[0];
 const posts = await fetchBlogPosts();
 
+// 1) Sous-sitemap : pages statiques
 const staticEntries = STATIC_URLS.map((u) =>
   urlEntry(u.loc, today, u.changefreq, u.priority),
 ).join("\n");
+const pagesXml = urlsetXml(staticEntries);
 
+// 2) Sous-sitemap : blog (snapshot au build)
 const blogEntries = posts
   .map((p) => {
     const lastmod = (p.updated_at || p.published_at || "").split("T")[0] || today;
     return urlEntry(`/blog/${p.slug}`, lastmod, "monthly", "0.6");
   })
   .join("\n");
+const blogXml = urlsetXml(blogEntries || "");
 
-const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticEntries}${blogEntries ? "\n" + blogEntries : ""}
-</urlset>
-`;
+// 3) Index : référence les sous-sitemaps + le sitemap dynamique en temps réel
+const indexXml = sitemapIndexXml([
+  { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: today },
+  { loc: `${SITE_URL}/sitemap-blog.xml`, lastmod: today },
+  { loc: DYNAMIC_BLOG_SITEMAP_URL, lastmod: today },
+]);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const outPath = resolve(__dirname, "..", "public", "sitemap.xml");
-mkdirSync(dirname(outPath), { recursive: true });
-writeFileSync(outPath, xml, "utf8");
+const publicDir = resolve(__dirname, "..", "public");
+mkdirSync(publicDir, { recursive: true });
 
-const total = STATIC_URLS.length + posts.length;
-console.log(`[sitemap] wrote ${outPath} with ${total} URLs (${posts.length} blog posts)`);
+writeFileSync(resolve(publicDir, "sitemap.xml"), indexXml, "utf8");
+writeFileSync(resolve(publicDir, "sitemap-pages.xml"), pagesXml, "utf8");
+writeFileSync(resolve(publicDir, "sitemap-blog.xml"), blogXml, "utf8");
+
+console.log(
+  `[sitemap] index written: 1 static-pages sitemap (${STATIC_URLS.length} URLs) + 1 blog sitemap (${posts.length} posts) + 1 dynamic edge sitemap`,
+);
