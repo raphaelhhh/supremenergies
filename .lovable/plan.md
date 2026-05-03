@@ -1,54 +1,53 @@
 ## Objectif
 
-Reproduire le type d'affichage Google que Polymarket obtient quand on cherche son nom : **titre + URL + description + sitelinks** (les 4-6 sous-liens cliquables : "Tendances", "Nouveau", etc.).
+Garantir que le sitemap reste exhaustif, à jour et signalé à Google automatiquement, sans dépendre d'un rebuild manuel.
 
-## Important à savoir
+## Ce qui est déjà bon (à conserver)
 
-Les **sitelinks sont 100% automatiques** : Google les génère seul quand il considère que le site est suffisamment structuré, populaire et indexé. On ne peut pas les forcer, mais on peut **maximiser leur probabilité d'apparition** en envoyant les bons signaux.
+- `scripts/generate-sitemap.mjs` régénère `public/sitemap.xml` au build avec : 21 pages statiques (toutes les pages services, zones, légales, simulateur, témoignages) + tous les articles `published = true`.
+- Plugin `seoPlugin()` dans `vite.config.ts` qui exécute ce script à chaque `buildStart`.
+- `robots.txt` référence le sitemap.
+- Le sitemap en ligne contient actuellement 40 URLs (21 statiques + 19 articles), conforme à la base.
 
-Aujourd'hui le site n'a quasiment aucun sitelink car :
-1. Le domaine `supremenergies.com` vient juste d'être branché (domaine "neuf" pour Google).
-2. Pas encore de schema `WebSite` avec `SearchAction` (manque le signal "site avec navigation").
-3. Le `LocalBusiness` schema existe mais pas de `Organization` propre avec logo + sameAs (réseaux sociaux).
-4. Les ancres internes (footer, menu) ne sont pas optimisées pour signaler les "pages clés".
+## Améliorations à apporter
 
-## Ce que je vais faire
+### 1. Notifier Google automatiquement à chaque nouvel article
 
-### 1. Ajouter les schemas manquants dans `index.html` (global, sur toutes les pages)
+Modifier `supabase/functions/generate-blog-post/index.ts` : après chaque insertion réussie d'un article (`published = true`), envoyer en parallèle :
 
-- **`Organization`** : nom officiel, logo, URL, contact, sameAs (LinkedIn, Facebook, Instagram si dispo).
-- **`WebSite`** avec `potentialAction` → SearchAction (autorise la "Sitelinks search box" Google).
+- Un `GET` vers `https://www.google.com/ping?sitemap=https://supremenergies.com/sitemap.xml`
+- Un `GET` vers `https://www.bing.com/ping?sitemap=https://supremenergies.com/sitemap.xml`
 
-### 2. Renforcer la structure de navigation
+Échecs non bloquants (try/catch + log).
 
-- Vérifier que le menu principal contient des libellés courts et stables (Services, À propos, Blog, Contact, Devis) — c'est ce que Google utilise comme candidats sitelinks.
-- Ajouter dans le **footer** une section "Pages principales" avec les 6 liens qu'on veut voir apparaître : Isolation, Pompe à chaleur, Panneaux solaires, Rénovation globale, Simulateur d'aides, Devis gratuit.
+### 2. Servir aussi le sitemap dynamiquement (filet de sécurité)
 
-### 3. Nettoyer la balise `<title>` et `<meta description>` de la home
+L'edge function `generate-sitemap` existe déjà et lit en direct la base. On la garde comme **source de vérité dynamique** accessible via :
+`https://epeomgifqjbgzyurcnaz.supabase.co/functions/v1/generate-sitemap`
 
-- Title actuel : OK mais long. Raccourcir à : `SupremEnergies — Rénovation énergétique en Île-de-France`
-- Meta description : déjà bonne, garder.
+Ajouter dans `public/robots.txt` une **seconde ligne `Sitemap:`** pointant vers cette URL. Google accepte plusieurs sitemaps ; cela garantit qu'il voit toujours les derniers articles, même entre deux déploiements Lovable.
 
-### 4. Vérifier la soumission Google Search Console
+### 3. Vérification de cohérence (one-shot)
 
-- Confirmer que le sitemap.xml est bien soumis sur la propriété `https://supremenergies.com/`.
-- Demander une indexation manuelle de la home + des 4 pages services via GSC (action manuelle de ta part, je te guiderai).
+Après déploiement, exécuter une vérification :
 
-### 5. Délai réaliste
+- `curl` sur les deux sitemaps
+- compter les `<loc>`
+- comparer avec `select count(*) from blog_posts where published = true` (actuellement 19) + 21 statiques
 
-Même avec tout ça parfait, Google met **2 à 8 semaines** après la première indexation pour afficher des sitelinks. C'est inévitable.
+## Détails techniques
 
-## Hors plan (à ne pas faire)
+- L'edge function `generate-sitemap` a déjà CORS, cache-control 1h, et la même liste de pages statiques que le script de build → cohérence garantie.
+- `verify_jwt` doit être désactivé pour cette fonction (accessible publiquement) — à vérifier dans `supabase/config.toml` et corriger si besoin.
+- Aucune migration DB requise.
 
-- Pas d'`aggregateRating` ni d'avis inventés (interdit par Google, risque de pénalité).
-- Pas de "RGE" (mémoire projet : interdit).
-- Pas de modification des couleurs/design.
+## Fichiers modifiés
 
-## Détail technique
+- `supabase/functions/generate-blog-post/index.ts` : ajout du ping Google/Bing post-insertion.
+- `public/robots.txt` : ajout d'une seconde ligne `Sitemap:` (URL edge function).
+- `supabase/config.toml` : vérifier `[functions.generate-sitemap] verify_jwt = false` (ajouter si manquant).
 
-Fichiers modifiés :
-- `index.html` : ajout de 2 blocs `<script type="application/ld+json">` (Organization + WebSite/SearchAction) + raccourcissement du `<title>`.
-- `src/components/Footer.tsx` : ajout/vérification d'un bloc "Pages principales" avec les ancres exactes des 6 pages cibles.
-- Pas de changement DB, pas d'edge function.
+## Hors périmètre
 
-Une fois mergé, tu fais : GSC → Inspection d'URL → "Demander une indexation" sur la home + les 4 services.
+- Pas de changement de structure du sitemap (déjà conforme schéma 0.9).
+- Pas de sitemap d'images / vidéos (non nécessaire pour l'instant).
