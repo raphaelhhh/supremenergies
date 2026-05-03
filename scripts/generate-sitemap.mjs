@@ -116,26 +116,36 @@ ${inner}
 const today = new Date().toISOString().split("T")[0];
 const posts = await fetchBlogPosts();
 
-// 1) Sous-sitemap : pages statiques
+// 1) Sous-sitemap : pages statiques (lastmod réel par page)
 const staticEntries = STATIC_URLS.map((u) =>
-  urlEntry(u.loc, today, u.changefreq, u.priority),
+  urlEntry(u.loc, u.lastmod, u.changefreq, u.priority),
 ).join("\n");
 const pagesXml = urlsetXml(staticEntries);
 
-// 2) Sous-sitemap : blog (snapshot au build)
+// 2) Sous-sitemap : blog — timestamp ISO complet (W3C datetime), précis à la seconde
 const blogEntries = posts
   .map((p) => {
-    const lastmod = (p.updated_at || p.published_at || "").split("T")[0] || today;
+    const raw = p.updated_at || p.published_at;
+    const lastmod = raw ? new Date(raw).toISOString() : `${today}T00:00:00Z`;
     return urlEntry(`/blog/${p.slug}`, lastmod, "monthly", "0.6");
   })
   .join("\n");
 const blogXml = urlsetXml(blogEntries || "");
 
-// 3) Index : référence les sous-sitemaps + le sitemap dynamique en temps réel
+// 3) Index : lastmod de chaque sous-sitemap = max des lastmod qu'il contient
+const pagesIndexLastmod = STATIC_URLS.map((u) => u.lastmod).sort().pop();
+const blogIndexLastmod = posts.length
+  ? new Date(
+      Math.max(
+        ...posts.map((p) => new Date(p.updated_at || p.published_at).getTime()),
+      ),
+    ).toISOString()
+  : `${today}T00:00:00Z`;
+
 const indexXml = sitemapIndexXml([
-  { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: today },
-  { loc: `${SITE_URL}/sitemap-blog.xml`, lastmod: today },
-  { loc: DYNAMIC_BLOG_SITEMAP_URL, lastmod: today },
+  { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: pagesIndexLastmod },
+  { loc: `${SITE_URL}/sitemap-blog.xml`, lastmod: blogIndexLastmod },
+  { loc: DYNAMIC_BLOG_SITEMAP_URL, lastmod: blogIndexLastmod },
 ]);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
