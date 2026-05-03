@@ -24,28 +24,39 @@ const ZONE_SLUGS = [
   "montreuil",
 ];
 
+// IMPORTANT : lastmod doit refléter la VRAIE date de dernière modification
+// éditoriale de la page. Mettre `today` partout dégrade la confiance de Google.
+// Quand tu modifies réellement le contenu d'une page, mets sa date à jour ici.
+const STATIC_PAGES_LAST_REVIEW = "2026-05-03"; // dernière revue SEO globale
+const ZONES_LAST_REVIEW = "2026-04-15";
+const LEGAL_LAST_REVIEW = "2026-01-10";
+
 const STATIC_URLS = [
-  { loc: "/", changefreq: "weekly", priority: "1.0" },
-  { loc: "/about", changefreq: "monthly", priority: "0.8" },
-  { loc: "/services", changefreq: "monthly", priority: "0.9" },
-  { loc: "/services/isolation-thermique", changefreq: "monthly", priority: "0.9" },
-  { loc: "/services/pompe-a-chaleur", changefreq: "monthly", priority: "0.9" },
-  { loc: "/services/panneaux-solaires", changefreq: "monthly", priority: "0.9" },
-  { loc: "/services/renovation-globale", changefreq: "monthly", priority: "0.9" },
-  { loc: "/simulateur-aides", changefreq: "monthly", priority: "0.9" },
-  { loc: "/temoignages", changefreq: "monthly", priority: "0.7" },
-  { loc: "/blog", changefreq: "weekly", priority: "0.7" },
-  { loc: "/contact", changefreq: "monthly", priority: "0.8" },
-  { loc: "/devis-gratuit", changefreq: "monthly", priority: "0.9" },
-  { loc: "/mentions-legales", changefreq: "yearly", priority: "0.3" },
-  { loc: "/privacy", changefreq: "yearly", priority: "0.3" },
-  { loc: "/terms", changefreq: "yearly", priority: "0.3" },
+  { loc: "/", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "weekly", priority: "1.0" },
+  { loc: "/about", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.8" },
+  { loc: "/services", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
+  { loc: "/services/isolation-thermique", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
+  { loc: "/services/pompe-a-chaleur", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
+  { loc: "/services/panneaux-solaires", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
+  { loc: "/services/renovation-globale", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
+  { loc: "/simulateur-aides", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
+  { loc: "/temoignages", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.7" },
+  { loc: "/blog", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "weekly", priority: "0.7" },
+  { loc: "/contact", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.8" },
+  { loc: "/devis-gratuit", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
+  { loc: "/mentions-legales", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
+  { loc: "/privacy", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
+  { loc: "/terms", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   ...ZONE_SLUGS.map((slug) => ({
     loc: `/zones/${slug}`,
+    lastmod: ZONES_LAST_REVIEW,
     changefreq: "monthly",
     priority: "0.8",
   })),
 ];
+
+// Pour le blog : on utilise le timestamp ISO complet (W3C datetime), plus précis
+// que la simple date — Google s'en sert pour prioriser le re-crawl.
 
 async function fetchBlogPosts() {
   try {
@@ -105,26 +116,36 @@ ${inner}
 const today = new Date().toISOString().split("T")[0];
 const posts = await fetchBlogPosts();
 
-// 1) Sous-sitemap : pages statiques
+// 1) Sous-sitemap : pages statiques (lastmod réel par page)
 const staticEntries = STATIC_URLS.map((u) =>
-  urlEntry(u.loc, today, u.changefreq, u.priority),
+  urlEntry(u.loc, u.lastmod, u.changefreq, u.priority),
 ).join("\n");
 const pagesXml = urlsetXml(staticEntries);
 
-// 2) Sous-sitemap : blog (snapshot au build)
+// 2) Sous-sitemap : blog — timestamp ISO complet (W3C datetime), précis à la seconde
 const blogEntries = posts
   .map((p) => {
-    const lastmod = (p.updated_at || p.published_at || "").split("T")[0] || today;
+    const raw = p.updated_at || p.published_at;
+    const lastmod = raw ? new Date(raw).toISOString() : `${today}T00:00:00Z`;
     return urlEntry(`/blog/${p.slug}`, lastmod, "monthly", "0.6");
   })
   .join("\n");
 const blogXml = urlsetXml(blogEntries || "");
 
-// 3) Index : référence les sous-sitemaps + le sitemap dynamique en temps réel
+// 3) Index : lastmod de chaque sous-sitemap = max des lastmod qu'il contient
+const pagesIndexLastmod = STATIC_URLS.map((u) => u.lastmod).sort().pop();
+const blogIndexLastmod = posts.length
+  ? new Date(
+      Math.max(
+        ...posts.map((p) => new Date(p.updated_at || p.published_at).getTime()),
+      ),
+    ).toISOString()
+  : `${today}T00:00:00Z`;
+
 const indexXml = sitemapIndexXml([
-  { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: today },
-  { loc: `${SITE_URL}/sitemap-blog.xml`, lastmod: today },
-  { loc: DYNAMIC_BLOG_SITEMAP_URL, lastmod: today },
+  { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: pagesIndexLastmod },
+  { loc: `${SITE_URL}/sitemap-blog.xml`, lastmod: blogIndexLastmod },
+  { loc: DYNAMIC_BLOG_SITEMAP_URL, lastmod: blogIndexLastmod },
 ]);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
