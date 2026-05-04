@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
+import SeoMeta from "@/components/SeoMeta";
 
 const LegalNotices = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-16">
+      <SeoMeta
+        title="Mentions Légales | SupremEnergies"
+        description="Mentions légales du site SupremEnergies : éditeur, hébergeur, propriété intellectuelle."
+        canonical="/mentions-legales"
+        robots="noindex, follow"
+      />
       <div className="container-custom max-w-4xl">
         <div className="bg-white rounded-lg shadow-sm p-8 md:p-12">
           <nav className="mb-8">

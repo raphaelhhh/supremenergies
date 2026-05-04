@@ -75,7 +75,11 @@ const BlogPost = () => {
     "description": post.meta_description || post.excerpt,
     "image": post.image_src,
     "datePublished": post.published_at,
-    "dateModified": post.updated_at,
+    "dateModified": post.updated_at || post.published_at,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://supremenergies.com/blog/${post.slug}`
+    },
     "author": {
       "@type": "Organization",
       "name": "SupremEnergies",
@@ -84,20 +88,39 @@ const BlogPost = () => {
     "publisher": {
       "@type": "Organization",
       "name": "SupremEnergies",
-      "url": "https://supremenergies.com"
+      "url": "https://supremenergies.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://supremenergies.com/favicon.png"
+      }
     }
   };
+
+  const canonicalUrl = `https://supremenergies.com/blog/${post.slug}`;
+  const desc = post.meta_description || post.excerpt;
 
   return (
     <div>
       <Helmet>
         <title>{post.title} | SupremEnergies</title>
-        <meta name="description" content={post.meta_description || post.excerpt} />
-        <link rel="canonical" href={`https://supremenergies.com/blog/${post.slug}`} />
+        <meta name="description" content={desc} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={canonicalUrl} />
+        <link rel="alternate" hrefLang="fr-FR" href={canonicalUrl} />
         <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.meta_description || post.excerpt} />
+        <meta property="og:description" content={desc} />
         <meta property="og:image" content={post.image_src} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta property="og:site_name" content="SupremEnergies" />
+        <meta property="article:published_time" content={post.published_at} />
+        <meta property="article:modified_time" content={post.updated_at || post.published_at} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={desc} />
+        <meta name="twitter:image" content={post.image_src} />
+        <meta name="twitter:site" content="@supremenergies" />
         <script type="application/ld+json">
           {JSON.stringify(blogPostSchema)}
         </script>
@@ -108,6 +131,11 @@ const BlogPost = () => {
         <img
           src={post.image_src}
           alt={post.title}
+          width={1600}
+          height={800}
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
