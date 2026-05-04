@@ -214,6 +214,8 @@ const About = () => {
         </div>
       </section>
 
+      <InternalLinksHub title="Continuez votre découverte" />
+
       {/* CTA Section */}
       <CTA 
         title="Prêt à collaborer avec nous ?"
