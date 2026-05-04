@@ -145,7 +145,6 @@ const blogIndexLastmod = posts.length
 const indexXml = sitemapIndexXml([
   { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: pagesIndexLastmod },
   { loc: `${SITE_URL}/sitemap-blog.xml`, lastmod: blogIndexLastmod },
-  { loc: DYNAMIC_BLOG_SITEMAP_URL, lastmod: blogIndexLastmod },
 ]);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
