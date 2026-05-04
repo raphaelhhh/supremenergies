@@ -11,9 +11,6 @@ const SUPABASE_URL = "https://epeomgifqjbgzyurcnaz.supabase.co";
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwZW9tZ2lmcWpiZ3p5dXJjbmF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5OTUyOTEsImV4cCI6MjA5MTU3MTI5MX0.7WTHMDXIKtK007D_g_z3iHRWGe-K3_RRmDkCIXJWgGQ";
 
-// URL de la edge function qui sert un sitemap blog en temps réel
-// (filet de sécurité entre deux déploiements pour les articles auto-générés)
-const DYNAMIC_BLOG_SITEMAP_URL = `${SUPABASE_URL}/functions/v1/generate-sitemap`;
 
 const ZONE_SLUGS = [
   "paris",
@@ -145,7 +142,6 @@ const blogIndexLastmod = posts.length
 const indexXml = sitemapIndexXml([
   { loc: `${SITE_URL}/sitemap-pages.xml`, lastmod: pagesIndexLastmod },
   { loc: `${SITE_URL}/sitemap-blog.xml`, lastmod: blogIndexLastmod },
-  { loc: DYNAMIC_BLOG_SITEMAP_URL, lastmod: blogIndexLastmod },
 ]);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -157,5 +153,5 @@ writeFileSync(resolve(publicDir, "sitemap-pages.xml"), pagesXml, "utf8");
 writeFileSync(resolve(publicDir, "sitemap-blog.xml"), blogXml, "utf8");
 
 console.log(
-  `[sitemap] index written: 1 static-pages sitemap (${STATIC_URLS.length} URLs) + 1 blog sitemap (${posts.length} posts) + 1 dynamic edge sitemap`,
+  `[sitemap] index written: 1 static-pages sitemap (${STATIC_URLS.length} URLs) + 1 blog sitemap (${posts.length} posts)`,
 );
