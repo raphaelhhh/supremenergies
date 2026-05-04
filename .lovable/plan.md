@@ -1,68 +1,127 @@
-# Plan d'optimisation SEO
+# SEO niveau "référence" : indexation rapide + capture maximale de leads
 
-Audit rapide : la base SEO est déjà solide (Helmet sur la plupart des pages, JSON-LD, sitemap index avec lastmod, robots.txt, prerender). Voici les manques à combler pour pousser le SEO plus loin.
+Le site a déjà : Helmet, JSON-LD, sitemap index, prerender, Cloud Supabase pour le blog auto. Voici ce qui manque pour devenir une **machine à leads** sur Google.
 
-## 1. Combler les pages sans SEO
+## A. Indexation rapide & contenus prioritaires
 
-Trois pages n'ont **aucune balise SEO** (title, description, canonical, robots) :
-- `LegalNotices.tsx` → ajouter Helmet + `noindex, follow` (page utilitaire)
-- `PrivacyPolicy.tsx` → idem `noindex, follow`
-- `TermsOfService.tsx` → idem `noindex, follow`
-- `NotFound.tsx` → Helmet avec `noindex, nofollow` + status 404 hint + lien vers pages clés (sitemap interne pour récupérer le jus SEO)
+### A1. Démultiplier les pages locales (pages "ville × service")
+Aujourd'hui : 6 zones (`/zones/paris`, etc.) + 4 services. Google adore les pages "service + ville" très ciblées (longue traîne, faible concurrence, intention forte).
 
-Bonus : compléter le contenu placeholder de `LegalNotices.tsx` ([NOM DE VOTRE SOCIÉTÉ]…) avec les vraies infos SupremEnergies (depuis la mémoire projet).
+- Créer une route `/services/:service/:ville` (ex : `/services/pompe-a-chaleur/paris`, `/services/isolation-thermique/versailles`) → **24 pages locales** générées dynamiquement à partir de zones × services.
+- Étendre la liste des zones de 6 à ~20 (Boulogne, Nanterre, Saint-Denis OK + Argenteuil, Créteil, Vitry, Aulnay, Sarcelles, Levallois, Issy, Vincennes, Neuilly, Asnières, Colombes, Courbevoie, Rueil…).
+- Total potentiel : ~80 pages géolocalisées indexables (vs ~10 aujourd'hui).
+- Chaque page : H1 unique (`Pompe à chaleur à Paris`), paragraphe local, FAQ locale, JSON-LD `Service + LocalBusiness + FAQPage`, témoignage local, CTA Google Form.
 
-## 2. Uniformiser les meta sociales (OG + Twitter)
+### A2. IndexNow + ping Google/Bing automatique
+- Ajouter une clé IndexNow dans `/public/<key>.txt`.
+- Edge Function `notify-search-engines` appelée à chaque publication d'article blog ou modification du sitemap → ping IndexNow (Bing/Yandex) + ping Google `/ping?sitemap=`.
+- Résultat : nouveaux articles indexés en heures, pas en semaines.
 
-Aujourd'hui incohérent selon les pages :
-- Index : OG complet, **pas de Twitter Card**
-- Services enfants : OG sans `og:image` ni Twitter
-- BlogPost : OG complet mais Twitter manquant
-- Plusieurs pages n'ont pas `og:image` → fallback hero
+### A3. Sitemap enrichi
+- Ajouter `<image:image>` dans le sitemap blog (Google Image SEO).
+- Ajouter `<news:news>` pour les articles publiés < 48h (Google News).
+- Sitemap géographique séparé `sitemap-zones.xml`.
+- Régénération du sitemap déclenchée à chaque insert blog (trigger Supabase + Edge Function existante).
 
-Action : créer un petit composant `<SeoMeta>` (title, description, canonical, OG complet, Twitter `summary_large_image`, robots, locale `fr_FR`) et l'utiliser partout. Garde les JSON-LD existants à part.
+### A4. RSS / Atom feed
+- `/rss.xml` généré côté Edge Function depuis `blog_posts`. Rétro-pingue Feedly/blog directories, signal de fraîcheur pour Google.
 
-## 3. Enrichir les données structurées
+## B. Contenu & autorité (E-E-A-T)
 
-- Ajouter `LocalBusiness` global (déjà sur ZoneLocale, le mettre aussi sur Index/Contact avec `areaServed`, `openingHours`, `telephone`, `priceRange`).
-- Ajouter `BreadcrumbList` (via le composant existant `SeoBreadcrumb`) sur les pages services, blog post, zones — actuellement non utilisé partout.
-- Ajouter `Article` schema sur `BlogPost` (vérifier qu'il a `datePublished`, `dateModified`, `author`, `publisher.logo`).
-- Ajouter `WebSite` + `SearchAction` (sitelinks searchbox) sur l'Index.
+### B1. Pages "piliers" (cluster topical)
+Créer 3 super-guides longs (3000+ mots) qui maillent vers tous les autres :
+- `/guide/maprimerenov-2026` — guide complet avec barème, calculatrice, cas concrets
+- `/guide/pompe-a-chaleur-prix-2026` — comparatif PAC, prix, ROI
+- `/guide/isolation-thermique-guide-complet`
 
-## 4. Performance & Core Web Vitals (impact SEO direct)
+Ces piliers reçoivent les liens internes des articles du blog (déjà auto-générés) → **autorité topique forte**.
 
-- Hero `<img>` : ajouter `fetchpriority="high"`, `loading="eager"`, `decoding="async"`, `width`/`height` explicites pour éviter le CLS.
-- Toutes les autres `<img>` : `loading="lazy"`, `decoding="async"`, dimensions explicites.
-- Préchargement de l'image LCP du Hero via `<link rel="preload" as="image">` (injecté dans Helmet de Index).
-- Vérifier les `alt` (audit rapide sur les images du Hero et des cartes services).
+### B2. Pages "comparatif/calculatrice"
+- `/calculatrices/economie-pompe-a-chaleur` (calcul économies en €/an)
+- `/calculatrices/aides-cee` 
+- Ces pages captent des recherches transactionnelles très qualifiées.
 
-## 5. Maillage interne & accessibilité SEO
+### B3. Pages "Avis & cas clients" structurées
+- `/realisations` avec photos avant/après, ville, type de travaux, montant des aides obtenues.
+- JSON-LD `Project` + `Review` par cas client.
 
-- Ajouter un fil d'Ariane visible (composant `Breadcrumb` existant) en haut de chaque page interne (services, blog, zones, à propos, contact). Améliore le maillage et alimente le `BreadcrumbList`.
-- Vérifier qu'il n'y a qu'un seul `<h1>` par page (audit rapide).
-- Footer : s'assurer que les liens vers les 4 pages services et les zones principales sont présents (boost crawl interne).
+### B4. Auteur / E-E-A-T
+- Page `/equipe` avec auteurs photographiés (nom, qualifications, années d'expérience).
+- Schéma `Person` + lien `author` dans les `BlogPosting` (au lieu d'`Organization`).
 
-## 6. Robots.txt & sitemap
+## C. Maillage interne agressif
 
-- Ajouter `Disallow: /404` et `Disallow: /*?*` (paramètres) si non bloqués.
-- Ajouter une ligne `Host: https://supremenergies.com` (optionnel, ignoré par Google mais utile pour Yandex/Bing).
-- Vérifier que les 3 pages "noindex" (legal/privacy/terms) ne polluent pas le sitemap statique → les retirer de `sitemap-pages.xml` si présentes.
+- **Mega-menu Navbar** avec liens vers tous les services × zones principales.
+- Composant `<RelatedZones>` dans chaque page service.
+- Composant `<RelatedServices>` (existe) à mettre sur **toutes** les pages zones.
+- Footer : section "Nos zones d'intervention" listant toutes les villes (boost crawl).
+- Liens contextuels dans le contenu (auto-générés par mots-clés).
 
-## 7. Détails techniques
+## D. Conversion → leads (l'autre moitié de "référence")
 
-- Préconnect `images.unsplash.com` et le domaine Supabase (utilisé pour avis Google + sitemap dynamique) dans `index.html`.
-- Ajouter `<html lang="fr">` est déjà OK. Ajouter `<meta name="theme-color">` pour mobile.
-- 404 doit aussi servir un vrai status 404 côté hébergeur (Lovable sert la SPA → ajouter au moins `<meta name="prerender-status-code" content="404">` pour les bots).
+### D1. CTAs sticky & contextuels
+- Bouton "Devis gratuit" sticky en bas sur mobile (visible en permanence).
+- Module "Calculateur d'aides en 30 sec" en haut de chaque page service.
+- Pop-up de sortie (exit-intent) sur les pages services avec offre spéciale.
+- Click-to-call WhatsApp / Tel sticky mobile.
 
-## Livrables (ordre d'exécution)
+### D2. Formulaire court inline (vs Google Form externe)
+- Mini-formulaire 3 champs (téléphone, type de travaux, ville) directement intégré, qui POST vers Zapier (déjà utilisé pour la newsletter).
+- Friction divisée par 3 vs Google Form externe → +50-100% de conversion typique.
+- Garde le Google Form en option "devis détaillé".
 
-1. Composant `SeoMeta` réutilisable + appliquer sur toutes les pages
-2. SEO sur Legal/Privacy/Terms/NotFound (noindex)
-3. Remplir vraies infos LegalNotices
-4. Breadcrumb visible + JSON-LD sur services/blog/zones
-5. Optimisations images (Hero priority, lazy ailleurs)
-6. Préconnect + theme-color dans `index.html`
-7. Mise à jour `robots.txt` et nettoyage `sitemap-pages.xml`
-8. Enrichissement JSON-LD (WebSite SearchAction, LocalBusiness sur Contact, Article complet sur BlogPost)
+### D3. Preuve sociale dynamique
+- Bandeau "23 personnes ont demandé un devis cette semaine" (vrai compteur Supabase).
+- Étoiles Google Reviews en haut de chaque page (déjà côté Edge Function `google-reviews`).
+- Logos partenaires/marques installées (Daikin, Atlantic, etc.).
 
-Aucun changement de design, aucun ajout de stat ni mention RGE.
+### D4. Tracking enrichi
+- Événements GTM sur chaque CTA (déjà en place pour Meta Pixel) — étendre à : scroll 50%, scroll 75%, click téléphone, click WhatsApp, formulaire commencé, formulaire envoyé.
+- Permet retargeting fin et optimisation des landing pages.
+
+## E. Performance & technique
+
+### E1. Core Web Vitals
+- Convertir hero image en **AVIF/WebP** + `<picture>` responsive.
+- `srcset` sur toutes les images de cartes services.
+- Lazy-load systématique hors fold, dimensions explicites partout.
+- Audit images Unsplash : héberger localement les 10 images critiques (latence -200ms).
+
+### E2. Préchargement intelligent
+- `<link rel="prefetch">` vers les pages services depuis l'accueil.
+- Code-splitting déjà OK via Vite.
+
+### E3. Schema markup avancé
+- `Breadcrumb` JSON-LD (déjà via composant) → vérifier qu'il est sur **toutes** les pages.
+- `HowTo` schema sur les guides ("comment installer une PAC").
+- `VideoObject` si on ajoute des vidéos témoignages (à prévoir).
+- `Product`/`Offer` schema sur les pages services avec fourchette de prix → prix dans les SERP.
+
+### E4. Hébergement images
+- Les images sur `raw.githubusercontent.com` sont lentes et non optimisées → migrer vers `/public/images/` ou Supabase Storage avec transformation à la volée.
+
+## F. Recommandations off-site (à exécuter par l'utilisateur, hors code)
+
+- Fiche Google Business Profile à 100% (photos, posts hebdo, Q&R).
+- Référencement annuaires : Pages Jaunes, Yelp, Bing Places, Apple Maps.
+- Backlinks via partenariats fournisseurs (Atlantic, Daikin, etc.).
+- Réponse à 100% des avis Google (signal positif fort).
+
+---
+
+## Plan d'exécution (ce que je vais coder maintenant)
+
+Priorité aux gains rapides à fort impact. Je propose d'exécuter dans cet ordre :
+
+1. **Pages locales service × ville** : route dynamique `/services/:service/:ville` + ajout de 14 nouvelles zones + génération automatique au sitemap → +~80 pages indexables.
+2. **IndexNow + ping moteurs** : edge function + clé publique + déclenchement à chaque article publié.
+3. **Sitemap images** dans `sitemap-blog.xml` (regénération via edge function existante) + sitemap-zones séparé.
+4. **Mini-formulaire de capture** réutilisable (3 champs → Zapier) + intégration en haut des pages services et zones, + bouton sticky mobile.
+5. **Mega-menu Navbar** + footer enrichi (toutes les zones).
+6. **Schema avancé** : `Service`+`Offer` avec fourchette de prix, `BreadcrumbList` partout, `Person` auteur sur articles blog (page `/equipe`).
+7. **Page "/realisations"** structurée + 1ère page pilier `/guide/maprimerenov-2026`.
+8. **Performance images** : conversion AVIF locales pour le top 5 d'images les plus vues, lazy partout.
+
+Aucune mention RGE, aucune mention "Lovable" côté UI, pas de stat bar, design existant préservé. Les "Demander un devis" externes restent (Google Form), mais on **ajoute** un mini-formulaire inline pour multiplier les conversions.
+
+Souhaite-tu qu'on lance les 8 étapes en séquence, ou as-tu des priorités différentes (ex : seulement 1+2+4 pour démarrer rapide) ?
