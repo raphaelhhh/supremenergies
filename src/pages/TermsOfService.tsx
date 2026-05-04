@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
+import SeoMeta from "@/components/SeoMeta";
 
 const TermsOfService = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-16">
+      <SeoMeta
+        title="Conditions Générales d'Utilisation | SupremEnergies"
+        description="Conditions Générales d'Utilisation du site SupremEnergies."
+        canonical="/terms"
+        robots="noindex, follow"
+      />
       <div className="container-custom max-w-4xl">
         <div className="bg-white rounded-lg shadow-sm p-8 md:p-12">
           <nav className="mb-8">

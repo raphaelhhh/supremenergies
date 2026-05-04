@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
+import SeoMeta from "@/components/SeoMeta";
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-16">
+      <SeoMeta
+        title="Politique de Confidentialité | SupremEnergies"
+        description="Politique de confidentialité et protection des données personnelles de SupremEnergies (RGPD)."
+        canonical="/privacy"
+        robots="noindex, follow"
+      />
       <div className="container-custom max-w-4xl">
         <div className="bg-white rounded-lg shadow-sm p-8 md:p-12">
           <nav className="mb-8">
