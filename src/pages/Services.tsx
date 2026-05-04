@@ -709,6 +709,21 @@ const Services = () => {
         </div>
       </section>
 
+      <InternalLinksHub
+        title="Pages utiles & ressources"
+        links={[
+          { to: "/services/isolation-thermique", label: "Détail isolation thermique" },
+          { to: "/services/pompe-a-chaleur", label: "Détail pompe à chaleur" },
+          { to: "/services/panneaux-solaires", label: "Détail panneaux solaires" },
+          { to: "/services/renovation-globale", label: "Détail rénovation globale" },
+          { to: "/simulateur-aides", label: "Simuler mes aides 2026" },
+          { to: "/temoignages", label: "Avis clients vérifiés" },
+          { to: "/blog", label: "Blog & guides experts" },
+          { to: "/about", label: "Notre équipe & garanties" },
+          { to: "/devis-gratuit", label: "Devis gratuit en 24h" },
+        ]}
+      />
+
       {/* CTA Section */}
       <CTA 
         title="Démarrez votre projet dès maintenant"
