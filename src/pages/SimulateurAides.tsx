@@ -499,6 +499,19 @@ const SimulateurAides = () => {
         </div>
       </section>
 
+      <InternalLinksHub
+        title="Choisissez votre poste de travaux"
+        subtitle="Découvrez en détail chaque solution éligible aux aides 2026."
+        links={[
+          { to: "/services/isolation-thermique", label: "Isolation thermique", desc: "Combles, murs, planchers" },
+          { to: "/services/pompe-a-chaleur", label: "Pompe à chaleur", desc: "Air/eau, air/air, géothermie" },
+          { to: "/services/panneaux-solaires", label: "Panneaux solaires", desc: "Autoconsommation & revente" },
+          { to: "/services/renovation-globale", label: "Rénovation globale", desc: "Parcours Accompagné" },
+          { to: "/blog", label: "Guides MaPrimeRénov'", desc: "Articles & conseils 2026" },
+          { to: "/devis-gratuit", label: "Demander un devis", desc: "Réponse sous 24h" },
+        ]}
+      />
+
       <CTA
         title="Prêt à concrétiser votre projet ?"
         subtitle="Notre équipe vous accompagne du devis à la fin du chantier, aides comprises."
