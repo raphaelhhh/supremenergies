@@ -163,40 +163,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Zones d'intervention (SEO local) */}
-          <div>
-            <h3 className="text-xl font-bold mb-6 text-white">Zones d'intervention</h3>
-            <ul className="space-y-2 text-sm">
-              {[
-                { slug: "paris", name: "Paris" },
-                { slug: "versailles", name: "Versailles" },
-                { slug: "boulogne-billancourt", name: "Boulogne-Billancourt" },
-                { slug: "saint-denis", name: "Saint-Denis" },
-                { slug: "nanterre", name: "Nanterre" },
-                { slug: "montreuil", name: "Montreuil" },
-                { slug: "argenteuil", name: "Argenteuil" },
-                { slug: "creteil", name: "Créteil" },
-                { slug: "vitry-sur-seine", name: "Vitry-sur-Seine" },
-                { slug: "courbevoie", name: "Courbevoie" },
-                { slug: "asnieres-sur-seine", name: "Asnières" },
-                { slug: "colombes", name: "Colombes" },
-                { slug: "rueil-malmaison", name: "Rueil-Malmaison" },
-                { slug: "issy-les-moulineaux", name: "Issy-les-Moulineaux" },
-                { slug: "levallois-perret", name: "Levallois" },
-                { slug: "neuilly-sur-seine", name: "Neuilly" },
-                { slug: "vincennes", name: "Vincennes" },
-                { slug: "saint-maur-des-fosses", name: "Saint-Maur" },
-                { slug: "noisy-le-grand", name: "Noisy-le-Grand" },
-                { slug: "aulnay-sous-bois", name: "Aulnay-sous-Bois" },
-              ].map((z) => (
-                <li key={z.slug}>
-                  <Link to={`/zones/${z.slug}`} className="text-gray-300 hover:text-white transition-colors">
-                    Rénovation {z.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
 
           {/* Articles récents (SEO maillage interne) */}
           <FooterPopularArticles />
