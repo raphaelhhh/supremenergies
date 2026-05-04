@@ -160,7 +160,18 @@ const Blog = () => {
         </div>
       </section>
 
-      <InternalLinksHub title="Passez de la lecture à l'action" />
+      <InternalLinksHub
+        title="De la lecture à l'action : passez à votre projet"
+        subtitle="Approfondissez avec nos pages dédiées aux travaux de rénovation énergétique."
+        links={[
+          { to: "/services/isolation-thermique", label: "Guide complet de l'isolation thermique", desc: "Combles, murs, planchers et menuiseries" },
+          { to: "/services/pompe-a-chaleur", label: "Tout savoir sur la pompe à chaleur", desc: "PAC air/eau, air/air, géothermique" },
+          { to: "/services/panneaux-solaires", label: "Installation de panneaux solaires en 2026", desc: "Autoconsommation, revente, rentabilité" },
+          { to: "/services/renovation-globale", label: "Rénovation énergétique globale & MaPrimeRénov'", desc: "Bouquet de travaux et Parcours Accompagné" },
+          { to: "/simulateur-aides", label: "Calculer mes aides à la rénovation 2026", desc: "MaPrimeRénov', CEE, Éco-PTZ" },
+          { to: "/devis-gratuit", label: "Demander un devis travaux gratuit", desc: "Réponse personnalisée sous 24h" },
+        ]}
+      />
 
       <CTA 
         title="Un projet de rénovation énergétique ?"
