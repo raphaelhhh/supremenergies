@@ -310,6 +310,24 @@ Articles existants (à ne pas dupliquer) : ${existingTitles.slice(0, 5).join(", 
 
     console.log(`Blog post generated: "${article.title}" (slug: ${slug})`);
 
+    // Notifie les moteurs de recherche (IndexNow + Google/Bing) pour indexation rapide
+    const newUrl = `https://supremenergies.com/blog/${slug}`;
+    try {
+      const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
+      if (SUPABASE_URL) {
+        await fetch(`${SUPABASE_URL}/functions/v1/notify-search-engines`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            urls: [newUrl, "https://supremenergies.com/blog", "https://supremenergies.com/"],
+            pingSitemap: true,
+          }),
+        });
+      }
+    } catch (e) {
+      console.warn("notify-search-engines failed:", e);
+    }
+
     return new Response(
       JSON.stringify({ success: true, post: { title: newPost.title, slug: newPost.slug } }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }

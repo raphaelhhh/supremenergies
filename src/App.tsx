@@ -22,9 +22,11 @@ import PompeAChaleur from "./pages/services/PompeAChaleur";
 import PanneauxSolaires from "./pages/services/PanneauxSolaires";
 import RenovationGlobale from "./pages/services/RenovationGlobale";
 import ZoneLocale from "./pages/ZoneLocale";
+import ServiceCity from "./pages/ServiceCity";
 import SimulateurAides from "./pages/SimulateurAides";
 import Temoignages from "./pages/Temoignages";
 import DevisGratuit from "./pages/DevisGratuit";
+import StickyMobileCTA from "./components/StickyMobileCTA";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +48,8 @@ const App = () => (
                 <Route path="/services/pompe-a-chaleur" element={<PompeAChaleur />} />
                 <Route path="/services/panneaux-solaires" element={<PanneauxSolaires />} />
                 <Route path="/services/renovation-globale" element={<RenovationGlobale />} />
+                {/* SEO local : pages service × ville (longue traîne) */}
+                <Route path="/services/:service/:ville" element={<ServiceCity />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
@@ -61,6 +65,7 @@ const App = () => (
               </Routes>
             </main>
             <Footer />
+            <StickyMobileCTA />
           </div>
         </BrowserRouter>
       </TooltipProvider>

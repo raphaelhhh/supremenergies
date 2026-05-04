@@ -178,4 +178,61 @@ export const zones: Record<string, ZoneData> = {
   },
 };
 
+/** Zones secondaires : pages SEO locales avec contenu adapté mais plus concis */
+type LiteInput = {
+  slug: string;
+  name: string;
+  code: string; // dépt
+  postalCode: string;
+  department: string;
+  population: string;
+  context: string; // 1 phrase contexte parc immobilier
+};
+
+const liteZones: LiteInput[] = [
+  { slug: "argenteuil", name: "Argenteuil", code: "95", postalCode: "95100", department: "Val-d'Oise", population: "110 000 habitants", context: "pavillons des années 50-70 et copropriétés" },
+  { slug: "creteil", name: "Créteil", code: "94", postalCode: "94000", department: "Val-de-Marne", population: "92 000 habitants", context: "grands ensembles, maisons individuelles et copropriétés" },
+  { slug: "vitry-sur-seine", name: "Vitry-sur-Seine", code: "94", postalCode: "94400", department: "Val-de-Marne", population: "95 000 habitants", context: "habitat mixte avec beaucoup de pavillons d'avant-guerre" },
+  { slug: "aulnay-sous-bois", name: "Aulnay-sous-Bois", code: "93", postalCode: "93600", department: "Seine-Saint-Denis", population: "85 000 habitants", context: "zones pavillonnaires étendues et résidences" },
+  { slug: "courbevoie", name: "Courbevoie", code: "92", postalCode: "92400", department: "Hauts-de-Seine", population: "82 000 habitants", context: "appartements en copropriété et quelques maisons de ville" },
+  { slug: "asnieres-sur-seine", name: "Asnières-sur-Seine", code: "92", postalCode: "92600", department: "Hauts-de-Seine", population: "87 000 habitants", context: "immeubles haussmanniens et pavillons fin XIXᵉ" },
+  { slug: "colombes", name: "Colombes", code: "92", postalCode: "92700", department: "Hauts-de-Seine", population: "85 000 habitants", context: "pavillons des années 30 et résidences récentes" },
+  { slug: "rueil-malmaison", name: "Rueil-Malmaison", code: "92", postalCode: "92500", department: "Hauts-de-Seine", population: "80 000 habitants", context: "maisons individuelles, villas et copropriétés haut de gamme" },
+  { slug: "issy-les-moulineaux", name: "Issy-les-Moulineaux", code: "92", postalCode: "92130", department: "Hauts-de-Seine", population: "70 000 habitants", context: "immeubles modernes et pavillons réhabilités" },
+  { slug: "levallois-perret", name: "Levallois-Perret", code: "92", postalCode: "92300", department: "Hauts-de-Seine", population: "65 000 habitants", context: "immeubles haussmanniens et copropriétés denses" },
+  { slug: "neuilly-sur-seine", name: "Neuilly-sur-Seine", code: "92", postalCode: "92200", department: "Hauts-de-Seine", population: "60 000 habitants", context: "hôtels particuliers, immeubles bourgeois et copropriétés" },
+  { slug: "vincennes", name: "Vincennes", code: "94", postalCode: "94300", department: "Val-de-Marne", population: "50 000 habitants", context: "maisons de ville et petits immeubles anciens" },
+  { slug: "saint-maur-des-fosses", name: "Saint-Maur-des-Fossés", code: "94", postalCode: "94100", department: "Val-de-Marne", population: "75 000 habitants", context: "pavillons en bord de Marne et grandes propriétés" },
+  { slug: "noisy-le-grand", name: "Noisy-le-Grand", code: "93", postalCode: "93160", department: "Seine-Saint-Denis", population: "70 000 habitants", context: "résidences récentes, copropriétés et pavillons" },
+];
+
+for (const z of liteZones) {
+  zones[z.slug] = {
+    slug: z.slug,
+    name: z.name,
+    fullName: `${z.name} (${z.code})`,
+    postalCode: z.postalCode,
+    department: z.department,
+    population: z.population,
+    intro: `SupremEnergies intervient à ${z.name} (${z.department}) pour vos projets de rénovation énergétique : installation de pompe à chaleur, isolation thermique (combles, murs, ITE/ITI), panneaux solaires photovoltaïques et rénovation globale. Nous mobilisons toutes les aides 2026 (MaPrimeRénov', CEE, éco-PTZ) pour réduire votre reste à charge.`,
+    housingContext: `Le parc immobilier à ${z.name} se compose principalement de ${z.context}. Nos solutions sont adaptées à chaque typologie : remplacement des chaudières fioul/gaz par pompes à chaleur, isolation des combles perdus, ITE des pavillons et installation de panneaux solaires en autoconsommation.`,
+    localAids: [
+      "MaPrimeRénov' (jusqu'à 11 000 €) selon revenus",
+      "Coup de pouce chauffage et isolation",
+      "Éco-PTZ jusqu'à 50 000 € sans intérêts",
+      "CEE bonifiés pour les travaux énergétiques",
+      "TVA réduite à 5,5%",
+    ],
+    faqs: [
+      { question: `Intervenez-vous rapidement à ${z.name} ?`, answer: `Oui, ${z.name} fait partie de notre zone d'intervention principale. Devis gratuit sous 48h, démarrage des travaux sous 2 à 4 semaines en moyenne.` },
+      { question: `Quelles économies avec une pompe à chaleur à ${z.name} ?`, answer: `Une PAC air/eau permet généralement 50 à 75% d'économies par rapport à un chauffage électrique ou au fioul. Pour une maison de 120 m², l'économie annuelle se situe entre 1 200 et 2 000 €.` },
+      { question: `Combien coûte une isolation des combles à ${z.name} ?`, answer: `Comptez 20 à 60 €/m² selon la technique. Avec MaPrimeRénov' + CEE, le reste à charge peut tomber à moins de 10 €/m² pour les ménages modestes.` },
+      { question: `Toutes les démarches d'aides sont-elles incluses ?`, answer: `Oui, nous nous occupons du montage de votre dossier MaPrimeRénov', des CEE et de toutes les démarches administratives.` },
+    ],
+    testimonialQuote: `Pose d'une pompe à chaleur dans notre maison à ${z.name}. Conseil clair, chantier propre, économies tout de suite visibles.`,
+    testimonialAuthor: `Client SupremEnergies, ${z.name}`,
+  };
+}
+
 export const zoneSlugs = Object.keys(zones);
+
