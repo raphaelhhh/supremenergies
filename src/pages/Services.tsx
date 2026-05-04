@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
 import SectionHeader from "@/components/SectionHeader";
 import CTA from "@/components/CTA";
+import InternalLinksHub from "@/components/InternalLinksHub";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ThermometerSun, Home, Droplets, SunMedium, Building, CheckCircle2, ArrowRight, Waves } from "lucide-react";
