@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import Breadcrumb from "@/components/Breadcrumb";
 import CTA from "@/components/CTA";
+import InternalLinksHub from "@/components/InternalLinksHub";
 import {
   GESTES,
   PROFILE_INFO,
