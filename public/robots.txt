@@ -4,6 +4,11 @@ Allow: /
 # Bloquer les routes privées / techniques
 Disallow: /auth
 Disallow: /admin
+# Bloquer les paramètres d'URL (filtres, tracking) pour éviter le contenu dupliqué
+Disallow: /*?*
 
 # Sitemap index : référence les sous-sitemaps (pages, blog) + le sitemap dynamique
 Sitemap: https://supremenergies.com/sitemap.xml
+
+# Hôte canonique (utile pour Yandex/Bing, ignoré par Google)
+Host: https://supremenergies.com
