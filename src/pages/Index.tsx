@@ -236,7 +236,7 @@ const Index = () => {
         <link rel="alternate" hrefLang="fr-FR" href="https://supremenergies.com/" />
         <link rel="alternate" hrefLang="x-default" href="https://supremenergies.com/" />
         {/* Préchargement de l'image LCP du Hero */}
-        <link rel="preload" as="image" href={heroImage} fetchpriority="high" />
+        <link rel="preload" as="image" href={heroImage} fetchPriority="high" />
         <meta property="og:title" content="Rénovation Énergétique Île-de-France ★ Jusqu'à 11 000€ d'aides 2026" />
         <meta property="og:description" content="Devis gratuit en 48h. Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. Experts en Île-de-France." />
         <meta property="og:url" content="https://supremenergies.com/" />
