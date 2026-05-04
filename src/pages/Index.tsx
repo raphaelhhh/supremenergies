@@ -478,6 +478,11 @@ const Index = () => {
         </div>
       </section>
 
+      <InternalLinksHub
+        title="Découvrez tout l'écosystème SupremEnergies"
+        subtitle="Services, simulateurs, guides et témoignages : tout ce qu'il faut pour réussir votre rénovation énergétique."
+      />
+
       {/* CTA Section */}
       <CTA />
     </div>
