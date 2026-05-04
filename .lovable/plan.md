@@ -1,53 +1,68 @@
-## Objectif
+# Plan d'optimisation SEO
 
-Garantir que le sitemap reste exhaustif, à jour et signalé à Google automatiquement, sans dépendre d'un rebuild manuel.
+Audit rapide : la base SEO est déjà solide (Helmet sur la plupart des pages, JSON-LD, sitemap index avec lastmod, robots.txt, prerender). Voici les manques à combler pour pousser le SEO plus loin.
 
-## Ce qui est déjà bon (à conserver)
+## 1. Combler les pages sans SEO
 
-- `scripts/generate-sitemap.mjs` régénère `public/sitemap.xml` au build avec : 21 pages statiques (toutes les pages services, zones, légales, simulateur, témoignages) + tous les articles `published = true`.
-- Plugin `seoPlugin()` dans `vite.config.ts` qui exécute ce script à chaque `buildStart`.
-- `robots.txt` référence le sitemap.
-- Le sitemap en ligne contient actuellement 40 URLs (21 statiques + 19 articles), conforme à la base.
+Trois pages n'ont **aucune balise SEO** (title, description, canonical, robots) :
+- `LegalNotices.tsx` → ajouter Helmet + `noindex, follow` (page utilitaire)
+- `PrivacyPolicy.tsx` → idem `noindex, follow`
+- `TermsOfService.tsx` → idem `noindex, follow`
+- `NotFound.tsx` → Helmet avec `noindex, nofollow` + status 404 hint + lien vers pages clés (sitemap interne pour récupérer le jus SEO)
 
-## Améliorations à apporter
+Bonus : compléter le contenu placeholder de `LegalNotices.tsx` ([NOM DE VOTRE SOCIÉTÉ]…) avec les vraies infos SupremEnergies (depuis la mémoire projet).
 
-### 1. Notifier Google automatiquement à chaque nouvel article
+## 2. Uniformiser les meta sociales (OG + Twitter)
 
-Modifier `supabase/functions/generate-blog-post/index.ts` : après chaque insertion réussie d'un article (`published = true`), envoyer en parallèle :
+Aujourd'hui incohérent selon les pages :
+- Index : OG complet, **pas de Twitter Card**
+- Services enfants : OG sans `og:image` ni Twitter
+- BlogPost : OG complet mais Twitter manquant
+- Plusieurs pages n'ont pas `og:image` → fallback hero
 
-- Un `GET` vers `https://www.google.com/ping?sitemap=https://supremenergies.com/sitemap.xml`
-- Un `GET` vers `https://www.bing.com/ping?sitemap=https://supremenergies.com/sitemap.xml`
+Action : créer un petit composant `<SeoMeta>` (title, description, canonical, OG complet, Twitter `summary_large_image`, robots, locale `fr_FR`) et l'utiliser partout. Garde les JSON-LD existants à part.
 
-Échecs non bloquants (try/catch + log).
+## 3. Enrichir les données structurées
 
-### 2. Servir aussi le sitemap dynamiquement (filet de sécurité)
+- Ajouter `LocalBusiness` global (déjà sur ZoneLocale, le mettre aussi sur Index/Contact avec `areaServed`, `openingHours`, `telephone`, `priceRange`).
+- Ajouter `BreadcrumbList` (via le composant existant `SeoBreadcrumb`) sur les pages services, blog post, zones — actuellement non utilisé partout.
+- Ajouter `Article` schema sur `BlogPost` (vérifier qu'il a `datePublished`, `dateModified`, `author`, `publisher.logo`).
+- Ajouter `WebSite` + `SearchAction` (sitelinks searchbox) sur l'Index.
 
-L'edge function `generate-sitemap` existe déjà et lit en direct la base. On la garde comme **source de vérité dynamique** accessible via :
-`https://epeomgifqjbgzyurcnaz.supabase.co/functions/v1/generate-sitemap`
+## 4. Performance & Core Web Vitals (impact SEO direct)
 
-Ajouter dans `public/robots.txt` une **seconde ligne `Sitemap:`** pointant vers cette URL. Google accepte plusieurs sitemaps ; cela garantit qu'il voit toujours les derniers articles, même entre deux déploiements Lovable.
+- Hero `<img>` : ajouter `fetchpriority="high"`, `loading="eager"`, `decoding="async"`, `width`/`height` explicites pour éviter le CLS.
+- Toutes les autres `<img>` : `loading="lazy"`, `decoding="async"`, dimensions explicites.
+- Préchargement de l'image LCP du Hero via `<link rel="preload" as="image">` (injecté dans Helmet de Index).
+- Vérifier les `alt` (audit rapide sur les images du Hero et des cartes services).
 
-### 3. Vérification de cohérence (one-shot)
+## 5. Maillage interne & accessibilité SEO
 
-Après déploiement, exécuter une vérification :
+- Ajouter un fil d'Ariane visible (composant `Breadcrumb` existant) en haut de chaque page interne (services, blog, zones, à propos, contact). Améliore le maillage et alimente le `BreadcrumbList`.
+- Vérifier qu'il n'y a qu'un seul `<h1>` par page (audit rapide).
+- Footer : s'assurer que les liens vers les 4 pages services et les zones principales sont présents (boost crawl interne).
 
-- `curl` sur les deux sitemaps
-- compter les `<loc>`
-- comparer avec `select count(*) from blog_posts where published = true` (actuellement 19) + 21 statiques
+## 6. Robots.txt & sitemap
 
-## Détails techniques
+- Ajouter `Disallow: /404` et `Disallow: /*?*` (paramètres) si non bloqués.
+- Ajouter une ligne `Host: https://supremenergies.com` (optionnel, ignoré par Google mais utile pour Yandex/Bing).
+- Vérifier que les 3 pages "noindex" (legal/privacy/terms) ne polluent pas le sitemap statique → les retirer de `sitemap-pages.xml` si présentes.
 
-- L'edge function `generate-sitemap` a déjà CORS, cache-control 1h, et la même liste de pages statiques que le script de build → cohérence garantie.
-- `verify_jwt` doit être désactivé pour cette fonction (accessible publiquement) — à vérifier dans `supabase/config.toml` et corriger si besoin.
-- Aucune migration DB requise.
+## 7. Détails techniques
 
-## Fichiers modifiés
+- Préconnect `images.unsplash.com` et le domaine Supabase (utilisé pour avis Google + sitemap dynamique) dans `index.html`.
+- Ajouter `<html lang="fr">` est déjà OK. Ajouter `<meta name="theme-color">` pour mobile.
+- 404 doit aussi servir un vrai status 404 côté hébergeur (Lovable sert la SPA → ajouter au moins `<meta name="prerender-status-code" content="404">` pour les bots).
 
-- `supabase/functions/generate-blog-post/index.ts` : ajout du ping Google/Bing post-insertion.
-- `public/robots.txt` : ajout d'une seconde ligne `Sitemap:` (URL edge function).
-- `supabase/config.toml` : vérifier `[functions.generate-sitemap] verify_jwt = false` (ajouter si manquant).
+## Livrables (ordre d'exécution)
 
-## Hors périmètre
+1. Composant `SeoMeta` réutilisable + appliquer sur toutes les pages
+2. SEO sur Legal/Privacy/Terms/NotFound (noindex)
+3. Remplir vraies infos LegalNotices
+4. Breadcrumb visible + JSON-LD sur services/blog/zones
+5. Optimisations images (Hero priority, lazy ailleurs)
+6. Préconnect + theme-color dans `index.html`
+7. Mise à jour `robots.txt` et nettoyage `sitemap-pages.xml`
+8. Enrichissement JSON-LD (WebSite SearchAction, LocalBusiness sur Contact, Article complet sur BlogPost)
 
-- Pas de changement de structure du sitemap (déjà conforme schéma 0.9).
-- Pas de sitemap d'images / vidéos (non nécessaire pour l'instant).
+Aucun changement de design, aucun ajout de stat ni mention RGE.
