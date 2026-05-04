@@ -15,12 +15,12 @@ interface InternalLinksHubProps {
 }
 
 const DEFAULT_LINKS: LinkItem[] = [
-  { to: "/services/isolation-thermique", label: "Isolation thermique", desc: "Combles, murs, planchers : -30% de pertes" },
-  { to: "/services/pompe-a-chaleur", label: "Pompe à chaleur", desc: "Divisez vos factures par 3 à 4" },
-  { to: "/services/panneaux-solaires", label: "Panneaux solaires", desc: "Autoconsommation & revente EDF OA" },
-  { to: "/services/renovation-globale", label: "Rénovation globale", desc: "Aides bonifiées jusqu'à 70 000 €" },
-  { to: "/simulateur-aides", label: "Simulateur d'aides 2026", desc: "MaPrimeRénov', CEE, Éco-PTZ en 2 min" },
-  { to: "/blog", label: "Guides & actualités", desc: "Conseils d'experts en rénovation énergétique" },
+  { to: "/services/isolation-thermique", label: "Isolation thermique des combles et murs", desc: "Jusqu'à 30% d'économies de chauffage" },
+  { to: "/services/pompe-a-chaleur", label: "Installation de pompe à chaleur air/eau", desc: "Divisez votre facture de chauffage par 3 à 4" },
+  { to: "/services/panneaux-solaires", label: "Panneaux solaires photovoltaïques en autoconsommation", desc: "Produisez votre électricité, revendez le surplus" },
+  { to: "/services/renovation-globale", label: "Rénovation énergétique globale clé en main", desc: "Aides MaPrimeRénov' bonifiées jusqu'à 70 000 €" },
+  { to: "/simulateur-aides", label: "Simulateur d'aides MaPrimeRénov' 2026", desc: "Estimez vos primes CEE et Éco-PTZ en 2 min" },
+  { to: "/blog", label: "Guides experts en rénovation énergétique", desc: "Conseils, actualités et études de cas" },
 ];
 
 const InternalLinksHub = ({

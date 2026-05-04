@@ -710,17 +710,18 @@ const Services = () => {
       </section>
 
       <InternalLinksHub
-        title="Pages utiles & ressources"
+        title="Approfondissez chaque solution de rénovation énergétique"
+        subtitle="Pages détaillées, simulateur d'aides et avis clients pour préparer vos travaux."
         links={[
-          { to: "/services/isolation-thermique", label: "Détail isolation thermique" },
-          { to: "/services/pompe-a-chaleur", label: "Détail pompe à chaleur" },
-          { to: "/services/panneaux-solaires", label: "Détail panneaux solaires" },
-          { to: "/services/renovation-globale", label: "Détail rénovation globale" },
-          { to: "/simulateur-aides", label: "Simuler mes aides 2026" },
-          { to: "/temoignages", label: "Avis clients vérifiés" },
-          { to: "/blog", label: "Blog & guides experts" },
-          { to: "/about", label: "Notre équipe & garanties" },
-          { to: "/devis-gratuit", label: "Devis gratuit en 24h" },
+          { to: "/services/isolation-thermique", label: "Isolation thermique des combles et murs", desc: "Techniques ITE, ITI, soufflage" },
+          { to: "/services/pompe-a-chaleur", label: "Installation de pompe à chaleur air/eau", desc: "Remplacement chaudière fioul ou gaz" },
+          { to: "/services/panneaux-solaires", label: "Panneaux solaires en autoconsommation", desc: "Photovoltaïque 3 à 9 kWc" },
+          { to: "/services/renovation-globale", label: "Rénovation énergétique globale", desc: "Parcours Accompagné MaPrimeRénov'" },
+          { to: "/simulateur-aides", label: "Simulateur d'aides à la rénovation 2026", desc: "MaPrimeRénov', CEE, Éco-PTZ" },
+          { to: "/temoignages", label: "Avis clients sur nos chantiers", desc: "Témoignages vérifiés de particuliers" },
+          { to: "/blog", label: "Guides experts en économies d'énergie", desc: "Articles & études de cas" },
+          { to: "/about", label: "Notre équipe et nos qualifications", desc: "Garanties et savoir-faire" },
+          { to: "/devis-gratuit", label: "Demander un devis travaux gratuit", desc: "Réponse sous 24h" },
         ]}
       />
 

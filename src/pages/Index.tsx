@@ -479,8 +479,16 @@ const Index = () => {
       </section>
 
       <InternalLinksHub
-        title="Découvrez tout l'écosystème SupremEnergies"
-        subtitle="Services, simulateurs, guides et témoignages : tout ce qu'il faut pour réussir votre rénovation énergétique."
+        title="Explorez nos solutions de rénovation énergétique"
+        subtitle="Services, simulateur d'aides 2026, guides experts et avis clients vérifiés : tout pour réussir vos travaux d'économies d'énergie."
+        links={[
+          { to: "/services/isolation-thermique", label: "Isolation des combles, murs et planchers", desc: "Travaux d'isolation thermique éligibles MaPrimeRénov'" },
+          { to: "/services/pompe-a-chaleur", label: "Pompe à chaleur air/eau et air/air", desc: "Remplacement chaudière fioul ou gaz" },
+          { to: "/services/panneaux-solaires", label: "Panneaux photovoltaïques en autoconsommation", desc: "Solaire résidentiel 3 à 9 kWc, prime EDF OA" },
+          { to: "/services/renovation-globale", label: "Rénovation énergétique globale clé en main", desc: "Parcours Accompagné MaPrimeRénov' jusqu'à 70 000 €" },
+          { to: "/simulateur-aides", label: "Calculer mes aides à la rénovation 2026", desc: "Simulateur MaPrimeRénov', CEE et Éco-PTZ" },
+          { to: "/temoignages", label: "Avis clients sur nos chantiers de rénovation", desc: "Témoignages vérifiés de particuliers" },
+        ]}
       />
 
       {/* CTA Section */}

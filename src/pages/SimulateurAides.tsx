@@ -503,12 +503,12 @@ const SimulateurAides = () => {
         title="Choisissez votre poste de travaux"
         subtitle="Découvrez en détail chaque solution éligible aux aides 2026."
         links={[
-          { to: "/services/isolation-thermique", label: "Isolation thermique", desc: "Combles, murs, planchers" },
-          { to: "/services/pompe-a-chaleur", label: "Pompe à chaleur", desc: "Air/eau, air/air, géothermie" },
-          { to: "/services/panneaux-solaires", label: "Panneaux solaires", desc: "Autoconsommation & revente" },
-          { to: "/services/renovation-globale", label: "Rénovation globale", desc: "Parcours Accompagné" },
-          { to: "/blog", label: "Guides MaPrimeRénov'", desc: "Articles & conseils 2026" },
-          { to: "/devis-gratuit", label: "Demander un devis", desc: "Réponse sous 24h" },
+          { to: "/services/isolation-thermique", label: "Travaux d'isolation thermique éligibles MaPrimeRénov'", desc: "Combles perdus, murs, planchers bas" },
+          { to: "/services/pompe-a-chaleur", label: "Installation de pompe à chaleur subventionnée", desc: "PAC air/eau, air/air et géothermique" },
+          { to: "/services/panneaux-solaires", label: "Panneaux solaires avec prime à l'autoconsommation", desc: "Photovoltaïque résidentiel 3 à 9 kWc" },
+          { to: "/services/renovation-globale", label: "Rénovation globale avec Parcours Accompagné", desc: "Aides bonifiées jusqu'à 70 000 €" },
+          { to: "/blog", label: "Guides MaPrimeRénov' et CEE 2026", desc: "Conseils et actualités sur les aides" },
+          { to: "/devis-gratuit", label: "Demander un devis travaux gratuit", desc: "Réponse personnalisée sous 24h" },
         ]}
       />
 

@@ -214,7 +214,18 @@ const About = () => {
         </div>
       </section>
 
-      <InternalLinksHub title="Continuez votre découverte" />
+      <InternalLinksHub
+        title="Découvrez nos services de rénovation énergétique"
+        subtitle="Une équipe d'experts pour piloter vos travaux d'économies d'énergie de A à Z."
+        links={[
+          { to: "/services", label: "Tous nos services de rénovation énergétique", desc: "Isolation, chauffage, solaire, rénovation globale" },
+          { to: "/services/pompe-a-chaleur", label: "Installation de pompe à chaleur par nos experts", desc: "Étude thermique gratuite et pose certifiée" },
+          { to: "/services/isolation-thermique", label: "Travaux d'isolation thermique des combles", desc: "Reste à charge réduit selon vos revenus" },
+          { to: "/temoignages", label: "Avis clients vérifiés sur nos chantiers", desc: "Plus de 500 projets accompagnés" },
+          { to: "/simulateur-aides", label: "Simuler mes aides MaPrimeRénov' 2026", desc: "Estimation personnalisée en 2 minutes" },
+          { to: "/contact", label: "Contacter un conseiller en rénovation", desc: "Réponse sous 24h ouvrées" },
+        ]}
+      />
 
       {/* CTA Section */}
       <CTA 
