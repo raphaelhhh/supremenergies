@@ -65,6 +65,7 @@ const App = () => (
               </Routes>
             </main>
             <Footer />
+            <StickyMobileCTA />
           </div>
         </BrowserRouter>
       </TooltipProvider>
