@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Hero from "@/components/Hero";
 import BlogCard from "@/components/BlogCard";
 import CTA from "@/components/CTA";
+import InternalLinksHub from "@/components/InternalLinksHub";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
@@ -158,6 +159,8 @@ const Blog = () => {
           )}
         </div>
       </section>
+
+      <InternalLinksHub title="Passez de la lecture à l'action" />
 
       <CTA 
         title="Un projet de rénovation énergétique ?"

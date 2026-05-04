@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
 import SectionHeader from "@/components/SectionHeader";
 import CTA from "@/components/CTA";
+import InternalLinksHub from "@/components/InternalLinksHub";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ThermometerSun, Home, Droplets, SunMedium, Building, CheckCircle2, ArrowRight, Waves } from "lucide-react";
@@ -707,6 +708,21 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      <InternalLinksHub
+        title="Pages utiles & ressources"
+        links={[
+          { to: "/services/isolation-thermique", label: "Détail isolation thermique" },
+          { to: "/services/pompe-a-chaleur", label: "Détail pompe à chaleur" },
+          { to: "/services/panneaux-solaires", label: "Détail panneaux solaires" },
+          { to: "/services/renovation-globale", label: "Détail rénovation globale" },
+          { to: "/simulateur-aides", label: "Simuler mes aides 2026" },
+          { to: "/temoignages", label: "Avis clients vérifiés" },
+          { to: "/blog", label: "Blog & guides experts" },
+          { to: "/about", label: "Notre équipe & garanties" },
+          { to: "/devis-gratuit", label: "Devis gratuit en 24h" },
+        ]}
+      />
 
       {/* CTA Section */}
       <CTA 

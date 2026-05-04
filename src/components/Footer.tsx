@@ -59,7 +59,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Main Content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold mb-6 text-white">SupremEnergies</h3>
@@ -87,42 +87,23 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6 text-white">Liens Rapides</h3>
             <ul className="space-y-3">
-              <li>
-                <Link to="/" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Accueil
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link to="/simulateur-aides" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Simulateur d'aides
-                </Link>
-              </li>
-              <li>
-                <Link to="/temoignages" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Témoignages
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Contact
-                </Link>
-              </li>
+              {[
+                { to: "/", label: "Accueil" },
+                { to: "/services", label: "Tous nos services" },
+                { to: "/simulateur-aides", label: "Simulateur d'aides 2026" },
+                { to: "/devis-gratuit", label: "Devis gratuit" },
+                { to: "/temoignages", label: "Témoignages clients" },
+                { to: "/blog", label: "Blog & guides" },
+                { to: "/about", label: "Qui sommes-nous ?" },
+                { to: "/contact", label: "Nous contacter" },
+              ].map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to} className="text-gray-300 hover:text-white transition-colors flex items-center">
+                    <ArrowRight size={16} className="mr-2 text-supreme-accent" />
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -130,36 +111,22 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6 text-white">Nos Services</h3>
             <ul className="space-y-3">
-              <li>
-                <Link to="/services#isolation" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Isolation Thermique
-                </Link>
-              </li>
-              <li>
-                <Link to="/services#chauffage" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Pompes à Chaleur
-                </Link>
-              </li>
-              <li>
-                <Link to="/services#eau-chaude" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Eau Chaude Sanitaire
-                </Link>
-              </li>
-              <li>
-                <Link to="/services#solaire" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Panneaux Solaires
-                </Link>
-              </li>
-              <li>
-                <Link to="/services#renovation" className="text-gray-300 hover:text-white transition-colors flex items-center">
-                  <ArrowRight size={16} className="mr-2 text-supreme-accent" />
-                  Rénovation Globale
-                </Link>
-              </li>
+              {[
+                { to: "/services/isolation-thermique", label: "Isolation Thermique" },
+                { to: "/services/pompe-a-chaleur", label: "Pompe à Chaleur" },
+                { to: "/services/panneaux-solaires", label: "Panneaux Solaires" },
+                { to: "/services/renovation-globale", label: "Rénovation Globale" },
+                { to: "/services/pompe-a-chaleur/paris", label: "PAC à Paris" },
+                { to: "/services/isolation-thermique/lyon", label: "Isolation à Lyon" },
+                { to: "/services/panneaux-solaires/marseille", label: "Solaire à Marseille" },
+              ].map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to} className="text-gray-300 hover:text-white transition-colors flex items-center">
+                    <ArrowRight size={16} className="mr-2 text-supreme-accent" />
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

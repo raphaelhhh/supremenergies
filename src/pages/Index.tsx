@@ -6,6 +6,7 @@ import ServiceCard from "@/components/ServiceCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import FeatureBox from "@/components/FeatureBox";
 import CTA from "@/components/CTA";
+import InternalLinksHub from "@/components/InternalLinksHub";
 import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target, Waves } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -476,6 +477,11 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <InternalLinksHub
+        title="Découvrez tout l'écosystème SupremEnergies"
+        subtitle="Services, simulateurs, guides et témoignages : tout ce qu'il faut pour réussir votre rénovation énergétique."
+      />
 
       {/* CTA Section */}
       <CTA />

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
 import SectionHeader from "@/components/SectionHeader";
 import CTA from "@/components/CTA";
+import InternalLinksHub from "@/components/InternalLinksHub";
 import { CheckCircle2, Shield, Award, Users, ThumbsUp, Lightbulb } from "lucide-react";
 
 const About = () => {
@@ -212,6 +213,8 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      <InternalLinksHub title="Continuez votre découverte" />
 
       {/* CTA Section */}
       <CTA 
