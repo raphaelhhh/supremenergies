@@ -153,5 +153,5 @@ writeFileSync(resolve(publicDir, "sitemap-pages.xml"), pagesXml, "utf8");
 writeFileSync(resolve(publicDir, "sitemap-blog.xml"), blogXml, "utf8");
 
 console.log(
-  `[sitemap] index written: 1 static-pages sitemap (${STATIC_URLS.length} URLs) + 1 blog sitemap (${posts.length} posts) + 1 dynamic edge sitemap`,
+  `[sitemap] index written: 1 static-pages sitemap (${STATIC_URLS.length} URLs) + 1 blog sitemap (${posts.length} posts)`,
 );
