@@ -74,7 +74,16 @@ const Hero = ({
             <div className="absolute -left-8 bottom-0 w-64 h-64 bg-supreme-secondary/10 rounded-full blur-3xl"></div>
             
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-8 border-white">
-              <img src={imageSrc} alt={imageAlt} className="w-full h-[500px] object-cover" />
+              <img
+                src={imageSrc}
+                alt={imageAlt}
+                width={800}
+                height={500}
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+                className="w-full h-[500px] object-cover"
+              />
               {overlay && <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>}
             </div>
             
