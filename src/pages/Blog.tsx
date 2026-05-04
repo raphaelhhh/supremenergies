@@ -160,6 +160,8 @@ const Blog = () => {
         </div>
       </section>
 
+      <InternalLinksHub title="Passez de la lecture à l'action" />
+
       <CTA 
         title="Un projet de rénovation énergétique ?"
         subtitle="Contactez notre équipe pour un devis gratuit et des conseils personnalisés."
