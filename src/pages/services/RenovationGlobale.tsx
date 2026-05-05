@@ -8,6 +8,7 @@ import RelatedServices from "@/components/RelatedServices";
 import { Building, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import renovationGlobaleHero from "@/assets/renovation-globale-maison.jpg";
 
 const faqItems = [
   { question: "Qu'est-ce que la rénovation globale ?", answer: "La rénovation globale consiste à traiter simultanément tous les postes de déperdition énergétique d'un logement : isolation (combles, murs, fenêtres), chauffage, ventilation. Cette approche intégrée garantit une performance optimale et des économies maximales." },
