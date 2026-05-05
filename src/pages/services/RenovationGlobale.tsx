@@ -8,6 +8,7 @@ import RelatedServices from "@/components/RelatedServices";
 import { Building, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import renovationGlobaleHero from "@/assets/renovation-globale-maison.jpg";
 
 const faqItems = [
   { question: "Qu'est-ce que la rénovation globale ?", answer: "La rénovation globale consiste à traiter simultanément tous les postes de déperdition énergétique d'un logement : isolation (combles, murs, fenêtres), chauffage, ventilation. Cette approche intégrée garantit une performance optimale et des économies maximales." },
@@ -66,8 +67,8 @@ const RenovationGlobale = () => {
         subtitle="Traitez tous les postes de déperdition en un seul chantier et économisez 60 à 80% sur vos factures."
         buttonText="Demander un diagnostic gratuit"
         buttonLink="/contact"
-        imageSrc="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
-        imageAlt="Rénovation énergétique globale d'une maison"
+        imageSrc={renovationGlobaleHero}
+        imageAlt="Maison rénovée énergétiquement avec isolation extérieure et panneaux solaires"
       />
 
       <Breadcrumb items={[{ label: "Services", href: "/services" }, { label: "Rénovation Globale" }]} />
