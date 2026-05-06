@@ -74,16 +74,60 @@ const Hero = ({
             <div className="absolute -left-8 bottom-0 w-64 h-64 bg-supreme-secondary/10 rounded-full blur-3xl"></div>
             
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-8 border-white">
-              <img
-                src={imageSrc}
-                alt={imageAlt}
-                width={800}
-                height={500}
-                fetchPriority="high"
-                loading="eager"
-                decoding="async"
-                className="w-full h-[500px] object-cover"
-              />
+              {(() => {
+                // Match optimized hero variants in /images/hero/{name}-{w}.{ext}
+                const HERO_BASES = [
+                  "energy-label",
+                  "hero-isolation-facade",
+                  "hero-maison-renovation",
+                  "hero-maison-sans-personnes",
+                  "hero-renovation-energetique",
+                  "hero-renovation-realiste",
+                  "renovation-globale-maison",
+                ];
+                const fileName = imageSrc.split("/").pop()?.split("?")[0] ?? "";
+                const baseName = fileName.replace(/\.[a-zA-Z0-9]+$/, "").replace(/-[A-Za-z0-9]{6,}$/, "");
+                const matched = HERO_BASES.find((b) => baseName === b || baseName.startsWith(b));
+                if (matched) {
+                  const widths = matched === "energy-label" || matched === "hero-maison-renovation" || matched === "hero-maison-sans-personnes" || matched === "hero-renovation-realiste" || matched === "renovation-globale-maison"
+                    ? [480, 800, 1200].filter((w) => w <= 1200)
+                    : [480, 800, 1200, 1600];
+                  const buildSet = (ext: string) =>
+                    widths.map((w) => `/images/hero/${matched}-${w}.${ext} ${w}w`).join(", ");
+                  const sizes = "(min-width: 1024px) 50vw, 100vw";
+                  const fallback = `/images/hero/${matched}-${widths.includes(1200) ? 1200 : widths[widths.length - 1]}.jpg`;
+                  return (
+                    <picture>
+                      <source type="image/avif" srcSet={buildSet("avif")} sizes={sizes} />
+                      <source type="image/webp" srcSet={buildSet("webp")} sizes={sizes} />
+                      <img
+                        src={fallback}
+                        srcSet={buildSet("jpg")}
+                        sizes={sizes}
+                        alt={imageAlt}
+                        width={1200}
+                        height={750}
+                        fetchPriority="high"
+                        loading="eager"
+                        decoding="async"
+                        className="w-full h-[500px] object-cover"
+                      />
+                    </picture>
+                  );
+                }
+                return (
+                  <img
+                    src={imageSrc}
+                    alt={imageAlt}
+                    width={800}
+                    height={500}
+                    fetchPriority="high"
+                    loading="eager"
+                    decoding="async"
+                    className="w-full h-[500px] object-cover"
+                  />
+                );
+              })()}
               {overlay && <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>}
             </div>
             
