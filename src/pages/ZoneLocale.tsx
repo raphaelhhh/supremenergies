@@ -59,8 +59,8 @@ const ZoneLocale = () => {
     })),
   };
 
-  const title = `Rénovation énergétique ${zone.name} | Pompe à chaleur, isolation, solaire | SupremEnergies`;
-  const description = `Spécialiste de la rénovation énergétique à ${zone.name} (${zone.postalCode}) : pompe à chaleur, isolation, panneaux solaires. Devis gratuit, aides MaPrimeRénov' 2026.`;
+  const title = `Rénovation énergétique à ${zone.name} (${zone.postalCode})`;
+  const description = `Rénovation énergétique à ${zone.name} (${zone.postalCode}) : pompe à chaleur, isolation, solaire. Devis gratuit, aides MaPrimeRénov' 2026.`;
 
   return (
     <div>
