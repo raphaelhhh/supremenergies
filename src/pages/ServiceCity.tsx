@@ -31,8 +31,8 @@ const ServiceCity = () => {
 
   if (!meta || !zone) return <Navigate to="/services" replace />;
 
-  const title = `${meta.name} à ${zone.name} (${zone.postalCode}) | Devis gratuit | SupremEnergies`;
-  const description = `${meta.name} à ${zone.name} : devis gratuit en 48h, jusqu'à 11 000 € d'aides MaPrimeRénov' 2026. ${meta.intro}`;
+  const title = `${meta.name} à ${zone.name} (${zone.postalCode})`;
+  const description = `${meta.name} à ${zone.name} (${zone.postalCode}) : devis gratuit 48h, jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. Experts en Île-de-France.`;
   const canonical = `${SITE}/services/${meta.slug}/${zone.slug}`;
   const [pMin, pMax] = meta.priceRange.split("-");
 
