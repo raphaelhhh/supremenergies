@@ -51,7 +51,7 @@ const IsolationThermique = () => {
       ]} />
       <Helmet>
         <title>Isolation Thermique en Île-de-France | SupremEnergies</title>
-        <meta name="description" content="Expert en isolation thermique : combles, murs (ITE/ITI), fenêtres, planchers. Réduisez vos factures de 25 à 50%. Devis gratuit, aides MaPrimeRénov' 2026. SupremEnergies, Île-de-France." />
+        <meta name="description" content="Isolation combles, murs (ITE/ITI), fenêtres, planchers. Réduisez vos factures de 25 à 50%. Devis gratuit, aides MaPrimeRénov' 2026." />
         <link rel="canonical" href="https://supremenergies.com/services/isolation-thermique" />
         <meta property="og:title" content="Isolation Thermique en Île-de-France | SupremEnergies" />
         <meta property="og:description" content="Solutions d'isolation thermique pour combles, murs, fenêtres. Devis gratuit, aides financières." />
