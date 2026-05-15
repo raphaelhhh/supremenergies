@@ -1,0 +1,26 @@
+# SupremEnergies
+
+> Spécialiste de la rénovation énergétique en France : pompe à chaleur, panneaux solaires, isolation thermique et rénovation globale. Accompagnement complet pour les aides 2026 (MaPrimeRénov', CEE).
+
+SupremEnergies aide les particuliers à réduire leur facture énergétique grâce à des travaux de rénovation performants et au suivi des aides de l'État. Contact : 01 86 04 68 89.
+
+## Pages
+
+- [Accueil](/): Présentation des services de rénovation énergétique et des aides 2026.
+- [Services](/services): Vue d'ensemble des prestations (PAC, solaire, isolation, rénovation globale).
+- [Pompe à chaleur](/services/pompe-a-chaleur): Installation de PAC air/eau et air/air, aides associées.
+- [Panneaux solaires](/services/panneaux-solaires): Pose de panneaux photovoltaïques et autoconsommation.
+- [Isolation thermique](/services/isolation-thermique): Isolation des combles, murs et planchers.
+- [Rénovation globale](/services/renovation-globale): Bouquet de travaux pour saut de classe énergétique.
+- [Simulateur d'aides](/simulateur-aides): Estimation MaPrimeRénov' et CEE 2026.
+- [Devis gratuit](/devis-gratuit): Demande de devis personnalisé.
+- [Blog](/blog): Articles sur la rénovation énergétique et les aides.
+- [Témoignages](/temoignages): Retours clients vérifiés.
+- [À propos](/about): Présentation de l'entreprise SupremEnergies.
+- [Contact](/contact): Coordonnées et formulaire de contact.
+
+## Optional
+
+- [Mentions légales](/mentions-legales)
+- [Politique de confidentialité](/politique-confidentialite)
+- [CGV](/cgv)
