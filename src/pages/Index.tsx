@@ -230,8 +230,8 @@ const Index = () => {
   return (
     <div>
       <Helmet>
-        <title>Rénovation Énergétique Île-de-France ★ Jusqu'à 11 000€ d'aides 2026</title>
-        <meta name="description" content="✓ Devis gratuit en 48h ✓ Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. Pompe à chaleur, isolation, panneaux solaires. Experts certifiés en Île-de-France. ★ 4.8/5" />
+        <title>Rénovation Énergétique Île-de-France ★ 11 000€ aides</title>
+        <meta name="description" content="Devis gratuit 48h. Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. Pompe à chaleur, isolation, solaire. Experts en Île-de-France." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://supremenergies.com/" />
         <link rel="alternate" hrefLang="fr-FR" href="https://supremenergies.com/" />
