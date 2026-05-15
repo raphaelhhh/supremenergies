@@ -47,10 +47,10 @@ const About = () => {
   return (
     <div>
       <Helmet>
-        <title>SupremEnergies ★ Expert Rénovation Énergétique Île-de-France | +1000 projets</title>
-        <meta name="description" content="✓ +1000 projets réalisés ✓ Garantie décennale. Expert rénovation énergétique en Île-de-France depuis plus de 10 ans. Isolation, pompe à chaleur, solaire." />
+        <title>SupremEnergies ★ Expert Rénovation Énergétique IDF</title>
+        <meta name="description" content="+1000 projets réalisés, garantie décennale. Expert rénovation énergétique Île-de-France : isolation, pompe à chaleur, solaire." />
         <link rel="canonical" href="https://supremenergies.com/about" />
-        <meta property="og:title" content="SupremEnergies ★ Expert Rénovation Énergétique Île-de-France" />
+        <meta property="og:title" content="SupremEnergies ★ Expert Rénovation Énergétique IDF" />
         <meta property="og:description" content="+1000 projets réalisés. Expert en rénovation énergétique en Île-de-France." />
         <meta property="og:url" content="https://supremenergies.com/about" />
         <meta property="og:type" content="website" />
