@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import RelatedArticles from "@/components/RelatedArticles";
 import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 import RelatedServices from "@/components/RelatedServices";
+import RelatedZones from "@/components/RelatedZones";
 import { Building, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -171,6 +172,8 @@ const RenovationGlobale = () => {
       />
 
       <RelatedServices excludeSlug="renovation-globale" title="Découvrez aussi" />
+
+      <RelatedZones serviceSlug="renovation-globale" serviceName="Rénovation globale" />
 
       <CTA title="Prêt à rénover votre logement ?" subtitle="Contactez-nous pour un audit énergétique gratuit et découvrez les aides auxquelles vous avez droit." />
     </div>

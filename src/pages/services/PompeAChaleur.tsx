@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import RelatedArticles from "@/components/RelatedArticles";
 import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 import RelatedServices from "@/components/RelatedServices";
+import RelatedZones from "@/components/RelatedZones";
 import { Home, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -167,6 +168,8 @@ const PompeAChaleur = () => {
       />
 
       <RelatedServices excludeSlug="pompe-a-chaleur" title="Découvrez aussi" />
+
+      <RelatedZones serviceSlug="pompe-a-chaleur" serviceName="Pompe à chaleur" />
 
       <CTA title="Prêt à passer à la pompe à chaleur ?" subtitle="Contactez-nous pour un diagnostic gratuit et découvrez combien vous pouvez économiser." />
     </div>

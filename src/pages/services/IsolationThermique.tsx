@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import RelatedArticles from "@/components/RelatedArticles";
 import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 import RelatedServices from "@/components/RelatedServices";
+import RelatedZones from "@/components/RelatedZones";
 import { ThermometerSun, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -168,6 +169,8 @@ const IsolationThermique = () => {
       />
 
       <RelatedServices excludeSlug="isolation-thermique" title="Découvrez aussi" />
+
+      <RelatedZones serviceSlug="isolation-thermique" serviceName="Isolation thermique" />
 
       <CTA title="Prêt à isoler votre logement ?" subtitle="Contactez-nous pour un diagnostic gratuit et un devis personnalisé. Nos experts vous accompagnent de A à Z." />
     </div>

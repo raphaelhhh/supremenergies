@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import RelatedArticles from "@/components/RelatedArticles";
 import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 import RelatedServices from "@/components/RelatedServices";
+import RelatedZones from "@/components/RelatedZones";
 import { SunMedium, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -171,6 +172,8 @@ const PanneauxSolaires = () => {
       />
 
       <RelatedServices excludeSlug="panneaux-solaires" title="Découvrez aussi" />
+
+      <RelatedZones serviceSlug="panneaux-solaires" serviceName="Panneaux solaires" />
 
       <CTA title="Prêt à produire votre propre énergie ?" subtitle="Contactez-nous pour une étude de faisabilité gratuite et découvrez le potentiel solaire de votre toiture." />
     </div>

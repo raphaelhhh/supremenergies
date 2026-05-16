@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import BlogCard from "@/components/BlogCard";
 import Breadcrumb from "@/components/Breadcrumb";
 import RelatedServices from "@/components/RelatedServices";
+import RelatedZones from "@/components/RelatedZones";
 import { supabase } from "@/integrations/supabase/client";
 
 const BlogPost = () => {
@@ -200,6 +201,11 @@ const BlogPost = () => {
 
       {/* Services associés (maillage interne SEO) */}
       <RelatedServices title="Nos services associés" />
+
+      <RelatedZones
+        title="Nos zones d'intervention"
+        subtitle="Nous accompagnons les particuliers dans toute l'Île-de-France pour leur rénovation énergétique."
+      />
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
