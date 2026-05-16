@@ -54,7 +54,7 @@ const Breadcrumb = ({ items }: BreadcrumbProps) => {
                     {item.label}
                   </span>
                 )}
-                {!isLast && <ChevronRight className="h-3 w-3 mx-1 text-gray-400" />}
+                {!isLast && <ChevronRight className="h-3 w-3 mx-1 text-gray-500" />}
               </li>
             );
           })}
