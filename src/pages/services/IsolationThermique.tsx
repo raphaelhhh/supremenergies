@@ -170,6 +170,8 @@ const IsolationThermique = () => {
 
       <RelatedServices excludeSlug="isolation-thermique" title="Découvrez aussi" />
 
+      <RelatedZones serviceSlug="isolation-thermique" serviceName="Isolation thermique" />
+
       <CTA title="Prêt à isoler votre logement ?" subtitle="Contactez-nous pour un diagnostic gratuit et un devis personnalisé. Nos experts vous accompagnent de A à Z." />
     </div>
   );
