@@ -94,11 +94,11 @@ const Blog = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-12 py-6 bg-white text-lg rounded-xl shadow-sm border-gray-200 focus:border-supreme-primary"
               />
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 h-5 w-5" aria-hidden="true" />
               {searchTerm && (
                 <Button
                   variant="ghost"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-700 hover:text-gray-900"
                   onClick={() => setSearchTerm("")}
                 >
                   Effacer
