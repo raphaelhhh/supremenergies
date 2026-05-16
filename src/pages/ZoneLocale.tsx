@@ -11,6 +11,8 @@ import {
 import Breadcrumb from "@/components/Breadcrumb";
 import CTA from "@/components/CTA";
 import RelatedArticles from "@/components/RelatedArticles";
+import RelatedServices from "@/components/RelatedServices";
+import RelatedZones from "@/components/RelatedZones";
 import { zones } from "@/data/zones";
 
 const QUOTE_FORM = "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header";
