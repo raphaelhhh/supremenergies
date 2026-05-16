@@ -173,6 +173,8 @@ const PanneauxSolaires = () => {
 
       <RelatedServices excludeSlug="panneaux-solaires" title="Découvrez aussi" />
 
+      <RelatedZones serviceSlug="panneaux-solaires" serviceName="Panneaux solaires" />
+
       <CTA title="Prêt à produire votre propre énergie ?" subtitle="Contactez-nous pour une étude de faisabilité gratuite et découvrez le potentiel solaire de votre toiture." />
     </div>
   );
