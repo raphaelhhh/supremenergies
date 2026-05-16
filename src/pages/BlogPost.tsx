@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import BlogCard from "@/components/BlogCard";
 import Breadcrumb from "@/components/Breadcrumb";
 import RelatedServices from "@/components/RelatedServices";
+import RelatedZones from "@/components/RelatedZones";
 import { supabase } from "@/integrations/supabase/client";
 
 const BlogPost = () => {
