@@ -173,6 +173,8 @@ const RenovationGlobale = () => {
 
       <RelatedServices excludeSlug="renovation-globale" title="Découvrez aussi" />
 
+      <RelatedZones serviceSlug="renovation-globale" serviceName="Rénovation globale" />
+
       <CTA title="Prêt à rénover votre logement ?" subtitle="Contactez-nous pour un audit énergétique gratuit et découvrez les aides auxquelles vous avez droit." />
     </div>
   );
