@@ -169,6 +169,8 @@ const PompeAChaleur = () => {
 
       <RelatedServices excludeSlug="pompe-a-chaleur" title="Découvrez aussi" />
 
+      <RelatedZones serviceSlug="pompe-a-chaleur" serviceName="Pompe à chaleur" />
+
       <CTA title="Prêt à passer à la pompe à chaleur ?" subtitle="Contactez-nous pour un diagnostic gratuit et découvrez combien vous pouvez économiser." />
     </div>
   );
