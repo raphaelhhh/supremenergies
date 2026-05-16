@@ -208,6 +208,14 @@ const ZoneLocale = () => {
         </div>
       </section>
 
+      <RelatedServices title={`Nos services à ${zone.name}`} />
+
+      <RelatedZones
+        excludeSlug={zone.slug}
+        title="Autres villes où nous intervenons"
+        subtitle="Explorez nos pages locales pour découvrir nos références et spécificités par ville."
+      />
+
       <RelatedArticles
         keywords={[zone.name, "rénovation", "MaPrimeRénov"]}
         title={`Articles utiles pour ${zone.name}`}
