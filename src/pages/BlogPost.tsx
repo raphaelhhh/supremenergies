@@ -202,6 +202,11 @@ const BlogPost = () => {
       {/* Services associés (maillage interne SEO) */}
       <RelatedServices title="Nos services associés" />
 
+      <RelatedZones
+        title="Nos zones d'intervention"
+        subtitle="Nous accompagnons les particuliers dans toute l'Île-de-France pour leur rénovation énergétique."
+      />
+
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
         <section className="py-12 md:py-16 bg-gray-50">
