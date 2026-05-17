@@ -16,7 +16,7 @@ const Services = () => {
   const eauChaudeRef = useRef<HTMLDivElement>(null);
   const solaireRef = useRef<HTMLDivElement>(null);
   const renovationRef = useRef<HTMLDivElement>(null);
-  const adoucisseurRef = useRef<HTMLDivElement>(null);
+  
   const businessRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
