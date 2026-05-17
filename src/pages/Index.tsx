@@ -7,7 +7,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import FeatureBox from "@/components/FeatureBox";
 import CTA from "@/components/CTA";
 import InternalLinksHub from "@/components/InternalLinksHub";
-import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target, Waves } from "lucide-react";
+import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/energy-label.png";
@@ -54,13 +54,7 @@ const Index = () => {
       link: "/services#eau-chaude",
       imageUrl: "https://github.com/raphaelhhh/supremenergies/raw/main/src/pages/chauffe-eau-electrique-blanc-mince-moderne-mur-beton_241146-2250.avif"
     },
-    {
-      title: "Adoucisseur d'Eau",
-      description: "Protégez vos équipements du calcaire et améliorez la qualité de votre eau pour plus de confort au quotidien.",
-      icon: <Waves size={32} />,
-      link: "/services#adoucisseur",
-      imageUrl: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-    },
+    
     {
       title: "Panneaux Solaires",
       description: "Production d'électricité verte grâce aux panneaux photovoltaïques. Réduisez vos factures et votre empreinte carbone.",

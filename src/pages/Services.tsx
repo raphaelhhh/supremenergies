@@ -7,7 +7,7 @@ import CTA from "@/components/CTA";
 import InternalLinksHub from "@/components/InternalLinksHub";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ThermometerSun, Home, Droplets, SunMedium, Building, CheckCircle2, ArrowRight, Waves } from "lucide-react";
+import { ThermometerSun, Home, Droplets, SunMedium, Building, CheckCircle2, ArrowRight } from "lucide-react";
 
 const Services = () => {
   const location = useLocation();
@@ -16,7 +16,7 @@ const Services = () => {
   const eauChaudeRef = useRef<HTMLDivElement>(null);
   const solaireRef = useRef<HTMLDivElement>(null);
   const renovationRef = useRef<HTMLDivElement>(null);
-  const adoucisseurRef = useRef<HTMLDivElement>(null);
+  
   const businessRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Services = () => {
           "eau-chaude": eauChaudeRef,
           solaire: solaireRef,
           renovation: renovationRef,
-          adoucisseur: adoucisseurRef,
+          
           business: businessRef,
         };
 
@@ -70,7 +70,7 @@ const Services = () => {
             },
             "telephone": "01 86 04 68 89"
           },
-          "serviceType": ["Isolation thermique", "Pompes à chaleur", "Eau chaude sanitaire", "Panneaux solaires", "Rénovation globale", "Adoucisseur d'eau"],
+          "serviceType": ["Isolation thermique", "Pompes à chaleur", "Eau chaude sanitaire", "Panneaux solaires", "Rénovation globale"],
           "areaServed": "Île-de-France",
           "description": "Services de rénovation énergétique pour particuliers et professionnels"
         })}</script>
@@ -97,9 +97,7 @@ const Services = () => {
             <Button asChild variant="ghost" className="text-supreme-primary hover:bg-supreme-primary/10">
               <a href="#eau-chaude">Eau Chaude Sanitaire</a>
             </Button>
-            <Button asChild variant="ghost" className="text-supreme-primary hover:bg-supreme-primary/10">
-              <a href="#adoucisseur">Adoucisseur d'Eau</a>
-            </Button>
+            
             <Button asChild variant="ghost" className="text-supreme-primary hover:bg-supreme-primary/10">
               <a href="#solaire">Panneaux Solaires</a>
             </Button>
@@ -294,66 +292,7 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Adoucisseur d'Eau */}
-      <section ref={adoucisseurRef} id="adoucisseur" className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1 rounded-lg overflow-hidden shadow-xl">
-              <img 
-                src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
-                alt="Adoucisseur d'eau"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="order-1 md:order-2">
-              <div className="flex items-center mb-4">
-                <Waves className="w-8 h-8 text-supreme-primary mr-2" />
-                <h2 className="text-3xl md:text-4xl font-bold text-supreme-primary">Adoucisseur d'Eau</h2>
-              </div>
-              <p className="text-lg mb-6 text-gray-700">
-                Une eau dure peut endommager vos équipements et réduire leur durée de vie. Nos adoucisseurs d'eau éliminent le calcaire pour protéger vos installations et améliorer votre confort au quotidien.
-              </p>
-              <h3 className="text-xl font-semibold mb-4">Nos solutions d'adoucissement incluent :</h3>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start">
-                  <CheckCircle2 className="h-6 w-6 text-supreme-primary mr-2 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-medium">Adoucisseurs à résine</span>
-                    <p className="text-gray-600">Technologie éprouvée pour éliminer efficacement le calcaire de votre eau.</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="h-6 w-6 text-supreme-primary mr-2 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-medium">Protection des équipements</span>
-                    <p className="text-gray-600">Prolongez la durée de vie de vos chauffe-eau, canalisations et électroménager.</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="h-6 w-6 text-supreme-primary mr-2 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-medium">Économies d'énergie</span>
-                    <p className="text-gray-600">Un équipement sans calcaire consomme moins d'énergie pour chauffer l'eau.</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle2 className="h-6 w-6 text-supreme-primary mr-2 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-medium">Installation et maintenance</span>
-                    <p className="text-gray-600">Service complet d'installation, mise en service et entretien régulier.</p>
-                  </div>
-                </li>
-              </ul>
-              <Button asChild className="bg-supreme-primary hover:bg-supreme-primary/90">
-                <Link to="/contact" className="flex items-center gap-2">
-                  Demander un devis
-                  <ArrowRight size={18} />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Panneaux Solaires */}
       <section ref={solaireRef} id="solaire" className="section-padding">
