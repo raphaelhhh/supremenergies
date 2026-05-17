@@ -10,7 +10,7 @@ const PROJECTS = [
   "Isolation thermique",
   "Panneaux solaires",
   "Rénovation globale",
-  "Eau chaude / Adoucisseur",
+  "Eau chaude sanitaire",
   "Je ne sais pas encore",
 ];
 
