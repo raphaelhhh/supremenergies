@@ -222,7 +222,7 @@ const SimulateurAides = () => {
                         <span className="font-medium">Moins de 15 ans</span>
                       </label>
                     </RadioGroup>
-                    <p className="text-xs text-gray-500 mt-2 flex items-start gap-1">
+                    <p className="text-xs text-gray-600 mt-2 flex items-start gap-1">
                       <Info size={12} className="mt-0.5 flex-shrink-0" />
                       MaPrimeRénov' impose un logement de plus de 15 ans (sauf sortie de chauffage fioul/charbon).
                     </p>
@@ -258,14 +258,14 @@ const SimulateurAides = () => {
                         placeholder="75015" maxLength={5} className="mt-2" />
                     </div>
                   </div>
-                  <p className="text-xs text-gray-500 -mt-2">
+                  <p className="text-xs text-gray-600 -mt-2">
                     Région détectée : <span className="font-medium">{region === "idf" ? "Île-de-France" : "Hors Île-de-France"}</span> (déduite du code postal — les plafonds ANAH diffèrent).
                   </p>
                   <div>
                     <Label htmlFor="rfr">Revenu fiscal de référence (€/an)</Label>
                     <Input id="rfr" type="number" min={0} step={1000} value={rfr}
                       onChange={(e) => setRfr(parseInt(e.target.value) || 0)} className="mt-2" placeholder="35 000" />
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-gray-600 mt-1">
                       Indiqué sur votre avis d'imposition 2025 (revenus 2024). Cumul du foyer.
                     </p>
                   </div>
@@ -318,7 +318,7 @@ const SimulateurAides = () => {
                 </p>
                 {(["chauffage", "isolation", "autre"] as const).map((cat) => (
                   <div key={cat} className="mb-5">
-                    <div className="text-xs font-bold uppercase text-gray-500 mb-2">
+                    <div className="text-xs font-bold uppercase text-gray-600 mb-2">
                       {cat === "chauffage" ? "🔥 Chauffage & ECS" : cat === "isolation" ? "🧱 Isolation & menuiseries" : "🧰 Autres"}
                     </div>
                     <div className="space-y-2">
@@ -331,7 +331,7 @@ const SimulateurAides = () => {
                               <Checkbox checked={!!sel} onCheckedChange={() => toggleGeste(g.id)} className="mt-1" />
                               <div className="flex-1 min-w-0">
                                 <div className="font-medium text-sm">{g.label}</div>
-                                {g.description && <div className="text-xs text-gray-500 mt-0.5">{g.description}</div>}
+                                {g.description && <div className="text-xs text-gray-600 mt-0.5">{g.description}</div>}
                                 {isExcluded && (
                                   <div className="text-xs text-orange-600 mt-1 flex items-start gap-1">
                                     <AlertCircle size={12} className="mt-0.5 flex-shrink-0" />
@@ -390,7 +390,7 @@ const SimulateurAides = () => {
                     <Input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="06 XX XX XX XX" className="mt-2" />
                   </div>
                 </div>
-                <p className="text-xs text-gray-500 mt-4">
+                <p className="text-xs text-gray-600 mt-4">
                   Vos données restent confidentielles et ne sont utilisées que pour vous recontacter. Pas de spam.
                 </p>
               </>
@@ -439,7 +439,7 @@ const SimulateurAides = () => {
                         {!g.excluded && (
                           <div className="text-right ml-3 flex-shrink-0">
                             <div className="font-bold text-supreme-primary">{(g.mpr + g.cee).toLocaleString("fr-FR")} €</div>
-                            <div className="text-xs text-gray-500">MPR {g.mpr}€ + CEE {g.cee}€</div>
+                            <div className="text-xs text-gray-600">MPR {g.mpr}€ + CEE {g.cee}€</div>
                           </div>
                         )}
                       </div>
@@ -460,7 +460,7 @@ const SimulateurAides = () => {
                   </div>
                 ))}
 
-                <p className="text-xs text-gray-500 mb-5">
+                <p className="text-xs text-gray-600 mb-5">
                   Estimation calculée selon le barème officiel ANAH 2026 (parcours par geste). Le montant définitif dépend
                   du devis retenu, de la conformité technique des équipements et de l'écrêtement légal (cumul max
                   100% TTC profil Bleu, 90% Jaune, 80% Violet, 50% Rose).
@@ -493,7 +493,7 @@ const SimulateurAides = () => {
             )}
           </div>
 
-          <p className="text-xs text-gray-500 text-center mt-4">
+          <p className="text-xs text-gray-600 text-center mt-4">
             Sources : Guide ANAH 2026, France Rénov', arrêtés du 18/08/2025, 15/12/2025 et 27/12/2025 pour les CEE.
           </p>
         </div>

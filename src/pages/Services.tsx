@@ -573,7 +573,7 @@ const Services = () => {
               <p className="text-gray-600 mb-4">
                 Aide financière de l'État pour la rénovation énergétique, accessible à tous les propriétaires et copropriétés.
               </p>
-              <p className="text-sm text-gray-500 italic">
+              <p className="text-sm text-gray-600 italic">
                 Le montant de l'aide dépend de vos revenus et des économies d'énergie permises par les travaux.
               </p>
             </div>
@@ -584,7 +584,7 @@ const Services = () => {
               <p className="text-gray-600 mb-4">
                 Dispositif obligeant les fournisseurs d'énergie à financer des travaux d'économies d'énergie.
               </p>
-              <p className="text-sm text-gray-500 italic">
+              <p className="text-sm text-gray-600 italic">
                 Primes, prêts bonifiés ou diagnostics gratuits selon les offres des fournisseurs d'énergie.
               </p>
             </div>
@@ -595,7 +595,7 @@ const Services = () => {
               <p className="text-gray-600 mb-4">
                 Prêt sans intérêts pour financer des travaux de rénovation énergétique dans votre logement.
               </p>
-              <p className="text-sm text-gray-500 italic">
+              <p className="text-sm text-gray-600 italic">
                 Jusqu'à 50 000 € remboursables sur 20 ans pour un bouquet de travaux.
               </p>
             </div>
@@ -606,7 +606,7 @@ const Services = () => {
               <p className="text-gray-600 mb-4">
                 TVA à 5,5% pour les travaux d'amélioration énergétique dans les logements achevés depuis plus de 2 ans.
               </p>
-              <p className="text-sm text-gray-500 italic">
+              <p className="text-sm text-gray-600 italic">
                 Applicable directement sur votre facture sans démarche particulière.
               </p>
             </div>
@@ -617,7 +617,7 @@ const Services = () => {
               <p className="text-gray-600 mb-4">
                 Subventions complémentaires proposées par les régions, départements et communes.
               </p>
-              <p className="text-sm text-gray-500 italic">
+              <p className="text-sm text-gray-600 italic">
                 Variables selon les territoires et cumulables avec les aides nationales.
               </p>
             </div>
@@ -628,7 +628,7 @@ const Services = () => {
               <p className="text-gray-600 mb-4">
                 Subventions de l'Agence Nationale de l'Habitat pour les rénovations globales et performantes.
               </p>
-              <p className="text-sm text-gray-500 italic">
+              <p className="text-sm text-gray-600 italic">
                 Jusqu'à 50% du montant des travaux selon les conditions de ressources.
               </p>
             </div>
