@@ -26,7 +26,9 @@ import ServiceCity from "./pages/ServiceCity";
 import SimulateurAides from "./pages/SimulateurAides";
 import Temoignages from "./pages/Temoignages";
 import DevisGratuit from "./pages/DevisGratuit";
+import RegionHautsDeFrance from "./pages/RegionHautsDeFrance";
 import StickyMobileCTA from "./components/StickyMobileCTA";
+import ExitIntentPopup from "./components/ExitIntentPopup";
 
 const queryClient = new QueryClient();
 
