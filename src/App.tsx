@@ -59,6 +59,7 @@ const App = () => (
                 <Route path="/simulateur-aides" element={<SimulateurAides />} />
                 <Route path="/temoignages" element={<Temoignages />} />
                 <Route path="/devis-gratuit" element={<DevisGratuit />} />
+                <Route path="/region/hauts-de-france" element={<RegionHautsDeFrance />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/legal" element={<LegalNotices />} />
