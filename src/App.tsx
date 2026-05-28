@@ -67,7 +67,8 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
-            <Footer />
+            <StickyMobileCTA />
+            <ExitIntentPopup />
             <StickyMobileCTA />
           </div>
         </BrowserRouter>
