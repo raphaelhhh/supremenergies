@@ -264,15 +264,15 @@ const ServiceCity = () => {
         </div>
       </section>
 
-      {/* Maillage interne — autres villes pour ce service */}
+      {/* Maillage interne — autres villes pour ce service (même région) */}
       <section className="py-12 bg-white border-t">
         <div className="container-custom">
           <h2 className="text-xl md:text-2xl font-bold mb-6 text-center">
-            {meta.name} dans d'autres villes d'Île-de-France
+            {meta.name} dans d'autres villes {zone.region === "hauts-de-france" ? "des Hauts-de-France" : "d'Île-de-France"}
           </h2>
           <div className="flex flex-wrap justify-center gap-2">
             {Object.values(zones)
-              .filter((z) => z.slug !== zone.slug)
+              .filter((z) => z.slug !== zone.slug && (z.region ?? "idf") === (zone.region ?? "idf"))
               .slice(0, 14)
               .map((z) => (
                 <Link
@@ -284,6 +284,16 @@ const ServiceCity = () => {
                 </Link>
               ))}
           </div>
+          {zone.region === "hauts-de-france" && (
+            <div className="text-center mt-6">
+              <Link
+                to="/region/hauts-de-france"
+                className="text-sm text-supreme-primary underline hover:no-underline"
+              >
+                Voir toutes nos interventions en Hauts-de-France →
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 
