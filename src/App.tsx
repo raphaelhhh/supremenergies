@@ -26,7 +26,9 @@ import ServiceCity from "./pages/ServiceCity";
 import SimulateurAides from "./pages/SimulateurAides";
 import Temoignages from "./pages/Temoignages";
 import DevisGratuit from "./pages/DevisGratuit";
+import RegionHautsDeFrance from "./pages/RegionHautsDeFrance";
 import StickyMobileCTA from "./components/StickyMobileCTA";
+import ExitIntentPopup from "./components/ExitIntentPopup";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +59,7 @@ const App = () => (
                 <Route path="/simulateur-aides" element={<SimulateurAides />} />
                 <Route path="/temoignages" element={<Temoignages />} />
                 <Route path="/devis-gratuit" element={<DevisGratuit />} />
+                <Route path="/region/hauts-de-france" element={<RegionHautsDeFrance />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/legal" element={<LegalNotices />} />
@@ -64,7 +67,8 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
-            <Footer />
+            <StickyMobileCTA />
+            <ExitIntentPopup />
             <StickyMobileCTA />
           </div>
         </BrowserRouter>

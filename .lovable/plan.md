@@ -1,127 +1,105 @@
-# SEO niveau "référence" : indexation rapide + capture maximale de leads
+# Stratégie Lead Entrant — SupremEnergies (Nord de la France)
 
-Le site a déjà : Helmet, JSON-LD, sitemap index, prerender, Cloud Supabase pour le blog auto. Voici ce qui manque pour devenir une **machine à leads** sur Google.
-
-## A. Indexation rapide & contenus prioritaires
-
-### A1. Démultiplier les pages locales (pages "ville × service")
-Aujourd'hui : 6 zones (`/zones/paris`, etc.) + 4 services. Google adore les pages "service + ville" très ciblées (longue traîne, faible concurrence, intention forte).
-
-- Créer une route `/services/:service/:ville` (ex : `/services/pompe-a-chaleur/paris`, `/services/isolation-thermique/versailles`) → **24 pages locales** générées dynamiquement à partir de zones × services.
-- Étendre la liste des zones de 6 à ~20 (Boulogne, Nanterre, Saint-Denis OK + Argenteuil, Créteil, Vitry, Aulnay, Sarcelles, Levallois, Issy, Vincennes, Neuilly, Asnières, Colombes, Courbevoie, Rueil…).
-- Total potentiel : ~80 pages géolocalisées indexables (vs ~10 aujourd'hui).
-- Chaque page : H1 unique (`Pompe à chaleur à Paris`), paragraphe local, FAQ locale, JSON-LD `Service + LocalBusiness + FAQPage`, témoignage local, CTA Google Form.
-
-### A2. IndexNow + ping Google/Bing automatique
-- Ajouter une clé IndexNow dans `/public/<key>.txt`.
-- Edge Function `notify-search-engines` appelée à chaque publication d'article blog ou modification du sitemap → ping IndexNow (Bing/Yandex) + ping Google `/ping?sitemap=`.
-- Résultat : nouveaux articles indexés en heures, pas en semaines.
-
-### A3. Sitemap enrichi
-- Ajouter `<image:image>` dans le sitemap blog (Google Image SEO).
-- Ajouter `<news:news>` pour les articles publiés < 48h (Google News).
-- Sitemap géographique séparé `sitemap-zones.xml`.
-- Régénération du sitemap déclenchée à chaque insert blog (trigger Supabase + Edge Function existante).
-
-### A4. RSS / Atom feed
-- `/rss.xml` généré côté Edge Function depuis `blog_posts`. Rétro-pingue Feedly/blog directories, signal de fraîcheur pour Google.
-
-## B. Contenu & autorité (E-E-A-T)
-
-### B1. Pages "piliers" (cluster topical)
-Créer 3 super-guides longs (3000+ mots) qui maillent vers tous les autres :
-- `/guide/maprimerenov-2026` — guide complet avec barème, calculatrice, cas concrets
-- `/guide/pompe-a-chaleur-prix-2026` — comparatif PAC, prix, ROI
-- `/guide/isolation-thermique-guide-complet`
-
-Ces piliers reçoivent les liens internes des articles du blog (déjà auto-générés) → **autorité topique forte**.
-
-### B2. Pages "comparatif/calculatrice"
-- `/calculatrices/economie-pompe-a-chaleur` (calcul économies en €/an)
-- `/calculatrices/aides-cee` 
-- Ces pages captent des recherches transactionnelles très qualifiées.
-
-### B3. Pages "Avis & cas clients" structurées
-- `/realisations` avec photos avant/après, ville, type de travaux, montant des aides obtenues.
-- JSON-LD `Project` + `Review` par cas client.
-
-### B4. Auteur / E-E-A-T
-- Page `/equipe` avec auteurs photographiés (nom, qualifications, années d'expérience).
-- Schéma `Person` + lien `author` dans les `BlogPosting` (au lieu d'`Organization`).
-
-## C. Maillage interne agressif
-
-- **Mega-menu Navbar** avec liens vers tous les services × zones principales.
-- Composant `<RelatedZones>` dans chaque page service.
-- Composant `<RelatedServices>` (existe) à mettre sur **toutes** les pages zones.
-- Footer : section "Nos zones d'intervention" listant toutes les villes (boost crawl).
-- Liens contextuels dans le contenu (auto-générés par mots-clés).
-
-## D. Conversion → leads (l'autre moitié de "référence")
-
-### D1. CTAs sticky & contextuels
-- Bouton "Devis gratuit" sticky en bas sur mobile (visible en permanence).
-- Module "Calculateur d'aides en 30 sec" en haut de chaque page service.
-- Pop-up de sortie (exit-intent) sur les pages services avec offre spéciale.
-- Click-to-call WhatsApp / Tel sticky mobile.
-
-### D2. Formulaire court inline (vs Google Form externe)
-- Mini-formulaire 3 champs (téléphone, type de travaux, ville) directement intégré, qui POST vers Zapier (déjà utilisé pour la newsletter).
-- Friction divisée par 3 vs Google Form externe → +50-100% de conversion typique.
-- Garde le Google Form en option "devis détaillé".
-
-### D3. Preuve sociale dynamique
-- Bandeau "23 personnes ont demandé un devis cette semaine" (vrai compteur Supabase).
-- Étoiles Google Reviews en haut de chaque page (déjà côté Edge Function `google-reviews`).
-- Logos partenaires/marques installées (Daikin, Atlantic, etc.).
-
-### D4. Tracking enrichi
-- Événements GTM sur chaque CTA (déjà en place pour Meta Pixel) — étendre à : scroll 50%, scroll 75%, click téléphone, click WhatsApp, formulaire commencé, formulaire envoyé.
-- Permet retargeting fin et optimisation des landing pages.
-
-## E. Performance & technique
-
-### E1. Core Web Vitals
-- Convertir hero image en **AVIF/WebP** + `<picture>` responsive.
-- `srcset` sur toutes les images de cartes services.
-- Lazy-load systématique hors fold, dimensions explicites partout.
-- Audit images Unsplash : héberger localement les 10 images critiques (latence -200ms).
-
-### E2. Préchargement intelligent
-- `<link rel="prefetch">` vers les pages services depuis l'accueil.
-- Code-splitting déjà OK via Vite.
-
-### E3. Schema markup avancé
-- `Breadcrumb` JSON-LD (déjà via composant) → vérifier qu'il est sur **toutes** les pages.
-- `HowTo` schema sur les guides ("comment installer une PAC").
-- `VideoObject` si on ajoute des vidéos témoignages (à prévoir).
-- `Product`/`Offer` schema sur les pages services avec fourchette de prix → prix dans les SERP.
-
-### E4. Hébergement images
-- Les images sur `raw.githubusercontent.com` sont lentes et non optimisées → migrer vers `/public/images/` ou Supabase Storage avec transformation à la volée.
-
-## F. Recommandations off-site (à exécuter par l'utilisateur, hors code)
-
-- Fiche Google Business Profile à 100% (photos, posts hebdo, Q&R).
-- Référencement annuaires : Pages Jaunes, Yelp, Bing Places, Apple Maps.
-- Backlinks via partenariats fournisseurs (Atlantic, Daikin, etc.).
-- Réponse à 100% des avis Google (signal positif fort).
+**Objectif :** 110 leads qualifiés / mois, 0€ budget Ads → tout en organique.
+**Leviers :** SEO local hyper-ciblé Nord + Lead magnets + Conversion site.
 
 ---
 
-## Plan d'exécution (ce que je vais coder maintenant)
+## 1. SEO local Nord (le plus gros levier de volume)
 
-Priorité aux gains rapides à fort impact. Je propose d'exécuter dans cet ordre :
+### 1.1 Pages services × villes Nord
+Créer une matrice de pages locales optimisées sur les 15 villes les plus peuplées du Nord/Pas-de-Calais/Somme :
+Lille, Roubaix, Tourcoing, Dunkerque, Villeneuve-d'Ascq, Calais, Arras, Valenciennes, Douai, Lens, Boulogne-sur-Mer, Amiens, Béthune, Cambrai, Maubeuge.
 
-1. **Pages locales service × ville** : route dynamique `/services/:service/:ville` + ajout de 14 nouvelles zones + génération automatique au sitemap → +~80 pages indexables.
-2. **IndexNow + ping moteurs** : edge function + clé publique + déclenchement à chaque article publié.
-3. **Sitemap images** dans `sitemap-blog.xml` (regénération via edge function existante) + sitemap-zones séparé.
-4. **Mini-formulaire de capture** réutilisable (3 champs → Zapier) + intégration en haut des pages services et zones, + bouton sticky mobile.
-5. **Mega-menu Navbar** + footer enrichi (toutes les zones).
-6. **Schema avancé** : `Service`+`Offer` avec fourchette de prix, `BreadcrumbList` partout, `Person` auteur sur articles blog (page `/equipe`).
-7. **Page "/realisations"** structurée + 1ère page pilier `/guide/maprimerenov-2026`.
-8. **Performance images** : conversion AVIF locales pour le top 5 d'images les plus vues, lazy partout.
+4 services × 15 villes = **60 nouvelles pages** :
+- `/pompe-a-chaleur/[ville]`
+- `/panneaux-solaires/[ville]`
+- `/isolation-thermique/[ville]`
+- `/renovation-globale/[ville]`
 
-Aucune mention RGE, aucune mention "Lovable" côté UI, pas de stat bar, design existant préservé. Les "Demander un devis" externes restent (Google Form), mais on **ajoute** un mini-formulaire inline pour multiplier les conversions.
+Chaque page : H1 ciblé, contenu local (climat, aides régionales Hauts-de-France, témoignages locaux si dispo), JSON-LD `LocalBusiness` + `Service`, CTA devis, FAQ locale.
 
-Souhaite-tu qu'on lance les 8 étapes en séquence, ou as-tu des priorités différentes (ex : seulement 1+2+4 pour démarrer rapide) ?
+### 1.2 Hub Hauts-de-France
+- Nouvelle page `/region/hauts-de-france` (pivot SEO)
+- Liens internes vers les 60 pages villes
+- Mise à jour `src/data/zones.ts` + sitemap
+
+### 1.3 Booster le blog automatique existant
+- Augmenter cadence (1/2 jours au lieu de 3) sur des sujets Nord/aides 2026
+- 20 articles "money keywords" priorisés (ex : *"prix pompe à chaleur Lille"*, *"aide rénovation Hauts-de-France 2026"*)
+
+### 1.4 Google Business Profile (action utilisateur)
+GBP optimisé Lille + posts hebdo + collecte d'avis = canal local n°1 gratuit.
+
+---
+
+## 2. Lead Magnets (conversion visiteurs → leads)
+
+### 2.1 Simulateur d'aides amélioré
+La page `/simulateur-aides` existe. L'enrichir :
+- Capture email **obligatoire** pour recevoir le résultat détaillé en PDF
+- Génération PDF personnalisée via Edge Function (Lovable AI)
+- Envoi auto par email (Resend ou Brevo connector)
+- Lead poussé dans Zapier comme les autres
+
+### 2.2 Guide PDF téléchargeable
+- "Guide 2026 : 11 000€ d'aides rénovation énergétique dans le Nord"
+- Landing dédiée `/guide-aides-renovation-nord`
+- Formulaire email + tel → PDF par email + lead Zapier
+
+### 2.3 Quiz éligibilité 2 min
+- Composant `/eligibilite` : 5 questions (type logement, revenus, ville, projet, propriétaire)
+- Affichage du montant d'aides estimé + capture lead
+
+---
+
+## 3. Conversion (augmenter le taux du trafic existant)
+
+- **Exit-intent popup** sur les pages services (offre simulateur)
+- **Sticky banner desktop** "Estimez vos aides en 2 min" (déjà mobile via `StickyMobileCTA`)
+- **Preuve sociale dynamique** : afficher avis Google récents (edge function `google-reviews` déjà en place) sur Home + pages villes
+- **A/B sur le Hero** : tester promesse "Devis 48h" vs "Jusqu'à 11 000€ d'aides"
+
+---
+
+## 4. Tracking & itération
+
+- Évènements GTM/Meta Pixel sur : ouverture simulateur, complétion, download guide, soumission formulaire
+- Dashboard Supabase simple : leads/jour, source (page d'entrée), taux conversion
+- Revue mensuelle des top pages (Semrush + GSC)
+
+---
+
+## Phasage suggéré
+
+| Phase | Durée | Livrables | Impact attendu |
+|---|---|---|---|
+| **1** | Cette session | Simulateur avec capture email + PDF + Zapier, popup exit-intent, hub Hauts-de-France | +15 leads/mois |
+| **2** | Session suivante | 60 pages services × villes Nord générées dynamiquement | +60 leads/mois (3-6 mois SEO) |
+| **3** | Session suivante | Guide PDF + landing + quiz éligibilité | +25 leads/mois |
+| **4** | Continu | Accélération blog + GBP + avis | +10 leads/mois |
+
+**Total visé : ~110 leads/mois à 6 mois.**
+
+---
+
+## Détails techniques
+
+- **Pages villes** : route dynamique `/[service]/[ville]` (pattern existant `ServiceCity.tsx` à étendre), data depuis `src/data/zones.ts` enrichi
+- **PDF simulateur** : edge function `generate-aides-pdf` (Lovable AI Gateway pour la rédaction, `pdf-lib` pour le rendu)
+- **Email** : connector Brevo (déjà documenté) ou Resend selon préférence
+- **Sitemap** : régénération via `scripts/generate-sitemap.mjs` après création des pages
+- **SEO** : `react-helmet-async` + JSON-LD `LocalBusiness` avec `areaServed` = ville
+
+---
+
+## Ce que je propose de faire en premier
+
+**Phase 1 uniquement** dans la prochaine session de build :
+1. Simulateur d'aides → capture email + génération PDF + envoi auto + lead Zapier
+2. Popup exit-intent sur pages services
+3. Hub `/region/hauts-de-france` + maillage interne
+
+Phases 2-4 livrées dans des sessions suivantes pour rester focus.
+
+Confirme-tu qu'on démarre par la **Phase 1** ? Ou tu préfères qu'on commence par les **60 pages villes Nord** (Phase 2, plus gros impact volume mais SEO long terme) ?

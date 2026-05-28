@@ -12,7 +12,7 @@ const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwZW9tZ2lmcWpiZ3p5dXJjbmF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5OTUyOTEsImV4cCI6MjA5MTU3MTI5MX0.7WTHMDXIKtK007D_g_z3iHRWGe-K3_RRmDkCIXJWgGQ";
 
 
-const ZONE_SLUGS = [
+const ZONE_SLUGS_IDF = [
   "paris",
   "versailles",
   "boulogne-billancourt",
@@ -21,11 +21,37 @@ const ZONE_SLUGS = [
   "montreuil",
 ];
 
+const ZONE_SLUGS_NORD = [
+  "lille",
+  "roubaix",
+  "tourcoing",
+  "dunkerque",
+  "villeneuve-d-ascq",
+  "calais",
+  "arras",
+  "valenciennes",
+  "douai",
+  "lens",
+  "boulogne-sur-mer",
+  "amiens",
+  "bethune",
+  "cambrai",
+  "maubeuge",
+];
+
+const SERVICE_SLUGS = [
+  "pompe-a-chaleur",
+  "isolation-thermique",
+  "panneaux-solaires",
+  "renovation-globale",
+];
+
 // IMPORTANT : lastmod doit refléter la VRAIE date de dernière modification
 // éditoriale de la page. Mettre `today` partout dégrade la confiance de Google.
 // Quand tu modifies réellement le contenu d'une page, mets sa date à jour ici.
-const STATIC_PAGES_LAST_REVIEW = "2026-05-03"; // dernière revue SEO globale
-const ZONES_LAST_REVIEW = "2026-04-15";
+const STATIC_PAGES_LAST_REVIEW = "2026-05-28"; // dernière revue SEO globale
+const ZONES_LAST_REVIEW = "2026-05-28";
+const SERVICE_CITY_LAST_REVIEW = "2026-05-28";
 const LEGAL_LAST_REVIEW = "2026-01-10";
 
 const STATIC_URLS = [
@@ -41,15 +67,25 @@ const STATIC_URLS = [
   { loc: "/blog", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "weekly", priority: "0.7" },
   { loc: "/contact", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.8" },
   { loc: "/devis-gratuit", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
+  { loc: "/region/hauts-de-france", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
   { loc: "/mentions-legales", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   { loc: "/privacy", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   { loc: "/terms", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
-  ...ZONE_SLUGS.map((slug) => ({
+  ...[...ZONE_SLUGS_IDF, ...ZONE_SLUGS_NORD].map((slug) => ({
     loc: `/zones/${slug}`,
     lastmod: ZONES_LAST_REVIEW,
     changefreq: "monthly",
-    priority: "0.8",
+    priority: "0.7",
   })),
+  // Pages service × ville (longue traîne SEO — 4 services × villes)
+  ...SERVICE_SLUGS.flatMap((service) =>
+    [...ZONE_SLUGS_IDF, ...ZONE_SLUGS_NORD].map((ville) => ({
+      loc: `/services/${service}/${ville}`,
+      lastmod: SERVICE_CITY_LAST_REVIEW,
+      changefreq: "monthly",
+      priority: "0.8",
+    })),
+  ),
 ];
 
 // Pour le blog : on utilise le timestamp ISO complet (W3C datetime), plus précis
