@@ -1,3 +1,5 @@
+export type ZoneRegion = "idf" | "hauts-de-france";
+
 export interface ZoneData {
   slug: string;
   name: string;
@@ -11,7 +13,9 @@ export interface ZoneData {
   testimonialQuote: string;
   testimonialAuthor: string;
   population: string;
+  region?: ZoneRegion;
 }
+
 
 export const zones: Record<string, ZoneData> = {
   paris: {
