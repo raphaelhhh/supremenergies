@@ -150,7 +150,7 @@ const Temoignages = () => {
       }
     : null;
 
-  const title = "Témoignages clients SupremEnergies | Avis Google rénovation énergétique";
+  const title = "Témoignages clients SupremEnergies | Avis Google rénovation";
   const description = `Découvrez ${displayCount || "nos"} avis clients (Google + témoignages) en Île-de-France : pompes à chaleur, isolation, panneaux solaires. Note moyenne ${blendedRating}/5.`;
 
   return (
@@ -204,7 +204,7 @@ const Temoignages = () => {
               <div className="flex items-center gap-3">
                 <img
                   src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png"
-                  alt="Google"
+                  alt="Logo Google"
                   className="w-7 h-7"
                   loading="lazy"
                 />

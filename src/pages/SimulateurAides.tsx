@@ -128,8 +128,8 @@ const SimulateurAides = () => {
   const profInfo = PROFILE_INFO[profile];
   const totalSteps = 5;
 
-  const title = "Simulateur MaPrimeRénov' 2026 — Barème officiel ANAH | SupremEnergies";
-  const description = "Estimez précisément vos aides 2026 (MaPrimeRénov' + CEE) selon le barème officiel ANAH. Calcul automatique de votre profil bleu/jaune/violet/rose en 2 minutes.";
+  const title = "Simulateur MaPrimeRénov' 2026 — Barème ANAH | SupremEnergies";
+  const description = "Estimez vos aides 2026 (MaPrimeRénov' + CEE) selon le barème ANAH. Calcul de votre profil bleu/jaune/violet/rose en 2 minutes.";
 
   return (
     <div>
