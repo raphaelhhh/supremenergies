@@ -37,6 +37,23 @@ const ZONE_SLUGS_NORD = [
   "bethune",
   "cambrai",
   "maubeuge",
+  "beauvais",
+  "compiegne",
+  "creil",
+  "saint-quentin",
+  "soissons",
+  "laon",
+  "abbeville",
+  "hazebrouck",
+];
+
+const ZONE_SLUGS_IDF_EXT = [
+  "cergy",
+  "evry-courcouronnes",
+  "meaux",
+  "melun",
+  "mantes-la-jolie",
+  "pontoise",
 ];
 
 const SERVICE_SLUGS = [
@@ -68,10 +85,11 @@ const STATIC_URLS = [
   { loc: "/contact", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.8" },
   { loc: "/devis-gratuit", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
   { loc: "/region/hauts-de-france", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
+  { loc: "/aides-renovation-2026", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.95" },
   { loc: "/mentions-legales", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   { loc: "/privacy", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   { loc: "/terms", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
-  ...[...ZONE_SLUGS_IDF, ...ZONE_SLUGS_NORD].map((slug) => ({
+  ...[...ZONE_SLUGS_IDF, ...ZONE_SLUGS_NORD, ...ZONE_SLUGS_IDF_EXT].map((slug) => ({
     loc: `/zones/${slug}`,
     lastmod: ZONES_LAST_REVIEW,
     changefreq: "monthly",
@@ -79,7 +97,7 @@ const STATIC_URLS = [
   })),
   // Pages service × ville (longue traîne SEO — 4 services × villes)
   ...SERVICE_SLUGS.flatMap((service) =>
-    [...ZONE_SLUGS_IDF, ...ZONE_SLUGS_NORD].map((ville) => ({
+    [...ZONE_SLUGS_IDF, ...ZONE_SLUGS_NORD, ...ZONE_SLUGS_IDF_EXT].map((ville) => ({
       loc: `/services/${service}/${ville}`,
       lastmod: SERVICE_CITY_LAST_REVIEW,
       changefreq: "monthly",
