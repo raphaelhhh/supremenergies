@@ -169,6 +169,19 @@
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="preconnect" href="https://epeomgifqjbgzyurcnaz.supabase.co" crossorigin>
     <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
+
+    <!-- LCP preload: hero image (homepage) — desktop AVIF variant, only loaded on lg+ -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/hero/energy-label-1200.avif"
+      type="image/avif"
+      imagesrcset="/images/hero/energy-label-480.avif 480w, /images/hero/energy-label-800.avif 800w, /images/hero/energy-label-1200.avif 1200w"
+      imagesizes="(min-width: 1024px) 50vw, 100vw"
+      fetchpriority="high"
+      media="(min-width: 1024px)"
+    />
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <meta property="og:title" content="SupremEnergies — Rénovation énergétique en Île-de-France">
   <meta name="twitter:title" content="SupremEnergies — Rénovation énergétique en Île-de-France">

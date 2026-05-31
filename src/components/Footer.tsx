@@ -91,6 +91,7 @@ const Footer = () => {
                 { to: "/", label: "Accueil" },
                 { to: "/services", label: "Tous nos services" },
                 { to: "/simulateur-aides", label: "Simulateur d'aides 2026" },
+                { to: "/aides-renovation-2026", label: "Guide aides 2026" },
                 { to: "/devis-gratuit", label: "Devis gratuit" },
                 { to: "/temoignages", label: "Témoignages clients" },
                 { to: "/blog", label: "Blog & guides" },

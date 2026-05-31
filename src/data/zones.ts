@@ -227,6 +227,21 @@ const liteZones: LiteInput[] = [
   { slug: "bethune", name: "Béthune", code: "62", postalCode: "62400", department: "Pas-de-Calais", population: "25 000 habitants", context: "maisons de ville reconstruites, corons et pavillons individuels", region: "hauts-de-france" },
   { slug: "cambrai", name: "Cambrai", code: "59", postalCode: "59400", department: "Nord", population: "32 000 habitants", context: "maisons de centre-ville anciennes et pavillons des années 60-70", region: "hauts-de-france" },
   { slug: "maubeuge", name: "Maubeuge", code: "59", postalCode: "59600", department: "Nord", population: "30 000 habitants", context: "maisons reconstruites d'après-guerre, pavillons et logements collectifs", region: "hauts-de-france" },
+  { slug: "beauvais", name: "Beauvais", code: "60", postalCode: "60000", department: "Oise", population: "57 000 habitants", context: "maisons en pierre et pavillons de banlieue d'après-guerre", region: "hauts-de-france" },
+  { slug: "compiegne", name: "Compiègne", code: "60", postalCode: "60200", department: "Oise", population: "41 000 habitants", context: "hôtels particuliers du centre, maisons de ville et pavillons individuels", region: "hauts-de-france" },
+  { slug: "creil", name: "Creil", code: "60", postalCode: "60100", department: "Oise", population: "36 000 habitants", context: "logements collectifs, maisons ouvrières et pavillons rénovés", region: "hauts-de-france" },
+  { slug: "saint-quentin", name: "Saint-Quentin", code: "02", postalCode: "02100", department: "Aisne", population: "53 000 habitants", context: "maisons de ville art déco, pavillons et copropriétés du centre", region: "hauts-de-france" },
+  { slug: "soissons", name: "Soissons", code: "02", postalCode: "02200", department: "Aisne", population: "28 000 habitants", context: "maisons reconstruites après 1918 et pavillons individuels", region: "hauts-de-france" },
+  { slug: "laon", name: "Laon", code: "02", postalCode: "02000", department: "Aisne", population: "25 000 habitants", context: "maisons médiévales de la ville haute et pavillons de la ville basse", region: "hauts-de-france" },
+  { slug: "abbeville", name: "Abbeville", code: "80", postalCode: "80100", department: "Somme", population: "23 000 habitants", context: "maisons picardes en brique et pavillons proches de la baie de Somme", region: "hauts-de-france" },
+  { slug: "hazebrouck", name: "Hazebrouck", code: "59", postalCode: "59190", department: "Nord", population: "22 000 habitants", context: "maisons flamandes en brique rouge et pavillons individuels", region: "hauts-de-france" },
+  // Île-de-France complément longue traîne
+  { slug: "cergy", name: "Cergy", code: "95", postalCode: "95000", department: "Val-d'Oise", population: "67 000 habitants", context: "résidences des années 80, maisons de ville et copropriétés récentes", region: "idf" },
+  { slug: "evry-courcouronnes", name: "Évry-Courcouronnes", code: "91", postalCode: "91000", department: "Essonne", population: "67 000 habitants", context: "grands ensembles, pavillons et résidences mixtes", region: "idf" },
+  { slug: "meaux", name: "Meaux", code: "77", postalCode: "77100", department: "Seine-et-Marne", population: "55 000 habitants", context: "maisons de ville anciennes, pavillons et résidences récentes", region: "idf" },
+  { slug: "melun", name: "Melun", code: "77", postalCode: "77000", department: "Seine-et-Marne", population: "41 000 habitants", context: "maisons de centre-ville, pavillons et copropriétés en bord de Seine", region: "idf" },
+  { slug: "mantes-la-jolie", name: "Mantes-la-Jolie", code: "78", postalCode: "78200", department: "Yvelines", population: "45 000 habitants", context: "pavillons, grands ensembles rénovés et maisons de ville", region: "idf" },
+  { slug: "pontoise", name: "Pontoise", code: "95", postalCode: "95000", department: "Val-d'Oise", population: "31 000 habitants", context: "maisons anciennes en pierre, pavillons et résidences", region: "idf" },
 ];
 
 for (const z of liteZones) {

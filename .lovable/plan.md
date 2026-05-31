@@ -1,105 +1,76 @@
-# Stratégie Lead Entrant — SupremEnergies (Nord de la France)
 
-**Objectif :** 110 leads qualifiés / mois, 0€ budget Ads → tout en organique.
-**Leviers :** SEO local hyper-ciblé Nord + Lead magnets + Conversion site.
+# Plan : devenir n°1 SEO local et générer du lead entrant
 
----
+## Constat actuel (audit rapide)
 
-## 1. SEO local Nord (le plus gros levier de volume)
+- **Semrush (FR)** : 1 mot-clé positionné, ~34 visites/mo estimées. Site jeune, autorité quasi nulle → la priorité est la **longue traîne locale** (forte intention, faible difficulté).
+- **Analytics** : 18 visiteurs / 36 vues sur 7 jours, bounce 76%, sessions surtout sur `/` → les pages locales et blog ne convertissent pas encore le trafic.
+- **SEO findings restants (Lighthouse)** : LCP lent + contraste insuffisant — bloquent le score de la version publiée.
+- **Atouts déjà en place** : 121 URLs au sitemap, hub Hauts-de-France, exit-intent, JSON-LD, simulateur d'aides, blog auto IA.
 
-### 1.1 Pages services × villes Nord
-Créer une matrice de pages locales optimisées sur les 15 villes les plus peuplées du Nord/Pas-de-Calais/Somme :
-Lille, Roubaix, Tourcoing, Dunkerque, Villeneuve-d'Ascq, Calais, Arras, Valenciennes, Douai, Lens, Boulogne-sur-Mer, Amiens, Béthune, Cambrai, Maubeuge.
+## Objectif
 
-4 services × 15 villes = **60 nouvelles pages** :
-- `/pompe-a-chaleur/[ville]`
-- `/panneaux-solaires/[ville]`
-- `/isolation-thermique/[ville]`
-- `/renovation-globale/[ville]`
-
-Chaque page : H1 ciblé, contenu local (climat, aides régionales Hauts-de-France, témoignages locaux si dispo), JSON-LD `LocalBusiness` + `Service`, CTA devis, FAQ locale.
-
-### 1.2 Hub Hauts-de-France
-- Nouvelle page `/region/hauts-de-france` (pivot SEO)
-- Liens internes vers les 60 pages villes
-- Mise à jour `src/data/zones.ts` + sitemap
-
-### 1.3 Booster le blog automatique existant
-- Augmenter cadence (1/2 jours au lieu de 3) sur des sujets Nord/aides 2026
-- 20 articles "money keywords" priorisés (ex : *"prix pompe à chaleur Lille"*, *"aide rénovation Hauts-de-France 2026"*)
-
-### 1.4 Google Business Profile (action utilisateur)
-GBP optimisé Lille + posts hebdo + collecte d'avis = canal local n°1 gratuit.
+Passer de ~30 à **500+ visites organiques/mois sous 90 jours** et transformer ce trafic en **≥110 leads/mois** via 3 leviers : performance technique, contenu géo-ciblé, conversion.
 
 ---
 
-## 2. Lead Magnets (conversion visiteurs → leads)
+## Phase A — Corriger les blocages techniques (impact immédiat)
 
-### 2.1 Simulateur d'aides amélioré
-La page `/simulateur-aides` existe. L'enrichir :
-- Capture email **obligatoire** pour recevoir le résultat détaillé en PDF
-- Génération PDF personnalisée via Edge Function (Lovable AI)
-- Envoi auto par email (Resend ou Brevo connector)
-- Lead poussé dans Zapier comme les autres
+1. **LCP Hero** : ajouter `width/height`, `fetchpriority="high"`, retirer `loading="lazy"` sur l'image principale (`energy-label.png`). Préload dans `index.html`. Conversion AVIF/WebP via `vite-imagetools`.
+2. **Contraste accessibilité** : audit des classes `text-muted-foreground/50`, `text-gray-*` arbitraires → remplacer par tokens `text-foreground` / `text-muted-foreground`.
+3. **Republier** pour que Lighthouse rescanne.
 
-### 2.2 Guide PDF téléchargeable
-- "Guide 2026 : 11 000€ d'aides rénovation énergétique dans le Nord"
-- Landing dédiée `/guide-aides-renovation-nord`
-- Formulaire email + tel → PDF par email + lead Zapier
+## Phase B — Scaler la longue traîne locale (le vrai moteur SEO)
 
-### 2.3 Quiz éligibilité 2 min
-- Composant `/eligibilite` : 5 questions (type logement, revenus, ville, projet, propriétaire)
-- Affichage du montant d'aides estimé + capture lead
+Stratégie : **service × ville**, modèle qui a fait 70 % du trafic de `copecologie.com` et `econegoce.com`.
 
----
+1. **Étendre la couverture géo** : ajouter ~30 villes prioritaires Nord + IDF (Amiens, Beauvais, Compiègne, Saint-Quentin, Cambrai, Maubeuge, Versailles, Cergy, Évry, Meaux…). Cible : **150–200 pages service-ville** indexables.
+2. **Contenu unique par page** : intro géo-spécifique (climat, type d'habitat dominant, aides locales/CEE régionales), bloc FAQ ville, témoignage local, lien vers la mairie/PCAET. Évite le contenu dupliqué qui plafonne le ranking actuel.
+3. **Maillage interne renforcé** : depuis chaque page ville → 3 services + 3 villes voisines + 2 articles blog pertinents (cocoon sémantique).
+4. **Pages piliers SEO** (haute intention) : `/aides-renovation-2026`, `/prix-pompe-a-chaleur`, `/isolation-1-euro-conditions-2026` — formats long-form 1500+ mots avec schéma `FAQPage` + `HowTo`.
 
-## 3. Conversion (augmenter le taux du trafic existant)
+## Phase C — Booster blog auto (passer de quantité à autorité)
 
-- **Exit-intent popup** sur les pages services (offre simulateur)
-- **Sticky banner desktop** "Estimez vos aides en 2 min" (déjà mobile via `StickyMobileCTA`)
-- **Preuve sociale dynamique** : afficher avis Google récents (edge function `google-reviews` déjà en place) sur Home + pages villes
-- **A/B sur le Hero** : tester promesse "Devis 48h" vs "Jusqu'à 11 000€ d'aides"
+1. **Cluster topiques** : regrouper les articles existants par silo (PAC, Solaire, Isolation, Aides) avec page de catégorie SEO + breadcrumb.
+2. **Refresh & enrich** : injecter tableaux comparatifs, schémas `HowTo`, calculateurs intégrés, vidéos YouTube embed.
+3. **Internal linking blog → pages commerciales** : chaque article doit pointer vers 1 page service + 1 page ville + le simulateur.
 
----
+## Phase D — Conversion : transformer le trafic en leads
 
-## 4. Tracking & itération
+1. **Lead magnets** (PDF gated) déjà au plan Phase 2 : « Guide MaPrimeRénov' 2026 », « Checklist 10 erreurs PAC », « Simulateur Excel CEE ». Échange contre email → séquence email auto (Zapier → Mailchimp/Brevo).
+2. **CTA contextuels** : injection dynamique d'un bandeau « Estimer mes aides en 60s » au scroll-50% sur tous les articles.
+3. **Sticky mobile CTA** existant : A/B test wording « Devis gratuit » vs « Mes aides 2026 ».
+4. **Preuve sociale temps réel** : composant « 12 demandes reçues aujourd'hui en Hauts-de-France » (compteur Supabase live).
+5. **Formulaire multi-étapes** sur `/devis-gratuit` (3 étapes simples > 1 long) — augmente le taux de complétion de 30-50%.
 
-- Évènements GTM/Meta Pixel sur : ouverture simulateur, complétion, download guide, soumission formulaire
-- Dashboard Supabase simple : leads/jour, source (page d'entrée), taux conversion
-- Revue mensuelle des top pages (Semrush + GSC)
+## Phase E — Off-page & E-E-A-T
 
----
+1. **Citations locales** : inscription Pages Jaunes, Google Business Profile (1 par grande ville si possible), Mappy, Yelp FR, Solocal.
+2. **Backlinks ciblés** : annuaires rénovation (ADEME partenaires, Effy comparateur, Quelle Énergie), guest posts sur blogs habitat.
+3. **Page « À propos » enrichie** : équipe avec photos + certifications/qualifications (rappel : interdiction du terme RGE), avis Google embed.
+4. **Schema Organization étendu** : `LocalBusiness` avec `areaServed` listant chaque ville couverte.
 
-## Phasage suggéré
+## Phase F — Monitoring
 
-| Phase | Durée | Livrables | Impact attendu |
-|---|---|---|---|
-| **1** | Cette session | Simulateur avec capture email + PDF + Zapier, popup exit-intent, hub Hauts-de-France | +15 leads/mois |
-| **2** | Session suivante | 60 pages services × villes Nord générées dynamiquement | +60 leads/mois (3-6 mois SEO) |
-| **3** | Session suivante | Guide PDF + landing + quiz éligibilité | +25 leads/mois |
-| **4** | Continu | Accélération blog + GBP + avis | +10 leads/mois |
-
-**Total visé : ~110 leads/mois à 6 mois.**
+1. Google Search Console : suivi hebdo des impressions/clics par page ville.
+2. Dashboard Supabase interne : leads/jour, source, page d'entrée, taux de conversion.
+3. Re-scan SEO mensuel + ajustement.
 
 ---
 
 ## Détails techniques
 
-- **Pages villes** : route dynamique `/[service]/[ville]` (pattern existant `ServiceCity.tsx` à étendre), data depuis `src/data/zones.ts` enrichi
-- **PDF simulateur** : edge function `generate-aides-pdf` (Lovable AI Gateway pour la rédaction, `pdf-lib` pour le rendu)
-- **Email** : connector Brevo (déjà documenté) ou Resend selon préférence
-- **Sitemap** : régénération via `scripts/generate-sitemap.mjs` après création des pages
-- **SEO** : `react-helmet-async` + JSON-LD `LocalBusiness` avec `areaServed` = ville
+- **Fichiers principaux à toucher** : `src/data/zones.ts` (ajout villes), `src/pages/ServiceCity.tsx` (contenu unique), `index.html` (preload LCP), nouvelles pages piliers dans `src/pages/`, `scripts/generate-sitemap.mjs`, nouveau composant `LeadMagnetForm.tsx`, edge function `send-lead-magnet`.
+- **Stack** : reste sur React + Supabase + Lovable AI Gateway pour génération de contenu par ville (Gemini 2.5 Flash).
+- **Pas de RGE** dans tout nouveau contenu (mémoire projet).
+- **Tracking** : events GTM/Meta Pixel sur chaque soumission lead magnet + simulateur.
 
 ---
 
-## Ce que je propose de faire en premier
+## Livrables et ordre d'exécution proposé
 
-**Phase 1 uniquement** dans la prochaine session de build :
-1. Simulateur d'aides → capture email + génération PDF + envoi auto + lead Zapier
-2. Popup exit-intent sur pages services
-3. Hub `/region/hauts-de-france` + maillage interne
+1. **Sprint 1 (cette session)** : Phase A + B.1/B.2 (ajout villes + template enrichi) + Phase D.1 (1er lead magnet).
+2. **Sprint 2** : Phase B.4 (3 pages piliers) + Phase C (refresh blog) + Phase D.2-4.
+3. **Sprint 3** : Phase E + F (off-page + monitoring).
 
-Phases 2-4 livrées dans des sessions suivantes pour rester focus.
-
-Confirme-tu qu'on démarre par la **Phase 1** ? Ou tu préfères qu'on commence par les **60 pages villes Nord** (Phase 2, plus gros impact volume mais SEO long terme) ?
+Dis-moi si tu valides cet ordre ou si tu veux prioriser un levier (ex. lead magnets d'abord, ou pages piliers d'abord).

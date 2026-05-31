@@ -27,6 +27,7 @@ import SimulateurAides from "./pages/SimulateurAides";
 import Temoignages from "./pages/Temoignages";
 import DevisGratuit from "./pages/DevisGratuit";
 import RegionHautsDeFrance from "./pages/RegionHautsDeFrance";
+import AidesRenovation2026 from "./pages/AidesRenovation2026";
 import StickyMobileCTA from "./components/StickyMobileCTA";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 
@@ -60,6 +61,7 @@ const App = () => (
                 <Route path="/temoignages" element={<Temoignages />} />
                 <Route path="/devis-gratuit" element={<DevisGratuit />} />
                 <Route path="/region/hauts-de-france" element={<RegionHautsDeFrance />} />
+                <Route path="/aides-renovation-2026" element={<AidesRenovation2026 />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/legal" element={<LegalNotices />} />
@@ -69,7 +71,6 @@ const App = () => (
             </main>
             <StickyMobileCTA />
             <ExitIntentPopup />
-            <StickyMobileCTA />
           </div>
         </BrowserRouter>
       </TooltipProvider>
