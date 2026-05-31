@@ -142,6 +142,8 @@ const Navbar = () => {
             isSolid || isOpen ? "text-gray-800" : "text-supreme-primary"
           } hover:text-supreme-primary`}
           onClick={toggleMenu}
+          aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={isOpen}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
