@@ -59,6 +59,45 @@ export type Database = {
         }
         Relationships: []
       }
+      leads: {
+        Row: {
+          consent: boolean
+          created_at: string
+          email: string
+          first_name: string | null
+          id: string
+          message: string | null
+          metadata: Json | null
+          page_path: string | null
+          postal_code: string | null
+          source: string
+        }
+        Insert: {
+          consent?: boolean
+          created_at?: string
+          email: string
+          first_name?: string | null
+          id?: string
+          message?: string | null
+          metadata?: Json | null
+          page_path?: string | null
+          postal_code?: string | null
+          source?: string
+        }
+        Update: {
+          consent?: boolean
+          created_at?: string
+          email?: string
+          first_name?: string | null
+          id?: string
+          message?: string | null
+          metadata?: Json | null
+          page_path?: string | null
+          postal_code?: string | null
+          source?: string
+        }
+        Relationships: []
+      }
       simulations: {
         Row: {
           created_at: string

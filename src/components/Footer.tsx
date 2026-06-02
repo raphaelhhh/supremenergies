@@ -118,8 +118,29 @@ const Footer = () => {
                 { to: "/services/panneaux-solaires", label: "Panneaux Solaires" },
                 { to: "/services/renovation-globale", label: "Rénovation Globale" },
                 { to: "/services/pompe-a-chaleur/paris", label: "PAC à Paris" },
-                { to: "/services/isolation-thermique/lyon", label: "Isolation à Lyon" },
-                { to: "/services/panneaux-solaires/marseille", label: "Solaire à Marseille" },
+                { to: "/services/isolation-thermique/lille", label: "Isolation à Lille" },
+                { to: "/services/panneaux-solaires/versailles", label: "Solaire à Versailles" },
+              ].map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to} className="text-gray-300 hover:text-white transition-colors flex items-center">
+                    <ArrowRight size={16} className="mr-2 text-supreme-accent" />
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Guides piliers SEO */}
+          <div>
+            <h3 className="text-xl font-bold mb-6 text-white">Guides 2026</h3>
+            <ul className="space-y-3">
+              {[
+                { to: "/aides-renovation-2026", label: "Toutes les aides 2026" },
+                { to: "/pompe-a-chaleur-2026", label: "Pompe à chaleur 2026" },
+                { to: "/simulateur-aides", label: "Simulateur d'aides" },
+                { to: "/region/hauts-de-france", label: "Hauts-de-France" },
+                { to: "/blog", label: "Blog rénovation" },
               ].map((l) => (
                 <li key={l.to}>
                   <Link to={l.to} className="text-gray-300 hover:text-white transition-colors flex items-center">

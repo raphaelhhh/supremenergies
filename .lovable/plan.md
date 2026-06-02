@@ -1,76 +1,74 @@
+## Sprint 2 — Contenu, lead magnets et conversion
 
-# Plan : devenir n°1 SEO local et générer du lead entrant
+Objectif : transformer le trafic SEO (long tail local + pilier Aides 2026) en demandes entrantes qualifiées, sans budget Ads.
 
-## Constat actuel (audit rapide)
+### 1. Lead magnet PDF "Guide Aides Rénovation 2026"
 
-- **Semrush (FR)** : 1 mot-clé positionné, ~34 visites/mo estimées. Site jeune, autorité quasi nulle → la priorité est la **longue traîne locale** (forte intention, faible difficulté).
-- **Analytics** : 18 visiteurs / 36 vues sur 7 jours, bounce 76%, sessions surtout sur `/` → les pages locales et blog ne convertissent pas encore le trafic.
-- **SEO findings restants (Lighthouse)** : LCP lent + contraste insuffisant — bloquent le score de la version publiée.
-- **Atouts déjà en place** : 121 URLs au sitemap, hub Hauts-de-France, exit-intent, JSON-LD, simulateur d'aides, blog auto IA.
+- Nouveau composant `src/components/LeadMagnetForm.tsx` : formulaire 3 champs (prénom, email, code postal) + checkbox RGPD.
+- Insertion dans : `Index.tsx` (section dédiée après SocialProof), `AidesRenovation2026.tsx` (CTA milieu + fin), `BlogPost.tsx` (après 60% de lecture).
+- Edge function `supabase/functions/send-lead-magnet/index.ts` :
+  - valide l'email (zod),
+  - insère dans nouvelle table `public.leads` (email, prénom, code_postal, source, created_at) avec RLS stricte + GRANT service_role,
+  - envoie le PDF en pièce jointe via Resend (secret `RESEND_API_KEY` à demander),
+  - push event `lead_magnet_submit` vers Zapier (webhook existant).
+- PDF statique `public/guide-aides-renovation-2026.pdf` (placeholder à remplacer plus tard par contenu réel).
 
-## Objectif
+### 2. Multi-step form sur /devis-gratuit
 
-Passer de ~30 à **500+ visites organiques/mois sous 90 jours** et transformer ce trafic en **≥110 leads/mois** via 3 leviers : performance technique, contenu géo-ciblé, conversion.
+- Refonte `src/pages/DevisGratuit.tsx` en 4 étapes : type de travaux → logement → contact → récap.
+- Progress bar + validation par étape (zod), persistance localStorage anti-perte.
+- Submit → même edge function que LeadMagnet (source=`devis_multistep`) + redirection Google Form en pré-rempli (URL params).
+- Tracking GTM : `form_step_view`, `form_step_complete`, `form_submit`.
 
----
+### 3. CTA dynamique au scroll 50%
 
-## Phase A — Corriger les blocages techniques (impact immédiat)
+- Nouveau `src/components/ScrollCTA.tsx` : bannière sticky bottom (desktop) déclenchée à 50% scroll, dismissible (sessionStorage).
+- Affichée sur Blog, BlogPost, Services, ServiceCity, AidesRenovation2026.
+- Variante A/B simple via random 50/50 stocké en localStorage (message 1 : "Estimez vos aides", message 2 : "Devis gratuit 48h").
 
-1. **LCP Hero** : ajouter `width/height`, `fetchpriority="high"`, retirer `loading="lazy"` sur l'image principale (`energy-label.png`). Préload dans `index.html`. Conversion AVIF/WebP via `vite-imagetools`.
-2. **Contraste accessibilité** : audit des classes `text-muted-foreground/50`, `text-gray-*` arbitraires → remplacer par tokens `text-foreground` / `text-muted-foreground`.
-3. **Republier** pour que Lighthouse rescanne.
+### 4. Topic clusters blog
 
-## Phase B — Scaler la longue traîne locale (le vrai moteur SEO)
+- Ajouter à `supabase/functions/generate-blog-post/index.ts` une logique de silos :
+  - 4 clusters (Pompe à chaleur, Isolation, Solaire, Aides) avec liste de sujets et internal links automatiques entre articles du même silo + vers la page service correspondante + vers `/aides-renovation-2026`.
+- Enrichir le prompt : tableaux markdown obligatoires, schema `HowTo` ou `FAQPage` selon le type, CTA LeadMagnet en milieu d'article.
+- Composant `src/components/BlogClusterNav.tsx` affiché en haut de chaque BlogPost listant les autres articles du même silo.
 
-Stratégie : **service × ville**, modèle qui a fait 70 % du trafic de `copecologie.com` et `econegoce.com`.
+### 5. 2e page pilier : "Pompe à chaleur 2026 : prix, aides, installation"
 
-1. **Étendre la couverture géo** : ajouter ~30 villes prioritaires Nord + IDF (Amiens, Beauvais, Compiègne, Saint-Quentin, Cambrai, Maubeuge, Versailles, Cergy, Évry, Meaux…). Cible : **150–200 pages service-ville** indexables.
-2. **Contenu unique par page** : intro géo-spécifique (climat, type d'habitat dominant, aides locales/CEE régionales), bloc FAQ ville, témoignage local, lien vers la mairie/PCAET. Évite le contenu dupliqué qui plafonne le ranking actuel.
-3. **Maillage interne renforcé** : depuis chaque page ville → 3 services + 3 villes voisines + 2 articles blog pertinents (cocoon sémantique).
-4. **Pages piliers SEO** (haute intention) : `/aides-renovation-2026`, `/prix-pompe-a-chaleur`, `/isolation-1-euro-conditions-2026` — formats long-form 1500+ mots avec schéma `FAQPage` + `HowTo`.
+- `src/pages/PompeAChaleur2026.tsx` (~1800 mots) : tableaux COP, comparatif air/eau vs air/air, calculateur d'économies inline, FAQPage + Product schema.
+- Route + lien Footer + ajout au sitemap.
 
-## Phase C — Booster blog auto (passer de quantité à autorité)
+### 6. Maillage interne renforcé
 
-1. **Cluster topiques** : regrouper les articles existants par silo (PAC, Solaire, Isolation, Aides) avec page de catégorie SEO + breadcrumb.
-2. **Refresh & enrich** : injecter tableaux comparatifs, schémas `HowTo`, calculateurs intégrés, vidéos YouTube embed.
-3. **Internal linking blog → pages commerciales** : chaque article doit pointer vers 1 page service + 1 page ville + le simulateur.
+- `RelatedZones.tsx` : afficher 3 villes proches géographiquement (basé sur département) au lieu d'aléatoire.
+- `InternalLinksHub.tsx` : ajouter section "Aides par région" pointant vers les 5 régions cibles.
+- Footer : ajouter colonne "Guides" avec liens vers les 2 pages piliers.
 
-## Phase D — Conversion : transformer le trafic en leads
+### 7. Suivi conversion
 
-1. **Lead magnets** (PDF gated) déjà au plan Phase 2 : « Guide MaPrimeRénov' 2026 », « Checklist 10 erreurs PAC », « Simulateur Excel CEE ». Échange contre email → séquence email auto (Zapier → Mailchimp/Brevo).
-2. **CTA contextuels** : injection dynamique d'un bandeau « Estimer mes aides en 60s » au scroll-50% sur tous les articles.
-3. **Sticky mobile CTA** existant : A/B test wording « Devis gratuit » vs « Mes aides 2026 ».
-4. **Preuve sociale temps réel** : composant « 12 demandes reçues aujourd'hui en Hauts-de-France » (compteur Supabase live).
-5. **Formulaire multi-étapes** sur `/devis-gratuit` (3 étapes simples > 1 long) — augmente le taux de complétion de 30-50%.
+- Table `public.leads` + dashboard simple (déjà couvert par l'edge function et l'analytics existant — pas d'UI admin dans ce sprint).
+- Events GTM additionnels : `lead_magnet_download`, `scroll_cta_click`, `multistep_complete`.
 
-## Phase E — Off-page & E-E-A-T
+### Technique
 
-1. **Citations locales** : inscription Pages Jaunes, Google Business Profile (1 par grande ville si possible), Mappy, Yelp FR, Solocal.
-2. **Backlinks ciblés** : annuaires rénovation (ADEME partenaires, Effy comparateur, Quelle Énergie), guest posts sur blogs habitat.
-3. **Page « À propos » enrichie** : équipe avec photos + certifications/qualifications (rappel : interdiction du terme RGE), avis Google embed.
-4. **Schema Organization étendu** : `LocalBusiness` avec `areaServed` listant chaque ville couverte.
+- Stack inchangée (React + Supabase + Lovable AI Gateway).
+- Nouvelle dépendance : aucune (Resend appelé via fetch direct dans edge function).
+- Secret requis : `RESEND_API_KEY` — je le demanderai au moment d'implémenter l'edge function.
+- Migration SQL : création table `leads` avec RLS (INSERT public validé, SELECT service_role only) + GRANT explicites.
 
-## Phase F — Monitoring
+### Fichiers touchés
 
-1. Google Search Console : suivi hebdo des impressions/clics par page ville.
-2. Dashboard Supabase interne : leads/jour, source, page d'entrée, taux de conversion.
-3. Re-scan SEO mensuel + ajustement.
+Créés : `LeadMagnetForm.tsx`, `ScrollCTA.tsx`, `BlogClusterNav.tsx`, `PompeAChaleur2026.tsx`, `send-lead-magnet/index.ts`, migration leads, PDF placeholder.
+Édités : `Index.tsx`, `DevisGratuit.tsx`, `BlogPost.tsx`, `AidesRenovation2026.tsx`, `generate-blog-post/index.ts`, `RelatedZones.tsx`, `InternalLinksHub.tsx`, `Footer.tsx`, `App.tsx`, `scripts/generate-sitemap.mjs`.
 
----
+### Ordre d'exécution
 
-## Détails techniques
+1. Migration `leads` + edge function `send-lead-magnet` + secret Resend
+2. LeadMagnetForm + intégration 3 pages
+3. Multi-step DevisGratuit
+4. ScrollCTA + A/B
+5. Page pilier PompeAChaleur2026
+6. Clusters blog + BlogClusterNav
+7. Maillage interne + sitemap
 
-- **Fichiers principaux à toucher** : `src/data/zones.ts` (ajout villes), `src/pages/ServiceCity.tsx` (contenu unique), `index.html` (preload LCP), nouvelles pages piliers dans `src/pages/`, `scripts/generate-sitemap.mjs`, nouveau composant `LeadMagnetForm.tsx`, edge function `send-lead-magnet`.
-- **Stack** : reste sur React + Supabase + Lovable AI Gateway pour génération de contenu par ville (Gemini 2.5 Flash).
-- **Pas de RGE** dans tout nouveau contenu (mémoire projet).
-- **Tracking** : events GTM/Meta Pixel sur chaque soumission lead magnet + simulateur.
-
----
-
-## Livrables et ordre d'exécution proposé
-
-1. **Sprint 1 (cette session)** : Phase A + B.1/B.2 (ajout villes + template enrichi) + Phase D.1 (1er lead magnet).
-2. **Sprint 2** : Phase B.4 (3 pages piliers) + Phase C (refresh blog) + Phase D.2-4.
-3. **Sprint 3** : Phase E + F (off-page + monitoring).
-
-Dis-moi si tu valides cet ordre ou si tu veux prioriser un levier (ex. lead magnets d'abord, ou pages piliers d'abord).
+Dis-moi si je lance tout, ou si tu veux prioriser un bloc (ex. : lead magnet d'abord pour capter dès cette semaine).

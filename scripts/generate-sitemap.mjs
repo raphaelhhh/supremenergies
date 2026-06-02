@@ -86,6 +86,7 @@ const STATIC_URLS = [
   { loc: "/devis-gratuit", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
   { loc: "/region/hauts-de-france", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.9" },
   { loc: "/aides-renovation-2026", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.95" },
+  { loc: "/pompe-a-chaleur-2026", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "monthly", priority: "0.95" },
   { loc: "/mentions-legales", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   { loc: "/privacy", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   { loc: "/terms", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },

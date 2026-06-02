@@ -11,6 +11,7 @@ import {
 import Breadcrumb from "@/components/Breadcrumb";
 import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 import LeadForm from "@/components/LeadForm";
+import LeadMagnetForm from "@/components/LeadMagnetForm";
 import CTA from "@/components/CTA";
 
 const SITE = "https://supremenergies.com";
@@ -298,6 +299,13 @@ const AidesRenovation2026 = () => {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Lead magnet PDF */}
+      <section className="py-14 bg-white">
+        <div className="container-custom max-w-3xl">
+          <LeadMagnetForm source="pillar_aides2026_end" />
         </div>
       </section>
 
