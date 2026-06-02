@@ -7,6 +7,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import FeatureBox from "@/components/FeatureBox";
 import CTA from "@/components/CTA";
 import InternalLinksHub from "@/components/InternalLinksHub";
+import LeadMagnetForm from "@/components/LeadMagnetForm";
 import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -260,6 +261,15 @@ const Index = () => {
       />
 
       <SocialProof />
+
+      {/* Lead magnet PDF */}
+      <section className="py-12 bg-gradient-to-b from-supreme-light/30 to-white">
+        <div className="container-custom max-w-2xl">
+          <LeadMagnetForm source="home_lead_magnet" />
+        </div>
+      </section>
+
+
 
       {/* Services Section */}
       <section className="section-padding">

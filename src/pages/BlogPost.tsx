@@ -9,6 +9,8 @@ import BlogCard from "@/components/BlogCard";
 import Breadcrumb from "@/components/Breadcrumb";
 import RelatedServices from "@/components/RelatedServices";
 import RelatedZones from "@/components/RelatedZones";
+import BlogClusterNav from "@/components/BlogClusterNav";
+import LeadMagnetForm from "@/components/LeadMagnetForm";
 import { supabase } from "@/integrations/supabase/client";
 
 const BlogPost = () => {
@@ -177,13 +179,25 @@ const BlogPost = () => {
       <section className="py-12 md:py-16">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
+            <BlogClusterNav currentTitle={post.title} currentSlug={post.slug} />
+
             <div 
               className="prose prose-lg max-w-none prose-headings:text-supreme-dark prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-p:text-gray-700 prose-p:leading-relaxed prose-li:text-gray-700 prose-strong:text-supreme-dark prose-a:text-supreme-primary hover:prose-a:underline"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
 
+            {/* Lead magnet PDF */}
+            <div className="mt-10">
+              <LeadMagnetForm
+                source={`blog_${post.slug}`}
+                title="Vous aimez ce contenu ? Recevez le Guide Aides 2026"
+                subtitle="Le PDF complet avec barèmes, plafonds et exemples chiffrés."
+                compact
+              />
+            </div>
+
             {/* CTA */}
-            <div className="mt-12 p-8 bg-supreme-light rounded-2xl text-center">
+            <div className="mt-8 p-8 bg-supreme-light rounded-2xl text-center">
               <h3 className="text-2xl font-bold mb-3">🏡 Besoin d'un conseil personnalisé ?</h3>
               <p className="text-gray-600 mb-6">
                 Nos experts SupremEnergies vous accompagnent de A à Z dans vos travaux de rénovation énergétique. Bénéficiez d'un diagnostic gratuit !
