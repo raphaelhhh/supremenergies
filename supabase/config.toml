@@ -1,7 +1,16 @@
 project_id = "epeomgifqjbgzyurcnaz"
 
+[functions.generate-blog-post]
+verify_jwt = false
+
 [functions.generate-sitemap]
 verify_jwt = false
 
+[functions.google-reviews]
+verify_jwt = false
+
 [functions.notify-search-engines]
+verify_jwt = false
+
+[functions.send-lead-magnet]
 verify_jwt = false
