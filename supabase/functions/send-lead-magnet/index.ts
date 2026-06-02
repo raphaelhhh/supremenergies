@@ -46,6 +46,10 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
+    // Schedule J+3 nurturing follow-up
+    const followupDue = new Date();
+    followupDue.setDate(followupDue.getDate() + 3);
+
     const { error } = await supabase.from("leads").insert({
       email: parsed.data.email,
       first_name: parsed.data.first_name ?? null,
@@ -55,6 +59,7 @@ Deno.serve(async (req) => {
       message: parsed.data.message ?? null,
       consent: parsed.data.consent,
       metadata: parsed.data.metadata ?? null,
+      followup_due_at: followupDue.toISOString(),
     });
 
     if (error) {

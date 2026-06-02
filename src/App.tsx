@@ -29,6 +29,8 @@ import DevisGratuit from "./pages/DevisGratuit";
 import RegionHautsDeFrance from "./pages/RegionHautsDeFrance";
 import AidesRenovation2026 from "./pages/AidesRenovation2026";
 import PompeAChaleur2026 from "./pages/PompeAChaleur2026";
+import Auth from "./pages/Auth";
+import AdminLeads from "./pages/AdminLeads";
 import StickyMobileCTA from "./components/StickyMobileCTA";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 import ScrollCTA from "./components/ScrollCTA";
@@ -69,7 +71,10 @@ const App = () => (
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/legal" element={<LegalNotices />} />
                 <Route path="/mentions-legales" element={<LegalNotices />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/admin/leads" element={<AdminLeads />} />
                 <Route path="*" element={<NotFound />} />
+
               </Routes>
             </main>
             <StickyMobileCTA />
