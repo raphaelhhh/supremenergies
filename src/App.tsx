@@ -28,8 +28,10 @@ import Temoignages from "./pages/Temoignages";
 import DevisGratuit from "./pages/DevisGratuit";
 import RegionHautsDeFrance from "./pages/RegionHautsDeFrance";
 import AidesRenovation2026 from "./pages/AidesRenovation2026";
+import PompeAChaleur2026 from "./pages/PompeAChaleur2026";
 import StickyMobileCTA from "./components/StickyMobileCTA";
 import ExitIntentPopup from "./components/ExitIntentPopup";
+import ScrollCTA from "./components/ScrollCTA";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +64,7 @@ const App = () => (
                 <Route path="/devis-gratuit" element={<DevisGratuit />} />
                 <Route path="/region/hauts-de-france" element={<RegionHautsDeFrance />} />
                 <Route path="/aides-renovation-2026" element={<AidesRenovation2026 />} />
+                <Route path="/pompe-a-chaleur-2026" element={<PompeAChaleur2026 />} />
                 <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/legal" element={<LegalNotices />} />
@@ -70,6 +73,7 @@ const App = () => (
               </Routes>
             </main>
             <StickyMobileCTA />
+            <ScrollCTA />
             <ExitIntentPopup />
           </div>
         </BrowserRouter>
