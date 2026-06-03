@@ -114,7 +114,7 @@ const LeadForm = ({
         <p className="text-gray-700">
           Un conseiller SupremEnergies vous rappelle sous 48h ouvrées.
         </p>
-        <p className="text-sm text-gray-500 mt-3">
+        <p className="text-sm text-gray-600 mt-3">
           Besoin d'aller plus vite ?{" "}
           <a href="tel:0186046889" className="text-supreme-primary font-semibold">
             01 86 04 68 89
@@ -216,7 +216,7 @@ const LeadForm = ({
       </Button>
 
       {showLegal && (
-        <p className="text-xs text-gray-500 mt-3 leading-relaxed">
+        <p className="text-xs text-gray-600 mt-3 leading-relaxed">
           En envoyant ce formulaire, vous acceptez d'être recontacté par SupremEnergies. Vos
           données ne sont jamais cédées à des tiers.{" "}
           <a href="/privacy" className="underline hover:text-supreme-primary">
