@@ -77,6 +77,7 @@ const App = () => (
 
               </Routes>
             </main>
+            <Footer />
             <StickyMobileCTA />
             <ScrollCTA />
             <ExitIntentPopup />
