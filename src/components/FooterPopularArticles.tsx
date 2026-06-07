@@ -22,7 +22,7 @@ const FooterPopularArticles = () => {
     return (
       <div>
         <h3 className="text-xl font-bold mb-6 text-white">Articles récents</h3>
-        <p className="text-gray-400 text-sm">Bientôt disponible.</p>
+        <p className="text-gray-200 text-sm">Bientôt disponible.</p>
       </div>
     );
   }
@@ -35,7 +35,7 @@ const FooterPopularArticles = () => {
           <li key={post.id}>
             <Link
               to={`/blog/${post.slug}`}
-              className="text-gray-300 hover:text-white transition-colors flex items-start text-sm"
+              className="text-gray-200 hover:text-white transition-colors flex items-start text-sm"
             >
               <ArrowRight
                 size={14}
