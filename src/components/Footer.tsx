@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl font-bold mb-2 text-white">Restez informé</h3>
-              <p className="text-gray-300">
+              <p className="text-gray-200">
                 Inscrivez-vous à notre newsletter pour recevoir nos actualités et conseils sur l'efficacité énergétique.
               </p>
             </div>
@@ -63,21 +63,21 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold mb-6 text-white">SupremEnergies</h3>
-            <p className="mb-6 text-gray-300">
+            <p className="mb-6 text-gray-200">
               Experts en rénovation énergétique pour particuliers et professionnels.
               Garantie décennale et accompagnement personnalisé.
             </p>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" aria-label="Facebook" className="text-gray-300 hover:text-white transition-colors">
+              <a href="https://facebook.com" aria-label="Facebook" className="text-gray-200 hover:text-white transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="https://twitter.com" aria-label="Twitter" className="text-gray-300 hover:text-white transition-colors">
+              <a href="https://twitter.com" aria-label="Twitter" className="text-gray-200 hover:text-white transition-colors">
                 <Twitter size={20} />
               </a>
-              <a href="https://instagram.com" aria-label="Instagram" className="text-gray-300 hover:text-white transition-colors">
+              <a href="https://instagram.com" aria-label="Instagram" className="text-gray-200 hover:text-white transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="https://linkedin.com" aria-label="LinkedIn" className="text-gray-300 hover:text-white transition-colors">
+              <a href="https://linkedin.com" aria-label="LinkedIn" className="text-gray-200 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -99,7 +99,7 @@ const Footer = () => {
                 { to: "/contact", label: "Nous contacter" },
               ].map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-gray-300 hover:text-white transition-colors flex items-center">
+                  <Link to={l.to} className="text-gray-200 hover:text-white transition-colors flex items-center">
                     <ArrowRight size={16} className="mr-2 text-supreme-accent" />
                     {l.label}
                   </Link>
@@ -122,7 +122,7 @@ const Footer = () => {
                 { to: "/services/panneaux-solaires/versailles", label: "Solaire à Versailles" },
               ].map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-gray-300 hover:text-white transition-colors flex items-center">
+                  <Link to={l.to} className="text-gray-200 hover:text-white transition-colors flex items-center">
                     <ArrowRight size={16} className="mr-2 text-supreme-accent" />
                     {l.label}
                   </Link>
@@ -143,7 +143,7 @@ const Footer = () => {
                 { to: "/blog", label: "Blog rénovation" },
               ].map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-gray-300 hover:text-white transition-colors flex items-center">
+                  <Link to={l.to} className="text-gray-200 hover:text-white transition-colors flex items-center">
                     <ArrowRight size={16} className="mr-2 text-supreme-accent" />
                     {l.label}
                   </Link>
@@ -162,13 +162,13 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start space-x-3">
                 <MapPin size={20} className="text-supreme-accent flex-shrink-0 mt-1" />
-                <span className="text-gray-300">
+                <span className="text-gray-200">
                   55 rue cartier bresson,<br />93500 pantin, France
                 </span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={20} className="text-supreme-accent flex-shrink-0" />
-                <a href="mailto:contact@supremenergies.com" className="text-gray-300 hover:text-white transition-colors">
+                <a href="mailto:contact@supremenergies.com" className="text-gray-200 hover:text-white transition-colors">
                   contact@supremenergies.com
                 </a>
               </li>
@@ -178,7 +178,7 @@ const Footer = () => {
 
 
         {/* Footer Bottom - Copyright */}
-        <div className="py-6 border-t border-gray-800 text-center text-gray-400">
+        <div className="py-6 border-t border-gray-800 text-center text-gray-200">
           <p>&copy; {new Date().getFullYear()} SupremEnergies. Tous droits réservés.</p>
           <p className="mt-2 text-sm">
             <Link to="/privacy" className="hover:text-white transition-colors">Politique de confidentialité</Link>
