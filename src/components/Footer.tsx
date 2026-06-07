@@ -178,7 +178,7 @@ const Footer = () => {
 
 
         {/* Footer Bottom - Copyright */}
-        <div className="py-6 border-t border-gray-800 text-center text-gray-400">
+        <div className="py-6 border-t border-gray-800 text-center text-gray-200">
           <p>&copy; {new Date().getFullYear()} SupremEnergies. Tous droits réservés.</p>
           <p className="mt-2 text-sm">
             <Link to="/privacy" className="hover:text-white transition-colors">Politique de confidentialité</Link>
