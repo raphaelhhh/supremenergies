@@ -72,6 +72,7 @@ const App = () => (
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/legal" element={<LegalNotices />} />
                 <Route path="/mentions-legales" element={<LegalNotices />} />
+                <Route path="/plan-du-site" element={<PlanDuSite />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/admin/leads" element={<AdminLeads />} />
                 <Route path="*" element={<NotFound />} />
