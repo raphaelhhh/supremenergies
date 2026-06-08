@@ -66,9 +66,9 @@ const SERVICE_SLUGS = [
 // IMPORTANT : lastmod doit refléter la VRAIE date de dernière modification
 // éditoriale de la page. Mettre `today` partout dégrade la confiance de Google.
 // Quand tu modifies réellement le contenu d'une page, mets sa date à jour ici.
-const STATIC_PAGES_LAST_REVIEW = "2026-05-28"; // dernière revue SEO globale
-const ZONES_LAST_REVIEW = "2026-05-28";
-const SERVICE_CITY_LAST_REVIEW = "2026-05-28";
+const STATIC_PAGES_LAST_REVIEW = "2026-06-08"; // dernière revue SEO globale
+const ZONES_LAST_REVIEW = "2026-06-08";
+const SERVICE_CITY_LAST_REVIEW = "2026-06-08";
 const LEGAL_LAST_REVIEW = "2026-01-10";
 
 const STATIC_URLS = [
@@ -90,6 +90,7 @@ const STATIC_URLS = [
   { loc: "/mentions-legales", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   { loc: "/privacy", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   { loc: "/terms", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
+  { loc: "/plan-du-site", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "weekly", priority: "0.5" },
   ...[...ZONE_SLUGS_IDF, ...ZONE_SLUGS_NORD, ...ZONE_SLUGS_IDF_EXT].map((slug) => ({
     loc: `/zones/${slug}`,
     lastmod: ZONES_LAST_REVIEW,
