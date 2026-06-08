@@ -101,18 +101,19 @@ const PlanDuSite = () => {
             <div className="space-y-6">
               {serviceSlugs.map((svc) => (
                 <div key={svc}>
-                  <h3 className="font-semibold text-supreme-dark mb-2">{serviceCatalog[svc].title}</h3>
+                  <h3 className="font-semibold text-supreme-dark mb-2">{serviceCatalog[svc].name}</h3>
                   <ul className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-1 text-sm text-supreme-primary">
                     {zoneSlugs.map((z) => (
                       <li key={z}>
                         <Link to={`/services/${svc}/${z}`} className="hover:underline">
-                          {serviceCatalog[svc].shortTitle || serviceCatalog[svc].title} à {zones[z].name}
+                          {serviceCatalog[svc].shortName} à {zones[z].name}
                         </Link>
                       </li>
                     ))}
                   </ul>
                 </div>
               ))}
+
             </div>
           </section>
 
