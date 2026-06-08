@@ -65,10 +65,11 @@ const PlanDuSite = () => {
               {serviceSlugs.map((s) => (
                 <li key={s}>
                   <Link to={`/services/${s}`} className="hover:underline">
-                    {serviceCatalog[s].title}
+                    {serviceCatalog[s].name}
                   </Link>
                 </li>
               ))}
+
             </ul>
           </section>
 
