@@ -90,6 +90,7 @@ const STATIC_URLS = [
   { loc: "/mentions-legales", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   { loc: "/privacy", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
   { loc: "/terms", lastmod: LEGAL_LAST_REVIEW, changefreq: "yearly", priority: "0.3" },
+  { loc: "/plan-du-site", lastmod: STATIC_PAGES_LAST_REVIEW, changefreq: "weekly", priority: "0.5" },
   ...[...ZONE_SLUGS_IDF, ...ZONE_SLUGS_NORD, ...ZONE_SLUGS_IDF_EXT].map((slug) => ({
     loc: `/zones/${slug}`,
     lastmod: ZONES_LAST_REVIEW,
