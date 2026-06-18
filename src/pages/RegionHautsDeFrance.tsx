@@ -17,9 +17,9 @@ const RegionHautsDeFrance = () => {
   const services = Object.values(serviceCatalog);
   const canonical = `${SITE}/region/hauts-de-france`;
 
-  const title = "Rénovation énergétique Hauts-de-France ★ Aides 2026 jusqu'à 11 000€";
+  const title = "Rénovation énergétique Hauts-de-France | Aides 2026";
   const description =
-    "✓ Pompe à chaleur, isolation, panneaux solaires dans le Nord, Pas-de-Calais et Somme. Devis gratuit 48h, jusqu'à 11 000€ d'aides MaPrimeRénov' + aides régionales Hauts-de-France.";
+    "Pompe à chaleur, isolation, solaire dans le Nord, Pas-de-Calais et Somme. Devis 48h, jusqu'à 11 000€ d'aides MaPrimeRénov' + aides régionales.";
 
   const schema = {
     "@context": "https://schema.org",
