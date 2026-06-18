@@ -79,7 +79,7 @@ const productSchema = {
 const PompeAChaleur2026 = () => (
   <div>
     <Helmet>
-      <title>Pompe à chaleur 2026 ★ Prix, aides, COP et installation | SupremEnergies</title>
+      <title>Pompe à chaleur 2026 : prix, aides & installation | SupremEnergies</title>
       <meta
         name="description"
         content="Guide complet pompe à chaleur 2026 : prix, MaPrimeRénov' jusqu'à 5 000 €, COP & SCOP, comparatif air/eau vs air/air, installation en 48h. Devis gratuit."
