@@ -26,7 +26,7 @@ const CANONICAL = `${SITE}/aides-renovation-2026`;
  *  - "barème anah 2026"
  */
 const AidesRenovation2026 = () => {
-  const title = "Aides Rénovation Énergétique 2026 — Guide Complet | MaPrimeRénov', CEE, Éco-PTZ";
+  const title = "Aides Rénovation Énergétique 2026 | MaPrimeRénov' & CEE";
   const description =
     "Toutes les aides rénovation énergétique 2026 : MaPrimeRénov' jusqu'à 11 000 €, CEE, Éco-PTZ 50 000 €, TVA 5,5 %. Barème ANAH, cumul, simulateur gratuit.";
 
