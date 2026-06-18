@@ -187,7 +187,7 @@ const DevisGratuit = () => {
   return (
     <div>
       <Helmet>
-        <title>Devis Gratuit Rénovation Énergétique 48h | Jusqu'à 11 000€ d'aides</title>
+        <title>Devis Gratuit Rénovation Énergétique 48h | 11 000€ d'aides</title>
         <meta
           name="description"
           content="✓ Devis gratuit sous 48h en 4 étapes. Pompe à chaleur, isolation, solaire. Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. ★ 4.8/5"
