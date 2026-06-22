@@ -23,7 +23,7 @@ const Hero = ({
   buttonText = "En savoir plus",
   buttonLink = "/services",
   secondaryButtonText = "Demander un devis",
-  secondaryButtonLink = "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header",
+  secondaryButtonLink = "/devis-gratuit",
   imageSrc = "/images/energy-label.png",
   imageAlt = "Rénovation énergétique et isolation thermique",
   overlay = true,

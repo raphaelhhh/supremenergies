@@ -16,7 +16,7 @@ import { zones } from "@/data/zones";
 import { serviceCatalog } from "@/data/services";
 
 const QUOTE_FORM =
-  "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header";
+  "/devis-gratuit";
 const SITE = "https://supremenergies.com";
 
 /**

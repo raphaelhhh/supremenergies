@@ -15,7 +15,7 @@ import RelatedServices from "@/components/RelatedServices";
 import RelatedZones from "@/components/RelatedZones";
 import { zones } from "@/data/zones";
 
-const QUOTE_FORM = "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header";
+const QUOTE_FORM = "/devis-gratuit";
 
 const services = [
   { slug: "pompe-a-chaleur", title: "Pompe à chaleur", desc: "Air/eau, air/air, géothermie" },

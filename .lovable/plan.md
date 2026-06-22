@@ -1,74 +1,86 @@
-## Sprint 2 — Contenu, lead magnets et conversion
+## Vue d'ensemble
 
-Objectif : transformer le trafic SEO (long tail local + pilier Aides 2026) en demandes entrantes qualifiées, sans budget Ads.
+Deux gros chantiers en parallèle :
+1. **Blog Pack pro** : catégories, maillage interne, template d'article enrichi, brief mots-clés dans l'IA
+2. **Tracking conversions** : remplacement du Google Form par le formulaire interne `/devis-gratuit` + événements GA4
 
-### 1. Lead magnet PDF "Guide Aides Rénovation 2026"
+---
 
-- Nouveau composant `src/components/LeadMagnetForm.tsx` : formulaire 3 champs (prénom, email, code postal) + checkbox RGPD.
-- Insertion dans : `Index.tsx` (section dédiée après SocialProof), `AidesRenovation2026.tsx` (CTA milieu + fin), `BlogPost.tsx` (après 60% de lecture).
-- Edge function `supabase/functions/send-lead-magnet/index.ts` :
-  - valide l'email (zod),
-  - insère dans nouvelle table `public.leads` (email, prénom, code_postal, source, created_at) avec RLS stricte + GRANT service_role,
-  - envoie le PDF en pièce jointe via Resend (secret `RESEND_API_KEY` à demander),
-  - push event `lead_magnet_submit` vers Zapier (webhook existant).
-- PDF statique `public/guide-aides-renovation-2026.pdf` (placeholder à remplacer plus tard par contenu réel).
+## Partie A — Blog Pack pro
 
-### 2. Multi-step form sur /devis-gratuit
+### A1. Schéma base de données
+- Migration : ajouter `category text` et `target_keyword text` sur `blog_posts`
+- Backfill : assigner une catégorie à chaque article existant via heuristique sur le titre (mots-clés "pompe à chaleur" → `pompe-a-chaleur`, etc.)
+- 6 catégories : `pompe-a-chaleur`, `isolation`, `panneaux-solaires`, `aides-financieres`, `renovation-globale`, `conseils-pratiques`
 
-- Refonte `src/pages/DevisGratuit.tsx` en 4 étapes : type de travaux → logement → contact → récap.
-- Progress bar + validation par étape (zod), persistance localStorage anti-perte.
-- Submit → même edge function que LeadMagnet (source=`devis_multistep`) + redirection Google Form en pré-rempli (URL params).
-- Tracking GTM : `form_step_view`, `form_step_complete`, `form_submit`.
+### A2. Page catégorie `/blog/categorie/:slug`
+- Nouvelle route + page `BlogCategory.tsx`
+- En-tête SEO unique par catégorie (H1 + 150 mots de description optimisée)
+- Liste des articles de la catégorie
+- Helmet : title/description/canonical/JSON-LD `CollectionPage` propre à la catégorie
+- Breadcrumbs schema
 
-### 3. CTA dynamique au scroll 50%
+### A3. Template `BlogPost.tsx` enrichi
+- **Breadcrumbs** (Accueil > Blog > Catégorie > Article) avec JSON-LD `BreadcrumbList`
+- **Table des matières (TOC)** auto-générée depuis les `<h2>` du contenu
+- **FAQ schema** si l'article contient une section FAQ détectable
+- **CTA inline** injecté mi-article (après ~50% du contenu)
+- **Articles liés** : 3 articles de la même catégorie en pied
+- **Badge catégorie** cliquable vers la page catégorie
+- Liens internes contextuels (déjà présents via `InternalLinksHub`)
 
-- Nouveau `src/components/ScrollCTA.tsx` : bannière sticky bottom (desktop) déclenchée à 50% scroll, dismissible (sessionStorage).
-- Affichée sur Blog, BlogPost, Services, ServiceCity, AidesRenovation2026.
-- Variante A/B simple via random 50/50 stocké en localStorage (message 1 : "Estimez vos aides", message 2 : "Devis gratuit 48h").
+### A4. Page `/blog` mise à jour
+- Ajout d'une rangée de **chips catégories** sous la barre de recherche
+- Filtrage par catégorie en plus de la recherche texte
 
-### 4. Topic clusters blog
+### A5. Edge Function `generate-blog-post` — brief mots-clés
+- Sélection d'un mot-clé long-tail dans une liste pré-définie (rotation) au lieu de prompt libre
+- Le prompt IA reçoit : `target_keyword`, `category`, structure imposée (intro, 4 H2, FAQ, conclusion CTA), longueur cible 1200-1500 mots
+- Stockage de `target_keyword` et `category` dans la ligne créée
 
-- Ajouter à `supabase/functions/generate-blog-post/index.ts` une logique de silos :
-  - 4 clusters (Pompe à chaleur, Isolation, Solaire, Aides) avec liste de sujets et internal links automatiques entre articles du même silo + vers la page service correspondante + vers `/aides-renovation-2026`.
-- Enrichir le prompt : tableaux markdown obligatoires, schema `HowTo` ou `FAQPage` selon le type, CTA LeadMagnet en milieu d'article.
-- Composant `src/components/BlogClusterNav.tsx` affiché en haut de chaque BlogPost listant les autres articles du même silo.
+### A6. Sitemap
+- Ajout des 6 URLs `/blog/categorie/:slug` dans `scripts/generate-sitemap.ts`
 
-### 5. 2e page pilier : "Pompe à chaleur 2026 : prix, aides, installation"
+---
 
-- `src/pages/PompeAChaleur2026.tsx` (~1800 mots) : tableaux COP, comparatif air/eau vs air/air, calculateur d'économies inline, FAQPage + Product schema.
-- Route + lien Footer + ajout au sitemap.
+## Partie B — Tracking conversions & remplacement Google Form
 
-### 6. Maillage interne renforcé
+### B1. Audit des liens Google Form
+- Recenser toutes les occurrences de `docs.google.com/forms` (Hero, CTAs, Sticky mobile, Exit intent, etc.)
+- Toutes pointent désormais vers `/devis-gratuit` (formulaire interne déjà connecté à `leads` + Zapier)
 
-- `RelatedZones.tsx` : afficher 3 villes proches géographiquement (basé sur département) au lieu d'aléatoire.
-- `InternalLinksHub.tsx` : ajouter section "Aides par région" pointant vers les 5 régions cibles.
-- Footer : ajouter colonne "Guides" avec liens vers les 2 pages piliers.
+### B2. Page `/devis-gratuit` — confirmation tracking
+- S'assurer que la soumission déclenche un `dataLayer.push({ event: 'generate_lead', form_location: '<page d'origine>' })`
+- Lire le `referrer` ou un query param `?from=...` pour tagger l'origine (hero, sticky, popup, services/...)
 
-### 7. Suivi conversion
+### B3. Événements GA4
+- Hook utilitaire `trackLead({ source, projectType })` → push GTM dataLayer
+- Déclenchement sur :
+  - submit `/devis-gratuit` (succès)
+  - submit `/contact` (succès)
+  - submit simulateur d'aides (succès)
+- Documentation courte dans `mem://integrations/suivi-et-marketing` sur comment configurer la **conversion** `generate_lead` dans GA4
 
-- Table `public.leads` + dashboard simple (déjà couvert par l'edge function et l'analytics existant — pas d'UI admin dans ce sprint).
-- Events GTM additionnels : `lead_magnet_download`, `scroll_cta_click`, `multistep_complete`.
+### B4. GSC
+- Pas d'action code requise — GSC ne mesure pas les conversions, il mesure impressions/clics
+- Je préciserai au user : la mesure des conversions = GA4 uniquement, GSC sert au suivi indexation/positions
 
-### Technique
+---
 
-- Stack inchangée (React + Supabase + Lovable AI Gateway).
-- Nouvelle dépendance : aucune (Resend appelé via fetch direct dans edge function).
-- Secret requis : `RESEND_API_KEY` — je le demanderai au moment d'implémenter l'edge function.
-- Migration SQL : création table `leads` avec RLS (INSERT public validé, SELECT service_role only) + GRANT explicites.
+## Hors scope (à demander si besoin)
+- Refonte graphique du blog
+- Migration vers SSR (les og:* par catégorie resteront client-side comme aujourd'hui pour Googlebot)
+- Création des 6 illustrations de catégories (utilisera des photos existantes par défaut)
 
-### Fichiers touchés
+## Détails techniques
 
-Créés : `LeadMagnetForm.tsx`, `ScrollCTA.tsx`, `BlogClusterNav.tsx`, `PompeAChaleur2026.tsx`, `send-lead-magnet/index.ts`, migration leads, PDF placeholder.
-Édités : `Index.tsx`, `DevisGratuit.tsx`, `BlogPost.tsx`, `AidesRenovation2026.tsx`, `generate-blog-post/index.ts`, `RelatedZones.tsx`, `InternalLinksHub.tsx`, `Footer.tsx`, `App.tsx`, `scripts/generate-sitemap.mjs`.
+- Migration SQL via `supabase--migration` avec GRANTs préservés
+- Edge function modifiée puis redéployée automatiquement
+- React-helmet-async déjà en place pour le SEO par route
+- Catégories slugs en kebab-case, mapping en constante partagée `src/lib/blog-categories.ts`
+- TOC : parse markdown `^## ` côté client, génère IDs, scroll-spy léger
+- Articles liés : `.eq('category', current).neq('id', current.id).limit(3)`
+- GTM dataLayer : pas de nouvelle dépendance, juste `window.dataLayer.push(...)`
 
-### Ordre d'exécution
-
-1. Migration `leads` + edge function `send-lead-magnet` + secret Resend
-2. LeadMagnetForm + intégration 3 pages
-3. Multi-step DevisGratuit
-4. ScrollCTA + A/B
-5. Page pilier PompeAChaleur2026
-6. Clusters blog + BlogClusterNav
-7. Maillage interne + sitemap
-
-Dis-moi si je lance tout, ou si tu veux prioriser un bloc (ex. : lead magnet d'abord pour capter dès cette semaine).
+## Estimation
+~15-20 fichiers touchés, 1 migration, 1 edge function modifiée. Je travaille en lots et je vous tiens informé après chaque lot.

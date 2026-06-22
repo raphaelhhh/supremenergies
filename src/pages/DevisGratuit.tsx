@@ -20,8 +20,7 @@ import {
 } from "lucide-react";
 import heroImage from "@/assets/energy-label.png";
 
-const QUOTE_FORM =
-  "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header";
+import { trackLead, getLeadSourceFromQuery } from "@/lib/track-lead";
 
 const STORAGE_KEY = "sce_devis_state";
 
@@ -162,6 +161,17 @@ const DevisGratuit = () => {
       });
       if (fnErr) throw fnErr;
 
+      // GA4 standard conversion event (à marquer comme conversion dans GA4)
+      trackLead({
+        source: getLeadSourceFromQuery("devis_multistep"),
+        project_type: state.work_types[0] ?? null,
+        value: 50,
+        extra: {
+          work_types: state.work_types,
+          housing_type: state.housing_type,
+          postal_code: state.postal_code,
+        },
+      });
       trackEvent("multistep_complete", {
         work_types: state.work_types,
         housing_type: state.housing_type,
@@ -432,10 +442,11 @@ const DevisGratuit = () => {
               )}
 
               <p className="text-xs text-gray-500 mt-6 text-center">
-                Préférez le formulaire long ?{" "}
-                <a href={QUOTE_FORM} target="_blank" rel="noopener noreferrer" className="text-supreme-primary underline">
-                  Ouvrir le formulaire détaillé
-                </a>
+                Vous préférez nous parler ? Appelez le{" "}
+                <a href="tel:+33186046889" className="text-supreme-primary underline">
+                  01 86 04 68 89
+                </a>{" "}
+                — réponse immédiate.
               </p>
             </div>
 

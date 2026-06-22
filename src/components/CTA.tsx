@@ -17,7 +17,7 @@ const CTA = ({
   title = "Prêt à réduire votre empreinte énergétique ?",
   subtitle = "Contactez-nous pour obtenir un devis personnalisé et découvrir les aides financières disponibles pour votre projet.",
   primaryButtonText = "Demander un devis",
-  primaryButtonLink = "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header",
+  primaryButtonLink = "/devis-gratuit",
   secondaryButtonText = "Nos services",
   secondaryButtonLink = "/services",
   backgroundClassName = "bg-supreme-primary",

@@ -133,7 +133,7 @@ const Navbar = () => {
           asChild 
           className="hidden md:inline-flex bg-supreme-accent hover:bg-supreme-accent/90"
         >
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">Demander un devis</a>
+          <a href="/devis-gratuit" target="_blank" rel="noopener noreferrer">Demander un devis</a>
         </Button>
 
         {/* Mobile Menu Button */}
@@ -205,7 +205,7 @@ const Navbar = () => {
               asChild 
               className="w-full bg-supreme-accent hover:bg-supreme-accent/90"
             >
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">Demander un devis</a>
+              <a href="/devis-gratuit" target="_blank" rel="noopener noreferrer">Demander un devis</a>
             </Button>
           </div>
         </div>

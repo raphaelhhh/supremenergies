@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
+import { trackLead } from "@/lib/track-lead";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -63,6 +64,13 @@ const ContactForm = () => {
         },
         mode: "no-cors",
         body: JSON.stringify(zapierData),
+      });
+
+      // GA4 standard conversion event
+      trackLead({
+        source: "contact_form",
+        project_type: formData.subject || null,
+        value: 30,
       });
 
       toast.success("Message envoyé avec succès ! Nous vous contacterons bientôt.");

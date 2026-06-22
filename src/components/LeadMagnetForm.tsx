@@ -79,6 +79,18 @@ const LeadMagnetForm = ({
       const url = (data as { download_url?: string })?.download_url ?? "/guide-aides-renovation-2026.pdf";
 
       trackEvent("lead_magnet_submit", { source });
+      // GA4 standard conversion event (marquer 'generate_lead' comme conversion dans GA4)
+      const w = window as unknown as { dataLayer?: unknown[] };
+      if (w.dataLayer) {
+        w.dataLayer.push({
+          event: "generate_lead",
+          lead_source: "lead_magnet",
+          lead_magnet_source: source,
+          value: 20,
+          currency: "EUR",
+          page_path: typeof location !== "undefined" ? location.pathname : null,
+        });
+      }
 
       // Trigger download
       const a = document.createElement("a");

@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Blog from "./pages/Blog";
+import BlogCategoryPage from "./pages/BlogCategory";
 import Contact from "./pages/Contact";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
@@ -59,6 +60,7 @@ const App = () => (
                 {/* SEO local : pages service × ville (longue traîne) */}
                 <Route path="/services/:service/:ville" element={<ServiceCity />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/categorie/:slug" element={<BlogCategoryPage />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/zones/:ville" element={<ZoneLocale />} />
