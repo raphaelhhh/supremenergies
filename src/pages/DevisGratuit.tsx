@@ -20,8 +20,7 @@ import {
 } from "lucide-react";
 import heroImage from "@/assets/energy-label.png";
 
-const QUOTE_FORM =
-  "/devis-gratuit";
+import { trackLead, getLeadSourceFromQuery } from "@/lib/track-lead";
 
 const STORAGE_KEY = "sce_devis_state";
 
@@ -162,6 +161,17 @@ const DevisGratuit = () => {
       });
       if (fnErr) throw fnErr;
 
+      // GA4 standard conversion event (à marquer comme conversion dans GA4)
+      trackLead({
+        source: getLeadSourceFromQuery("devis_multistep"),
+        project_type: state.work_types[0] ?? null,
+        value: 50,
+        extra: {
+          work_types: state.work_types,
+          housing_type: state.housing_type,
+          postal_code: state.postal_code,
+        },
+      });
       trackEvent("multistep_complete", {
         work_types: state.work_types,
         housing_type: state.housing_type,
