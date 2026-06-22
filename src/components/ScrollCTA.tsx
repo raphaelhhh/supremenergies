@@ -3,7 +3,7 @@ import { X, ArrowRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const QUOTE_FORM =
-  "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header";
+  "/devis-gratuit";
 
 const VARIANTS = [
   {

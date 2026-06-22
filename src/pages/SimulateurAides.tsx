@@ -467,7 +467,7 @@ const SimulateurAides = () => {
                 </p>
 
                 <Button asChild size="lg" className="w-full bg-supreme-accent hover:bg-supreme-accent/90 text-white">
-                  <a href="https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">
+                  <a href="/devis-gratuit" target="_blank" rel="noopener noreferrer">
                     Demander mon devis détaillé sous 48h <ArrowRight className="ml-2" size={16} />
                   </a>
                 </Button>

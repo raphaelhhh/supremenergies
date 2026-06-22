@@ -2,7 +2,7 @@ import { Phone, FileText } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const QUOTE_FORM =
-  "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header";
+  "/devis-gratuit";
 
 /**
  * Barre CTA sticky en bas d'écran sur mobile uniquement.

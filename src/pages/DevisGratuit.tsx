@@ -21,7 +21,7 @@ import {
 import heroImage from "@/assets/energy-label.png";
 
 const QUOTE_FORM =
-  "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform?usp=header";
+  "/devis-gratuit";
 
 const STORAGE_KEY = "sce_devis_state";
 

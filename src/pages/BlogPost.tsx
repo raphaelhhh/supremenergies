@@ -203,7 +203,7 @@ const BlogPost = () => {
                 Nos experts SupremEnergies vous accompagnent de A à Z dans vos travaux de rénovation énergétique. Bénéficiez d'un diagnostic gratuit !
               </p>
               <Button asChild className="bg-supreme-primary hover:bg-supreme-primary/90 text-white px-8 py-3 rounded-lg mb-3">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform" target="_blank" rel="noopener noreferrer">📋 Demander un devis gratuit</a>
+                <a href="/devis-gratuit" target="_blank" rel="noopener noreferrer">📋 Demander un devis gratuit</a>
               </Button>
               <p className="text-gray-500 text-sm mt-2">
                 Ou appelez-nous au <a href="tel:+33186046889" className="text-supreme-primary font-semibold hover:underline">01 86 04 68 89</a>

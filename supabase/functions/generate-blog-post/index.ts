@@ -81,7 +81,7 @@ const TOPICS = [
   }
 ];
 
-const DEVIS_URL = "https://docs.google.com/forms/d/e/1FAIpQLScnhgMR8AwvJG2UkAibutS6EHPI-a-lLnFNqjtOdlpsrBXBcQ/viewform";
+const DEVIS_URL = "/devis-gratuit";
 const PHONE = "01 86 04 68 89";
 
 function slugify(text: string): string {
