@@ -6,82 +6,113 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const TOPICS = [
-  {
-    theme: "MaPrimeRénov'",
-    keywords: ["MaPrimeRénov'", "aides rénovation", "subventions", "prime énergie"],
-    angle: "Actualité et évolutions de MaPrimeRénov' : nouveaux barèmes, conditions d'éligibilité, démarches à suivre.",
-    image: "/images/blog/maprimenov-aides.jpg"
-  },
-  {
-    theme: "Certificats d'Économies d'Énergie (CEE)",
-    keywords: ["CEE", "certificats économies énergie", "prime énergie", "fournisseurs énergie"],
-    angle: "Comment fonctionnent les CEE, comment en bénéficier et les cumuler avec d'autres aides.",
-    image: "/images/blog/maprimenov-aides.jpg"
-  },
-  {
-    theme: "Pompe à chaleur",
-    keywords: ["pompe à chaleur", "PAC", "chauffage", "COP", "air/eau"],
-    angle: "Conseils techniques sur les pompes à chaleur : choix, entretien, performance, innovations.",
-    image: "/images/blog/pompe-a-chaleur.jpg"
-  },
-  {
-    theme: "Isolation thermique",
-    keywords: ["isolation", "ITE", "ITI", "combles", "thermique"],
-    angle: "Techniques d'isolation, matériaux innovants, retours d'expérience et bonnes pratiques.",
-    image: "/images/blog/isolation-thermique.jpg"
-  },
-  {
-    theme: "Panneaux solaires photovoltaïques",
-    keywords: ["panneaux solaires", "photovoltaïque", "autoconsommation", "énergie solaire"],
-    angle: "Rendement, nouvelles technologies, rentabilité et réglementations des installations solaires.",
-    image: "/images/blog/panneaux-solaires.jpg"
-  },
-  {
-    theme: "DPE et réglementation",
-    keywords: ["DPE", "diagnostic performance énergétique", "RE2020", "passoire thermique"],
-    angle: "Évolution du DPE, interdictions de location, obligations légales et impact sur l'immobilier.",
-    image: "/images/blog/dpe-reglementation.jpg"
-  },
-  {
-    theme: "Rénovation globale",
-    keywords: ["rénovation globale", "bouquet travaux", "performance énergétique"],
-    angle: "Avantages d'une approche globale, retours d'expérience, aides spécifiques.",
-    image: "/images/blog/renovation-globale.jpg"
-  },
-  {
-    theme: "Chauffe-eau thermodynamique",
-    keywords: ["chauffe-eau thermodynamique", "eau chaude sanitaire", "ballon thermodynamique"],
-    angle: "Technologies, installation, économies et aides pour le chauffe-eau thermodynamique.",
-    image: "/images/blog/chauffe-eau.jpg"
-  },
-  {
-    theme: "VMC et ventilation",
-    keywords: ["VMC", "ventilation", "qualité air", "double flux"],
-    angle: "Importance de la ventilation, types de VMC, lien avec l'isolation et la qualité de l'air.",
-    image: "/images/blog/vmc-ventilation.jpg"
-  },
-  {
-    theme: "Éco-PTZ et financement",
-    keywords: ["éco-PTZ", "financement", "prêt travaux", "crédit rénovation"],
-    angle: "Solutions de financement pour la rénovation : éco-PTZ, prêts aidés, tiers-financement.",
-    image: "/images/blog/maprimenov-aides.jpg"
-  },
-  {
-    theme: "Fenêtres et menuiseries",
-    keywords: ["fenêtres", "double vitrage", "triple vitrage", "menuiseries"],
-    angle: "Remplacement de fenêtres : matériaux, performances, aides et retour sur investissement.",
-    image: "/images/blog/isolation-maison.jpg"
-  },
-  {
-    theme: "Audit énergétique",
-    keywords: ["audit énergétique", "bilan thermique", "diagnostic", "travaux prioritaires"],
-    angle: "Pourquoi et comment réaliser un audit énergétique avant de rénover.",
-    image: "/images/blog/dpe-reglementation.jpg"
-  }
+// Briefs SEO : chaque entrée = un sujet d'article ciblant UN mot-clé long-tail précis.
+// Le pipeline pioche dans la liste en évitant les sujets déjà traités récemment.
+// category DOIT correspondre à un slug de src/lib/blog-categories.ts.
+interface TopicBrief {
+  theme: string;
+  category: "pompe-a-chaleur" | "isolation" | "panneaux-solaires" | "aides-financieres" | "renovation-globale" | "conseils-pratiques";
+  target_keyword: string;
+  secondary_keywords: string[];
+  search_intent: string;
+  image: string;
+}
+
+const TOPICS: TopicBrief[] = [
+  // --- Aides financières ---
+  { theme: "MaPrimeRénov' 2026 : barèmes, plafonds et conditions", category: "aides-financieres",
+    target_keyword: "MaPrimeRénov 2026 montant",
+    secondary_keywords: ["barème MaPrimeRénov", "plafond revenus MaPrimeRénov", "profil bleu jaune violet rose"],
+    search_intent: "L'internaute veut connaître précisément le montant qu'il peut toucher selon ses revenus et ses travaux.",
+    image: "/images/blog/maprimenov-aides.jpg" },
+  { theme: "Cumuler MaPrimeRénov' et CEE : guide complet 2026", category: "aides-financieres",
+    target_keyword: "cumul MaPrimeRénov CEE 2026",
+    secondary_keywords: ["prime CEE coup de pouce", "écrêtement aides rénovation", "calcul cumul primes"],
+    search_intent: "Comprendre les règles de cumul et le plafond d'écrêtement (100% TTC profil bleu, 90% jaune…).",
+    image: "/images/blog/maprimenov-aides.jpg" },
+  { theme: "Éco-PTZ 2026 : montant, durée et conditions", category: "aides-financieres",
+    target_keyword: "éco PTZ 2026 conditions",
+    secondary_keywords: ["prêt à taux zéro travaux", "éco-PTZ banque éligible", "éco-PTZ copropriété"],
+    search_intent: "Savoir combien on peut emprunter et auprès de quelles banques.",
+    image: "/images/blog/maprimenov-aides.jpg" },
+
+  // --- Pompe à chaleur ---
+  { theme: "Prix d'une pompe à chaleur air/eau en 2026 (pose comprise)", category: "pompe-a-chaleur",
+    target_keyword: "prix pompe à chaleur air eau 2026",
+    secondary_keywords: ["coût installation PAC", "PAC air eau aides", "tarif pompe à chaleur 100m2"],
+    search_intent: "Connaître le budget total pose comprise et après aides.",
+    image: "/images/blog/pompe-a-chaleur.jpg" },
+  { theme: "PAC air/eau vs air/air : laquelle choisir en 2026 ?", category: "pompe-a-chaleur",
+    target_keyword: "PAC air eau ou air air",
+    secondary_keywords: ["différence pompe à chaleur", "comparatif PAC", "PAC chauffage eau chaude"],
+    search_intent: "Aider à choisir le bon type de PAC selon le logement et l'usage.",
+    image: "/images/blog/pompe-a-chaleur.jpg" },
+  { theme: "Pompe à chaleur géothermique : prix, fonctionnement, rentabilité", category: "pompe-a-chaleur",
+    target_keyword: "pompe à chaleur géothermique prix",
+    secondary_keywords: ["PAC géothermique installation", "captage horizontal vertical", "géothermie maison individuelle"],
+    search_intent: "Comprendre si la géothermie est rentable pour son terrain.",
+    image: "/images/blog/pompe-a-chaleur.jpg" },
+
+  // --- Isolation ---
+  { theme: "Isolation des combles perdus : prix et aides 2026", category: "isolation",
+    target_keyword: "isolation combles perdus prix 2026",
+    secondary_keywords: ["isolation combles 1 euro", "soufflage laine de verre", "isolation combles aides"],
+    search_intent: "Connaître le coût au m² et les aides disponibles.",
+    image: "/images/blog/isolation-thermique.jpg" },
+  { theme: "ITE vs ITI : comparatif coût, performance et aides", category: "isolation",
+    target_keyword: "ITE ou ITI comparatif",
+    secondary_keywords: ["isolation thermique extérieure", "isolation par l'intérieur", "ITE prix m2"],
+    search_intent: "Choisir entre isolation extérieure et intérieure.",
+    image: "/images/blog/isolation-thermique.jpg" },
+  { theme: "VMC double flux : prix, fonctionnement et aides 2026", category: "isolation",
+    target_keyword: "VMC double flux prix 2026",
+    secondary_keywords: ["installation VMC double flux", "VMC double flux MaPrimeRénov", "ventilation maison BBC"],
+    search_intent: "Évaluer le coût et les bénéfices d'une VMC double flux.",
+    image: "/images/blog/vmc-ventilation.jpg" },
+  { theme: "Remplacer ses fenêtres : double ou triple vitrage en 2026 ?", category: "isolation",
+    target_keyword: "double ou triple vitrage 2026",
+    secondary_keywords: ["prix fenêtre double vitrage", "isolation acoustique fenêtre", "aide changement fenêtre"],
+    search_intent: "Choisir le vitrage adapté et estimer le retour sur investissement.",
+    image: "/images/blog/isolation-maison.jpg" },
+
+  // --- Panneaux solaires ---
+  { theme: "Rentabilité des panneaux solaires en 2026 : combien ça rapporte ?", category: "panneaux-solaires",
+    target_keyword: "rentabilité panneaux solaires 2026",
+    secondary_keywords: ["amortissement photovoltaïque", "prix kWc panneaux", "revente surplus EDF OA"],
+    search_intent: "Estimer le retour sur investissement réel.",
+    image: "/images/blog/panneaux-solaires.jpg" },
+  { theme: "Autoconsommation solaire avec batterie : guide 2026", category: "panneaux-solaires",
+    target_keyword: "autoconsommation solaire batterie 2026",
+    secondary_keywords: ["panneaux solaires stockage", "batterie domestique solaire", "autoconsommation totale"],
+    search_intent: "Comprendre si une batterie est rentable en autoconsommation.",
+    image: "/images/blog/panneaux-solaires.jpg" },
+
+  // --- Rénovation globale ---
+  { theme: "Parcours Accompagné MaPrimeRénov' : conditions et démarches 2026", category: "renovation-globale",
+    target_keyword: "MaPrimeRénov Parcours Accompagné 2026",
+    secondary_keywords: ["accompagnateur Rénov", "audit énergétique obligatoire", "gain classe DPE"],
+    search_intent: "Comprendre comment activer le parcours et trouver un Accompagnateur Rénov'.",
+    image: "/images/blog/renovation-globale.jpg" },
+  { theme: "Sortir une passoire thermique du DPE F ou G : plan de travaux 2026", category: "renovation-globale",
+    target_keyword: "rénover passoire thermique 2026",
+    secondary_keywords: ["interdiction location DPE G", "audit énergétique passoire", "gain DPE travaux"],
+    search_intent: "Plan d'action pour un propriétaire bailleur ou occupant.",
+    image: "/images/blog/dpe-reglementation.jpg" },
+
+  // --- Conseils pratiques ---
+  { theme: "Audit énergétique : prix, durée et utilité en 2026", category: "conseils-pratiques",
+    target_keyword: "audit énergétique prix 2026",
+    secondary_keywords: ["audit énergétique obligatoire", "auditeur agréé", "audit MaPrimeRénov"],
+    search_intent: "Savoir combien coûte un audit et à quoi il sert.",
+    image: "/images/blog/dpe-reglementation.jpg" },
+  { theme: "Chauffe-eau thermodynamique : prix, économies et aides 2026", category: "conseils-pratiques",
+    target_keyword: "chauffe-eau thermodynamique prix 2026",
+    secondary_keywords: ["ballon thermodynamique aides", "économie chauffe-eau thermodynamique", "installation ballon eau chaude"],
+    search_intent: "Évaluer l'intérêt par rapport à un cumulus classique.",
+    image: "/images/blog/chauffe-eau.jpg" },
 ];
 
-const DEVIS_URL = "/devis-gratuit";
+const DEVIS_URL = "/devis-gratuit?from=blog_cta";
 const PHONE = "01 86 04 68 89";
 
 function slugify(text: string): string {
