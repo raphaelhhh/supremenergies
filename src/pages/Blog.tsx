@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import Hero from "@/components/Hero";
 import BlogCard from "@/components/BlogCard";
 import CTA from "@/components/CTA";
@@ -10,16 +11,18 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { BLOG_CATEGORIES } from "@/lib/blog-categories";
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const { data: blogPosts = [], isLoading } = useQuery({
     queryKey: ["blog-posts"],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
-        .select("id, title, slug, excerpt, author, image_src, published_at")
+        .select("id, title, slug, excerpt, author, image_src, published_at, category")
         .eq("published", true)
         .order("published_at", { ascending: false });
       if (error) throw error;
@@ -27,10 +30,13 @@ const Blog = () => {
     },
   });
 
-  const filteredPosts = blogPosts.filter(post => 
-    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPosts = blogPosts.filter((post) => {
+    const matchSearch =
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchCategory = !activeCategory || (post as { category?: string }).category === activeCategory;
+    return matchSearch && matchCategory;
+  });
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString("fr-FR", {
@@ -106,10 +112,49 @@ const Blog = () => {
               )}
             </div>
           </div>
+          {/* Catégories chips */}
+          <div className="max-w-4xl mx-auto mt-6 flex flex-wrap justify-center gap-2">
+            <button
+              type="button"
+              onClick={() => setActiveCategory(null)}
+              className={`px-3 py-1.5 rounded-full text-sm border transition ${
+                activeCategory === null
+                  ? "border-supreme-primary bg-supreme-primary text-white font-semibold"
+                  : "border-gray-200 bg-white text-gray-700 hover:border-supreme-primary hover:text-supreme-primary"
+              }`}
+            >
+              Toutes
+            </button>
+            {BLOG_CATEGORIES.map((c) => (
+              <div key={c.slug} className="flex items-center">
+                <button
+                  type="button"
+                  onClick={() => setActiveCategory(c.slug)}
+                  className={`px-3 py-1.5 rounded-l-full text-sm border-y border-l transition ${
+                    activeCategory === c.slug
+                      ? "border-supreme-primary bg-supreme-primary text-white font-semibold"
+                      : "border-gray-200 bg-white text-gray-700 hover:border-supreme-primary hover:text-supreme-primary"
+                  }`}
+                >
+                  {c.shortName}
+                </button>
+                <Link
+                  to={`/blog/categorie/${c.slug}`}
+                  aria-label={`Voir la page catégorie ${c.name}`}
+                  title={`Page dédiée ${c.name}`}
+                  className={`px-2 py-1.5 rounded-r-full text-xs border-y border-r transition ${
+                    activeCategory === c.slug
+                      ? "border-supreme-primary bg-supreme-primary text-white"
+                      : "border-gray-200 bg-white text-gray-500 hover:text-supreme-primary"
+                  }`}
+                >
+                  →
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-
-      {/* Blog Posts */}
       <section className="py-16 md:py-20">
         <div className="container-custom">
           {isLoading ? (
