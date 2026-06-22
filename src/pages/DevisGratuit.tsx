@@ -442,10 +442,11 @@ const DevisGratuit = () => {
               )}
 
               <p className="text-xs text-gray-500 mt-6 text-center">
-                Préférez le formulaire long ?{" "}
-                <a href={QUOTE_FORM} target="_blank" rel="noopener noreferrer" className="text-supreme-primary underline">
-                  Ouvrir le formulaire détaillé
-                </a>
+                Vous préférez nous parler ? Appelez le{" "}
+                <a href="tel:+33186046889" className="text-supreme-primary underline">
+                  01 86 04 68 89
+                </a>{" "}
+                — réponse immédiate.
               </p>
             </div>
 
