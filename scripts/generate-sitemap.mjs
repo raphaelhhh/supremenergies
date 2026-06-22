@@ -63,6 +63,16 @@ const SERVICE_SLUGS = [
   "renovation-globale",
 ];
 
+// Catégories blog — doivent rester synchronisées avec src/lib/blog-categories.ts
+const BLOG_CATEGORY_SLUGS = [
+  "pompe-a-chaleur",
+  "isolation",
+  "panneaux-solaires",
+  "aides-financieres",
+  "renovation-globale",
+  "conseils-pratiques",
+];
+
 // IMPORTANT : lastmod doit refléter la VRAIE date de dernière modification
 // éditoriale de la page. Mettre `today` partout dégrade la confiance de Google.
 // Quand tu modifies réellement le contenu d'une page, mets sa date à jour ici.
@@ -106,6 +116,13 @@ const STATIC_URLS = [
       priority: "0.8",
     })),
   ),
+  // Pages catégorie blog (hubs SEO)
+  ...BLOG_CATEGORY_SLUGS.map((slug) => ({
+    loc: `/blog/categorie/${slug}`,
+    lastmod: STATIC_PAGES_LAST_REVIEW,
+    changefreq: "weekly",
+    priority: "0.8",
+  })),
 ];
 
 // Pour le blog : on utilise le timestamp ISO complet (W3C datetime), plus précis
