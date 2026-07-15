@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "sdk_version": "0.22.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://epeomgifqjbgzyurcnaz.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "supremenergies-mcp",
+      "version": "0.1.0",
+      "title": "SupremEnergies"
+    },
+    "tools": [
+      {
+        "name": "list_recent_leads",
+        "title": "List recent leads",
+        "description": "List the most recent leads captured by the SupremEnergies website forms (quote requests, contact, lead magnet). Requires admin role — RLS enforces this on the server.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "description": "Number of leads to return (max 100)."
+            },
+            "source": {
+              "type": "string",
+              "maxLength": 64,
+              "description": "Optional source filter (e.g. 'devis-gratuit', 'contact', 'lead_magnet')."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_blog_posts",
+        "title": "List blog posts",
+        "description": "List published blog articles from SupremEnergies (title, slug, excerpt, category, target keyword, publication date).",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20
+            },
+            "category": {
+              "type": "string",
+              "maxLength": 64,
+              "description": "Filter by blog category slug (e.g. 'pompe-a-chaleur')."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_blog_post",
+        "title": "Get blog post by slug",
+        "description": "Fetch the full content of a published SupremEnergies blog article by its slug.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255,
+              "description": "Article slug, e.g. 'aides-renovation-2026'."
+            }
+          },
+          "required": [
+            "slug"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_testimonials",
+        "title": "List customer testimonials",
+        "description": "List published customer testimonials for SupremEnergies (name, city, service, rating, savings).",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20
+            },
+            "service": {
+              "type": "string",
+              "maxLength": 64,
+              "description": "Filter by service (e.g. 'pompe-a-chaleur', 'isolation')."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
