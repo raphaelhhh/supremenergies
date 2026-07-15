@@ -32,6 +32,7 @@ import AidesRenovation2026 from "./pages/AidesRenovation2026";
 import PompeAChaleur2026 from "./pages/PompeAChaleur2026";
 import Auth from "./pages/Auth";
 import AdminLeads from "./pages/AdminLeads";
+import OAuthConsent from "./pages/OAuthConsent";
 import PlanDuSite from "./pages/PlanDuSite";
 import StickyMobileCTA from "./components/StickyMobileCTA";
 import ExitIntentPopup from "./components/ExitIntentPopup";
@@ -76,7 +77,9 @@ const App = () => (
                 <Route path="/mentions-legales" element={<LegalNotices />} />
                 <Route path="/plan-du-site" element={<PlanDuSite />} />
                 <Route path="/auth" element={<Auth />} />
+                <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
                 <Route path="/admin/leads" element={<AdminLeads />} />
+
                 <Route path="*" element={<NotFound />} />
 
               </Routes>
