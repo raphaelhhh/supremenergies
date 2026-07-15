@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -13,22 +13,32 @@ const schema = z.object({
   password: z.string().min(8, "8 caractères minimum").max(72),
 });
 
+/** Only allow same-origin relative paths as post-auth redirect. */
+function sanitizeNext(raw: string | null): string | null {
+  if (!raw) return null;
+  if (!raw.startsWith("/") || raw.startsWith("//")) return null;
+  return raw;
+}
+
 export default function Auth() {
   const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const next = sanitizeNext(params.get("next"));
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const redirectAfterAuth = () => navigate(next ?? "/admin/leads", { replace: true });
     const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      if (session) navigate("/admin/leads", { replace: true });
+      if (session) redirectAfterAuth();
     });
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate("/admin/leads", { replace: true });
+      if (data.session) redirectAfterAuth();
     });
     return () => sub.subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, next]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,13 +48,14 @@ export default function Auth() {
       return;
     }
     setLoading(true);
+    const emailRedirectTo = `${window.location.origin}${next ?? "/admin/leads"}`;
     const { error } =
       mode === "signin"
         ? await supabase.auth.signInWithPassword({ email, password })
         : await supabase.auth.signUp({
             email,
             password,
-            options: { emailRedirectTo: `${window.location.origin}/admin/leads` },
+            options: { emailRedirectTo },
           });
     setLoading(false);
     if (error) {
