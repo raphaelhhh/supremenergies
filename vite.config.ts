@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { spawnSync } from "node:child_process";
+import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/supabase/vite";
 
 // Plugin Vite SEO :
 // - buildStart : régénère public/sitemap.xml (toutes les routes + blog)
@@ -43,6 +44,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
+    mcpPlugin(),
     seoPlugin(),
     mode === 'development' &&
     componentTagger(),
