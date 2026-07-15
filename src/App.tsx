@@ -77,7 +77,9 @@ const App = () => (
                 <Route path="/mentions-legales" element={<LegalNotices />} />
                 <Route path="/plan-du-site" element={<PlanDuSite />} />
                 <Route path="/auth" element={<Auth />} />
+                <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
                 <Route path="/admin/leads" element={<AdminLeads />} />
+
                 <Route path="*" element={<NotFound />} />
 
               </Routes>
