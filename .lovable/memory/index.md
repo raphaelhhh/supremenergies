@@ -7,6 +7,7 @@ All "Demander un devis" buttons link to external Google Form. Internals to Zapie
 Tech: Supabase (Auth, DB, Functions), react-helmet-async for SEO, Tailwind prose.
 Visuals: Realistic photos only. Hero uses `energy-label.png`.
 Do not re-add statistics bar (was removed).
+Bandeau France Rénov' obligatoire (arrêté 7/07/2026) sur toutes les pages, phrase exacte + lien france-renov.gouv.fr/servicepublic. Ne jamais retirer.
 SEO meta: punchy titles with ★/✓ emojis + numbers ("11 000€", "48h", "4.8/5") for CTR.
 
 ## Memories
