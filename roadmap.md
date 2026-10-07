@@ -1,5 +1,5 @@
 # Site presentation review
-- [ ] Check primary pages and visible navigation.
-- [ ] Clean broken article images, quote-page spacing, contact presentation and footer placeholders.
-- [ ] Verify the cleaned pages and quote steps in the browser.
-- [ ] Report missing company identifiers requiring owner-provided information.
+- [x] Check primary pages and visible navigation.
+- [x] Clean broken article images, quote-page spacing, contact presentation and footer placeholders.
+- [x] Verify the cleaned pages and quote steps in the browser (no final submission sent).
+- [x] Flag missing company identifiers in the review; legal completion requires owner-provided details.

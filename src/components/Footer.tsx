@@ -59,7 +59,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Main Content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
+        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold mb-6 text-white">SupremEnergies</h3>
