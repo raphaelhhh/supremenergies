@@ -33,9 +33,11 @@ const BlogCard = ({
         <img
           src={imageSrc}
           alt={title}
+          loading="lazy"
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           onError={(e) => {
-            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=1170&q=80";
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = "/images/blog/isolation-maison.jpg";
           }}
         />
       </Link>

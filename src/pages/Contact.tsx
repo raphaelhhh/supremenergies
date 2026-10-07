@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import Hero from "@/components/Hero";
 import ContactForm from "@/components/ContactForm";
 import { Mail, MapPin, Clock } from "lucide-react";
 import { useEffect } from "react";
@@ -91,11 +90,11 @@ const Contact = () => {
       {/* Contact Information Section */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="max-w-2xl mx-auto">
             <div>
               <h2 className="text-3xl font-bold mb-6 text-supreme-primary">Nos Coordonnées</h2>
               <p className="text-lg mb-8 text-gray-700">
-                N'hésitez pas à nous contacter par email ou en venant directement à nos bureaux. Notre équipe de conseillers spécialisés se fera un plaisir de vous accompagner dans vos projets.
+                Contactez-nous par téléphone, par email ou via le formulaire. Notre équipe vous accompagne dans votre projet. Nous ne recevons pas de visiteurs au siège social.
               </p>
               <div className="space-y-6">
                 <div className="flex items-start">
@@ -103,9 +102,9 @@ const Contact = () => {
                     <MapPin className="h-6 w-6 text-supreme-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Adresse</h3>
-                    <p className="text-gray-600">55 rue cartier bresson, 93500 pantin, France</p>
-                    <p className="text-gray-600">Téléphone: 01 86 04 68 89</p>
+                    <h3 className="font-semibold text-lg">Siège social</h3>
+                    <p className="text-muted-foreground">55 rue Cartier-Bresson, 93500 Pantin, France</p>
+                    <a href="tel:0186046889" className="text-primary hover:underline">Téléphone : 01 86 04 68 89</a>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -114,7 +113,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Email</h3>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 break-all">
                       <a href="mailto:contact@supremenergies.com" className="hover:text-supreme-primary transition-colors">
                         contact@supremenergies.com
                       </a>
@@ -126,24 +125,12 @@ const Contact = () => {
                     <Clock className="h-6 w-6 text-supreme-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Horaires d'ouverture</h3>
+                    <h3 className="font-semibold text-lg">Horaires de contact</h3>
                     <p className="text-gray-600">Lundi - Vendredi: 9h00 - 19h00</p>
                     <p className="text-gray-600">Samedi - Dimanche: Fermé</p>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="bg-gray-200 rounded-lg overflow-hidden h-[400px] shadow-md">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.142047557097!2d2.3414048768644355!3d48.86150940090647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sPalais%20Royal%2C%2075001%20Paris!5e0!3m2!1sfr!2sfr!4v1682504184416!5m2!1sfr!2sfr" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Carte Google Maps de SupremEnergies"
-              ></iframe>
             </div>
           </div>
         </div>
