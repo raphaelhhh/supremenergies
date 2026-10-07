@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import Hero from "@/components/Hero";
-import SocialProof from "@/components/SocialProof";
 import SectionHeader from "@/components/SectionHeader";
 import ServiceCard from "@/components/ServiceCard";
 import TestimonialCard from "@/components/TestimonialCard";
@@ -259,8 +258,6 @@ const Index = () => {
         imageSrc={heroImage}
         imageAlt="Rénovation énergétique et isolation thermique"
       />
-
-      <SocialProof />
 
       {/* Lead magnet PDF */}
       <section className="py-12 bg-gradient-to-b from-supreme-light/30 to-white">

@@ -133,7 +133,7 @@ const Navbar = () => {
           asChild 
           className="hidden md:inline-flex bg-supreme-accent hover:bg-supreme-accent/90"
         >
-          <a href="/devis-gratuit" target="_blank" rel="noopener noreferrer">Demander un devis</a>
+          <Link to="/devis-gratuit">Demander un devis</Link>
         </Button>
 
         {/* Mobile Menu Button */}
@@ -205,7 +205,7 @@ const Navbar = () => {
               asChild 
               className="w-full bg-supreme-accent hover:bg-supreme-accent/90"
             >
-              <a href="/devis-gratuit" target="_blank" rel="noopener noreferrer">Demander un devis</a>
+              <Link to="/devis-gratuit">Demander un devis</Link>
             </Button>
           </div>
         </div>

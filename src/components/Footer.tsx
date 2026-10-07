@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Facebook, Instagram, Linkedin, Twitter, ArrowRight } from "lucide-react";
+import { Mail, MapPin, ArrowRight } from "lucide-react";
 import FooterPopularArticles from "./FooterPopularArticles";
 const Footer = () => {
   return <footer className="bg-gray-900 text-white">
@@ -59,7 +59,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Main Content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold mb-6 text-white">SupremEnergies</h3>
@@ -67,20 +67,6 @@ const Footer = () => {
               Experts en rénovation énergétique pour particuliers et professionnels.
               Garantie décennale et accompagnement personnalisé.
             </p>
-            <div className="flex space-x-4">
-              <a href="https://facebook.com" aria-label="Facebook" className="text-gray-200 hover:text-white transition-colors">
-                <Facebook size={20} />
-              </a>
-              <a href="https://twitter.com" aria-label="Twitter" className="text-gray-200 hover:text-white transition-colors">
-                <Twitter size={20} />
-              </a>
-              <a href="https://instagram.com" aria-label="Instagram" className="text-gray-200 hover:text-white transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href="https://linkedin.com" aria-label="LinkedIn" className="text-gray-200 hover:text-white transition-colors">
-                <Linkedin size={20} />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -163,12 +149,12 @@ const Footer = () => {
               <li className="flex items-start space-x-3">
                 <MapPin size={20} className="text-supreme-accent flex-shrink-0 mt-1" />
                 <span className="text-gray-200">
-                  55 rue cartier bresson,<br />93500 pantin, France
+                  55 rue Cartier-Bresson,<br />93500 Pantin, France
                 </span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={20} className="text-supreme-accent flex-shrink-0" />
-                <a href="mailto:contact@supremenergies.com" className="text-gray-200 hover:text-white transition-colors">
+                <a href="mailto:contact@supremenergies.com" className="text-gray-200 hover:text-white transition-colors break-all">
                   contact@supremenergies.com
                 </a>
               </li>

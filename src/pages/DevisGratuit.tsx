@@ -195,7 +195,7 @@ const DevisGratuit = () => {
   const progress = (step / 4) * 100;
 
   return (
-    <div>
+    <div className="pt-24">
       <Helmet>
         <title>Devis Gratuit Rénovation Énergétique 48h | 11 000€ d'aides</title>
         <meta
