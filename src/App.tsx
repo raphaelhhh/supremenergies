@@ -38,10 +38,18 @@ import PlanDuSite from "./pages/PlanDuSite";
 import StickyMobileCTA from "./components/StickyMobileCTA";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 import ScrollCTA from "./components/ScrollCTA";
+import CookieBanner from "./components/CookieBanner";
+import { useEffect } from "react";
+import { loadGoogleAds } from "./lib/google-ads";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    void loadGoogleAds();
+  }, []);
+
+  return (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -90,11 +98,13 @@ const App = () => (
             <StickyMobileCTA />
             <ScrollCTA />
             <ExitIntentPopup />
+            <CookieBanner />
           </div>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
-);
+  );
+};
 
 export default App;

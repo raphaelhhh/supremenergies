@@ -1,4 +1,6 @@
 // Helper unique pour pousser un événement GA4 'generate_lead' dans le dataLayer GTM.
+// Envoie aussi la conversion « Demande de devis » à Google Ads (avec consentement).
+import { fireAdsConversion } from "./google-ads";
 // Documentation officielle : https://developers.google.com/analytics/devguides/collection/ga4/reference/events#generate_lead
 //
 // Côté GA4 : marquer 'generate_lead' comme conversion (Admin → Évènements → Marquer comme conversion).
@@ -49,6 +51,8 @@ export function trackLead({
     page_path: typeof location !== "undefined" ? location.pathname : null,
     ...extra,
   });
+  // Conversion Google Ads « Demande de devis (site) » — sans effet sans consentement.
+  void fireAdsConversion();
 }
 
 /** Lit le paramètre ?from=... de l'URL pour tagger l'origine d'un formulaire. */

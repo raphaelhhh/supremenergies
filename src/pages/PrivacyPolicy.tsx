@@ -87,12 +87,28 @@ const PrivacyPolicy = () => {
               <li>Cookies de mesure d'audience : <strong>13 mois</strong> maximum</li>
             </ul>
 
-            <h2 className="text-2xl font-semibold mb-4 text-gray-800">8. Cookies</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">8. Cookies et mesure publicitaire</h2>
             <p className="mb-6">
               Notre site utilise des cookies nécessaires au fonctionnement, ainsi que des cookies de mesure
-              d'audience et de marketing (Google Analytics via GTM, Meta Pixel). Vous pouvez accepter, refuser
-              ou paramétrer leur utilisation à tout moment via le bandeau de consentement ou les paramètres
-              de votre navigateur.
+              d'audience et de marketing (Google Analytics via Google Tag Manager, Google Ads, Meta Pixel).
+              Vous pouvez accepter, refuser ou modifier votre choix à tout moment via le lien
+              « Paramètres des cookies » en bas de chaque page.
+            </p>
+            <p className="mb-6">
+              <strong>Publicité Google :</strong> lorsque vous y consentez, Google Ads reçoit des données de
+              navigation (pages vues, envois de formulaire) à des fins de mesure de l'efficacité de nos
+              annonces et d'optimisation de leur diffusion. Google agit comme destinataire de ces données,
+              conformément à ses propres règles de confidentialité. Pour en savoir plus sur l'utilisation
+              de vos données par Google, consultez{" "}
+              <a
+                href="https://business.safety.google/privacy/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-supreme-primary underline"
+              >
+                la page dédiée de Google
+              </a>
+              . Sans votre consentement, aucune mesure publicitaire détaillée n'est effectuée.
             </p>
 
             <h2 className="text-2xl font-semibold mb-4 text-gray-800">9. Vos droits</h2>

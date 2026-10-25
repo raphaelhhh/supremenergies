@@ -174,6 +174,14 @@ const Footer = () => {
             <Link to="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
             {" | "}
             <Link to="/plan-du-site" className="hover:text-white transition-colors">Plan du site</Link>
+            {" | "}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event("open-cookie-settings"))}
+              className="hover:text-white transition-colors"
+            >
+              Paramètres des cookies
+            </button>
           </p>
         </div>
       </div>
