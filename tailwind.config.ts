@@ -68,7 +68,7 @@ export default {
 					"primary": "#0B2545", // Bleu nuit
 					"secondary": "#13315C", // Bleu profond
 					"dark": "#0A1B2E", // Encre la plus foncée (titres)
-					"light": "#F7F5F0", // Fond crème
+					"light": "#F6F8FA", // Fond clair des sections
 					"accent": "#F59E0B", // Orange accent pour les appels à l'action
 					"gold": "#C8A15A", // Or : filets et petits accents
 				},
@@ -124,7 +124,7 @@ export default {
 			},
 			fontFamily: {
 				'montserrat': ['Montserrat', 'sans-serif'],
-				'display': ['Fraunces', 'Georgia', 'serif'],
+				'display': ['Montserrat', 'sans-serif'],
 			}
 		}
 	},
