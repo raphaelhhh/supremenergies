@@ -4,4 +4,5 @@
 - [ ] Étape 2 : harmoniser pages services, contact, devis et simulateur (même style, retirer « simulateur officiel », délais 24h/48h).
 - [ ] Étape 3 : photos réelles de chantiers et de l'équipe — en attente des photos du propriétaire.
 - [ ] Étape 4 : SIRET, RCS, assurance décennale dans les mentions — en attente des informations du propriétaire.
-- [ ] Campagnes Google et Meta orientées visites, pompe à chaleur, France entière (installations nationales avec les équipes confirmées) : proposer une page cohérente avec la couverture nationale, puis choix de campagne, comptes et approbation du budget ; aucun lancement autorisé.
+- [x] Adapter la page pompe à chaleur à la couverture nationale par nos équipes, en bleu et orange sans effet luxe.
+- [ ] Campagnes Google et Meta orientées visites, pompe à chaleur, France entière : choix de campagne, comptes et approbation du budget ; aucun lancement autorisé.
