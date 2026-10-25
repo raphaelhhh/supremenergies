@@ -82,7 +82,7 @@
   }
   
   .btn-accent {
-    @apply bg-supreme-accent hover:bg-supreme-accent/90 text-white font-medium py-2 px-6 rounded-md transition-all;
+    @apply bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark font-medium py-2 px-6 rounded-md transition-all;
   }
 
   .section-padding {
