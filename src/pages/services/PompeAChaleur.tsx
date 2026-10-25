@@ -1,179 +1,128 @@
 import { Helmet } from "react-helmet-async";
-import Hero from "@/components/Hero";
-import CTA from "@/components/CTA";
+import { ArrowRight, Check, CheckCircle2, Home, MapPin, Phone, Thermometer, Users, Wind } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import Breadcrumb from "@/components/Breadcrumb";
 import RelatedArticles from "@/components/RelatedArticles";
 import SeoBreadcrumb from "@/components/SeoBreadcrumb";
 import RelatedServices from "@/components/RelatedServices";
 import RelatedZones from "@/components/RelatedZones";
-import { Home, CheckCircle2, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import installationPhoto from "../gettyimages-2160605901-612x612.jpg";
+import { heatPumpCoverage } from "@/data/pompe-a-chaleur";
 
 const faqItems = [
-  { question: "Quelle pompe à chaleur choisir ?", answer: "La PAC air/eau est idéale pour remplacer une chaudière et alimenter radiateurs ou plancher chauffant. La PAC air/air convient pour chauffer et climatiser. La PAC géothermique offre le meilleur rendement toute l'année mais nécessite un terrain." },
-  { question: "Combien coûte une pompe à chaleur ?", answer: "Le coût varie de 8 000 à 18 000 € selon le type et la puissance. Avec MaPrimeRénov' (jusqu'à 5 000 €) et les CEE, le reste à charge peut être considérablement réduit." },
-  { question: "Quelles économies avec une pompe à chaleur ?", answer: "Une PAC permet de réaliser 50 à 75% d'économies par rapport à un chauffage électrique classique, et jusqu'à 40% par rapport à une chaudière gaz. Le retour sur investissement est généralement de 5 à 8 ans." },
-  { question: "Une PAC fonctionne-t-elle par grand froid ?", answer: "Les PAC modernes fonctionnent jusqu'à -15°C voire -25°C. En Île-de-France, elles couvrent 100% des besoins de chauffage. Un appoint électrique intégré prend le relais si nécessaire." }
+  { question: "Installez-vous des pompes à chaleur partout en France ?", answer: "Oui. Nos équipes réalisent les installations de pompes à chaleur partout en France. Indiquez votre commune et votre code postal dans la demande de devis : nous étudions votre logement et organisons l'intervention avec vous." },
+  { question: "Qui réalise mon installation ?", answer: "L'installation est réalisée par les équipes de SupremEnergies. Nous vous accompagnons dans le choix de l'équipement, la préparation du chantier et la mise en service." },
+  { question: "Quelle pompe à chaleur choisir pour ma maison ?", answer: "Le choix dépend de votre isolation, de la surface à chauffer, de votre chauffage actuel et du climat local. Une PAC air/eau peut alimenter des radiateurs ou un plancher chauffant ; une PAC air/air chauffe et peut rafraîchir les pièces. Une étude permet de choisir une puissance adaptée." },
+  { question: "Quel budget prévoir ?", answer: "Le prix dépend de l'équipement, de sa puissance et des adaptations nécessaires dans votre logement. Votre devis détaille les travaux et le coût de l'installation. Les aides éventuelles sont étudiées séparément : elles ne sont ni automatiques ni garanties." },
+  { question: "Quelles aides peuvent financer mon projet ?", answer: "Selon votre situation, le type de pompe à chaleur et les conditions du dispositif, MaPrimeRénov', les primes CEE ou un éco-prêt à taux zéro peuvent être envisagés. L'éligibilité doit être vérifiée avant tout engagement ; la décision appartient aux organismes concernés." },
+  { question: "Une pompe à chaleur fonctionne-t-elle en hiver ?", answer: "Oui, mais ses performances dépendent de la température extérieure, du modèle et du dimensionnement. Dans les régions froides, l'étude du logement tient compte des besoins en hiver et d'un éventuel appoint. Les économies dépendent aussi de l'isolation et de l'usage." },
 ];
+const solutions = [
+  { icon: Thermometer, title: "PAC air/eau", text: "Pour remplacer votre chaudière et alimenter vos radiateurs ou votre plancher chauffant. Selon le modèle, elle peut aussi produire l'eau chaude." },
+  { icon: Wind, title: "PAC air/air", text: "Pour chauffer les pièces en hiver et les rafraîchir en été avec un système de climatisation réversible." },
+  { icon: Home, title: "PAC géothermique ou hybride", text: "Des solutions à étudier selon votre terrain, votre installation existante et les besoins de votre habitation." },
+];
+const steps = [
+  { title: "Vous nous parlez de votre maison", text: "Votre commune, votre chauffage actuel et votre projet : nous partons de votre situation." },
+  { title: "Nous étudions votre installation", text: "Isolation, besoins de chauffage et configuration du logement pour choisir une solution adaptée." },
+  { title: "Vous recevez un devis détaillé", text: "Équipement, travaux prévus et budget. Nous faisons aussi le point sur les aides possibles." },
+  { title: "Nos équipes réalisent les travaux", text: "Nous organisons l'installation et la mise en service, puis vous expliquons le fonctionnement." },
+];
+const title = "Pompe à chaleur partout en France | SupremEnergies";
+const description = "Installation de pompes à chaleur partout en France par les équipes SupremEnergies. Étude de votre logement, devis gratuit et accompagnement sur les aides.";
 
 const PompeAChaleur = () => {
+  const ownTeams = heatPumpCoverage.installationTeam === "internal";
   const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Installation de Pompes à Chaleur",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "SupremEnergies",
-      "telephone": "01 86 04 68 89",
-      "address": { "@type": "PostalAddress", "streetAddress": "55 rue Cartier Bresson", "addressLocality": "Pantin", "postalCode": "93500", "addressCountry": "FR" }
-    },
-    "areaServed": "Île-de-France",
-    "description": "Installation de pompes à chaleur air/eau, air/air et géothermiques. Réduisez vos factures de chauffage de 50 à 75%.",
-    "serviceType": "Installation pompe à chaleur"
+    "@context": "https://schema.org", "@type": "Service", name: "Installation de pompes à chaleur",
+    provider: { "@type": "LocalBusiness", name: "SupremEnergies", telephone: "01 86 04 68 89", address: { "@type": "PostalAddress", streetAddress: "55 rue Cartier-Bresson", addressLocality: "Pantin", postalCode: "93500", addressCountry: "FR" } },
+    areaServed: heatPumpCoverage.areaServed, description, serviceType: "Installation pompe à chaleur",
   };
+  const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqItems.map(item => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqItems.map(item => ({
-      "@type": "Question",
-      "name": item.question,
-      "acceptedAnswer": { "@type": "Answer", "text": item.answer }
-    }))
-  };
+  return <div>
+    <SeoBreadcrumb items={[{ name: "Accueil", url: "/" }, { name: "Services", url: "/services" }, { name: "Pompe à chaleur", url: "/services/pompe-a-chaleur" }]} />
+    <Helmet>
+      <title>{title}</title><meta name="description" content={description} />
+      <link rel="canonical" href="https://supremenergies.com/services/pompe-a-chaleur" />
+      <meta property="og:title" content={title} /><meta property="og:description" content={description} />
+      <meta property="og:url" content="https://supremenergies.com/services/pompe-a-chaleur" /><meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} />
+      <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script><script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+    </Helmet>
 
-  return (
-    <div>
-      <SeoBreadcrumb items={[
-        { name: "Accueil", url: "/" },
-        { name: "Services", url: "/services" },
-        { name: "Pompe à chaleur", url: "/services/pompe-a-chaleur" },
-      ]} />
-      <Helmet>
-        <title>Pompe à Chaleur en Île-de-France | Installation PAC | SupremEnergies</title>
-        <meta name="description" content="Installation de pompes à chaleur air/eau, air/air et géothermiques en Île-de-France. Économisez 50 à 75% sur votre chauffage. Devis gratuit, aides MaPrimeRénov' 2026." />
-        <link rel="canonical" href="https://supremenergies.com/services/pompe-a-chaleur" />
-        <meta property="og:title" content="Pompe à Chaleur en Île-de-France | SupremEnergies" />
-        <meta property="og:description" content="Installation PAC air/eau, air/air. Économies de 50 à 75%. Devis gratuit." />
-        <meta property="og:url" content="https://supremenergies.com/services/pompe-a-chaleur" />
-        <meta property="og:type" content="website" />
-        <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      </Helmet>
-
-      <Hero
-        title="Pompes à Chaleur"
-        subtitle="Divisez vos factures de chauffage par 3 à 4 grâce à une pompe à chaleur performante et écologique."
-        buttonText="Demander un devis gratuit"
-        buttonLink="/contact"
-        imageSrc="https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/gettyimages-2160605901-612x612.jpg"
-        imageAlt="Installation de pompe à chaleur"
-      />
-
-      <Breadcrumb items={[{ label: "Services", href: "/services" }, { label: "Pompe à Chaleur" }]} />
-
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div>
-              <h2 className="text-3xl font-bold mb-6 text-supreme-primary">Comment fonctionne une pompe à chaleur ?</h2>
-              <p className="text-lg mb-4 text-gray-700">
-                Une pompe à chaleur capte l'énergie gratuite présente dans l'environnement (air, eau ou sol) et la transfère à votre système de chauffage. Pour 1 kWh d'électricité consommé, elle produit 3 à 4 kWh de chaleur.
-              </p>
-              <p className="text-lg mb-6 text-gray-700">
-                C'est aujourd'hui la solution de chauffage la plus économique et écologique, recommandée par l'État dans le cadre de la transition énergétique.
-              </p>
-
-              <h3 className="text-xl font-semibold mb-4">Nos solutions PAC</h3>
-              <ul className="space-y-3 mb-8">
-                {[
-                  { title: "PAC air/eau", desc: "Idéale pour remplacer une chaudière. Alimente radiateurs, plancher chauffant et eau chaude sanitaire." },
-                  { title: "PAC air/air (climatisation réversible)", desc: "Chauffe en hiver, rafraîchit en été. Installation simple et rapide." },
-                  { title: "PAC géothermique", desc: "Puise la chaleur du sol pour un rendement optimal et constant, même par grand froid." },
-                  { title: "PAC hybride", desc: "Combine pompe à chaleur et chaudière gaz pour une efficacité maximale en toutes conditions." }
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start">
-                    <CheckCircle2 className="h-6 w-6 text-supreme-primary mr-2 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-medium">{item.title}</span>
-                      <p className="text-gray-600">{item.desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Économies réalisables</h3>
-              <div className="bg-supreme-light p-6 rounded-lg mb-6">
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <span className="font-medium">vs chauffage électrique</span>
-                    <span className="text-supreme-primary font-bold text-lg">-50 à -75%</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="font-medium">vs chaudière gaz</span>
-                    <span className="text-supreme-primary font-bold text-lg">-30 à -40%</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="font-medium">vs chaudière fioul</span>
-                    <span className="text-supreme-primary font-bold text-lg">-50 à -60%</span>
-                  </div>
-                </div>
-              </div>
-
-              <h3 className="text-xl font-semibold mb-4">Aides financières</h3>
-              <ul className="space-y-2 mb-8">
-                {[
-                  "MaPrimeRénov' : jusqu'à 5 000 € pour une PAC air/eau",
-                  "CEE : primes complémentaires de 2 500 à 4 000 €",
-                  "Éco-PTZ : jusqu'à 50 000 € à taux zéro",
-                  "TVA à 5,5%"
-                ].map((aide, i) => (
-                  <li key={i} className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-supreme-secondary mr-2 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{aide}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Button asChild className="bg-supreme-primary hover:bg-supreme-primary/90 w-full">
-                <Link to="/contact" className="flex items-center justify-center gap-2">
-                  Demander un devis gratuit <ArrowRight size={18} />
-                </Link>
-              </Button>
-            </div>
+    <section className="relative isolate overflow-hidden bg-supreme-primary pt-24 pb-12 md:pt-28 md:pb-16">
+      <img src={installationPhoto} alt="Installation d’une unité extérieure de pompe à chaleur sur une maison" width={612} height={408} fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-right" />
+      <div className="absolute inset-0 -z-10 bg-supreme-primary/90 md:bg-supreme-primary/80" />
+      <div className="container-custom">
+        <div className="[&_nav]:py-0 [&_a]:text-primary-foreground/80 [&_span]:text-primary-foreground [&_svg]:text-primary-foreground/80"><Breadcrumb items={[{ label: "Services", href: "/services" }, { label: "Pompe à chaleur" }]} /></div>
+        <div className="mt-6 max-w-2xl">
+          <p className="mb-4 flex items-center gap-2 text-sm font-semibold text-primary-foreground"><MapPin size={18} className="text-supreme-accent" /> Installation partout en France</p>
+          <h1 className="text-3xl font-bold leading-tight text-primary-foreground md:text-5xl">Votre pompe à chaleur,<br className="hidden sm:block" /> installée par nos équipes</h1>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-primary-foreground/90">Un chauffage adapté à votre maison. SupremEnergies vous accompagne de l’étude du logement à la mise en service, partout en France.</p>
+          <ul className="my-6 space-y-2 text-sm text-primary-foreground">
+            {["Devis gratuit et sans engagement", ownTeams ? "Installation par les équipes SupremEnergies" : "Installation accompagnée par SupremEnergies", "Étude des aides selon votre situation"].map(feature => <li key={feature} className="flex items-start gap-2"><Check size={18} className="shrink-0 text-supreme-accent" />{feature}</li>)}
+          </ul>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="lg" className="h-auto min-h-12 whitespace-normal bg-supreme-accent px-5 text-supreme-dark hover:bg-supreme-accent/90"><Link to={heatPumpCoverage.quotePath}>Demander un devis gratuit <ArrowRight /></Link></Button>
+            <Button asChild variant="outline" size="lg" className="h-auto min-h-12 border-primary-foreground/50 bg-transparent px-5 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"><a href="tel:0186046889"><Phone />01 86 04 68 89</a></Button>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <h2 className="text-3xl font-bold mb-8 text-supreme-primary text-center">Questions fréquentes sur les pompes à chaleur</h2>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {faqItems.map((item, i) => (
-              <div key={i} className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-                <h3 className="text-lg font-semibold mb-3 text-supreme-primary">{item.question}</h3>
-                <p className="text-gray-600">{item.answer}</p>
-              </div>
-            ))}
-          </div>
+    <section className="section-padding bg-background">
+      <div className="container-custom grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <p className="mb-3 text-sm font-semibold text-supreme-secondary">Votre logement, votre solution</p>
+          <h2 className="mb-5 text-2xl font-bold md:text-3xl">Un projet étudié pour votre maison, pas une solution standard</h2>
+          <p className="mb-5 leading-relaxed text-muted-foreground">Une pompe à chaleur récupère la chaleur de l’air ou du sol pour chauffer votre logement. Le bon équipement dépend de votre isolation, de vos émetteurs de chaleur et du climat de votre région.</p>
+          <p className="leading-relaxed text-muted-foreground">Nos équipes interviennent dans toute la France. Dès votre demande, nous étudions vos besoins et préparons avec vous les prochaines étapes, du choix de l’équipement à l’installation.</p>
+          <div className="mt-6 flex items-start gap-3 border-t border-border pt-5"><Users className="shrink-0 text-supreme-primary" /><p className="text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Les équipes SupremEnergies à vos côtés.</strong> Vous savez qui réalise vos travaux et comment votre projet est organisé.</p></div>
         </div>
-      </section>
+        <figure>
+          <img src={installationPhoto} alt="Technicien intervenant sur une pompe à chaleur extérieure" width={612} height={408} loading="lazy" className="aspect-[3/2] w-full rounded-lg object-cover" />
+          <figcaption className="mt-2 text-xs text-muted-foreground">Photo illustrative d’une installation de pompe à chaleur.</figcaption>
+        </figure>
+      </div>
+    </section>
 
-      <RelatedArticles
-        keywords={["pompe à chaleur", "PAC", "chauffage", "MaPrimeRénov"]}
-        title="Pour aller plus loin sur la pompe à chaleur"
-      />
+    <section className="section-padding bg-supreme-light">
+      <div className="container-custom">
+        <h2 className="text-2xl font-bold md:text-3xl">Quelle pompe à chaleur pour votre logement ?</h2>
+        <p className="mt-3 max-w-2xl text-muted-foreground">Nous vous aidons à choisir selon votre chauffage actuel et vos besoins de confort.</p>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">{solutions.map(({ icon: Icon, title: name, text }) => <article key={name} className="rounded-lg border border-border bg-card p-6"><Icon className="mb-5 text-supreme-primary" size={28} /><h3 className="mb-3 text-xl font-bold">{name}</h3><p className="text-sm leading-relaxed text-muted-foreground">{text}</p></article>)}</div>
+      </div>
+    </section>
 
-      <RelatedServices excludeSlug="pompe-a-chaleur" title="Découvrez aussi" />
+    <section className="section-padding">
+      <div className="container-custom">
+        <h2 className="text-2xl font-bold md:text-3xl">Comment se déroule votre installation ?</h2>
+        <ol className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">{steps.map((step, i) => <li key={step.title} className="border-t-2 border-supreme-primary pt-5"><span className="text-sm font-bold text-supreme-secondary">Étape {i + 1}</span><h3 className="my-3 text-lg font-bold">{step.title}</h3><p className="text-sm leading-relaxed text-muted-foreground">{step.text}</p></li>)}</ol>
+      </div>
+    </section>
 
-      <RelatedZones serviceSlug="pompe-a-chaleur" serviceName="Pompe à chaleur" />
+    <section className="section-padding bg-supreme-light">
+      <div className="container-custom grid gap-10 md:grid-cols-2">
+        <div><h2 className="mb-4 text-2xl font-bold md:text-3xl">Un budget clair avant les travaux</h2><p className="leading-relaxed text-muted-foreground">Votre devis précise l’équipement proposé, les travaux à réaliser et le coût de l’installation. Les économies dépendent de votre logement, du système remplacé et de votre utilisation : elles ne peuvent pas être garanties à l’avance.</p></div>
+        <div><h3 className="mb-4 text-xl font-bold">Faisons le point sur les aides possibles</h3><ul className="space-y-3">{["MaPrimeRénov’ et primes CEE, selon l’éligibilité", "Éco-prêt à taux zéro, sous conditions", "TVA réduite lorsque les travaux sont éligibles"].map(item => <li key={item} className="flex items-start gap-2 text-muted-foreground"><CheckCircle2 size={20} className="shrink-0 text-supreme-primary" />{item}</li>)}</ul><p className="mt-4 text-sm text-muted-foreground">Les montants et conditions sont à vérifier avant de vous engager. L’attribution relève des organismes concernés.</p><Button asChild variant="link" className="mt-3 h-auto justify-start whitespace-normal p-0"><Link to="/simulateur-aides">Estimer mes aides <ArrowRight /></Link></Button></div>
+      </div>
+    </section>
 
-      <CTA title="Prêt à passer à la pompe à chaleur ?" subtitle="Contactez-nous pour un diagnostic gratuit et découvrez combien vous pouvez économiser." />
-    </div>
-  );
+    <section className="section-padding">
+      <div className="container-custom max-w-4xl">
+        <h2 className="mb-8 text-2xl font-bold md:text-3xl">Vos questions sur l’installation</h2>
+        <div className="divide-y divide-border border-y border-border">{faqItems.map(item => <details key={item.question} className="group py-5"><summary className="cursor-pointer text-base font-semibold text-supreme-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{item.question}</summary><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.answer}</p></details>)}</div>
+      </div>
+    </section>
+
+    <section className="bg-supreme-primary py-12">
+      <div className="container-custom flex flex-col items-start justify-between gap-6 md:flex-row md:items-center"><div><h2 className="text-2xl font-bold text-primary-foreground">Parlons de votre projet de chauffage</h2><p className="mt-3 max-w-xl text-primary-foreground/90">Indiquez votre commune et votre chauffage actuel. Nos équipes étudient votre projet partout en France.</p></div><Button asChild size="lg" className="h-auto min-h-12 shrink-0 whitespace-normal bg-supreme-accent text-supreme-dark hover:bg-supreme-accent/90"><Link to={heatPumpCoverage.quotePath}>Demander un devis <ArrowRight /></Link></Button></div>
+    </section>
+    <RelatedArticles keywords={["pompe à chaleur", "PAC", "chauffage", "MaPrimeRénov"]} title="Nos conseils pour préparer votre projet" />
+    <RelatedServices excludeSlug="pompe-a-chaleur" title="Découvrez aussi" />
+    <RelatedZones serviceSlug="pompe-a-chaleur" serviceName="Pompe à chaleur" title="Des installations partout en France" subtitle="Nos équipes interviennent dans toute la France. Retrouvez ici nos pages locales en Île-de-France et dans les Hauts-de-France ; votre commune peut aussi être étudiée même si elle n’est pas listée." />
+  </div>;
 };
-
 export default PompeAChaleur;
