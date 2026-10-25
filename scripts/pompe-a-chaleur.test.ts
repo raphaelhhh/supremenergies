@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { heatPumpCoverage } from "./pompe-a-chaleur";
+import { heatPumpCoverage } from "../src/data/pompe-a-chaleur";
 
 describe("Heat pump installation offer", () => {
   test("covers all of France", () => {
