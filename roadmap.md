@@ -1,5 +1,5 @@
-# Site presentation review
-- [x] Check primary pages and visible navigation.
-- [x] Clean broken article images, quote-page spacing, contact presentation and footer placeholders.
-- [x] Verify the cleaned pages and quote steps in the browser (no final submission sent).
-- [x] Flag missing company identifiers in the review; legal completion requires owner-provided details.
+# Site premium et confiance (étape par étape)
+- [x] Étape 1 : titres élégants, accueil plus clair, bandeau de confiance, avis Google réels à la place des témoignages inventés.
+- [ ] Étape 2 : harmoniser pages services, contact, devis et simulateur (même style, retirer « simulateur officiel », délais 24h/48h).
+- [ ] Étape 3 : photos réelles de chantiers et de l'équipe — en attente des photos du propriétaire.
+- [ ] Étape 4 : SIRET, RCS, assurance décennale dans les mentions — en attente des informations du propriétaire.
