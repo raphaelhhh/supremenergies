@@ -7,6 +7,7 @@ import {
   persistConsentChoice,
 } from "@/lib/consent";
 import { loadGoogleAds } from "@/lib/google-ads";
+import { loadMetaPixel } from "@/lib/meta-pixel";
 
 /**
  * Bannière de consentement cookies, affichée uniquement dans les régions
@@ -35,7 +36,10 @@ const CookieBanner = () => {
   const decide = (decision: "granted" | "denied") => {
     persistConsentChoice(decision);
     setVisible(false);
-    if (decision === "granted") void loadGoogleAds();
+    if (decision === "granted") {
+      void loadGoogleAds();
+      void loadMetaPixel();
+    }
   };
 
   return (
