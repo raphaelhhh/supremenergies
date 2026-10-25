@@ -34,7 +34,7 @@ const CTA = ({
         <div className="flex flex-wrap justify-center gap-4">
           <Button 
             asChild 
-            className="bg-supreme-accent hover:bg-supreme-accent/90 text-white px-6 py-6 rounded-md text-lg"
+            className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-6 rounded-md text-lg"
           >
             <a href={primaryButtonLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
               {primaryButtonText}

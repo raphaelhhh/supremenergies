@@ -286,7 +286,7 @@ const BlogPost = () => {
             {category && (
               <Link
                 to={`/blog/categorie/${category.slug}`}
-                className="inline-flex items-center gap-1.5 bg-supreme-accent/95 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 hover:bg-supreme-accent transition"
+                className="inline-flex items-center gap-1.5 bg-supreme-accent/95 text-supreme-dark text-xs font-semibold px-3 py-1 rounded-full mb-3 hover:bg-supreme-accent transition"
               >
                 <Tag className="h-3 w-3" /> {category.name}
               </Link>

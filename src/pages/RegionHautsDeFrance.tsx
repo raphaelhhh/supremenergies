@@ -76,7 +76,7 @@ const RegionHautsDeFrance = () => {
             <strong> Devis gratuit en 48h, jusqu'à 11 000 € d'aides 2026.</strong>
           </p>
           <div className="flex flex-wrap gap-3">
-            <Button asChild className="bg-supreme-accent hover:bg-supreme-accent/90 text-white px-6 py-6 text-lg">
+            <Button asChild className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-6 text-lg">
               <a href={QUOTE_FORM} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                 Demander mon devis gratuit <ArrowRight size={18} />
               </a>

@@ -55,7 +55,7 @@ const StickyMobileCTA = () => {
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleQuote}
-        className="flex-1 flex items-center justify-center gap-2 py-3 bg-supreme-accent text-white font-semibold"
+        className="flex-1 flex items-center justify-center gap-2 py-3 bg-supreme-accent text-supreme-dark font-semibold"
       >
         <FileText size={18} /> Devis gratuit
       </a>

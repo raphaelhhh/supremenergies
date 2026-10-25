@@ -303,7 +303,7 @@ const SimulateurAides = () => {
                     <label key={o.v} className="flex items-center gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
                       <RadioGroupItem value={o.v} id={`ch-${o.v}`} />
                       <span className="font-medium flex-1">{o.l}</span>
-                      {o.bonus && <span className="text-xs text-green-600 font-medium">{o.bonus}</span>}
+                      {o.bonus && <span className="text-xs text-supreme-secondary font-medium">{o.bonus}</span>}
                     </label>
                   ))}
                 </RadioGroup>
@@ -401,8 +401,8 @@ const SimulateurAides = () => {
             {step === 6 && (
               <div className="py-2">
                 <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle2 className="text-green-600" size={36} />
+                  <div className="w-16 h-16 bg-supreme-light rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 className="text-supreme-primary" size={36} />
                   </div>
                   <h2 className="text-2xl font-bold mb-2">Votre estimation détaillée</h2>
                   <p className="text-gray-600 text-sm">
@@ -467,7 +467,7 @@ const SimulateurAides = () => {
                   100% TTC profil Bleu, 90% Jaune, 80% Violet, 50% Rose).
                 </p>
 
-                <Button asChild size="lg" className="w-full bg-supreme-accent hover:bg-supreme-accent/90 text-white">
+                <Button asChild size="lg" className="w-full bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark">
                   <a href="/devis-gratuit" target="_blank" rel="noopener noreferrer">
                     Demander mon devis détaillé sous 48h <ArrowRight className="ml-2" size={16} />
                   </a>
@@ -486,7 +486,7 @@ const SimulateurAides = () => {
                     Suivant <ArrowRight className="ml-2" size={16} />
                   </Button>
                 ) : (
-                  <Button onClick={handleSubmit} disabled={!canProceed() || submitting} className="bg-supreme-accent hover:bg-supreme-accent/90">
+                  <Button onClick={handleSubmit} disabled={!canProceed() || submitting} className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark">
                     {submitting ? (<><Loader2 className="mr-2 animate-spin" size={16} /> Calcul...</>) : (<>Voir mon estimation <ArrowRight className="ml-2" size={16} /></>)}
                   </Button>
                 )}

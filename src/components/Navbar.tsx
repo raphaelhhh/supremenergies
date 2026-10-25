@@ -131,7 +131,7 @@ const Navbar = () => {
         {/* CTA Button */}
         <Button 
           asChild 
-          className="hidden md:inline-flex bg-supreme-accent hover:bg-supreme-accent/90"
+          className="hidden md:inline-flex bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark"
         >
           <Link to="/devis-gratuit">Demander un devis</Link>
         </Button>
@@ -203,7 +203,7 @@ const Navbar = () => {
             )}
             <Button 
               asChild 
-              className="w-full bg-supreme-accent hover:bg-supreme-accent/90"
+              className="w-full bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark"
             >
               <Link to="/devis-gratuit">Demander un devis</Link>
             </Button>

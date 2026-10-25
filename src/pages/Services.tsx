@@ -640,7 +640,7 @@ const Services = () => {
               Nos conseillers vous accompagnent dans toutes vos démarches pour obtenir les aides auxquelles vous avez droit.
             </p>
             <div className="text-center">
-              <Button asChild className="bg-supreme-accent hover:bg-supreme-accent/90">
+              <Button asChild className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark">
                 <Link to="/contact">Faire une simulation gratuite</Link>
               </Button>
             </div>
