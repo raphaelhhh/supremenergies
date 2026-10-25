@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+import { trackLead } from "@/lib/track-lead";
 
 const schema = z.object({
   first_name: z.string().trim().min(1, "Prénom requis").max(80),
@@ -79,18 +80,13 @@ const LeadMagnetForm = ({
       const url = (data as { download_url?: string })?.download_url ?? "/guide-aides-renovation-2026.pdf";
 
       trackEvent("lead_magnet_submit", { source });
-      // GA4 standard conversion event (marquer 'generate_lead' comme conversion dans GA4)
-      const w = window as unknown as { dataLayer?: unknown[] };
-      if (w.dataLayer) {
-        w.dataLayer.push({
-          event: "generate_lead",
-          lead_source: "lead_magnet",
-          lead_magnet_source: source,
-          value: 20,
-          currency: "EUR",
-          page_path: typeof location !== "undefined" ? location.pathname : null,
-        });
-      }
+      // Conversions GA4 + Google Ads + Meta (avec consentement visiteur)
+      trackLead({
+        source: "lead_magnet",
+        value: 20,
+        currency: "EUR",
+        extra: { lead_magnet_source: source },
+      });
 
       // Trigger download
       const a = document.createElement("a");
