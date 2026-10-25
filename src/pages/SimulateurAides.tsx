@@ -108,6 +108,19 @@ const SimulateurAides = () => {
         })),
       }]);
       if (error) throw error;
+      // Centralise aussi le contact dans la liste des leads + alerte équipe
+      await supabase.functions.invoke("send-lead-magnet", {
+        body: {
+          email: parsed.data.email,
+          first_name: parsed.data.firstName,
+          phone: parsed.data.phone,
+          postal_code: postalCode || null,
+          source: "simulateur",
+          page_path: "/simulateur-aides",
+          consent: true,
+          message: `Aide estimée: ${result.total} € | Travaux: ${selectedGestes.map((g) => g.id).join(", ")}`,
+        },
+      }).catch(() => undefined);
       setStep(6);
     } catch (e) {
       toast({ title: "Erreur", description: "Impossible d'enregistrer votre simulation. Réessayez ou contactez-nous.", variant: "destructive" });

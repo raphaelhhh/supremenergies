@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { supabase } from "@/integrations/supabase/client";
 
 const ZAPIER_HOOK = "https://hooks.zapier.com/hooks/catch/23975075/uulr9bm/";
 
@@ -66,6 +67,19 @@ const LeadForm = ({
 
     setLoading(true);
     try {
+      const { error: fnErr } = await supabase.functions.invoke("send-lead-magnet", {
+        body: {
+          first_name: name.trim().slice(0, 80),
+          phone: cleaned,
+          postal_code: city.trim().slice(0, 16),
+          source: "devis_rapide",
+          page_path: window.location.pathname,
+          consent: true,
+          message: `Projet: ${project} | Ville: ${city.trim()} | Origine: ${source}`.slice(0, 2000),
+        },
+      });
+      if (fnErr) throw fnErr;
+
       await fetch(ZAPIER_HOOK, {
         method: "POST",
         mode: "no-cors",

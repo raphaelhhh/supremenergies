@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { trackLead } from "@/lib/track-lead";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -57,7 +58,20 @@ const ContactForm = () => {
         source: "Site web SupremEnergies"
       };
 
-      const response = await fetch("https://hooks.zapier.com/hooks/catch/23975075/uulr9bm/", {
+      const { error: fnErr } = await supabase.functions.invoke("send-lead-magnet", {
+        body: {
+          email: formData.email,
+          first_name: formData.name.slice(0, 80),
+          phone: formData.phone.slice(0, 32) || null,
+          source: "contact_form",
+          page_path: window.location.pathname,
+          consent: true,
+          message: [formData.subject && `Sujet: ${formData.subject}`, formData.message].filter(Boolean).join(" | ").slice(0, 2000),
+        },
+      });
+      if (fnErr) throw fnErr;
+
+      await fetch("https://hooks.zapier.com/hooks/catch/23975075/uulr9bm/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

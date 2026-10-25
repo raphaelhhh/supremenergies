@@ -69,7 +69,7 @@ export type Database = {
         Row: {
           consent: boolean
           created_at: string
-          email: string
+          email: string | null
           first_name: string | null
           followup_due_at: string | null
           followup_sent_at: string | null
@@ -83,7 +83,7 @@ export type Database = {
         Insert: {
           consent?: boolean
           created_at?: string
-          email: string
+          email?: string | null
           first_name?: string | null
           followup_due_at?: string | null
           followup_sent_at?: string | null
@@ -97,7 +97,7 @@ export type Database = {
         Update: {
           consent?: boolean
           created_at?: string
-          email?: string
+          email?: string | null
           first_name?: string | null
           followup_due_at?: string | null
           followup_sent_at?: string | null

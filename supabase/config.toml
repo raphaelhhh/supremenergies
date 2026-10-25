@@ -13,3 +13,6 @@ project_id = "epeomgifqjbgzyurcnaz"
     verify_jwt = false
   [functions.send-lead-magnet]
     verify_jwt = false
+
+[functions.preview-transactional-email]
+verify_jwt = false
