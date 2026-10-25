@@ -31,16 +31,19 @@ const CTA = ({
         <p className="text-lg md:text-xl mb-8 text-white/90 max-w-3xl mx-auto">
           {subtitle}
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center items-start gap-4">
+          <div className="flex flex-col items-center">
           <Button 
             asChild 
             className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-6 rounded-md text-lg"
           >
-            <a href={primaryButtonLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+            <a href={primaryButtonLink} className="flex items-center gap-2">
               {primaryButtonText}
               <ArrowRight size={18} />
             </a>
           </Button>
+          <span className="mt-2 text-sm text-white/85">Réponse sous 24h</span>
+          </div>
           <Button 
             asChild 
             variant="outline" 

@@ -1,5 +1,5 @@
 
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -51,13 +51,16 @@ const Hero = ({
                 </div>)}
             </div>
 
-            <div className="flex flex-wrap gap-4">
-              <Button asChild className="bg-supreme-primary hover:bg-supreme-primary/90 text-white px-6 py-6 rounded-md text-lg">
-                <Link to={buttonLink} className="flex items-center gap-2">
-                  {buttonText}
-                  <ArrowRight size={18} />
-                </Link>
-              </Button>
+            <div className="flex flex-wrap items-start gap-4">
+              <div className="flex flex-col items-center">
+                <Button asChild className="bg-supreme-primary hover:bg-supreme-primary/90 text-white px-6 py-6 rounded-md text-lg">
+                  <Link to={buttonLink} className="flex items-center gap-2">
+                    {buttonText}
+                    <ArrowRight size={18} />
+                  </Link>
+                </Button>
+                <span className="mt-2 text-sm text-muted-foreground">Réponse sous 24h</span>
+              </div>
               <Button asChild variant="outline" className="bg-white hover:bg-gray-100 text-supreme-primary border-supreme-primary px-6 py-6 rounded-md text-lg">
                 {secondaryButtonLink.startsWith('http') ? (
                   <a href={secondaryButtonLink} target="_blank" rel="noopener noreferrer">{secondaryButtonText}</a>
@@ -66,6 +69,14 @@ const Hero = ({
                 )}
               </Button>
             </div>
+
+            <a href="https://www.google.com/maps/place/?q=place_id:ChIJ9z-FH6XlRkARdJA1ALkFU38" target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-3 rounded-full border border-border bg-card px-4 py-2 shadow-sm hover:shadow-md transition-shadow">
+              <span className="flex text-supreme-accent" aria-hidden="true">
+                {[0,1,2,3,4].map((i) => <Star key={i} size={16} className="fill-current" />)}
+              </span>
+              <span className="text-sm font-semibold text-foreground">5/5</span>
+              <span className="text-sm text-muted-foreground">· 19 avis Google</span>
+            </a>
           </div>
 
           {/* Image with overlay design */}
