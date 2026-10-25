@@ -34,12 +34,12 @@ const ZONES = [
 const routes = [
   {
     path: "/",
-    title: "Rénovation Énergétique Île-de-France ★ Jusqu'à 11 000€ d'aides 2026",
+    title: "Rénovation énergétique & aides 2026 | SupremEnergies",
     description:
-      "✓ Devis gratuit en 48h ✓ Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. Pompe à chaleur, isolation, panneaux solaires. Experts en Île-de-France.",
-    h1: "Transformez votre habitat et réduisez vos factures énergétiques",
+      "Rénovation énergétique : isolation, solaire et pompe à chaleur installée partout en France par nos équipes. Aides 2026 sous conditions. Devis gratuit.",
+    h1: "Votre rénovation énergétique, menée avec sérieux de A à Z",
     intro:
-      "SupremEnergies, expert en rénovation énergétique en Île-de-France, accompagne particuliers et entreprises pour l'isolation thermique, l'installation de pompes à chaleur, la pose de panneaux solaires et la rénovation globale. Devis gratuit sous 48h, conseiller dédié, jusqu'à 11 000€ d'aides MaPrimeRénov' 2026.",
+      "Isolation et solaire en Île-de-France, pompe à chaleur partout en France par nos équipes. Un devis détaillé et un accompagnement pour comprendre les aides à la rénovation énergétique en 2026. MaPrimeRénov', CEE et financements sont étudiés sous conditions, sans garantie d'attribution.",
   },
   {
     path: "/about",
@@ -70,12 +70,12 @@ const routes = [
   },
   {
     path: "/services/pompe-a-chaleur",
-    title: "Pompe à Chaleur en Île-de-France | Installation PAC | SupremEnergies",
+    title: "Pompe à chaleur : installation & aides 2026 | SupremEnergies",
     description:
-      "Installation de pompes à chaleur air/eau, air/air et géothermiques en Île-de-France. Économisez 50 à 75% sur votre chauffage. Devis gratuit, aides 2026.",
-    h1: "Installation de pompe à chaleur en Île-de-France",
+      "Installation de pompe à chaleur partout en France par nos équipes. PAC air/eau ou air/air, devis gratuit et étude des aides 2026 selon votre éligibilité.",
+    h1: "Installation de pompe à chaleur par nos équipes",
     intro:
-      "La pompe à chaleur est la solution de chauffage la plus performante pour remplacer une chaudière au gaz ou au fioul. SupremEnergies installe des PAC air/eau, air/air et géothermiques avec un dimensionnement précis pour maximiser vos économies.",
+      "Une pompe à chaleur air/eau ou air/air adaptée à votre maison, partout en France. SupremEnergies vous accompagne de l'étude du logement à la mise en service et fait le point sur les aides 2026 sous conditions. Le prix dépend du logement, du type de PAC et des travaux nécessaires. Les aides et économies ne sont pas garanties.",
   },
   {
     path: "/services/panneaux-solaires",

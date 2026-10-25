@@ -11,23 +11,27 @@ import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, Badg
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/energy-label.png";
+import { heatPumpCoverage } from "@/data/pompe-a-chaleur";
+
+const homeTitle = "Rénovation énergétique & aides 2026 | SupremEnergies";
+const homeDescription = "Rénovation énergétique : isolation, solaire et pompe à chaleur installée partout en France par nos équipes. Aides 2026 sous conditions. Devis gratuit.";
 
 const faqItems = [
   {
     question: "Quelles aides pour la rénovation énergétique en 2026 ?",
-    answer: "En 2026, vous pouvez bénéficier de MaPrimeRénov' (jusqu'à 90% du coût selon vos revenus), des CEE, de l'éco-PTZ jusqu'à 50 000 €, et de la TVA à 5,5%. SupremEnergies vous accompagne dans toutes les démarches."
+    answer: "MaPrimeRénov', les primes CEE, l'éco-prêt à taux zéro et la TVA réduite peuvent contribuer au financement de travaux éligibles. Les aides à la rénovation énergétique en 2026 dépendent notamment de vos revenus, du logement, des travaux et des conditions en vigueur. Vérifiez votre éligibilité avant de vous engager : les aides ne sont ni automatiques ni garanties."
   },
   {
     question: "Combien coûte l'isolation des combles ?",
-    answer: "Le coût de l'isolation des combles varie de 20 à 60 €/m² selon la technique utilisée. Avec les aides (MaPrimeRénov' + CEE), le reste à charge peut être très faible, parfois moins de 10 €/m²."
+    answer: "Le prix dépend de la surface, de l'accès aux combles, de la technique et des matériaux. Un devis détaillé permet de connaître le budget des travaux. Les aides éventuelles et le reste à charge doivent être étudiés séparément selon votre situation."
   },
   {
     question: "Quelle pompe à chaleur choisir ?",
-    answer: "Le choix dépend de votre logement : la PAC air/eau est idéale pour remplacer une chaudière, la PAC air/air convient pour chauffer et climatiser, et la PAC géothermique offre le meilleur rendement. Nos experts réalisent un diagnostic gratuit."
+    answer: "Le choix dépend de l'isolation, de votre chauffage actuel et des besoins de votre maison. Une pompe à chaleur air/eau peut alimenter des radiateurs ou un plancher chauffant ; une PAC air/air chauffe et peut rafraîchir les pièces. Nos équipes étudient le logement pour proposer un équipement et une puissance adaptés."
   },
   {
     question: "Intervenez-vous en Île-de-France ?",
-    answer: "Oui, notre zone d'intervention principale couvre toute l'Île-de-France. Nous intervenons aussi dans d'autres régions pour des projets spécifiques. Contactez-nous pour vérifier notre disponibilité."
+    answer: "Oui, l'Île-de-France reste notre zone principale pour la rénovation énergétique. Pour les pompes à chaleur, nos propres équipes réalisent les installations partout en France. Indiquez votre commune dans votre demande pour organiser l'étude de votre projet."
   }
 ];
 
@@ -41,8 +45,8 @@ const Index = () => {
       imageUrl: "https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/gettyimages-2210519115-612x612.jpg"
     },
     {
-      title: "Pompes à Chaleur",
-      description: "Des systèmes performants et économiques pour chauffer votre habitation tout en réduisant votre consommation d'énergie.",
+      title: "Pompe à chaleur",
+      description: "Installation de pompes à chaleur air/eau et air/air partout en France par nos équipes, avec étude du logement et devis détaillé.",
       icon: <Home size={32} />,
       link: "/services/pompe-a-chaleur",
       imageUrl: "https://raw.githubusercontent.com/raphaelhhh/supremenergies/main/src/pages/gettyimages-2214842911-612x612.jpg"
@@ -139,12 +143,12 @@ const Index = () => {
     "@id": "https://supremenergies.com/#localbusiness",
     "name": "SupremEnergies",
     "alternateName": "Suprem Energies",
-    "description": "Expert en rénovation énergétique : isolation thermique, pompes à chaleur, panneaux solaires et rénovation globale en Île-de-France.",
+    "description": homeDescription,
     "url": "https://supremenergies.com",
     "telephone": "+33186046889",
     "email": "contact@supremenergies.com",
     "image": "https://supremenergies.com/og-image.jpg",
-    "logo": "https://supremenergies.com/favicon.ico",
+    "logo": "https://supremenergies.com/favicon.png",
     "priceRange": "€€",
     "address": {
       "@type": "PostalAddress",
@@ -183,7 +187,7 @@ const Index = () => {
       "name": "Services de rénovation énergétique",
       "itemListElement": [
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Isolation thermique" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pompe à chaleur" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Installation de pompe à chaleur", "url": "https://supremenergies.com/services/pompe-a-chaleur", "areaServed": heatPumpCoverage.areaServed } },
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Panneaux solaires" } },
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rénovation globale" } }
       ]
@@ -224,19 +228,19 @@ const Index = () => {
   return (
     <div>
       <Helmet>
-        <title>SupremEnergies | Rénovation énergétique en Île-de-France</title>
-        <meta name="description" content="SupremEnergies réalise vos travaux de rénovation énergétique en Île-de-France : pompe à chaleur, isolation, solaire. Accompagnement aux aides MaPrimeRénov' et CEE, devis gratuit." />
+        <title>{homeTitle}</title>
+        <meta name="description" content={homeDescription} />
         <link rel="canonical" href="https://supremenergies.com/" />
-        <meta property="og:title" content="SupremEnergies | Rénovation énergétique en Île-de-France" />
-        <meta property="og:description" content="Pompe à chaleur, isolation et solaire en Île-de-France : SupremEnergies réalise vos travaux et vous accompagne pour les aides MaPrimeRénov' et CEE." />
+        <meta property="og:title" content={homeTitle} />
+        <meta property="og:description" content={homeDescription} />
         <meta property="og:url" content="https://supremenergies.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://supremenergies.com/og-image.jpg" />
         <meta property="og:locale" content="fr_FR" />
         <meta property="og:site_name" content="SupremEnergies" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="SupremEnergies | Rénovation énergétique en Île-de-France" />
-        <meta name="twitter:description" content="Pompe à chaleur, isolation et solaire en Île-de-France, avec accompagnement aux aides MaPrimeRénov' et CEE." />
+        <meta name="twitter:title" content={homeTitle} />
+        <meta name="twitter:description" content={homeDescription} />
         <meta name="twitter:image" content="https://supremenergies.com/og-image.jpg" />
         <meta name="twitter:site" content="@supremenergies" />
         <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
@@ -247,7 +251,7 @@ const Index = () => {
 
       <Hero 
         title="Votre rénovation énergétique, menée avec sérieux de A à Z"
-        subtitle="Pompe à chaleur, isolation et solaire en Île-de-France. Un interlocuteur unique, un devis détaillé et un accompagnement clair pour vos aides."
+        subtitle="Isolation et solaire en Île-de-France, pompe à chaleur partout en France par nos équipes. Un devis détaillé et un accompagnement pour comprendre les aides à la rénovation énergétique en 2026."
         features={["Devis gratuit et sans engagement", "Garantie décennale sur nos travaux", "Montage des dossiers MaPrimeRénov' et CEE"]}
         buttonText="Demander un devis"
         buttonLink="/devis-gratuit"
@@ -279,6 +283,18 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="section-padding bg-supreme-light" aria-labelledby="home-aides-title">
+        <div className="container-custom max-w-4xl">
+          <h2 id="home-aides-title" className="mb-5 text-2xl font-bold md:text-3xl">Quelles aides pour votre rénovation énergétique en 2026 ?</h2>
+          <p className="mb-4 leading-relaxed text-muted-foreground">Vous préparez une isolation ou l’installation d’une pompe à chaleur ? MaPrimeRénov’, les primes CEE, l’éco-prêt à taux zéro et la TVA réduite peuvent être étudiés selon votre logement, vos revenus et les travaux envisagés.</p>
+          <p className="mb-6 text-sm leading-relaxed text-muted-foreground">Le montant dépend des conditions en vigueur et de l’examen de votre dossier. Une estimation n’est pas une attribution d’aide : vérifiez les critères avant de signer ou de commencer les travaux.</p>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild><Link to="/aides-renovation-2026">Comprendre les aides rénovation 2026</Link></Button>
+            <Button asChild variant="outline"><Link to="/simulateur-aides">Estimer mes aides</Link></Button>
+          </div>
+        </div>
+      </section>
+
       {/* Lead magnet PDF */}
       <section className="py-12 bg-gradient-to-b from-supreme-light/30 to-white">
         <div className="container-custom max-w-2xl">
@@ -292,9 +308,9 @@ const Index = () => {
       <section className="section-padding">
         <div className="container-custom">
           <SectionHeader 
-            title="Nos Solutions Énergétiques" 
+            title="Nos travaux de rénovation énergétique" 
             subtitle="Découvrez notre gamme complète de solutions pour améliorer l'efficacité énergétique de votre habitation ou de votre entreprise."
-            highlightedWord="Solutions"
+            highlightedWord="rénovation"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -500,10 +516,11 @@ const Index = () => {
         title="Explorez nos solutions de rénovation énergétique"
         subtitle="Services, simulateur d'aides 2026, guides experts et avis clients vérifiés : tout pour réussir vos travaux d'économies d'énergie."
         links={[
-          { to: "/services/isolation-thermique", label: "Isolation des combles, murs et planchers", desc: "Travaux d'isolation thermique éligibles MaPrimeRénov'" },
+          { to: "/services/isolation-thermique", label: "Isolation des combles, murs et planchers", desc: "Solutions d'isolation adaptées à votre logement" },
           { to: "/services/pompe-a-chaleur", label: "Pompe à chaleur air/eau et air/air", desc: "Remplacement chaudière fioul ou gaz" },
           { to: "/services/panneaux-solaires", label: "Panneaux photovoltaïques en autoconsommation", desc: "Solaire résidentiel 3 à 9 kWc, prime EDF OA" },
-          { to: "/services/renovation-globale", label: "Rénovation énergétique globale clé en main", desc: "Parcours Accompagné MaPrimeRénov' jusqu'à 70 000 €" },
+          { to: "/services/renovation-globale", label: "Rénovation énergétique globale", desc: "Coordonner isolation et chauffage selon vos besoins" },
+          { to: "/aides-renovation-2026", label: "Aides rénovation énergétique 2026", desc: "MaPrimeRénov', CEE et financements sous conditions" },
           { to: "/simulateur-aides", label: "Calculer mes aides à la rénovation 2026", desc: "Simulateur MaPrimeRénov', CEE et Éco-PTZ" },
           { to: "/temoignages", label: "Avis clients sur nos chantiers de rénovation", desc: "Témoignages vérifiés de particuliers" },
         ]}
