@@ -16,8 +16,8 @@ const SocialProof = () => {
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-gray-700">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-600"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-supreme-accent opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-supreme-accent"></span>
             </span>
             <span><strong>{count}</strong> demandes de devis ce mois-ci</span>
           </div>

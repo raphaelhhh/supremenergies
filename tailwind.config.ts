@@ -67,6 +67,7 @@ export default {
 				"supreme": {
 					"primary": "#0B2545", // Bleu nuit
 					"secondary": "#13315C", // Bleu profond
+					"dark": "#0A1B2E", // Encre la plus foncée (titres)
 					"light": "#F7F5F0", // Fond crème
 					"accent": "#F59E0B", // Orange accent pour les appels à l'action
 					"gold": "#C8A15A", // Or : filets et petits accents
