@@ -7,6 +7,7 @@ import {
   persistConsentChoice,
 } from "@/lib/consent";
 import { loadGoogleAds } from "@/lib/google-ads";
+import { loadMetaPixel } from "@/lib/meta-pixel";
 
 /**
  * Bannière de consentement cookies, affichée uniquement dans les régions

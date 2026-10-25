@@ -41,12 +41,13 @@ import ScrollCTA from "./components/ScrollCTA";
 import CookieBanner from "./components/CookieBanner";
 import { useEffect } from "react";
 import { loadGoogleAds } from "./lib/google-ads";
-
+import { loadMetaPixel } from "./lib/meta-pixel";
 const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
     void loadGoogleAds();
+    void loadMetaPixel();
   }, []);
 
   return (
