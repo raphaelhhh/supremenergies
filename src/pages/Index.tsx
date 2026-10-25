@@ -224,7 +224,19 @@ const Index = () => {
   return (
     <div>
       <Helmet>
-PLACEHOLDER
+        <title>SupremEnergies | Rénovation énergétique en Île-de-France</title>
+        <meta name="description" content="SupremEnergies réalise vos travaux de rénovation énergétique en Île-de-France : pompe à chaleur, isolation, solaire. Accompagnement aux aides MaPrimeRénov' et CEE, devis gratuit." />
+        <link rel="canonical" href="https://supremenergies.com/" />
+        <meta property="og:title" content="SupremEnergies | Rénovation énergétique en Île-de-France" />
+        <meta property="og:description" content="Pompe à chaleur, isolation et solaire en Île-de-France : SupremEnergies réalise vos travaux et vous accompagne pour les aides MaPrimeRénov' et CEE." />
+        <meta property="og:url" content="https://supremenergies.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://supremenergies.com/og-image.jpg" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta property="og:site_name" content="SupremEnergies" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="SupremEnergies | Rénovation énergétique en Île-de-France" />
+        <meta name="twitter:description" content="Pompe à chaleur, isolation et solaire en Île-de-France, avec accompagnement aux aides MaPrimeRénov' et CEE." />
         <meta name="twitter:image" content="https://supremenergies.com/og-image.jpg" />
         <meta name="twitter:site" content="@supremenergies" />
         <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
