@@ -122,6 +122,7 @@ export default {
 			},
 			fontFamily: {
 				'montserrat': ['Montserrat', 'sans-serif'],
+				'display': ['Fraunces', 'Georgia', 'serif'],
 			}
 		}
 	},
