@@ -6,6 +6,7 @@ import { sendTemplateEmail } from "../_shared/transactional-email-templates/send
 const SOURCE_LABELS: Record<string, string> = {
   devis_multistep: "Demande de devis",
   contact_form: "Formulaire de contact",
+  devis_rapide: "Demande de devis rapide",
   simulateur: "Simulateur d'aides",
   lead_magnet: "Guide des aides",
   newsletter: "Newsletter",
