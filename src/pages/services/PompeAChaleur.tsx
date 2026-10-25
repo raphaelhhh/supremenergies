@@ -14,8 +14,8 @@ const faqItems = [
   { question: "Installez-vous des pompes à chaleur partout en France ?", answer: "Oui. Nos équipes réalisent les installations de pompes à chaleur partout en France. Indiquez votre commune et votre code postal dans la demande de devis : nous étudions votre logement et organisons l'intervention avec vous." },
   { question: "Qui réalise mon installation ?", answer: "L'installation est réalisée par les équipes de SupremEnergies. Nous vous accompagnons dans le choix de l'équipement, la préparation du chantier et la mise en service." },
   { question: "Quelle pompe à chaleur choisir pour ma maison ?", answer: "Le choix dépend de votre isolation, de la surface à chauffer, de votre chauffage actuel et du climat local. Une PAC air/eau peut alimenter des radiateurs ou un plancher chauffant ; une PAC air/air chauffe et peut rafraîchir les pièces. Une étude permet de choisir une puissance adaptée." },
-  { question: "Quel budget prévoir ?", answer: "Le prix dépend de l'équipement, de sa puissance et des adaptations nécessaires dans votre logement. Votre devis détaille les travaux et le coût de l'installation. Les aides éventuelles sont étudiées séparément : elles ne sont ni automatiques ni garanties." },
-  { question: "Quelles aides peuvent financer mon projet ?", answer: "Selon votre situation, le type de pompe à chaleur et les conditions du dispositif, MaPrimeRénov', les primes CEE ou un éco-prêt à taux zéro peuvent être envisagés. L'éligibilité doit être vérifiée avant tout engagement ; la décision appartient aux organismes concernés." },
+  { question: "Quel est le prix d’une installation de pompe à chaleur ?", answer: "Le prix dépend de l'équipement, de sa puissance et des adaptations nécessaires dans votre logement. Votre devis détaille les travaux et le coût de l'installation. Les aides éventuelles sont étudiées séparément : elles ne sont ni automatiques ni garanties." },
+  { question: "Quelles aides pour une pompe à chaleur en 2026 ?", answer: "En 2026, MaPrimeRénov', les primes CEE ou un éco-prêt à taux zéro peuvent être étudiés selon votre situation, le type de pompe à chaleur et les conditions en vigueur. Les dispositifs ne financent pas tous les mêmes équipements : l’éligibilité d’une PAC air/eau et d’une PAC air/air doit être vérifiée séparément. Vérifiez les critères avant tout engagement ; la décision appartient aux organismes concernés." },
   { question: "Une pompe à chaleur fonctionne-t-elle en hiver ?", answer: "Oui, mais ses performances dépendent de la température extérieure, du modèle et du dimensionnement. Dans les régions froides, l'étude du logement tient compte des besoins en hiver et d'un éventuel appoint. Les économies dépendent aussi de l'isolation et de l'usage." },
 ];
 const solutions = [
@@ -29,15 +29,15 @@ const steps = [
   { title: "Vous recevez un devis détaillé", text: "Équipement, travaux prévus et budget. Nous faisons aussi le point sur les aides possibles." },
   { title: "Nos équipes réalisent les travaux", text: "Nous organisons l'installation et la mise en service, puis vous expliquons le fonctionnement." },
 ];
-const title = "Pompe à chaleur partout en France | SupremEnergies";
-const description = "Installation de pompes à chaleur partout en France par les équipes SupremEnergies. Étude de votre logement, devis gratuit et accompagnement sur les aides.";
+const title = "Pompe à chaleur : installation & aides 2026 | SupremEnergies";
+const description = "Installation de pompe à chaleur partout en France par nos équipes. PAC air/eau ou air/air, devis gratuit et étude des aides 2026 selon votre éligibilité.";
 
 const PompeAChaleur = () => {
   const ownTeams = heatPumpCoverage.installationTeam === "internal";
   const serviceSchema = {
     "@context": "https://schema.org", "@type": "Service", name: "Installation de pompes à chaleur",
     provider: { "@type": "LocalBusiness", name: "SupremEnergies", telephone: "01 86 04 68 89", address: { "@type": "PostalAddress", streetAddress: "55 rue Cartier-Bresson", addressLocality: "Pantin", postalCode: "93500", addressCountry: "FR" } },
-    areaServed: heatPumpCoverage.areaServed, description, serviceType: "Installation pompe à chaleur",
+    areaServed: heatPumpCoverage.areaServed, description, serviceType: "Installation pompe à chaleur", url: "https://supremenergies.com/services/pompe-a-chaleur",
   };
   const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqItems.map(item => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) };
 
@@ -59,8 +59,8 @@ const PompeAChaleur = () => {
         <div className="[&_nav]:py-0 [&_a]:text-primary-foreground/80 [&_span]:text-primary-foreground [&_svg]:text-primary-foreground/80"><Breadcrumb items={[{ label: "Services", href: "/services" }, { label: "Pompe à chaleur" }]} /></div>
         <div className="mt-6 max-w-2xl">
           <p className="mb-4 flex items-center gap-2 text-sm font-semibold text-primary-foreground"><MapPin size={18} className="text-supreme-accent" /> Installation partout en France</p>
-          <h1 className="text-3xl font-bold leading-tight text-primary-foreground md:text-5xl">Votre pompe à chaleur,<br className="hidden sm:block" /> installée par nos équipes</h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-primary-foreground/90">Un chauffage adapté à votre maison. SupremEnergies vous accompagne de l’étude du logement à la mise en service, partout en France.</p>
+          <h1 className="text-3xl font-bold leading-tight text-primary-foreground md:text-5xl">Installation de pompe à chaleur<br className="hidden sm:block" /> par nos équipes</h1>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-primary-foreground/90">Une pompe à chaleur air/eau ou air/air adaptée à votre maison, partout en France. SupremEnergies vous accompagne de l’étude du logement à la mise en service et fait le point sur les aides 2026 sous conditions.</p>
           <ul className="my-6 space-y-2 text-sm text-primary-foreground">
             {["Devis gratuit et sans engagement", ownTeams ? "Installation par les équipes SupremEnergies" : "Installation accompagnée par SupremEnergies", "Étude des aides selon votre situation"].map(feature => <li key={feature} className="flex items-start gap-2"><Check size={18} className="shrink-0 text-supreme-accent" />{feature}</li>)}
           </ul>
@@ -76,9 +76,10 @@ const PompeAChaleur = () => {
       <div className="container-custom grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
           <p className="mb-3 text-sm font-semibold text-supreme-secondary">Votre logement, votre solution</p>
-          <h2 className="mb-5 text-2xl font-bold md:text-3xl">Un projet étudié pour votre maison, pas une solution standard</h2>
+          <h2 className="mb-5 text-2xl font-bold md:text-3xl">Comment fonctionne une pompe à chaleur ?</h2>
           <p className="mb-5 leading-relaxed text-muted-foreground">Une pompe à chaleur récupère la chaleur de l’air ou du sol pour chauffer votre logement. Le bon équipement dépend de votre isolation, de vos émetteurs de chaleur et du climat de votre région.</p>
-          <p className="leading-relaxed text-muted-foreground">Nos équipes interviennent dans toute la France. Dès votre demande, nous étudions vos besoins et préparons avec vous les prochaines étapes, du choix de l’équipement à l’installation.</p>
+          <p className="leading-relaxed text-muted-foreground">Dans un projet de rénovation énergétique, le chauffage et l’isolation se pensent ensemble : une maison mieux isolée n’a pas les mêmes besoins de puissance. Nos équipes interviennent dans toute la France pour étudier vos besoins, choisir l’équipement et préparer l’installation.</p>
+          <Link to="/services/isolation-thermique" className="mt-4 inline-block font-medium text-supreme-primary underline underline-offset-4">Préparer aussi l’isolation de votre logement</Link>
           <div className="mt-6 flex items-start gap-3 border-t border-border pt-5"><Users className="shrink-0 text-supreme-primary" /><p className="text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Les équipes SupremEnergies à vos côtés.</strong> Vous savez qui réalise vos travaux et comment votre projet est organisé.</p></div>
         </div>
         <figure>
@@ -98,21 +99,21 @@ const PompeAChaleur = () => {
 
     <section className="section-padding">
       <div className="container-custom">
-        <h2 className="text-2xl font-bold md:text-3xl">Comment se déroule votre installation ?</h2>
+        <h2 className="text-2xl font-bold md:text-3xl">Les étapes de votre installation de pompe à chaleur</h2>
         <ol className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">{steps.map((step, i) => <li key={step.title} className="border-t-2 border-supreme-primary pt-5"><span className="text-sm font-bold text-supreme-secondary">Étape {i + 1}</span><h3 className="my-3 text-lg font-bold">{step.title}</h3><p className="text-sm leading-relaxed text-muted-foreground">{step.text}</p></li>)}</ol>
       </div>
     </section>
 
     <section className="section-padding bg-supreme-light">
       <div className="container-custom grid gap-10 md:grid-cols-2">
-        <div><h2 className="mb-4 text-2xl font-bold md:text-3xl">Un budget clair avant les travaux</h2><p className="leading-relaxed text-muted-foreground">Votre devis précise l’équipement proposé, les travaux à réaliser et le coût de l’installation. Les économies dépendent de votre logement, du système remplacé et de votre utilisation : elles ne peuvent pas être garanties à l’avance.</p></div>
-        <div><h3 className="mb-4 text-xl font-bold">Faisons le point sur les aides possibles</h3><ul className="space-y-3">{["MaPrimeRénov’ et primes CEE, selon l’éligibilité", "Éco-prêt à taux zéro, sous conditions", "TVA réduite lorsque les travaux sont éligibles"].map(item => <li key={item} className="flex items-start gap-2 text-muted-foreground"><CheckCircle2 size={20} className="shrink-0 text-supreme-primary" />{item}</li>)}</ul><p className="mt-4 text-sm text-muted-foreground">Les montants et conditions sont à vérifier avant de vous engager. L’attribution relève des organismes concernés.</p><Button asChild variant="link" className="mt-3 h-auto justify-start whitespace-normal p-0"><Link to="/simulateur-aides">Estimer mes aides <ArrowRight /></Link></Button></div>
+        <div><h2 className="mb-4 text-2xl font-bold md:text-3xl">Prix d’une pompe à chaleur : un devis adapté à votre maison</h2><p className="leading-relaxed text-muted-foreground">Le prix dépend du type de PAC, de sa puissance, des raccordements et des adaptations de votre chauffage actuel. Votre devis précise l’équipement, les travaux et le coût de l’installation. Les économies dépendent du logement, du système remplacé et de l’utilisation : elles ne peuvent pas être garanties à l’avance.</p></div>
+        <div><h2 className="mb-4 text-2xl font-bold md:text-3xl">Aides pompe à chaleur 2026 : que vérifier ?</h2><ul className="space-y-3">{["MaPrimeRénov’ et primes CEE, selon l’éligibilité", "Éco-prêt à taux zéro, sous conditions", "TVA réduite lorsque les travaux sont éligibles"].map(item => <li key={item} className="flex items-start gap-2 text-muted-foreground"><CheckCircle2 size={20} className="shrink-0 text-supreme-primary" />{item}</li>)}</ul><p className="mt-4 text-sm leading-relaxed text-muted-foreground">Les aides dépendent notamment de vos revenus, du logement et du type d’équipement. Une PAC air/eau et une PAC air/air ne relèvent pas nécessairement des mêmes dispositifs. Les conditions sont à vérifier avant de vous engager ; l’attribution relève des organismes concernés.</p><div className="mt-4 flex flex-col items-start gap-3"><Button asChild variant="link" className="h-auto justify-start whitespace-normal p-0"><Link to="/aides-renovation-2026">Consulter le guide des aides rénovation 2026 <ArrowRight /></Link></Button><Button asChild variant="link" className="h-auto justify-start whitespace-normal p-0"><Link to="/simulateur-aides">Estimer mes aides <ArrowRight /></Link></Button></div></div>
       </div>
     </section>
 
     <section className="section-padding">
       <div className="container-custom max-w-4xl">
-        <h2 className="mb-8 text-2xl font-bold md:text-3xl">Vos questions sur l’installation</h2>
+        <h2 className="mb-8 text-2xl font-bold md:text-3xl">Pompe à chaleur : installation, prix et aides 2026</h2>
         <div className="divide-y divide-border border-y border-border">{faqItems.map(item => <details key={item.question} className="group py-5"><summary className="cursor-pointer text-base font-semibold text-supreme-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{item.question}</summary><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.answer}</p></details>)}</div>
       </div>
     </section>
