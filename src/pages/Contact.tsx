@@ -61,7 +61,7 @@ const Contact = () => {
   return (
     <div>
       <Helmet>
-        <title>Devis Gratuit Rénovation Énergétique 48h ★ SupremEnergies</title>
+        <title>Contact | SupremEnergies – Rénovation énergétique</title>
         <meta name="description" content="✓ Devis gratuit en 48h ✓ Conseiller dédié. Pompe à chaleur, isolation, solaire en Île-de-France. Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026." />
         <link rel="canonical" href="https://supremenergies.com/contact" />
         <meta property="og:title" content="Devis Gratuit Rénovation Énergétique 48h ★ SupremEnergies" />

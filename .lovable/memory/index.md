@@ -12,6 +12,7 @@ SEO meta: punchy titles with ★/✓ emojis + numbers ("11 000€", "48h", "4.8/
 
 ## Memories
 - [Entreprise Informations](mem://entreprise/informations-clefs) — SupremEnergies facts, contacts, RGE constraint
+- [Réception des leads](mem://site/reception-leads) — alertes vers admin@supremenergies.com, page /admin/leads
 - [Flux et Liens Externes](mem://site/flux-et-liens-externes) — Google Form URL, Zapier routing, legal pages
 - [Identité Visuelle et Hero](mem://design/identite-visuelle-et-hero) — Photo realism, Hero labels, service images, favicon
 - [Structure et Cohérence UI](mem://design/structure-et-coherence) — Contact layout, services menu, blog styling, rejected stats bar
