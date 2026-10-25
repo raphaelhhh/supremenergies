@@ -224,24 +224,19 @@ const Index = () => {
   return (
     <div>
       <Helmet>
-        <title>Rénovation Énergétique Île-de-France ★ 11 000€ aides</title>
-        <meta name="description" content="Devis gratuit 48h. Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. Pompe à chaleur, isolation, solaire. Experts en Île-de-France." />
-        <meta name="robots" content="index, follow" />
+        <title>SupremEnergies | Rénovation énergétique en Île-de-France</title>
+        <meta name="description" content="SupremEnergies réalise vos travaux de rénovation énergétique en Île-de-France : pompe à chaleur, isolation, solaire. Accompagnement aux aides MaPrimeRénov' et CEE, devis gratuit." />
         <link rel="canonical" href="https://supremenergies.com/" />
-        <link rel="alternate" hrefLang="fr-FR" href="https://supremenergies.com/" />
-        <link rel="alternate" hrefLang="x-default" href="https://supremenergies.com/" />
-        {/* Préchargement de l'image LCP du Hero */}
-        <link rel="preload" as="image" href={heroImage} fetchPriority="high" />
-        <meta property="og:title" content="Rénovation Énergétique Île-de-France ★ 11 000€ aides" />
-        <meta property="og:description" content="Devis gratuit 48h. Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. Experts en Île-de-France." />
+        <meta property="og:title" content="SupremEnergies | Rénovation énergétique en Île-de-France" />
+        <meta property="og:description" content="Pompe à chaleur, isolation et solaire en Île-de-France : SupremEnergies réalise vos travaux et vous accompagne pour les aides MaPrimeRénov' et CEE." />
         <meta property="og:url" content="https://supremenergies.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://supremenergies.com/og-image.jpg" />
         <meta property="og:locale" content="fr_FR" />
         <meta property="og:site_name" content="SupremEnergies" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Rénovation Énergétique Île-de-France ★ Aides 2026" />
-        <meta name="twitter:description" content="Devis gratuit 48h. Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026." />
+        <meta name="twitter:title" content="SupremEnergies | Rénovation énergétique en Île-de-France" />
+        <meta name="twitter:description" content="Pompe à chaleur, isolation et solaire en Île-de-France, avec accompagnement aux aides MaPrimeRénov' et CEE." />
         <meta name="twitter:image" content="https://supremenergies.com/og-image.jpg" />
         <meta name="twitter:site" content="@supremenergies" />
         <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
