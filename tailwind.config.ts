@@ -65,10 +65,11 @@ export default {
 				},
 				// SupremEnergies custom colors
 				"supreme": {
-					"primary": "#16803C", // Green
-					"secondary": "#1E6091", // Blue
-					"light": "#E6F2EB", // Light green background
-					"accent": "#F59E0B", // Orange accent for CTAs
+					"primary": "#0B2545", // Bleu nuit
+					"secondary": "#13315C", // Bleu profond
+					"light": "#F7F5F0", // Fond crème
+					"accent": "#F59E0B", // Orange accent pour les appels à l'action
+					"gold": "#C8A15A", // Or : filets et petits accents
 				},
 			},
 			borderRadius: {
