@@ -67,6 +67,11 @@
   .container-custom {
     @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
   }
+
+  /* Champs de saisie : fond blanc net, même sur un fond crème */
+  input:not([type="checkbox"]):not([type="radio"]), textarea, select {
+    @apply bg-card;
+  }
   
   .btn-primary {
     @apply bg-supreme-primary hover:bg-supreme-primary/90 text-white font-medium py-2 px-6 rounded-md transition-all;
