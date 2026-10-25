@@ -7,7 +7,7 @@ import FeatureBox from "@/components/FeatureBox";
 import CTA from "@/components/CTA";
 import InternalLinksHub from "@/components/InternalLinksHub";
 import LeadMagnetForm from "@/components/LeadMagnetForm";
-import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target } from "lucide-react";
+import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/energy-label.png";

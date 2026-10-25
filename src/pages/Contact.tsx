@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import ContactForm from "@/components/ContactForm";
-import { Mail, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin, Clock, Phone, Star, CheckCircle2 } from "lucide-react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -72,79 +72,62 @@ const Contact = () => {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
-      {/* Contact Form Section - First */}
-      <section className="section-padding bg-gray-50 pt-32" id="formulaire">
+      <section className="bg-supreme-light pt-32 pb-16">
         <div className="container-custom">
-          <div className="max-w-2xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-supreme-primary text-center">Contactez SupremEnergies</h1>
-            <p className="text-lg mb-8 text-gray-700 text-center">
-              Remplissez le formulaire ci-dessous pour nous faire part de votre projet. Un conseiller vous recontactera dans les 24h.
-            </p>
-            <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-supreme-primary">Parlons de votre projet</h1>
+            <p className="text-lg text-muted-foreground">Un conseiller vous rappelle sous 24h, du lundi au vendredi. Devis gratuit et sans engagement.</p>
+          </div>
+          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div id="formulaire" className="lg:col-span-2 bg-card rounded-2xl shadow-md p-6 md:p-8 border border-border">
+              <h2 className="text-2xl font-bold mb-6 text-foreground">Envoyez-nous un message</h2>
               <ContactForm />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Information Section */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="max-w-2xl mx-auto">
-            <div>
-              <h2 className="text-3xl font-bold mb-6 text-supreme-primary">Nos Coordonnées</h2>
-              <p className="text-lg mb-8 text-gray-700">
-                Contactez-nous par téléphone, par email ou via le formulaire. Notre équipe vous accompagne dans votre projet. Nous ne recevons pas de visiteurs au siège social.
-              </p>
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="bg-supreme-light rounded-full p-3 mr-4">
-                    <MapPin className="h-6 w-6 text-supreme-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg">Siège social</h3>
-                    <p className="text-muted-foreground">55 rue Cartier-Bresson, 93500 Pantin, France</p>
-                    <a href="tel:0186046889" className="text-primary hover:underline">Téléphone : 01 86 04 68 89</a>
-                  </div>
+            <aside className="space-y-5">
+              <a href="tel:0186046889" className="block rounded-2xl bg-supreme-primary p-6 text-white shadow-md hover:bg-supreme-primary/90 transition-colors">
+                <Phone className="h-6 w-6 mb-3 text-supreme-accent" />
+                <p className="text-sm text-white/80">Vous préférez appeler ?</p>
+                <p className="text-2xl font-bold">01 86 04 68 89</p>
+                <p className="text-sm text-white/80 mt-1">Lun – Ven · 9h – 19h</p>
+              </a>
+              <div className="rounded-2xl bg-card border border-border p-6 space-y-4">
+                <div className="flex items-start gap-3">
+                  <Mail className="h-5 w-5 text-supreme-primary mt-0.5" />
+                  <a href="mailto:contact@supremenergies.com" className="text-foreground break-all hover:underline">contact@supremenergies.com</a>
                 </div>
-                <div className="flex items-start">
-                  <div className="bg-supreme-light rounded-full p-3 mr-4">
-                    <Mail className="h-6 w-6 text-supreme-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg">Email</h3>
-                    <p className="text-gray-600 break-all">
-                      <a href="mailto:contact@supremenergies.com" className="hover:text-supreme-primary transition-colors">
-                        contact@supremenergies.com
-                      </a>
-                    </p>
-                  </div>
+                <div className="flex items-start gap-3">
+                  <Clock className="h-5 w-5 text-supreme-primary mt-0.5" />
+                  <p className="text-foreground">Lundi – Vendredi : 9h – 19h<br /><span className="text-muted-foreground">Week-end : fermé</span></p>
                 </div>
-                <div className="flex items-start">
-                  <div className="bg-supreme-light rounded-full p-3 mr-4">
-                    <Clock className="h-6 w-6 text-supreme-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg">Horaires de contact</h3>
-                    <p className="text-gray-600">Lundi - Vendredi: 9h00 - 19h00</p>
-                    <p className="text-gray-600">Samedi - Dimanche: Fermé</p>
-                  </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="h-5 w-5 text-supreme-primary mt-0.5" />
+                  <p className="text-foreground">55 rue Cartier-Bresson, 93500 Pantin<br /><span className="text-sm text-muted-foreground">Siège administratif — pas d'accueil du public</span></p>
                 </div>
               </div>
-            </div>
+              <a href="https://www.google.com/maps/place/?q=place_id:ChIJ9z-FH6XlRkARdJA1ALkFU38" target="_blank" rel="noopener noreferrer" className="block rounded-2xl bg-card border border-border p-6 hover:shadow-md transition-shadow">
+                <div className="flex text-supreme-accent mb-2" aria-hidden="true">{[0,1,2,3,4].map((i) => <Star key={i} className="h-5 w-5 fill-current" />)}</div>
+                <p className="font-bold text-foreground">5/5 · 19 avis Google</p>
+                <p className="text-sm text-muted-foreground">Lire les avis de nos clients</p>
+              </a>
+              <ul className="space-y-2 px-1">
+                {["Réponse sous 24h", "Devis gratuit et sans engagement", "Aide pour vos dossiers d'aides"].map((t) => (
+                  <li key={t} className="flex items-center gap-2 text-foreground"><CheckCircle2 className="h-5 w-5 text-supreme-primary" />{t}</li>
+                ))}
+              </ul>
+            </aside>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="section-padding bg-supreme-light">
+      <section className="section-padding">
         <div className="container-custom">
-          <h2 className="text-3xl font-bold mb-8 text-supreme-primary text-center">Questions Fréquemment Posées</h2>
+          <h2 className="text-3xl font-bold mb-8 text-supreme-primary text-center">Questions fréquentes</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {faqItems.map((item, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-md">
+              <div key={index} className="bg-card rounded-xl p-6 border border-border">
                 <h3 className="text-xl font-semibold mb-3">{item.question}</h3>
-                <p className="text-gray-600">{item.answer}</p>
+                <p className="text-muted-foreground">{item.answer}</p>
               </div>
             ))}
           </div>
