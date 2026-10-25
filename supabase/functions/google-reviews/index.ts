@@ -118,9 +118,10 @@ Deno.serve(async (req) => {
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
     console.error("google-reviews error:", message);
-    return new Response(JSON.stringify({ error: message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    // Degrade gracefully: the page hides the Google block when `error` is present.
+    return new Response(
+      JSON.stringify({ error: "Google reviews unavailable", reviews: [] }),
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
   }
 });
