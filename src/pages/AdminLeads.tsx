@@ -8,7 +8,8 @@ import { toast } from "@/components/ui/use-toast";
 
 type Lead = {
   id: string;
-  email: string;
+  email: string | null;
+  metadata: { phone?: string } | null;
   first_name: string | null;
   postal_code: string | null;
   source: string;
@@ -59,11 +60,12 @@ export default function AdminLeads() {
 
   const exportCsv = () => {
     const rows = [
-      ["Date", "Email", "Prénom", "CP", "Source", "Page", "Message"],
+      ["Date", "Nom", "Téléphone", "Email", "CP", "Source", "Page", "Message"],
       ...filtered.map((l) => [
         new Date(l.created_at).toISOString(),
-        l.email,
         l.first_name ?? "",
+        l.metadata?.phone ?? "",
+        l.email ?? "",
         l.postal_code ?? "",
         l.source,
         l.page_path ?? "",
@@ -81,7 +83,7 @@ export default function AdminLeads() {
   };
 
   const filtered = leads.filter((l) =>
-    filter ? `${l.email} ${l.first_name ?? ""} ${l.source} ${l.postal_code ?? ""}`.toLowerCase().includes(filter.toLowerCase()) : true,
+    filter ? `${l.email ?? ""} ${l.metadata?.phone ?? ""} ${l.first_name ?? ""} ${l.source} ${l.postal_code ?? ""}`.toLowerCase().includes(filter.toLowerCase()) : true,
   );
 
   if (loading) return <div className="container py-16 text-center text-muted-foreground">Chargement…</div>;
@@ -137,7 +139,7 @@ export default function AdminLeads() {
 
       <input
         type="search"
-        placeholder="Rechercher (email, prénom, source, CP…)"
+        placeholder="Rechercher (nom, téléphone, email, source, CP…)"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
         className="w-full md:w-96 mb-4 px-3 py-2 border rounded-md bg-background"
@@ -148,11 +150,12 @@ export default function AdminLeads() {
           <thead className="bg-muted/50 text-left">
             <tr>
               <th className="px-3 py-2 font-semibold">Date</th>
+              <th className="px-3 py-2 font-semibold">Nom</th>
+              <th className="px-3 py-2 font-semibold">Téléphone</th>
               <th className="px-3 py-2 font-semibold">Email</th>
-              <th className="px-3 py-2 font-semibold">Prénom</th>
               <th className="px-3 py-2 font-semibold">CP</th>
               <th className="px-3 py-2 font-semibold">Source</th>
-              <th className="px-3 py-2 font-semibold">Page</th>
+              <th className="px-3 py-2 font-semibold">Détails</th>
               <th className="px-3 py-2 font-semibold">Relance</th>
             </tr>
           </thead>
@@ -162,11 +165,12 @@ export default function AdminLeads() {
                 <td className="px-3 py-2 whitespace-nowrap text-muted-foreground">
                   {new Date(l.created_at).toLocaleString("fr-FR")}
                 </td>
-                <td className="px-3 py-2 font-medium">{l.email}</td>
-                <td className="px-3 py-2">{l.first_name ?? "—"}</td>
+                <td className="px-3 py-2 font-medium">{l.first_name ?? "—"}</td>
+                <td className="px-3 py-2 whitespace-nowrap">{l.metadata?.phone ? <a className="text-supreme-primary underline" href={`tel:${l.metadata.phone}`}>{l.metadata.phone}</a> : "—"}</td>
+                <td className="px-3 py-2">{l.email ?? "—"}</td>
                 <td className="px-3 py-2">{l.postal_code ?? "—"}</td>
                 <td className="px-3 py-2"><Badge variant="secondary">{l.source}</Badge></td>
-                <td className="px-3 py-2 text-xs text-muted-foreground truncate max-w-[200px]">{l.page_path ?? "—"}</td>
+                <td className="px-3 py-2 text-xs text-muted-foreground max-w-[320px]">{l.message ?? l.page_path ?? "—"}</td>
                 <td className="px-3 py-2 text-xs">
                   {l.followup_sent_at ? (
                     <Badge>envoyée</Badge>
@@ -181,7 +185,7 @@ export default function AdminLeads() {
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={7} className="px-3 py-8 text-center text-muted-foreground">Aucun lead</td></tr>
+              <tr><td colSpan={8} className="px-3 py-8 text-center text-muted-foreground">Aucun lead</td></tr>
             )}
           </tbody>
         </table>
