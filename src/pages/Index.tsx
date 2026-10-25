@@ -246,13 +246,38 @@ const Index = () => {
 
 
       <Hero 
-        title="Transformez votre habitat et réduisez vos factures énergétiques"
-        subtitle="Experts en rénovation énergétique pour un avenir plus durable et économique"
-        buttonText="Découvrir nos solutions"
-        buttonLink="/services"
+        title="Votre rénovation énergétique, menée avec sérieux de A à Z"
+        subtitle="Pompe à chaleur, isolation et solaire en Île-de-France. Un interlocuteur unique, un devis détaillé et un accompagnement clair pour vos aides."
+        features={["Devis gratuit et sans engagement", "Garantie décennale sur nos travaux", "Montage des dossiers MaPrimeRénov' et CEE"]}
+        buttonText="Demander un devis"
+        buttonLink="/devis-gratuit"
+        secondaryButtonText="Voir nos solutions"
+        secondaryButtonLink="/services"
         imageSrc={heroImage}
         imageAlt="Rénovation énergétique et isolation thermique"
       />
+
+      {/* Trust strip */}
+      <section className="border-y border-border bg-card">
+        <div className="container-custom py-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <a href="https://www.google.com/maps/place/?q=place_id:ChIJ9z-FH6XlRkARdJA1ALkFU38" target="_blank" rel="noopener noreferrer" className="group">
+            <p className="font-display text-2xl text-foreground">19 avis Google</p>
+            <p className="text-sm text-muted-foreground group-hover:underline">Lire les avis clients</p>
+          </a>
+          <div>
+            <p className="font-display text-2xl text-foreground">Décennale</p>
+            <p className="text-sm text-muted-foreground">Travaux assurés 10 ans</p>
+          </div>
+          <div>
+            <p className="font-display text-2xl text-foreground">1 interlocuteur</p>
+            <p className="text-sm text-muted-foreground">Du devis à la mise en service</p>
+          </div>
+          <div>
+            <p className="font-display text-2xl text-foreground">Île-de-France</p>
+            <p className="text-sm text-muted-foreground">Zone d'intervention principale</p>
+          </div>
+        </div>
+      </section>
 
       {/* Lead magnet PDF */}
       <section className="py-12 bg-gradient-to-b from-supreme-light/30 to-white">
@@ -361,9 +386,9 @@ const Index = () => {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <SectionHeader 
-            title="Notre Processus Simple" 
-            subtitle="Nous rendons votre transition énergétique facile et sans stress avec notre processus en quatre étapes"
-            highlightedWord="Simple"
+            title="Comment se déroule votre projet" 
+            subtitle="Quatre étapes claires, sans surprise, avec un seul interlocuteur du premier appel à la mise en service."
+            highlightedWord="projet"
           />
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -385,25 +410,18 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Reviews Section — real Google reviews only */}
       <section className="section-padding">
         <div className="container-custom">
-          <SectionHeader 
-            title="Ce Que Disent Nos Clients" 
-            subtitle="Découvrez les témoignages de nos clients satisfaits qui ont fait confiance à SupremEnergies pour leurs projets de rénovation énergétique."
-            highlightedWord="Clients"
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard
-                key={index}
-                name={testimonial.name}
-                role={testimonial.role}
-                testimonial={testimonial.testimonial}
-                rating={testimonial.rating}
-              />
-            ))}
+          <div className="max-w-3xl mx-auto text-center rounded-2xl border border-border bg-card p-10 shadow-sm">
+            <p className="text-sm uppercase tracking-widest text-muted-foreground mb-3">Avis clients</p>
+            <h2 className="text-3xl md:text-4xl mb-4">Ce que nos clients disent de nous</h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Plutôt que des témoignages choisis par nos soins, consultez directement les 19 avis laissés par nos clients sur notre fiche Google.
+            </p>
+            <Button asChild size="lg">
+              <a href="https://www.google.com/maps/place/?q=place_id:ChIJ9z-FH6XlRkARdJA1ALkFU38" target="_blank" rel="noopener noreferrer">Lire les avis sur Google</a>
+            </Button>
           </div>
         </div>
       </section>
