@@ -120,7 +120,7 @@ const Blog = () => {
               className={`px-3 py-1.5 rounded-full text-sm border transition ${
                 activeCategory === null
                   ? "border-supreme-primary bg-supreme-primary text-white font-semibold"
-                  : "border-gray-200 bg-white text-gray-700 hover:border-supreme-primary hover:text-supreme-primary"
+                  : "border-supreme-dark/25 bg-white text-supreme-dark hover:border-supreme-primary hover:text-supreme-primary"
               }`}
             >
               Toutes
@@ -133,7 +133,7 @@ const Blog = () => {
                   className={`px-3 py-1.5 rounded-l-full text-sm border-y border-l transition ${
                     activeCategory === c.slug
                       ? "border-supreme-primary bg-supreme-primary text-white font-semibold"
-                      : "border-gray-200 bg-white text-gray-700 hover:border-supreme-primary hover:text-supreme-primary"
+                      : "border-supreme-dark/25 bg-white text-supreme-dark hover:border-supreme-primary hover:text-supreme-primary"
                   }`}
                 >
                   {c.shortName}
@@ -145,7 +145,7 @@ const Blog = () => {
                   className={`px-2 py-1.5 rounded-r-full text-xs border-y border-r transition ${
                     activeCategory === c.slug
                       ? "border-supreme-primary bg-supreme-primary text-white"
-                      : "border-gray-200 bg-white text-gray-500 hover:text-supreme-primary"
+                      : "border-supreme-dark/25 bg-white text-supreme-secondary hover:text-supreme-primary"
                   }`}
                 >
                   →
