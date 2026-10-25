@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail, MapPin, ArrowRight } from "lucide-react";
 import FooterPopularArticles from "./FooterPopularArticles";
 const Footer = () => {
-  return <footer className="bg-gray-900 text-white">
+  return <footer className="bg-supreme-dark text-white border-t-2 border-supreme-gold/70">
       <div className="container-custom">
         {/* Newsletter Section */}
         <div className="py-10 border-b border-gray-800">
@@ -47,10 +47,10 @@ const Footer = () => {
                   type="email" 
                   name="email"
                   placeholder="Votre adresse email" 
-                  className="flex-grow p-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-supreme-primary" 
+                  className="flex-grow p-3 bg-white/5 border border-white/25 rounded-md text-white placeholder:text-white/70 focus:outline-none focus:ring-2 focus:ring-supreme-gold" 
                   required 
                 />
-                <button type="submit" className="bg-supreme-primary hover:bg-supreme-primary/90 text-white px-6 py-3 rounded-md transition-colors flex-shrink-0 flex items-center justify-center">
+                <button type="submit" className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-3 rounded-md transition-colors flex-shrink-0 flex items-center justify-center">
                   S'inscrire <ArrowRight size={16} className="ml-2" />
                 </button>
               </form>
