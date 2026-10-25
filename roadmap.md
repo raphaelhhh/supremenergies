@@ -1,5 +1,5 @@
 # Site rénovation clair et confiance (étape par étape)
-- [ ] Optimiser l’accueil et la page pompe à chaleur pour rénovation énergétique, pompe à chaleur et aides 2026.
+- [x] Optimiser l’accueil et la page pompe à chaleur pour rénovation énergétique, pompe à chaleur et aides 2026 ; titres, contenu, FAQ et liens vérifiés.
 - [x] Corriger l'effet luxe : titres sans empattements, fonds blancs/gris clair, supprimer le filet doré ; garder bleu et orange.
 - [x] Étape 1 : accueil plus clair, bandeau de confiance, avis Google réels à la place des témoignages inventés.
 - [ ] Étape 2 : harmoniser pages services, contact, devis et simulateur (même style, retirer « simulateur officiel », délais 24h/48h).
