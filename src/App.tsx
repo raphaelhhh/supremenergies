@@ -98,11 +98,13 @@ const App = () => {
             <StickyMobileCTA />
             <ScrollCTA />
             <ExitIntentPopup />
+            <CookieBanner />
           </div>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
-);
+  );
+};
 
 export default App;
