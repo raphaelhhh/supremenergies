@@ -128,8 +128,8 @@ const SimulateurAides = () => {
   const profInfo = PROFILE_INFO[profile];
   const totalSteps = 5;
 
-  const title = "Simulateur MaPrimeRénov' 2026 — Barème ANAH | SupremEnergies";
-  const description = "Estimez vos aides 2026 (MaPrimeRénov' + CEE) selon le barème ANAH. Calcul de votre profil bleu/jaune/violet/rose en 2 minutes.";
+  const title = "Simulateur aides MaPrimeRénov' et CEE 2026 | SupremEnergies";
+  const description = "Estimation gratuite et indicative de vos aides MaPrimeRénov' et CEE 2026 : profil de revenus, travaux éligibles, montant par geste. Résultat en 2 minutes.";
 
   return (
     <div>
@@ -156,8 +156,9 @@ const SimulateurAides = () => {
             Estimez vos aides MaPrimeRénov' &amp; CEE 2026
           </h1>
           <p className="text-base md:text-lg text-white/95 max-w-2xl">
-            Calcul basé sur les <strong>barèmes officiels ANAH 2026</strong> et les <strong>primes CEE Coup de pouce</strong> :
-            forfaits par geste, plafonds de dépense, profil de revenus déterminé automatiquement. Résultat précis en 2 minutes.
+            En 5 étapes, obtenez une <strong>estimation indicative</strong> de MaPrimeRénov' et des primes CEE selon votre logement,
+            vos revenus (profil bleu, jaune, violet ou rose) et les travaux envisagés. Calcul basé sur les barèmes ANAH 2026 ;
+            le montant définitif dépend de l'instruction de votre dossier par l'ANAH.
           </p>
         </div>
       </section>
