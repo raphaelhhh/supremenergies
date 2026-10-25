@@ -97,7 +97,7 @@ const ZoneLocale = () => {
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mb-8">{zone.intro}</p>
           <div className="flex flex-wrap gap-4">
-            <Button asChild className="bg-supreme-accent hover:bg-supreme-accent/90 text-white px-6 py-6 text-lg">
+            <Button asChild className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-6 text-lg">
               <a href={QUOTE_FORM} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                 Devis gratuit à {zone.name} <ArrowRight size={18} />
               </a>

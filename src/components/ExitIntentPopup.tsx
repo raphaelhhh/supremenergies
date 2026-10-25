@@ -104,7 +104,7 @@ const ExitIntentPopup = () => {
             <li>✓ Résultat immédiat</li>
             <li>✓ Aucune carte bancaire requise</li>
           </ul>
-          <Button asChild className="w-full bg-supreme-accent hover:bg-supreme-accent/90 text-white py-6 text-base">
+          <Button asChild className="w-full bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark py-6 text-base">
             <Link to="/simulateur-aides" onClick={() => setOpen(false)} className="flex items-center justify-center gap-2">
               Calculer mes aides gratuitement <ArrowRight size={18} />
             </Link>

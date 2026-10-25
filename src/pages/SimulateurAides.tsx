@@ -467,7 +467,7 @@ const SimulateurAides = () => {
                   100% TTC profil Bleu, 90% Jaune, 80% Violet, 50% Rose).
                 </p>
 
-                <Button asChild size="lg" className="w-full bg-supreme-accent hover:bg-supreme-accent/90 text-white">
+                <Button asChild size="lg" className="w-full bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark">
                   <a href="/devis-gratuit" target="_blank" rel="noopener noreferrer">
                     Demander mon devis détaillé sous 48h <ArrowRight className="ml-2" size={16} />
                   </a>
@@ -486,7 +486,7 @@ const SimulateurAides = () => {
                     Suivant <ArrowRight className="ml-2" size={16} />
                   </Button>
                 ) : (
-                  <Button onClick={handleSubmit} disabled={!canProceed() || submitting} className="bg-supreme-accent hover:bg-supreme-accent/90">
+                  <Button onClick={handleSubmit} disabled={!canProceed() || submitting} className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark">
                     {submitting ? (<><Loader2 className="mr-2 animate-spin" size={16} /> Calcul...</>) : (<>Voir mon estimation <ArrowRight className="ml-2" size={16} /></>)}
                   </Button>
                 )}

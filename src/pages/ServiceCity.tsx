@@ -150,7 +150,7 @@ const ServiceCity = () => {
               <div className="flex flex-wrap gap-3">
                 <Button
                   asChild
-                  className="bg-supreme-accent hover:bg-supreme-accent/90 text-white px-6 py-6 text-lg"
+                  className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-6 text-lg"
                 >
                   <a
                     href={QUOTE_FORM}

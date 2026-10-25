@@ -139,7 +139,7 @@ const AidesRenovation2026 = () => {
                 </li>
               </ul>
               <div className="flex flex-wrap gap-3">
-                <Button asChild className="bg-supreme-accent hover:bg-supreme-accent/90 text-white px-6 py-6 text-lg">
+                <Button asChild className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-6 text-lg">
                   <Link to="/simulateur-aides" className="flex items-center gap-2">
                     Simuler mes aides en 60 s <ArrowRight size={18} />
                   </Link>
