@@ -52,8 +52,9 @@ export function trackLead({
     page_path: typeof location !== "undefined" ? location.pathname : null,
     ...extra,
   });
-  // Conversion Google Ads « Demande de devis (site) » — sans effet sans consentement.
+  // Conversions Google Ads et Meta « Lead » — sans effet sans consentement.
   void fireAdsConversion();
+  void trackMetaLead({ content_name: source, value, currency });
 }
 
 /** Lit le paramètre ?from=... de l'URL pour tagger l'origine d'un formulaire. */

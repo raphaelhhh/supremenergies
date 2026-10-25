@@ -36,7 +36,10 @@ const CookieBanner = () => {
   const decide = (decision: "granted" | "denied") => {
     persistConsentChoice(decision);
     setVisible(false);
-    if (decision === "granted") void loadGoogleAds();
+    if (decision === "granted") {
+      void loadGoogleAds();
+      void loadMetaPixel();
+    }
   };
 
   return (
