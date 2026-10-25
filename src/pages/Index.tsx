@@ -7,7 +7,7 @@ import FeatureBox from "@/components/FeatureBox";
 import CTA from "@/components/CTA";
 import InternalLinksHub from "@/components/InternalLinksHub";
 import LeadMagnetForm from "@/components/LeadMagnetForm";
-import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target } from "lucide-react";
+import { Home, ThermometerSun, Droplets, SunMedium, Building, CheckCircle2, BadgeCheck, Clock, Award, Users, Leaf, Shield, TrendingUp, Target, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/energy-label.png";
@@ -415,6 +415,10 @@ const Index = () => {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center rounded-2xl border border-border bg-card p-10 shadow-sm">
             <p className="text-sm uppercase tracking-widest text-muted-foreground mb-3">Avis clients</p>
+            <div className="flex justify-center items-center gap-1 text-supreme-accent mb-2" aria-label="Note 5 sur 5">
+              {[0,1,2,3,4].map((i) => <Star key={i} className="h-7 w-7 fill-current" />)}
+            </div>
+            <p className="text-2xl font-bold text-foreground mb-6">5/5 <span className="text-base font-normal text-muted-foreground">· 19 avis vérifiés sur Google</span></p>
             <h2 className="text-3xl md:text-4xl mb-4">Ce que nos clients disent de nous</h2>
             <p className="text-lg text-muted-foreground mb-8">
               Plutôt que des témoignages choisis par nos soins, consultez directement les 19 avis laissés par nos clients sur notre fiche Google.
