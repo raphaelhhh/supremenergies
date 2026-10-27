@@ -42,6 +42,7 @@ import CookieBanner from "./components/CookieBanner";
 import { useEffect } from "react";
 import { loadGoogleAds } from "./lib/google-ads";
 import { loadMetaPixel } from "./lib/meta-pixel";
+import AudienceTracker from "./components/AudienceTracker";
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -57,6 +58,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <AudienceTracker />
           <div className="flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow">

@@ -3,6 +3,7 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
+import { trackLead } from "@/lib/track-lead";
 
 const ZAPIER_HOOK = "https://hooks.zapier.com/hooks/catch/23975075/uulr9bm/";
 
@@ -96,21 +97,7 @@ const LeadForm = ({
         }),
       });
 
-      // Tracking GTM
-      if (typeof window !== "undefined" && (window as unknown as { dataLayer?: unknown[] }).dataLayer) {
-        (window as unknown as { dataLayer: unknown[] }).dataLayer.push({
-          event: "lead_submit",
-          lead_source: source,
-          lead_project: project,
-        });
-      }
-      // Tracking Meta Pixel
-      if (typeof window !== "undefined" && (window as unknown as { fbq?: (...a: unknown[]) => void }).fbq) {
-        (window as unknown as { fbq: (...a: unknown[]) => void }).fbq("track", "Lead", {
-          content_name: project,
-          content_category: source,
-        });
-      }
+      trackLead({ source: "devis_rapide", project_type: project });
 
       setDone(true);
     } catch {

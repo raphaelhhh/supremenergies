@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin, ArrowRight } from "lucide-react";
 import FooterPopularArticles from "./FooterPopularArticles";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { trackLead } from "@/lib/track-lead";
+import { Button } from "@/components/ui/button";
 const Footer = () => {
+  const [newsletterBusy, setNewsletterBusy] = useState(false);
+  const [newsletterMessage, setNewsletterMessage] = useState("");
   return <footer className="bg-supreme-dark text-primary-foreground border-t border-secondary">
       <div className="container-custom">
         {/* Newsletter Section */}
@@ -16,44 +22,45 @@ const Footer = () => {
             <div>
               <form onSubmit={async (e) => {
                 e.preventDefault();
-                const formData = new FormData(e.currentTarget);
+                const form = e.currentTarget;
+                const formData = new FormData(form);
                 const email = formData.get('email') as string;
                 
                 if (!email) {
-                  alert('Veuillez saisir votre email');
+                  setNewsletterMessage('Veuillez saisir votre email');
                   return;
                 }
 
+                setNewsletterBusy(true);
+                setNewsletterMessage("");
                 try {
-                  await fetch("https://hooks.zapier.com/hooks/catch/23975075/uulr9bm/", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    mode: "no-cors",
-                    body: JSON.stringify({
-                      timestamp: new Date().toISOString(),
-                      email: email,
-                      type: "Newsletter",
-                      source: "Footer site web"
-                    }),
+                  const { error } = await supabase.functions.invoke("send-lead-magnet", {
+                    body: { email, source: "newsletter", consent: true, page_path: window.location.pathname },
                   });
-                  
-                  alert('Inscription réussie !');
-                  e.currentTarget.reset();
+                  if (error) throw error;
+                  trackLead({ source: "newsletter" });
+                  setNewsletterMessage('Inscription réussie !');
+                  form.reset();
                 } catch (error) {
-                  alert('Erreur lors de l\'inscription');
+                  setNewsletterMessage('Erreur lors de l’inscription. Veuillez réessayer.');
+                } finally {
+                  setNewsletterBusy(false);
                 }
               }} className="flex flex-col sm:flex-row gap-2">
                 <input 
                   type="email" 
                   name="email"
+                  aria-label="Email pour la newsletter"
                   placeholder="Votre adresse email" 
                   className="flex-grow p-3 bg-card border border-input rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-supreme-accent" 
                   required 
                 />
-                <button type="submit" className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-3 rounded-md transition-colors flex-shrink-0 flex items-center justify-center">
-                  S'inscrire <ArrowRight size={16} className="ml-2" />
-                </button>
+                <Button type="submit" disabled={newsletterBusy} className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-3 h-auto flex-shrink-0">
+                  {newsletterBusy ? "Envoi…" : "S'inscrire"} <ArrowRight size={16} className="ml-2" />
+                </Button>
               </form>
+              <p className="text-xs mt-2">En vous inscrivant, vous acceptez de recevoir notre newsletter. <Link to="/privacy" className="underline">Confidentialité</Link></p>
+              {newsletterMessage && <p role="status" className="text-sm mt-2">{newsletterMessage}</p>}
             </div>
           </div>
         </div>

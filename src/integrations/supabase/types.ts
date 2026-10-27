@@ -14,6 +14,21 @@ export type Database = {
   }
   public: {
     Tables: {
+      audience_sync_settings: {
+        Row: {
+          id: boolean
+          token: string
+        }
+        Insert: {
+          id?: boolean
+          token?: string
+        }
+        Update: {
+          id?: boolean
+          token?: string
+        }
+        Relationships: []
+      }
       blog_posts: {
         Row: {
           author: string
@@ -155,6 +170,27 @@ export type Database = {
         }
         Relationships: []
       }
+      site_audience_daily: {
+        Row: {
+          day: string
+          event: string
+          page_path: string
+          total: number
+        }
+        Insert: {
+          day: string
+          event: string
+          page_path: string
+          total?: number
+        }
+        Update: {
+          day?: string
+          event?: string
+          page_path?: string
+          total?: number
+        }
+        Relationships: []
+      }
       testimonials: {
         Row: {
           city: string
@@ -233,6 +269,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      increment_site_audience: { Args: { p_events: Json }; Returns: undefined }
     }
     Enums: {
       app_role: "admin" | "user"

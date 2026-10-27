@@ -12,7 +12,7 @@ declare global {
 
 export const STORAGE_KEY = "cookie_consent";
 export const STORAGE_META_KEY = "cookie_consent_meta";
-export const CONSENT_NOTICE_VERSION = "2026-10-25";
+export const CONSENT_NOTICE_VERSION = "2026-10-27";
 
 const CONSENT_COUNTRIES = [
   "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR",
@@ -78,4 +78,5 @@ export function persistConsentChoice(decision: "granted" | "denied") {
     // stockage indisponible : le choix principal suffit
   }
   updateConsent(decision);
+  window.dispatchEvent(new Event("site-consent-change"));
 }

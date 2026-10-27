@@ -85,6 +85,7 @@ const PrivacyPolicy = () => {
               <li>Clients : durée de la relation contractuelle + <strong>5 ans</strong> (preuve)</li>
               <li>Données comptables et factures : <strong>10 ans</strong> (obligation légale)</li>
               <li>Cookies de mesure d'audience : <strong>13 mois</strong> maximum</li>
+              <li>Statistiques anonymes du tableau d'équipe : cumuls quotidiens sans identifiant de visiteur ; les 90 derniers jours sont affichés</li>
             </ul>
 
             <h2 className="text-2xl font-semibold mb-4 text-gray-800">8. Cookies et mesure publicitaire</h2>
@@ -93,6 +94,15 @@ const PrivacyPolicy = () => {
               d'audience et de marketing (Google Analytics via Google Tag Manager, Google Ads, Meta Pixel).
               Vous pouvez accepter, refuser ou modifier votre choix à tout moment via le lien
               « Paramètres des cookies » en bas de chaque page.
+            </p>
+            <p className="mb-6">
+              <strong>Tableau de suivi de l'équipe :</strong> les coordonnées que vous envoyez dans nos
+              formulaires sont également enregistrées dans un Google Sheet à accès restreint pour traiter
+              votre demande. Un onglet distinct présente, uniquement après acceptation des cookies,
+              les totaux quotidiens de pages consultées, clics sur les liens, devis, téléphone, email et avis,
+              et formulaires envoyés. Aucun nom, email, téléphone, adresse IP, identifiant de visiteur,
+              contenu saisi ou paramètre d'URL n'est enregistré dans ces statistiques ; elles ne sont
+              pas reliées à votre demande. Vous pouvez retirer votre consentement à tout moment.
             </p>
             <p className="mb-6">
               <strong>Publicité Google :</strong> lorsque vous y consentez, Google Ads reçoit des données de

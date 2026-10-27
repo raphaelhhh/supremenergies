@@ -2,6 +2,7 @@
 // Envoie aussi la conversion « Demande de devis » à Google Ads (avec consentement).
 import { fireAdsConversion } from "./google-ads";
 import { trackMetaLead } from "./meta-pixel";
+import { recordAudience } from "./audience";
 // Documentation officielle : https://developers.google.com/analytics/devguides/collection/ga4/reference/events#generate_lead
 //
 // Côté GA4 : marquer 'generate_lead' comme conversion (Admin → Évènements → Marquer comme conversion).
@@ -16,9 +17,10 @@ type LeadSource =
   | "exit_intent"
   | "sticky_mobile"
   | "scroll_cta";
+// Newsletter and quick quotes also use the same consent-aware submission counter.
 
 export interface LeadEventPayload {
-  source: LeadSource;
+  source: LeadSource | "newsletter" | "devis_rapide";
   /** Identifiant libre du projet (pompe-a-chaleur, isolation, etc.) */
   project_type?: string;
   /** Valeur estimée du lead pour le scoring (par défaut 1) */
@@ -41,6 +43,7 @@ export function trackLead({
   extra,
 }: LeadEventPayload): void {
   if (typeof window === "undefined") return;
+  recordAudience("form_submit");
   const w = window as unknown as DataLayerWindow;
   if (!w.dataLayer) w.dataLayer = [];
   w.dataLayer.push({
