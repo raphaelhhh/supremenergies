@@ -3,7 +3,10 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { z } from "https://esm.sh/zod@3.23.8";
 import { sendTemplateEmail } from "../_shared/transactional-email-templates/send-email.ts";
 
+const LEADS_SHEET_ID = "1D5d72iZhcDNpw22zkvXdL0Pinw_11mJ20tO1gEPDYlI";
+
 const SOURCE_LABELS: Record<string, string> = {
+  home_lead_magnet: "Guide des aides",
   devis_multistep: "Demande de devis",
   contact_form: "Formulaire de contact",
   devis_rapide: "Demande de devis rapide",
@@ -87,6 +90,46 @@ Deno.serve(async (req) => {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
+    }
+
+    // Ajout dans le Google Sheet de l'équipe (n'empêche jamais l'enregistrement du lead)
+    try {
+      const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+      const SHEETS_KEY = Deno.env.get("GOOGLE_SHEETS_API_KEY");
+      if (LOVABLE_API_KEY && SHEETS_KEY) {
+        const date = new Date().toLocaleString("fr-FR", {
+          timeZone: "Europe/Paris", day: "2-digit", month: "2-digit", year: "numeric",
+          hour: "2-digit", minute: "2-digit",
+        }).replace(",", "");
+        const details = (parsed.data.message ?? "").replace(/\s*\|\s*Tél:\s*\S+/, "");
+        const row = [
+          date,
+          SOURCE_LABELS[parsed.data.source] ?? parsed.data.source,
+          parsed.data.first_name ?? "",
+          phone ?? "",
+          parsed.data.email ?? "",
+          parsed.data.postal_code ?? "",
+          details,
+          parsed.data.page_path ?? "",
+          "Nouveau",
+          "",
+        ];
+        const res = await fetch(
+          `https://connector-gateway.lovable.dev/google_sheets/v4/spreadsheets/${LEADS_SHEET_ID}/values/Leads!A:J:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${LOVABLE_API_KEY}`,
+              "X-Connection-Api-Key": SHEETS_KEY,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ values: [row] }),
+          },
+        );
+        if (!res.ok) console.error(`Sheet append failed [${res.status}]: ${await res.text()}`);
+      }
+    } catch (sheetErr) {
+      console.error("Sheet append error", sheetErr);
     }
 
     // Alerte e-mail à l'équipe (n'empêche jamais l'enregistrement du lead)
