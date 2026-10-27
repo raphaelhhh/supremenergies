@@ -120,6 +120,18 @@ const SimulateurAides = () => {
           page_path: "/simulateur-aides",
           consent: true,
           message: `Aide estimée: ${result.total} € | Travaux: ${selectedGestes.map((g) => g.id).join(", ")}`,
+          metadata: {
+            income_category: profile, housing_type: housingType, housing_age: housingAge,
+            owner_status: ownerStatus, current_heating: currentHeating,
+            household_size: householdSize, rfr, region,
+            work_types: selectedGestes.map(g => GESTES.find(def => def.id === g.id)?.label ?? g.id),
+            work_details: selectedGestes.map(g => ({
+              label: GESTES.find(def => def.id === g.id)?.label ?? g.id,
+              ...(g.surface !== undefined ? { surface: g.surface } : {}),
+              ...(g.count !== undefined ? { count: g.count } : {}),
+            })),
+            estimated_aid: result.total, total_mpr: result.totalMPR, total_cee: result.totalCEE,
+          },
         },
       });
       if (leadError) throw leadError;
