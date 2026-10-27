@@ -2,6 +2,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { z } from "https://esm.sh/zod@3.23.8";
 import { sendTemplateEmail } from "../_shared/transactional-email-templates/send-email.ts";
+import { leadDetailCells } from "../_shared/lead-sheet-details.ts";
 
 const LEADS_SHEET_ID = "1D5d72iZhcDNpw22zkvXdL0Pinw_11mJ20tO1gEPDYlI";
 
@@ -113,9 +114,10 @@ Deno.serve(async (req) => {
           parsed.data.page_path ?? "",
           "Nouveau",
           "",
+          ...leadDetailCells(parsed.data.metadata ?? {}),
         ];
         const res = await fetch(
-          `https://connector-gateway.lovable.dev/google_sheets/v4/spreadsheets/${LEADS_SHEET_ID}/values/Leads!A:J:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`,
+          `https://connector-gateway.lovable.dev/google_sheets/v4/spreadsheets/${LEADS_SHEET_ID}/values/Leads!A:W:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`,
           {
             method: "POST",
             headers: {
