@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import Breadcrumb from "@/components/Breadcrumb";
 import CTA from "@/components/CTA";
 import InternalLinksHub from "@/components/InternalLinksHub";
+import { trackLead } from "@/lib/track-lead";
 import {
   GESTES,
   PROFILE_INFO,
@@ -109,7 +110,7 @@ const SimulateurAides = () => {
       }]);
       if (error) throw error;
       // Centralise aussi le contact dans la liste des leads + alerte équipe
-      await supabase.functions.invoke("send-lead-magnet", {
+      const { error: leadError } = await supabase.functions.invoke("send-lead-magnet", {
         body: {
           email: parsed.data.email,
           first_name: parsed.data.firstName,
@@ -120,7 +121,9 @@ const SimulateurAides = () => {
           consent: true,
           message: `Aide estimée: ${result.total} € | Travaux: ${selectedGestes.map((g) => g.id).join(", ")}`,
         },
-      }).catch(() => undefined);
+      });
+      if (leadError) throw leadError;
+      trackLead({ source: "simulateur_aides" });
       setStep(6);
     } catch (e) {
       toast({ title: "Erreur", description: "Impossible d'enregistrer votre simulation. Réessayez ou contactez-nous.", variant: "destructive" });

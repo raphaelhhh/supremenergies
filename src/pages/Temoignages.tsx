@@ -218,6 +218,7 @@ const Temoignages = () => {
               {google && (
                 <button
                   type="button"
+                  data-audience-event="review_click"
                   onClick={() => showGoogleAction("Laisser un avis Google", writeReviewUrl)}
                   className="text-supreme-primary hover:underline text-sm font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
