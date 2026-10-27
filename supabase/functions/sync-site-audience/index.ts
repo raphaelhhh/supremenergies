@@ -43,6 +43,14 @@ Deno.serve(async req => {
       ...(data ?? []).map(row => [row.day, row.page_path, labels[row.event] ?? row.event, row.total, new Date().toISOString(), "Visiteurs ayant accepté les cookies uniquement"]),
     ];
     // Only the managed Audience tab is rewritten, never the team's Leads statuses/comments.
+    const cleared = await fetch(`${GATEWAY_URL}/values/Audience!A:F:clear`, {
+      method: "POST", headers: gatewayHeaders, body: JSON.stringify({}),
+    });
+    if (!cleared.ok) {
+      const details = await cleared.text();
+      console.error(`Audience clear failed [${cleared.status}]: ${details}`);
+      return new Response(JSON.stringify({ error: "Google Sheets update failed", status: cleared.status, details }), { status: cleared.status, headers });
+    }
     const response = await fetch(`${GATEWAY_URL}/values:batchUpdate`, {
       method: "POST", headers: gatewayHeaders,
       body: JSON.stringify({ valueInputOption: "RAW", data: [{ range: "Audience!A1:F20001", values }] }),
