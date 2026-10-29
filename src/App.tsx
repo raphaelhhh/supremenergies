@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FranceRenovBanner from "./components/FranceRenovBanner";
@@ -43,6 +43,7 @@ import { useEffect } from "react";
 import { loadGoogleAds } from "./lib/google-ads";
 import { loadMetaPixel } from "./lib/meta-pixel";
 import AudienceTracker from "./components/AudienceTracker";
+import blogConsolidation from "./data/blog-consolidation.json";
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -74,6 +75,9 @@ const App = () => {
                 <Route path="/services/:service/:ville" element={<ServiceCity />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/categorie/:slug" element={<BlogCategoryPage />} />
+                {Object.entries(blogConsolidation.redirects).map(([from, to]) => (
+                  <Route key={from} path={from} element={<Navigate to={to} replace />} />
+                ))}
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/zones/:ville" element={<ZoneLocale />} />

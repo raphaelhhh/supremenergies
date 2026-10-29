@@ -1,4 +1,5 @@
 # Site rénovation clair et confiance (étape par étape)
+- [x] Optimiser les titres et descriptions des trois guides ; éco-PTZ fusionnés, ancien lien conservé, devis et descriptions uniques vérifiés ; publication nécessaire pour les changements statiques.
 - [x] Ajouter les réponses détaillées des formulaires aux leads du Sheet et compléter la dernière simulation enregistrée ; simulation réelle de contrôle et lecture du Sheet vérifiées.
 - [x] Réunir toutes les demandes et ajouter des statistiques anonymes de visites et clics consentis au Google Sheet ; newsletter, consentement, clic devis et export vérifiés.
 - [x] Optimiser l’accueil et la page pompe à chaleur pour rénovation énergétique, pompe à chaleur et aides 2026 ; titres, contenu, FAQ et liens vérifiés.
