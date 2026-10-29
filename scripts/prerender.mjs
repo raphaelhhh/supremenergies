@@ -17,6 +17,7 @@ if (!existsSync(baseHtmlPath)) {
 const baseHtml = readFileSync(baseHtmlPath, "utf8");
 const SITE_URL = "https://supremenergies.com";
 const OG_IMG = `${SITE_URL}/og-image.jpg`;
+const blogConsolidation = JSON.parse(readFileSync(resolve(__dirname, "../src/data/blog-consolidation.json"), "utf8"));
 
 /**
  * Routes à pré-rendre. Chaque entrée définit le contenu SEO injecté côté serveur
@@ -249,4 +250,49 @@ for (const route of routes) {
   written++;
 }
 
+// The three optimized guides use their published editorial data in both the
+// initial HTML and React. Render real article content, not a hidden SEO block.
+async function prerenderGuides() {
+  const apiUrl = "https://epeomgifqjbgzyurcnaz.supabase.co";
+  const anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwZW9tZ2lmcWpiZ3p5dXJjbmF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5OTUyOTEsImV4cCI6MjA5MTU3MTI5MX0.7WTHMDXIKtK007D_g_z3iHRWGe-K3_RRmDkCIXJWgGQ";
+  const params = new URLSearchParams({
+    select: "slug,title,meta_description,excerpt,content,published_at,updated_at",
+    published: "eq.true",
+    slug: `in.(${blogConsolidation.guideSlugs.join(",")})`,
+  });
+  const response = await fetch(`${apiUrl}/rest/v1/blog_posts?${params}`, {
+    headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },
+    signal: AbortSignal.timeout(20000),
+  });
+  if (!response.ok) throw new Error(`Guide fetch failed: ${response.status}`);
+  const posts = await response.json();
+  if (posts.length !== blogConsolidation.guideSlugs.length) {
+    throw new Error("An optimized guide is missing from published content");
+  }
+  for (const post of posts) {
+    const path = `/blog/${post.slug}`;
+    const canonical = `${SITE_URL}${path}`;
+    let html = buildHtml({ path, title: `${post.title} | SupremEnergies`, description: post.meta_description || post.excerpt, h1: post.title, intro: post.excerpt });
+    html = html.replace(/<div id="seo-prerender"[\s\S]*?<\/nav>\s*<\/div>/, "");
+    html = html.replace('<div id="root"></div>', `<div id="root"><main><article><h1>${escapeHtml(post.title)}</h1>${post.content}</article></main></div>`);
+    html = html.replace('property="og:type" content="website"', 'property="og:type" content="article"');
+    const schema = { "@context": "https://schema.org", "@type": "BlogPosting", headline: post.title, description: post.meta_description || post.excerpt, datePublished: post.published_at, dateModified: post.updated_at, mainEntityOfPage: canonical, author: { "@type": "Organization", name: "SupremEnergies" } };
+    html = html.replace("</head>", `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script></head>`);
+    const outDir = resolve(distDir, `.${path}`);
+    mkdirSync(outDir, { recursive: true });
+    writeFileSync(resolve(outDir, "index.html"), html);
+    written++;
+  }
+  // Lovable static hosting cannot issue configured HTTP 301s. An immediate
+  // HTML redirect and destination canonical also work for non-JS crawlers.
+  for (const [from, to] of Object.entries(blogConsolidation.redirects)) {
+    const target = `${SITE_URL}${to}`;
+    const outDir = resolve(distDir, `.${from}`);
+    mkdirSync(outDir, { recursive: true });
+    writeFileSync(resolve(outDir, "index.html"), `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Guide éco-PTZ | SupremEnergies</title><meta http-equiv="refresh" content="0;url=${target}"><link rel="canonical" href="${target}"></head><body><p><a href="${target}">Consulter le guide éco-PTZ mis à jour</a></p></body></html>`);
+    written++;
+  }
+}
+
+await prerenderGuides();
 console.log(`[prerender] wrote ${written} pre-rendered HTML files`);
