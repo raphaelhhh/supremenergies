@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { PROFILE_INFO, type IncomeProfile } from "@/lib/aides2026";
 import { toast } from "@/components/ui/use-toast";
 
 type Lead = {
   id: string;
   email: string | null;
-  metadata: { phone?: string } | null;
+  metadata: { phone?: string; income_category?: string } | null;
   first_name: string | null;
   postal_code: string | null;
   source: string;
@@ -18,6 +19,18 @@ type Lead = {
   created_at: string;
   followup_due_at: string | null;
   followup_sent_at: string | null;
+};
+
+const ProfileBadge = ({ cat }: { cat?: string | null }) => {
+  if (cat === "bleu" || cat === "jaune" || cat === "violet" || cat === "rose") {
+    const info = PROFILE_INFO[cat];
+    return (
+      <Badge className={`${info.color} border-transparent text-white`}>
+        Profil {info.label}
+      </Badge>
+    );
+  }
+  return <Badge className="bg-muted text-muted-foreground border-transparent">Profil inconnu</Badge>;
 };
 
 export default function AdminLeads() {
@@ -155,6 +168,7 @@ export default function AdminLeads() {
               <th className="px-3 py-2 font-semibold">Email</th>
               <th className="px-3 py-2 font-semibold">CP</th>
               <th className="px-3 py-2 font-semibold">Source</th>
+              <th className="px-3 py-2 font-semibold">Profil</th>
               <th className="px-3 py-2 font-semibold">Détails</th>
               <th className="px-3 py-2 font-semibold">Relance</th>
             </tr>
@@ -170,6 +184,7 @@ export default function AdminLeads() {
                 <td className="px-3 py-2">{l.email ?? "—"}</td>
                 <td className="px-3 py-2">{l.postal_code ?? "—"}</td>
                 <td className="px-3 py-2"><Badge variant="secondary">{l.source}</Badge></td>
+                <td className="px-3 py-2"><ProfileBadge cat={l.metadata?.income_category} /></td>
                 <td className="px-3 py-2 text-xs text-muted-foreground max-w-[320px]">{l.message ?? l.page_path ?? "—"}</td>
                 <td className="px-3 py-2 text-xs">
                   {l.followup_sent_at ? (
@@ -185,7 +200,7 @@ export default function AdminLeads() {
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={8} className="px-3 py-8 text-center text-muted-foreground">Aucun lead</td></tr>
+              <tr><td colSpan={9} className="px-3 py-8 text-center text-muted-foreground">Aucun lead</td></tr>
             )}
           </tbody>
         </table>
