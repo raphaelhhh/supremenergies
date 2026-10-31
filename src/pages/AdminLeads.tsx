@@ -168,6 +168,7 @@ export default function AdminLeads() {
               <th className="px-3 py-2 font-semibold">Email</th>
               <th className="px-3 py-2 font-semibold">CP</th>
               <th className="px-3 py-2 font-semibold">Source</th>
+              <th className="px-3 py-2 font-semibold">Profil</th>
               <th className="px-3 py-2 font-semibold">Détails</th>
               <th className="px-3 py-2 font-semibold">Relance</th>
             </tr>
@@ -183,6 +184,7 @@ export default function AdminLeads() {
                 <td className="px-3 py-2">{l.email ?? "—"}</td>
                 <td className="px-3 py-2">{l.postal_code ?? "—"}</td>
                 <td className="px-3 py-2"><Badge variant="secondary">{l.source}</Badge></td>
+                <td className="px-3 py-2"><ProfileBadge cat={l.metadata?.income_category} /></td>
                 <td className="px-3 py-2 text-xs text-muted-foreground max-w-[320px]">{l.message ?? l.page_path ?? "—"}</td>
                 <td className="px-3 py-2 text-xs">
                   {l.followup_sent_at ? (
