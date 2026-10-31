@@ -80,19 +80,21 @@ const ZoneLocale = () => {
       {/* Hero local */}
       <section className="bg-gradient-to-br from-supreme-primary to-supreme-primary/80 text-white py-16 md:py-20">
         <div className="container-custom">
+          <div className="[&_nav]:px-0 [&_nav]:py-0 [&_a]:text-white/85 [&_a:hover]:text-white [&_span]:text-white [&_svg]:text-white/80">
           <Breadcrumb
             items={[
               { label: "Zones d'intervention", href: "/services" },
               { label: zone.name },
             ]}
           />
+          </div>
           <div className="flex items-center gap-2 text-white/80 mb-3 mt-4">
             <MapPin size={20} />
             <span className="text-sm">
               {zone.fullName} · {zone.population}
             </span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 max-w-3xl">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 max-w-3xl text-white leading-tight">
             Rénovation énergétique à {zone.name}
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mb-8">{zone.intro}</p>
