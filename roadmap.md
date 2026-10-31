@@ -1,5 +1,5 @@
 # Site rénovation clair et confiance (étape par étape)
-- [ ] Relier guide → simulateur → devis PAC, transmettre les réponses au devis et vérifier le parcours dans le Sheet.
+- [x] Relier guide → simulateur → devis PAC ; coordonnées et profil repris, parcours et réponses reçus dans le Sheet avec statut Nouveau, notes intactes ; tests retirés. Publication nécessaire.
 - [x] Fiabiliser les colonnes du Sheet sans toucher aux notes ; devis PAC reçu en colonne A avec statut Nouveau, notes intactes, contrôle de bout en bout réussi.
 - [x] Orienter les guides chauffage/aides et les résultats PAC du simulateur vers un devis PAC prérempli et modifiable, sans publicité payante ; parcours guide → devis vérifié sur ordinateur et téléphone. Publication nécessaire.
 - [x] Optimiser les titres et descriptions des trois guides ; éco-PTZ fusionnés, ancien lien conservé, devis et descriptions uniques vérifiés ; publication nécessaire pour les changements statiques.
