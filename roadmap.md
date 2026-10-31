@@ -1,6 +1,6 @@
 # Site rénovation clair et confiance (étape par étape)
-- [ ] Fiabiliser les colonnes du Sheet sans toucher aux notes ; vérifier un devis PAC de bout en bout.
-- [ ] Orienter les guides chauffage/aides et le simulateur vers un devis PAC prérempli, sans publicité payante.
+- [x] Fiabiliser les colonnes du Sheet sans toucher aux notes ; devis PAC reçu en colonne A avec statut Nouveau, notes intactes, contrôle de bout en bout réussi.
+- [x] Orienter les guides chauffage/aides et les résultats PAC du simulateur vers un devis PAC prérempli et modifiable, sans publicité payante ; parcours guide → devis vérifié sur ordinateur et téléphone. Publication nécessaire.
 - [x] Optimiser les titres et descriptions des trois guides ; éco-PTZ fusionnés, ancien lien conservé, devis et descriptions uniques vérifiés ; publication nécessaire pour les changements statiques.
 - [x] Ajouter les réponses détaillées des formulaires aux leads du Sheet et compléter la dernière simulation enregistrée ; simulation réelle de contrôle et lecture du Sheet vérifiées.
 - [x] Réunir toutes les demandes et ajouter des statistiques anonymes de visites et clics consentis au Google Sheet ; newsletter, consentement, clic devis et export vérifiés.
