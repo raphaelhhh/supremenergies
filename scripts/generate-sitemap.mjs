@@ -2,11 +2,12 @@
 //   - public/sitemap.xml         → index qui référence les sous-sitemaps
 //   - public/sitemap-pages.xml   → pages statiques (services, zones, légales, etc.)
 //   - public/sitemap-blog.xml    → articles de blog publiés (lus depuis Supabase)
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SITE_URL = "https://supremenergies.com";
+const blogConsolidation = JSON.parse(readFileSync(new URL("../src/data/blog-consolidation.json", import.meta.url), "utf8"));
 const SUPABASE_URL = "https://epeomgifqjbgzyurcnaz.supabase.co";
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVwZW9tZ2lmcWpiZ3p5dXJjbmF6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5OTUyOTEsImV4cCI6MjA5MTU3MTI5MX0.7WTHMDXIKtK007D_g_z3iHRWGe-K3_RRmDkCIXJWgGQ";
@@ -184,7 +185,7 @@ ${inner}
 }
 
 const today = new Date().toISOString().split("T")[0];
-const posts = await fetchBlogPosts();
+const posts = (await fetchBlogPosts()).filter((post) => !Object.hasOwn(blogConsolidation.redirects, `/blog/${post.slug}`));
 
 // 1) Sous-sitemap : pages statiques (lastmod réel par page)
 const staticEntries = STATIC_URLS.map((u) =>
