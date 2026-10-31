@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { PROFILE_INFO, type IncomeProfile } from "@/lib/aides2026";
 import { toast } from "@/components/ui/use-toast";
 
 type Lead = {
@@ -21,6 +22,7 @@ type Lead = {
 };
 
 export default function AdminLeads() {
+  const PROFILE_KEYS: IncomeProfile[] = ["bleu", "jaune", "violet", "rose"];
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
