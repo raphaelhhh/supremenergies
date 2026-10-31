@@ -289,7 +289,7 @@ async function prerenderGuides() {
     const target = `${SITE_URL}${to}`;
     const outDir = resolve(distDir, `.${from}`);
     mkdirSync(outDir, { recursive: true });
-    writeFileSync(resolve(outDir, "index.html"), `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Guide éco-PTZ | SupremEnergies</title><meta http-equiv="refresh" content="0;url=${target}"><link rel="canonical" href="${target}"></head><body><p><a href="${target}">Consulter le guide éco-PTZ mis à jour</a></p></body></html>`);
+    writeFileSync(resolve(outDir, "index.html"), `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Guide rénovation énergétique | SupremEnergies</title><meta http-equiv="refresh" content="0;url=${target}"><link rel="canonical" href="${target}"></head><body><p><a href="${target}">Consulter le guide mis à jour</a></p></body></html>`);
     written++;
   }
 }
