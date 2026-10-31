@@ -139,9 +139,9 @@ const LeadForm = ({
         </h3>
       )}
 
-      <div className="space-y-3">
+      <div className="space-y-3 text-left text-gray-900">
         <div>
-          <label htmlFor={`lf-name-${source}`} className="sr-only">
+          <label htmlFor={`lf-name-${source}`} className="block text-sm font-medium text-gray-900 mb-1">
             Nom
           </label>
           <Input
@@ -154,7 +154,7 @@ const LeadForm = ({
           />
         </div>
         <div>
-          <label htmlFor={`lf-phone-${source}`} className="sr-only">
+          <label htmlFor={`lf-phone-${source}`} className="block text-sm font-medium text-gray-900 mb-1">
             Téléphone
           </label>
           <Input
@@ -169,7 +169,7 @@ const LeadForm = ({
           />
         </div>
         <div>
-          <label htmlFor={`lf-city-${source}`} className="sr-only">
+          <label htmlFor={`lf-city-${source}`} className="block text-sm font-medium text-gray-900 mb-1">
             Ville
           </label>
           <Input
@@ -182,14 +182,14 @@ const LeadForm = ({
           />
         </div>
         <div>
-          <label htmlFor={`lf-project-${source}`} className="sr-only">
+          <label htmlFor={`lf-project-${source}`} className="block text-sm font-medium text-gray-900 mb-1">
             Type de projet
           </label>
           <select
             id={`lf-project-${source}`}
             value={project}
             onChange={(e) => setProject(e.target.value)}
-            className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm"
+            className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm text-gray-900"
           >
             {PROJECTS.map((p) => (
               <option key={p} value={p}>

@@ -120,6 +120,7 @@ const ServiceCity = () => {
       {/* Hero */}
       <section className="bg-gradient-to-br from-supreme-primary to-supreme-primary/80 text-white py-14 md:py-20">
         <div className="container-custom">
+          <div className="[&_nav]:px-0 [&_nav]:py-0 [&_a]:text-white/85 [&_a:hover]:text-white [&_span]:text-white [&_svg]:text-white/80">
           <Breadcrumb
             items={[
               { label: "Services", href: "/services" },
@@ -127,6 +128,7 @@ const ServiceCity = () => {
               { label: zone.name },
             ]}
           />
+          </div>
           <div className="flex items-center gap-2 text-white/80 mb-3 mt-4">
             <MapPin size={18} />
             <span className="text-sm">
@@ -135,7 +137,7 @@ const ServiceCity = () => {
           </div>
           <div className="grid lg:grid-cols-5 gap-10 items-start">
             <div className="lg:col-span-3">
-              <h1 className="text-3xl md:text-5xl font-bold mb-4">
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white leading-tight">
                 {meta.name} à {zone.name}
               </h1>
               <p className="text-lg md:text-xl text-white/90 mb-6">{meta.intro}</p>
