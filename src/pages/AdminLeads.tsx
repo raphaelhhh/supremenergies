@@ -200,7 +200,7 @@ export default function AdminLeads() {
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={8} className="px-3 py-8 text-center text-muted-foreground">Aucun lead</td></tr>
+              <tr><td colSpan={9} className="px-3 py-8 text-center text-muted-foreground">Aucun lead</td></tr>
             )}
           </tbody>
         </table>
