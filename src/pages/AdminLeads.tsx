@@ -34,7 +34,6 @@ const ProfileBadge = ({ cat }: { cat?: string | null }) => {
 };
 
 export default function AdminLeads() {
-  const PROFILE_KEYS: IncomeProfile[] = ["bleu", "jaune", "violet", "rose"];
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
