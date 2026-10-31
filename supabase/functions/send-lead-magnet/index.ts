@@ -4,6 +4,7 @@ import { z } from "https://esm.sh/zod@3.23.8";
 import { sendTemplateEmail } from "../_shared/transactional-email-templates/send-email.ts";
 import { leadDetailCells } from "../_shared/lead-sheet-details.ts";
 import { leadSheetAppendRequest } from "../_shared/lead-sheet-append.ts";
+import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
 
 const LEADS_SHEET_ID = "1D5d72iZhcDNpw22zkvXdL0Pinw_11mJ20tO1gEPDYlI";
 const LEADS_TAB_ID = 623765645;
@@ -18,13 +19,6 @@ const SOURCE_LABELS: Record<string, string> = {
   newsletter: "Newsletter",
 };
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-};
-
 const BodySchema = z.object({
   email: z.string().trim().email().max(255).optional().nullable(),
   phone: z.string().trim().max(32).optional().nullable(),
@@ -34,7 +28,10 @@ const BodySchema = z.object({
   page_path: z.string().trim().max(255).optional().nullable(),
   message: z.string().trim().max(2000).optional().nullable(),
   consent: z.boolean().default(false),
-  metadata: z.record(z.any()).optional().nullable(),
+  metadata: z.object({
+    guide_path: z.string().regex(/^\/blog\/[a-z0-9-]{1,180}$/).optional(),
+    journey_stage: z.enum(["guide_simulation", "simulation", "guide_simulation_quote", "simulation_quote", "quote"]).optional(),
+  }).passthrough().optional().nullable(),
 });
 
 Deno.serve(async (req) => {

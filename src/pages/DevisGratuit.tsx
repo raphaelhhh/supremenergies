@@ -21,7 +21,7 @@ import {
 import heroImage from "@/assets/energy-label.png";
 
 import { trackLead, getLeadSourceFromQuery } from "@/lib/track-lead";
-import { requestedQuoteWorks } from "@/lib/heat-pump-journey";
+import { requestedQuoteWorks, journeyMetadata, simulationTransferSchema } from "@/lib/heat-pump-journey";
 
 const STORAGE_KEY = "sce_devis_state";
 
@@ -76,7 +76,12 @@ const step3Schema = z.object({
 });
 
 const DevisGratuit = () => {
-  const { search } = useLocation();
+  const { search, state: navigationState } = useLocation();
+  const simulation = useMemo(() => {
+    if (new URLSearchParams(search).get("from") !== "simulateur_resultat") return null;
+    const parsed = simulationTransferSchema.safeParse(navigationState?.simulation);
+    return parsed.success ? parsed.data : null;
+  }, [search, navigationState]);
   const [step, setStep] = useState(1);
   const [state, setState] = useState<FormState>(initialState);
   const [loading, setLoading] = useState(false);
@@ -96,8 +101,14 @@ const DevisGratuit = () => {
       // ignore
     }
     const requested = requestedQuoteWorks(search);
+    if (simulation) restored = {
+      ...initialState,
+      first_name: simulation.first_name, email: simulation.email, phone: simulation.phone,
+      postal_code: simulation.postal_code,
+      housing_type: simulation.housing_type === "maison" ? "Maison individuelle" : "Appartement",
+    };
     setState({ ...restored, ...(requested.length ? { work_types: requested } : {}) });
-  }, [search]);
+  }, [search, simulation]);
 
   useEffect(() => {
     try {
@@ -153,10 +164,18 @@ const DevisGratuit = () => {
           first_name: parsed.data.first_name,
           postal_code: state.postal_code || null,
           source: "devis_multistep",
+          phone: parsed.data.phone,
           page_path: "/devis-gratuit",
           consent: true,
           message: `Travaux: ${state.work_types.join(", ")} | Logement: ${state.housing_type} | Surface: ${state.surface || "n/a"} | Tél: ${parsed.data.phone}`,
           metadata: {
+            ...(simulation ? {
+              income_category: simulation.income_category, housing_age: simulation.housing_age,
+              owner_status: simulation.owner_status, current_heating: simulation.current_heating,
+              household_size: simulation.household_size, rfr: simulation.rfr, region: simulation.region,
+              estimated_aid: simulation.estimated_aid, total_mpr: simulation.total_mpr, total_cee: simulation.total_cee,
+            } : {}),
+            ...journeyMetadata(search, "quote"),
             work_types: state.work_types,
             housing_type: state.housing_type,
             surface: state.surface,
@@ -225,6 +244,7 @@ const DevisGratuit = () => {
               <p className="text-sm text-gray-600 mb-5">
                 4 questions rapides pour estimer vos aides et préparer votre devis.
               </p>
+              {simulation && !done && <p className="mb-5 border-l-2 border-supreme-primary pl-3 text-sm text-muted-foreground">Votre simulation est reprise : profil {simulation.income_category}, aides estimées {simulation.estimated_aid.toLocaleString("fr-FR")} €. Vous pouvez modifier votre logement et vos travaux ; les aides restent à confirmer.</p>}
 
               {/* Progress */}
               <div className="mb-6">
