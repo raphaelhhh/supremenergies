@@ -15,7 +15,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { getCategory } from "@/lib/blog-categories";
 import { renderToStaticMarkup } from "react-dom/server";
 import HeatPumpQuoteCTA from "@/components/HeatPumpQuoteCTA";
-import { isHeatPumpGuide, heatPumpQuotePath } from "@/lib/heat-pump-journey";
+import { isHeatPumpGuide } from "@/lib/heat-pump-journey";
 
 interface Heading {
   id: string;
