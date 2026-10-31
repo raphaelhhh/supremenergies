@@ -13,6 +13,8 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CTA from "@/components/CTA";
 import InternalLinksHub from "@/components/InternalLinksHub";
 import { trackLead } from "@/lib/track-lead";
+import { Link } from "react-router-dom";
+import HeatPumpQuoteCTA from "@/components/HeatPumpQuoteCTA";
 import {
   GESTES,
   PROFILE_INFO,
@@ -177,7 +179,7 @@ const SimulateurAides = () => {
           <div className="flex items-center gap-3 mt-8 mb-4">
             <Calculator size={28} />
             <span className="text-xs md:text-sm uppercase tracking-wide text-white/90 font-medium">
-              Simulateur officiel — barèmes ANAH &amp; CEE 2026
+              Simulateur SupremEnergies — estimation des aides 2026
             </span>
           </div>
           <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white drop-shadow-sm leading-tight">
@@ -495,11 +497,11 @@ const SimulateurAides = () => {
                   100% TTC profil Bleu, 90% Jaune, 80% Violet, 50% Rose).
                 </p>
 
-                <Button asChild size="lg" className="w-full bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark">
-                  <a href="/devis-gratuit" target="_blank" rel="noopener noreferrer">
-                    Demander mon devis détaillé sous 48h <ArrowRight className="ml-2" size={16} />
-                  </a>
-                </Button>
+                {selectedGestes.some(g => g.id.startsWith("pac-"))
+                  ? <HeatPumpQuoteCTA from="simulateur_resultat" />
+                  : <Button asChild size="lg" className="h-auto min-h-12 w-full whitespace-normal bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark">
+                      <Link to="/devis-gratuit?from=simulateur_resultat">Demander mon devis détaillé <ArrowRight className="ml-2" size={16} /></Link>
+                    </Button>}
               </div>
             )}
 

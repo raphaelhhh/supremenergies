@@ -13,6 +13,9 @@ import BlogClusterNav from "@/components/BlogClusterNav";
 import LeadMagnetForm from "@/components/LeadMagnetForm";
 import { supabase } from "@/integrations/supabase/client";
 import { getCategory } from "@/lib/blog-categories";
+import { renderToStaticMarkup } from "react-dom/server";
+import HeatPumpQuoteCTA from "@/components/HeatPumpQuoteCTA";
+import { isHeatPumpGuide } from "@/lib/heat-pump-journey";
 
 interface Heading {
   id: string;
@@ -35,7 +38,7 @@ function slugifyId(text: string): string {
  *  - injecte un CTA inline à ~50% du contenu
  *  - retourne la liste des headings + une FAQ détectée (Q/R en H3 sous un H2 "FAQ"/"Questions")
  */
-function enrichContent(html: string): {
+function enrichContent(html: string, heatPump: boolean, slug: string): {
   html: string;
   headings: Heading[];
   faq: { question: string; answer: string }[];
@@ -87,16 +90,15 @@ function enrichContent(html: string): {
     const midIdx = Math.floor(allH2.length / 2);
     const midH2 = allH2[midIdx];
     const cta = doc.createElement("div");
-    cta.innerHTML = `
-      <div style="background:#f0f9ff;border-left:4px solid #2e7d32;border-radius:8px;padding:18px 20px;margin:24px 0;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
-        <div style="flex:1;min-width:200px;">
-          <strong style="color:#2e7d32;display:block;margin-bottom:4px;">Vous lisez ceci parce que vous y pensez sérieusement.</strong>
-          <span style="color:#374151;font-size:14px;">Faites-vous accompagner gratuitement par un expert SupremEnergies pour chiffrer votre projet.</span>
-        </div>
-        <a href="/devis-gratuit?from=blog_inline" style="background:#2e7d32;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;white-space:nowrap;">Devis gratuit 48h →</a>
-      </div>
-    `;
-    midH2.parentNode?.insertBefore(cta.firstElementChild!, midH2);
+    cta.innerHTML = heatPump
+      ? renderToStaticMarkup(<HeatPumpQuoteCTA from={`blog_${slug}`} />)
+      : renderToStaticMarkup(<aside className="not-prose my-8 border-y border-border bg-supreme-light px-5 py-6">
+          <h3 className="text-xl font-bold text-supreme-primary">Quel budget pour votre rénovation ?</h3>
+          <p className="my-3 text-sm text-muted-foreground">Parlez-nous de votre logement pour obtenir un devis détaillé, gratuit et sans engagement.</p>
+          <Button asChild className="bg-supreme-accent text-supreme-dark hover:bg-supreme-accent/90"><a href={`/devis-gratuit?from=blog_${slug}`}>Demander un devis gratuit</a></Button>
+        </aside>);
+    const inlineCTA = cta.firstElementChild;
+    if (inlineCTA) midH2.parentNode?.insertBefore(inlineCTA, midH2);
   }
 
   return { html: root.innerHTML, headings, faq };
@@ -160,7 +162,7 @@ const BlogPost = () => {
   }, [post, isLoading, navigate]);
 
   const enriched = useMemo(
-    () => (post ? enrichContent(post.content) : { html: "", headings: [], faq: [] }),
+    () => (post ? enrichContent(post.content, isHeatPumpGuide(post.category, post.title), post.slug) : { html: "", headings: [], faq: [] }),
     [post],
   );
 
@@ -176,6 +178,7 @@ const BlogPost = () => {
   }
 
   if (!post) return null;
+  const heatPump = isHeatPumpGuide(post.category, post.title);
 
   const canonicalUrl = `https://supremenergies.com/blog/${post.slug}`;
   const desc = post.meta_description || post.excerpt;
@@ -362,7 +365,7 @@ const BlogPost = () => {
             </div>
 
             {/* CTA final */}
-            <div className="mt-8 p-8 bg-supreme-light rounded-2xl text-center">
+            {heatPump ? <HeatPumpQuoteCTA from={`blog_${post.slug}_final`} /> : <div className="mt-8 border-y border-border py-8 text-center">
               <h3 className="text-2xl font-bold mb-3">🏡 Besoin d'un conseil personnalisé ?</h3>
               <p className="text-gray-700 mb-6">
                 Nos experts SupremEnergies vous accompagnent de A à Z dans vos travaux de rénovation
@@ -370,7 +373,7 @@ const BlogPost = () => {
               </p>
               <Button
                 asChild
-                className="bg-supreme-primary hover:bg-supreme-primary/90 text-white px-8 py-3 rounded-lg mb-3"
+                className="bg-supreme-primary hover:bg-supreme-primary/90 text-primary-foreground px-8 py-3 rounded-lg mb-3"
               >
                 <Link to={`/devis-gratuit?from=blog_${post.slug}`}>📋 Demander un devis gratuit</Link>
               </Button>
@@ -383,7 +386,7 @@ const BlogPost = () => {
                   01 86 04 68 89
                 </a>
               </p>
-            </div>
+            </div>}
           </div>
         </div>
       </section>

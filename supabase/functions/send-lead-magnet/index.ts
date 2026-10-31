@@ -3,8 +3,10 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { z } from "https://esm.sh/zod@3.23.8";
 import { sendTemplateEmail } from "../_shared/transactional-email-templates/send-email.ts";
 import { leadDetailCells } from "../_shared/lead-sheet-details.ts";
+import { leadSheetAppendRequest } from "../_shared/lead-sheet-append.ts";
 
 const LEADS_SHEET_ID = "1D5d72iZhcDNpw22zkvXdL0Pinw_11mJ20tO1gEPDYlI";
+const LEADS_TAB_ID = 623765645;
 
 const SOURCE_LABELS: Record<string, string> = {
   home_lead_magnet: "Guide des aides",
@@ -117,7 +119,7 @@ Deno.serve(async (req) => {
           ...leadDetailCells(parsed.data.metadata ?? {}),
         ];
         const res = await fetch(
-          `https://connector-gateway.lovable.dev/google_sheets/v4/spreadsheets/${LEADS_SHEET_ID}/values/Leads!A:W:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`,
+          `https://connector-gateway.lovable.dev/google_sheets/v4/spreadsheets/${LEADS_SHEET_ID}:batchUpdate`,
           {
             method: "POST",
             headers: {
@@ -125,7 +127,7 @@ Deno.serve(async (req) => {
               "X-Connection-Api-Key": SHEETS_KEY,
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ values: [row] }),
+            body: JSON.stringify(leadSheetAppendRequest(LEADS_TAB_ID, row)),
           },
         );
         if (!res.ok) console.error(`Sheet append failed [${res.status}]: ${await res.text()}`);

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,6 +21,7 @@ import {
 import heroImage from "@/assets/energy-label.png";
 
 import { trackLead, getLeadSourceFromQuery } from "@/lib/track-lead";
+import { requestedQuoteWorks } from "@/lib/heat-pump-journey";
 
 const STORAGE_KEY = "sce_devis_state";
 
@@ -75,6 +76,7 @@ const step3Schema = z.object({
 });
 
 const DevisGratuit = () => {
+  const { search } = useLocation();
   const [step, setStep] = useState(1);
   const [state, setState] = useState<FormState>(initialState);
   const [loading, setLoading] = useState(false);
@@ -83,16 +85,19 @@ const DevisGratuit = () => {
 
   // Restore from localStorage
   useEffect(() => {
+    let restored = initialState;
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<FormState>;
-        setState({ ...initialState, ...parsed, consent: false });
+        restored = { ...initialState, ...parsed, consent: false };
       }
     } catch {
       // ignore
     }
-  }, []);
+    const requested = requestedQuoteWorks(search);
+    setState({ ...restored, ...(requested.length ? { work_types: requested } : {}) });
+  }, [search]);
 
   useEffect(() => {
     try {

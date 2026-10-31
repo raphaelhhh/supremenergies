@@ -1,4 +1,6 @@
 # Site rénovation clair et confiance (étape par étape)
+- [x] Fiabiliser les colonnes du Sheet sans toucher aux notes ; devis PAC reçu en colonne A avec statut Nouveau, notes intactes, contrôle de bout en bout réussi.
+- [x] Orienter les guides chauffage/aides et les résultats PAC du simulateur vers un devis PAC prérempli et modifiable, sans publicité payante ; parcours guide → devis vérifié sur ordinateur et téléphone. Publication nécessaire.
 - [x] Optimiser les titres et descriptions des trois guides ; éco-PTZ fusionnés, ancien lien conservé, devis et descriptions uniques vérifiés ; publication nécessaire pour les changements statiques.
 - [x] Ajouter les réponses détaillées des formulaires aux leads du Sheet et compléter la dernière simulation enregistrée ; simulation réelle de contrôle et lecture du Sheet vérifiées.
 - [x] Réunir toutes les demandes et ajouter des statistiques anonymes de visites et clics consentis au Google Sheet ; newsletter, consentement, clic devis et export vérifiés.
@@ -9,4 +11,4 @@
 - [ ] Étape 3 : photos réelles de chantiers et de l'équipe — en attente des photos du propriétaire.
 - [ ] Étape 4 : SIRET, RCS, assurance décennale dans les mentions — en attente des informations du propriétaire.
 - [x] Adapter la page pompe à chaleur à la couverture nationale par nos équipes, en bleu et orange sans effet luxe.
-- [ ] Campagnes Google et Meta orientées visites, pompe à chaleur, France entière : choix de campagne, comptes et approbation du budget ; aucun lancement autorisé.
+- Publicités Google et Meta différées à la demande du propriétaire ; aucun lancement autorisé.
