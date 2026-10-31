@@ -10,7 +10,7 @@ import { toast } from "@/components/ui/use-toast";
 type Lead = {
   id: string;
   email: string | null;
-  metadata: { phone?: string } | null;
+  metadata: { phone?: string; income_category?: string } | null;
   first_name: string | null;
   postal_code: string | null;
   source: string;
@@ -19,6 +19,18 @@ type Lead = {
   created_at: string;
   followup_due_at: string | null;
   followup_sent_at: string | null;
+};
+
+const ProfileBadge = ({ cat }: { cat?: string | null }) => {
+  if (cat === "bleu" || cat === "jaune" || cat === "violet" || cat === "rose") {
+    const info = PROFILE_INFO[cat];
+    return (
+      <Badge className={`${info.color} border-transparent text-white`}>
+        Profil {info.label}
+      </Badge>
+    );
+  }
+  return <Badge className="bg-muted text-muted-foreground border-transparent">Profil inconnu</Badge>;
 };
 
 export default function AdminLeads() {
