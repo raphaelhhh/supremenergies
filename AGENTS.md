@@ -7,5 +7,6 @@
 - Every lead submission is appended to the team's Google Sheet from the `send-lead-magnet` edge function (best-effort, after the DB insert), so the team sees leads without email; the database stays the source of truth.
 - Append lead rows with Sheets appendCells to the explicit Leads tab ID, never inferred values tables, so standalone team notes cannot shift incoming data away from column A.
 - Keep PAC quote-link targeting in the shared journey helper, with an allowlisted query preselection that remains editable, so relevant organic guides and simulation results reach the same internal quote flow.
+- Carry explicit guide context through allowlisted internal links and simulation answers through validated navigation state only; export submitted journey context in separate lead-detail columns, never correlate anonymous audience counters with leads.
 - Shared lead-sheet serialization exports explicit form metadata into detail columns after the team's status/comment columns, so simulation answers remain available without inferring missing information.
 - Anonymous audience tracking uses explicit consent, batched write-only daily counters and hourly server-side Sheets exports; never collect visitor identifiers or join these totals to leads, and never rewrite the Leads tab during audience sync.

@@ -1,4 +1,16 @@
 import { heatPumpCoverage } from "@/data/pompe-a-chaleur";
+import { z } from "zod";
+
+// Passed in navigation state only: no personal information in URLs or audience counters.
+export const simulationTransferSchema = z.object({
+  first_name: z.string().max(80), email: z.string().email().max(255), phone: z.string().max(32),
+  postal_code: z.string().max(5), housing_type: z.enum(["maison", "appartement"]),
+  income_category: z.enum(["bleu", "jaune", "violet", "rose"]), housing_age: z.enum([">15", "<15"]),
+  owner_status: z.enum(["occupant", "bailleur", "copro"]), current_heating: z.string().max(40),
+  household_size: z.number().int().min(1).max(100), rfr: z.number().finite().nonnegative(),
+  region: z.enum(["idf", "autres"]), estimated_aid: z.number().finite().nonnegative(),
+  total_mpr: z.number().finite().nonnegative(), total_cee: z.number().finite().nonnegative(),
+});
 
 export function guidePathFromSearch(search: string): string | undefined {
   const guide = new URLSearchParams(search).get("guide");

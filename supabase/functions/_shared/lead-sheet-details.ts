@@ -4,7 +4,13 @@ const labels: Record<string, string> = {
   gaz: "Gaz", fioul: "Fioul", electrique: "Électrique", bois: "Bois / granulés", pac: "Pompe à chaleur", autre: "Autre",
   ">15": "Plus de 15 ans", "<15": "Moins de 15 ans", idf: "Île-de-France", autres: "Hors Île-de-France",
 };
-export const leadDetailHeaders = ["Profil aides", "Logement", "Âge du logement", "Statut propriétaire", "Chauffage actuel", "Personnes du foyer", "Revenu fiscal (€ / an)", "Surface (m²)", "Travaux cochés / quantités", "Aide estimée (€)", "MaPrimeRénov’ estimée (€)", "CEE estimées (€)", "Région des barèmes"];
+export const leadDetailHeaders = ["Profil aides", "Logement", "Âge du logement", "Statut propriétaire", "Chauffage actuel", "Personnes du foyer", "Revenu fiscal (€ / an)", "Surface (m²)", "Travaux cochés / quantités", "Aide estimée (€)", "MaPrimeRénov’ estimée (€)", "CEE estimées (€)", "Région des barèmes", "Guide d’origine", "Parcours de demande"];
+
+const journeys: Record<string, string> = {
+  guide_simulation: "Guide → Simulateur", simulation: "Simulateur",
+  guide_simulation_quote: "Guide → Simulateur → Devis PAC",
+  simulation_quote: "Simulateur → Devis", quote: "Devis direct",
+};
 
 /** Only explicit answers; never infer an income profile from a quote request. */
 export function leadDetailCells(metadata: Record<string, unknown> = {}): (string | number)[] {
@@ -17,5 +23,6 @@ export function leadDetailCells(metadata: Record<string, unknown> = {}): (string
     const work = item as Record<string, unknown>;
     return [typeof work.label === "string" ? work.label : "", typeof work.surface === "number" ? `${work.surface} m²` : "", typeof work.count === "number" ? `Quantité : ${work.count}` : ""].filter(Boolean).join(" — ");
   }).filter(Boolean).join(" ; ") : "";
-  return [profiles[text("income_category")] ?? "Non renseigné", label("housing_type"), label("housing_age"), label("owner_status"), label("current_heating"), number("household_size"), number("rfr"), text("surface") || number("surface"), details || works, number("estimated_aid"), number("total_mpr"), number("total_cee"), label("region")];
+  const guide = text("guide_path");
+  return [profiles[text("income_category")] ?? "Non renseigné", label("housing_type"), label("housing_age"), label("owner_status"), label("current_heating"), number("household_size"), number("rfr"), text("surface") || number("surface"), details || works, number("estimated_aid"), number("total_mpr"), number("total_cee"), label("region"), /^\/blog\/[a-z0-9-]{1,180}$/.test(guide) ? guide : "", journeys[text("journey_stage")] ?? ""];
 }

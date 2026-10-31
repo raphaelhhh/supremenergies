@@ -13,7 +13,8 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CTA from "@/components/CTA";
 import InternalLinksHub from "@/components/InternalLinksHub";
 import { trackLead } from "@/lib/track-lead";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { guidePathFromSearch, journeyMetadata, requestedQuoteWorks } from "@/lib/heat-pump-journey";
 import HeatPumpQuoteCTA from "@/components/HeatPumpQuoteCTA";
 import {
   GESTES,
@@ -36,6 +37,7 @@ const submitSchema = z.object({
 
 const SimulateurAides = () => {
   const { toast } = useToast();
+  const { search } = useLocation();
   const [step, setStep] = useState<Step>(1);
   const [submitting, setSubmitting] = useState(false);
 
@@ -51,7 +53,7 @@ const SimulateurAides = () => {
   // Étape 3 — Chauffage actuel
   const [currentHeating, setCurrentHeating] = useState<string>("gaz");
   // Étape 4 — Travaux envisagés (avec surface/quantité)
-  const [selectedGestes, setSelectedGestes] = useState<GesteInput[]>([]);
+  const [selectedGestes, setSelectedGestes] = useState<GesteInput[]>(() => requestedQuoteWorks(search).length ? [{ id: "pac-air-eau" }] : []);
   // Étape 5 — Coordonnées
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
@@ -77,6 +79,19 @@ const SimulateurAides = () => {
   };
   const updateGeste = (id: string, patch: Partial<GesteInput>) => {
     setSelectedGestes((prev) => prev.map((g) => (g.id === id ? { ...g, ...patch } : g)));
+  };
+
+  const simulationAnswers = {
+    income_category: profile, housing_type: housingType, housing_age: housingAge,
+    owner_status: ownerStatus, current_heating: currentHeating,
+    household_size: householdSize, rfr, region,
+    work_types: selectedGestes.map(g => GESTES.find(def => def.id === g.id)?.label ?? g.id),
+    work_details: selectedGestes.map(g => ({
+      label: GESTES.find(def => def.id === g.id)?.label ?? g.id,
+      ...(g.surface !== undefined ? { surface: g.surface } : {}),
+      ...(g.count !== undefined ? { count: g.count } : {}),
+    })),
+    estimated_aid: result.total, total_mpr: result.totalMPR, total_cee: result.totalCEE,
   };
 
   const handleSubmit = async () => {
@@ -123,16 +138,8 @@ const SimulateurAides = () => {
           consent: true,
           message: `Aide estimée: ${result.total} € | Travaux: ${selectedGestes.map((g) => g.id).join(", ")}`,
           metadata: {
-            income_category: profile, housing_type: housingType, housing_age: housingAge,
-            owner_status: ownerStatus, current_heating: currentHeating,
-            household_size: householdSize, rfr, region,
-            work_types: selectedGestes.map(g => GESTES.find(def => def.id === g.id)?.label ?? g.id),
-            work_details: selectedGestes.map(g => ({
-              label: GESTES.find(def => def.id === g.id)?.label ?? g.id,
-              ...(g.surface !== undefined ? { surface: g.surface } : {}),
-              ...(g.count !== undefined ? { count: g.count } : {}),
-            })),
-            estimated_aid: result.total, total_mpr: result.totalMPR, total_cee: result.totalCEE,
+            ...simulationAnswers,
+            ...journeyMetadata(search, "simulation"),
           },
         },
       });
@@ -498,7 +505,7 @@ const SimulateurAides = () => {
                 </p>
 
                 {selectedGestes.some(g => g.id.startsWith("pac-"))
-                  ? <HeatPumpQuoteCTA from="simulateur_resultat" />
+                  ? <HeatPumpQuoteCTA from="simulateur_resultat" guide={guidePathFromSearch(search)} simulation={{ ...simulationAnswers, first_name: firstName, email, phone, postal_code: postalCode }} />
                   : <Button asChild size="lg" className="h-auto min-h-12 w-full whitespace-normal bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark">
                       <Link to="/devis-gratuit?from=simulateur_resultat">Demander mon devis détaillé <ArrowRight className="ml-2" size={16} /></Link>
                     </Button>}

@@ -98,7 +98,11 @@ const PrivacyPolicy = () => {
             <p className="mb-6">
               <strong>Tableau de suivi de l'équipe :</strong> les coordonnées que vous envoyez dans nos
               formulaires sont également enregistrées dans un Google Sheet à accès restreint pour traiter
-              votre demande. Un onglet distinct présente, uniquement après acceptation des cookies,
+              votre demande. Lorsque vous utilisez les liens guide → simulateur → devis, la demande contient
+              le guide d’origine et l’étape du parcours. Vos réponses au simulateur peuvent être reprises
+              dans le devis pour éviter de les saisir à nouveau, sans coordonnées dans les liens et sans
+              identifiant de visiteur. Ce contexte de demande reste séparé des statistiques anonymes.
+              Un onglet distinct présente, uniquement après acceptation des cookies,
               les totaux quotidiens de pages consultées, clics sur les liens, devis, téléphone, email et avis,
               et formulaires envoyés. Aucun nom, email, téléphone, adresse IP, identifiant de visiteur,
               contenu saisi ou paramètre d'URL n'est enregistré dans ces statistiques ; elles ne sont
