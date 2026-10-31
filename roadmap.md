@@ -1,5 +1,5 @@
 # Site rénovation clair et confiance (étape par étape)
-- [ ] Fusionner les guides cumul MaPrimeRénov' + CEE, conserver l’ancienne adresse, actualiser les liens et sitemaps, vérifier le parcours.
+- [x] Fusionner les guides cumul MaPrimeRénov' + CEE : un article conservé, cinq variantes archivées et redirigées ; liens internes et sitemap vérifiés, parcours simulateur et affichage ordinateur/mobile contrôlés, 12 tests réussis. Publication nécessaire pour les redirections et le sitemap statiques.
 - [x] Relier guide → simulateur → devis PAC ; coordonnées et profil repris, parcours et réponses reçus dans le Sheet avec statut Nouveau, notes intactes ; tests retirés. Publication nécessaire.
 - [x] Fiabiliser les colonnes du Sheet sans toucher aux notes ; devis PAC reçu en colonne A avec statut Nouveau, notes intactes, contrôle de bout en bout réussi.
 - [x] Orienter les guides chauffage/aides et les résultats PAC du simulateur vers un devis PAC prérempli et modifiable, sans publicité payante ; parcours guide → devis vérifié sur ordinateur et téléphone. Publication nécessaire.
