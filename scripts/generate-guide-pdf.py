@@ -15,6 +15,8 @@ from reportlab.platypus import (BaseDocTemplate, Frame, PageTemplate, Paragraph,
 
 pdfmetrics.registerFont(TTFont("Sans", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"))
 pdfmetrics.registerFont(TTFont("Sans-Bold", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"))
+from reportlab.pdfbase.pdfmetrics import registerFontFamily
+registerFontFamily("Sans", normal="Sans", bold="Sans-Bold", italic="Sans", boldItalic="Sans-Bold")
 
 NAVY = colors.HexColor("#0B2545")
 NAVY2 = colors.HexColor("#13315C")
@@ -144,7 +146,7 @@ st += [Spacer(1, 8), callout("<b>À surveiller :</b> le budget 2027 en discussio
 st += [P("1. Quel est votre profil ?", h2),
        P("Votre couleur dépend du revenu fiscal de référence (RFR) de votre foyer, indiqué sur votre avis d'imposition, "
          "et du nombre de personnes qui y vivent. Plafonds 2026 :", body), Spacer(1, 4)]
-rfr = [["Personnes", "Bleu<br/>(très modestes)", "Jaune<br/>(modestes)", "Violet<br/>(intermédiaires)", "Rose"],
+rfr = [["Foyer", "Bleu<br/>(très modestes)", "Jaune<br/>(modestes)", "Violet<br/>(intermédiaires)", "Rose"],
        ["1", "≤ 17 363 €<br/><font size=7.5 color='#5B6573'>IDF ≤ 23 768 €</font>", "≤ 22 259 €<br/><font size=7.5 color='#5B6573'>IDF ≤ 28 933 €</font>", "≤ 31 185 €<br/><font size=7.5 color='#5B6573'>IDF ≤ 40 404 €</font>", "au-delà"],
        ["2", "≤ 25 393 €<br/><font size=7.5 color='#5B6573'>IDF ≤ 34 884 €</font>", "≤ 32 553 €<br/><font size=7.5 color='#5B6573'>IDF ≤ 42 463 €</font>", "≤ 45 842 €<br/><font size=7.5 color='#5B6573'>IDF ≤ 59 394 €</font>", "au-delà"],
        ["3", "≤ 30 547 €<br/><font size=7.5 color='#5B6573'>IDF ≤ 41 893 €</font>", "≤ 39 192 €<br/><font size=7.5 color='#5B6573'>IDF ≤ 51 000 €</font>", "≤ 55 129 €<br/><font size=7.5 color='#5B6573'>IDF ≤ 71 060 €</font>", "au-delà"],
