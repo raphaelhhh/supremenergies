@@ -18,7 +18,9 @@ export interface TemplateEntry {
  *   // then add to TEMPLATES: 'welcome': welcomeTemplate
  */
 import { template as newLeadAlert } from './new-lead-alert.tsx'
+import { template as guideAides } from './guide-aides.tsx'
 
 export const TEMPLATES: Record<string, TemplateEntry> = {
   'new-lead-alert': newLeadAlert,
+  'guide-aides': guideAides,
 }

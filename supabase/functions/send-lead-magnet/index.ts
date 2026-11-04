@@ -151,11 +151,27 @@ Deno.serve(async (req) => {
       console.error("Lead alert email failed", mailErr);
     }
 
+    // Envoi du guide au visiteur qui l'a demandé
+    let guideEmailed = false;
+    const isGuideRequest = /lead_magnet|aides2026/.test(parsed.data.source);
+    if (isGuideRequest && parsed.data.email && parsed.data.consent) {
+      try {
+        const r = await sendTemplateEmail("guide-aides", parsed.data.email, {
+          templateData: { firstName: parsed.data.first_name ?? undefined },
+          idempotencyKey: `guide-aides-${inserted.id}`,
+        });
+        guideEmailed = r?.sent === true;
+      } catch (mailErr) {
+        console.error("Guide email failed", mailErr);
+      }
+    }
+
     // PDF is served statically from /guide-aides-renovation-2026.pdf
     return new Response(
       JSON.stringify({
         ok: true,
         download_url: "/guide-aides-renovation-2026.pdf",
+        guide_emailed: guideEmailed,
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
