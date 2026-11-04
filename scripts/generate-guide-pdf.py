@@ -28,7 +28,10 @@ OUT = Path(__file__).resolve().parent.parent / "public" / "guide-aides-renovatio
 W, H = A4
 M = 18 * mm
 
-s = lambda **k: ParagraphStyle("x", fontName="Sans", fontSize=10, leading=14.5, textColor=colors.HexColor("#1F2937"), **k)
+def s(**k):
+    base = dict(fontName="Sans", fontSize=10, leading=14.5, textColor=colors.HexColor("#1F2937"))
+    base.update(k)
+    return ParagraphStyle("x", **base)
 body = s()
 small = s(fontSize=8.5, leading=12, textColor=GREY)
 h1 = s(fontName="Sans-Bold", fontSize=19, leading=24, textColor=NAVY, spaceAfter=4)
