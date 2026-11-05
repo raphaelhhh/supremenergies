@@ -179,6 +179,85 @@ async function searchWeb(query: string, apiKey: string): Promise<string> {
   }
 }
 
+const ARTICLE_TOOL = {
+  name: "create_blog_post",
+  description: "Enregistre l'article de blog rédigé",
+  input_schema: {
+    type: "object",
+    properties: {
+      title: { type: "string", description: "Titre SEO, 50-65 caractères" },
+      excerpt: { type: "string", description: "Résumé, 140-160 caractères" },
+      meta_description: { type: "string", description: "Meta description, 145-155 caractères" },
+      content: { type: "string", description: "HTML complet de l'article avec le CTA" },
+    },
+    required: ["title", "excerpt", "meta_description", "content"],
+    additionalProperties: false,
+  },
+};
+
+type Article = { title: string; excerpt: string; meta_description: string; content: string };
+
+async function writeArticleWithClaude(system: string, user: string, apiKey: string): Promise<Article> {
+  const response = await fetch("https://ai.gateway.lovable.dev/v1/messages", {
+    method: "POST",
+    headers: {
+      "Lovable-API-Key": apiKey,
+      Authorization: `Bearer ${apiKey}`,
+      "X-Lovable-AIG-SDK": "fetch",
+      "anthropic-version": "2023-06-01",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "anthropic/claude-sonnet-5",
+      max_tokens: 16000,
+      stream: true,
+      system,
+      messages: [{ role: "user", content: user }],
+      tools: [ARTICLE_TOOL],
+      tool_choice: { type: "tool", name: "create_blog_post" },
+    }),
+  });
+
+  if (!response.ok || !response.body) {
+    const errorText = await response.text();
+    console.error("Claude gateway error:", response.status, errorText);
+    throw new Error(`AI gateway error: ${response.status}`);
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  let toolJson = "";
+  let stopReason = "";
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop() ?? "";
+    for (const line of lines) {
+      if (!line.startsWith("data:")) continue;
+      let evt: any;
+      try { evt = JSON.parse(line.slice(5).trim()); } catch { continue; }
+      if (evt.type === "content_block_delta" && evt.delta?.type === "input_json_delta") {
+        toolJson += evt.delta.partial_json ?? "";
+      } else if (evt.type === "message_delta" && evt.delta?.stop_reason) {
+        stopReason = evt.delta.stop_reason;
+      } else if (evt.type === "error") {
+        throw new Error(`Claude stream error: ${evt.error?.message ?? "unknown"}`);
+      }
+    }
+  }
+
+  if (stopReason === "refusal") throw new Error("Claude refused to write this article");
+  if (!toolJson) throw new Error("No article returned by Claude");
+  const article = JSON.parse(toolJson) as Article;
+  for (const k of ["title", "excerpt", "meta_description", "content"] as const) {
+    if (typeof article[k] !== "string" || !article[k].trim()) throw new Error(`Missing field: ${k}`);
+  }
+  return article;
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -219,7 +298,7 @@ serve(async (req) => {
     );
     console.log(`Research completed, got ${webResearch.length} chars of context`);
 
-    const systemPrompt = `Tu es un rédacteur SEO expert en rénovation énergétique pour SupremEnergies (Île-de-France).
+    const systemPrompt = `Tu es un rédacteur SEO expert en rénovation énergétique pour SupremEnergies (installations de pompes à chaleur partout en France avec ses propres équipes).
 
 Rédige un article SEO long-form de 1200-1500 mots OPTIMISÉ pour le mot-clé principal indiqué.
 
@@ -231,15 +310,17 @@ RÈGLES SEO IMPÉRATIVES :
   2. 4 H2 minimum, chacun avec 200-300 mots de contenu et au moins 1 H3 ou liste.
   3. Une section H2 "Questions fréquentes" avec 3-5 paires H3 (question) + paragraphe de réponse de 40-80 mots — utile pour le schema FAQ.
   4. CTA final (encadré ci-dessous).
-- Ton professionnel, factuel, chiffré (€ TTC, m², kWh, %).
+- Ton professionnel, clair et rassurant, chiffré (€ TTC, m², kWh, %), phrases courtes, accessible à un propriétaire non spécialiste.
+- Montants d'aides : uniquement ceux confirmés par le contexte d'actualité fourni ; présente-les comme indicatifs, jamais comme garantis, et renvoie vers France Rénov' pour la décision officielle. N'invente aucun chiffre.
+- INTERDIT : ne jamais écrire le sigle « RGE » ni prétendre à une certification ; parle de « qualifications » si nécessaire.
 - Format : HTML valide (p, h2, h3, ul, li, ol, strong, table). PAS de h1.
 - Pas de balises html, head, body.
 - OBLIGATOIRE : Termine par cet encadré CTA exact :
-  <div style="background: linear-gradient(135deg, #e8f5e9 0%, #fff8e1 100%); border-radius: 16px; padding: 32px; text-align: center; margin-top: 40px; border: 1px solid #c8e6c9;">
-    <h3 style="color: #2e7d32; margin-bottom: 12px;">🏡 Vous avez un projet de rénovation énergétique ?</h3>
+  <div style="background: #f1f5fb; border-radius: 16px; padding: 32px; text-align: center; margin-top: 40px; border: 1px solid #d6e0f0;">
+    <h3 style="color: #1e3a6e; margin-bottom: 12px;">🏡 Vous avez un projet de rénovation énergétique ?</h3>
     <p style="color: #555; margin-bottom: 20px;">Les experts SupremEnergies vous accompagnent de A à Z dans vos travaux. Bénéficiez d'un diagnostic gratuit et d'un devis personnalisé.</p>
-    <a href="${DEVIS_URL}" style="display: inline-block; background: #2e7d32; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 12px;">📋 Demander un devis gratuit</a>
-    <p style="color: #777; margin-top: 12px;">Ou appelez-nous au <a href="tel:+33186046889" style="color: #2e7d32; font-weight: bold;">${PHONE}</a></p>
+    <a href="${DEVIS_URL}" style="display: inline-block; background: #f97316; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-bottom: 12px;">📋 Demander un devis gratuit</a>
+    <p style="color: #777; margin-top: 12px;">Ou appelez-nous au <a href="tel:+33186046889" style="color: #1e3a6e; font-weight: bold;">${PHONE}</a></p>
   </div>
 
 Renvoie un JSON avec EXACTEMENT ces champs :
@@ -260,57 +341,9 @@ Intention de recherche : ${topic.search_intent}
 
 Articles déjà publiés (à NE PAS dupliquer) : ${existingTitles.slice(0, 8).join(" | ")}${researchContext}`;
 
-    // Step 2: Generate the article with AI
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
-        ],
-        tools: [
-          {
-            type: "function",
-            function: {
-              name: "create_blog_post",
-              description: "Create a blog post with structured data",
-              parameters: {
-                type: "object",
-                properties: {
-                  title: { type: "string", description: "SEO-friendly title, max 70 chars" },
-                  excerpt: { type: "string", description: "Short summary, max 160 chars" },
-                  meta_description: { type: "string", description: "SEO meta description, max 155 chars" },
-                  content: { type: "string", description: "Full HTML content of the article including CTA" },
-                },
-                required: ["title", "excerpt", "meta_description", "content"],
-                additionalProperties: false,
-              },
-            },
-          },
-        ],
-        tool_choice: { type: "function", function: { name: "create_blog_post" } },
-      }),
-    });
+    // Step 2: Write the article with Claude (streamed, structured via tool use)
+    const article = await writeArticleWithClaude(systemPrompt, userPrompt, LOVABLE_API_KEY);
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("AI gateway error:", response.status, errorText);
-      throw new Error(`AI gateway error: ${response.status}`);
-    }
-
-    const aiResult = await response.json();
-    const toolCall = aiResult.choices?.[0]?.message?.tool_calls?.[0];
-    
-    if (!toolCall) {
-      throw new Error("No tool call in AI response");
-    }
-
-    const article = JSON.parse(toolCall.function.arguments);
     
     // Generate slug and ensure uniqueness
     let slug = slugify(article.title);
