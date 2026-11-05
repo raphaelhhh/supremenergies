@@ -36,7 +36,7 @@ const LeadMagnetForm = ({
   source = "lead_magnet_aides2026",
   compact = false,
   title = "Recevez gratuitement le Guide Aides Rénovation 2026",
-  subtitle = "Le récap complet : MaPrimeRénov', CEE, éco-PTZ, TVA 5,5%. Format PDF, 100% gratuit.",
+  subtitle = "À jour des règles de septembre 2026 : MaPrimeRénov', primes CEE, éco-PTZ, TVA 5,5 %. PDF gratuit, envoyé par e-mail.",
 }: Props) => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
@@ -111,7 +111,7 @@ const LeadMagnetForm = ({
         <CheckCircle2 className="h-12 w-12 text-supreme-primary mx-auto mb-3" />
         <h3 className="text-xl md:text-2xl font-bold mb-2">Merci {firstName} !</h3>
         <p className="text-muted-foreground">
-          Votre guide est en cours de téléchargement. Si rien ne se passe,{" "}
+          Votre guide est en cours de téléchargement et vous le recevrez aussi par e-mail. Si rien ne se passe,{" "}
           <a
             href="/guide-aides-renovation-2026.pdf"
             className="text-supreme-primary underline"
