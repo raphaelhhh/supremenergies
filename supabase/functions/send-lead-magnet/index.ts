@@ -28,6 +28,7 @@ const BodySchema = z.object({
   page_path: z.string().trim().max(255).optional().nullable(),
   message: z.string().trim().max(2000).optional().nullable(),
   consent: z.boolean().default(false),
+  wants_guide: z.boolean().optional(),
   metadata: z.object({
     guide_path: z.string().regex(/^\/blog\/[a-z0-9-]{1,180}$/).optional(),
     journey_stage: z.enum(["guide_simulation", "simulation", "guide_simulation_quote", "simulation_quote", "quote"]).optional(),
@@ -153,7 +154,9 @@ Deno.serve(async (req) => {
 
     // Envoi du guide au visiteur qui l'a demandé
     let guideEmailed = false;
-    const isGuideRequest = /lead_magnet|aides2026/.test(parsed.data.source);
+    const isGuideRequest =
+      parsed.data.wants_guide === true ||
+      /lead_magnet|aides2026|pillar_pac2026|^blog_/.test(parsed.data.source);
     if (isGuideRequest && parsed.data.email && parsed.data.consent) {
       try {
         const r = await sendTemplateEmail("guide-aides", parsed.data.email, {

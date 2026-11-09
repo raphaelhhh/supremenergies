@@ -44,6 +44,7 @@ const LeadMagnetForm = ({
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [guideEmailed, setGuideEmailed] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -73,11 +74,13 @@ const LeadMagnetForm = ({
             source,
             page_path: typeof window !== "undefined" ? window.location.pathname : null,
             consent: true,
+            wants_guide: true,
           },
         },
       );
       if (fnErr) throw fnErr;
       const url = (data as { download_url?: string })?.download_url ?? "/guide-aides-renovation-2026.pdf";
+      setGuideEmailed((data as { guide_emailed?: boolean })?.guide_emailed === true);
 
       trackEvent("lead_magnet_submit", { source });
       // Conversions GA4 + Google Ads + Meta (avec consentement visiteur)
@@ -111,7 +114,11 @@ const LeadMagnetForm = ({
         <CheckCircle2 className="h-12 w-12 text-supreme-primary mx-auto mb-3" />
         <h3 className="text-xl md:text-2xl font-bold mb-2">Merci {firstName} !</h3>
         <p className="text-muted-foreground">
-          Votre guide est en cours de téléchargement et vous le recevrez aussi par e-mail. Si rien ne se passe,{" "}
+          Votre guide est en cours de téléchargement
+          {guideEmailed
+            ? " et vous le recevrez aussi par e-mail"
+            : ""}
+          . Si rien ne se passe,{" "}
           <a
             href="/guide-aides-renovation-2026.pdf"
             className="text-supreme-primary underline"
