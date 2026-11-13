@@ -42,14 +42,16 @@ import CookieBanner from "./components/CookieBanner";
 import { useEffect } from "react";
 import { loadGoogleAds } from "./lib/google-ads";
 import { loadMetaPixel } from "./lib/meta-pixel";
+import { onConsentChange } from "./lib/consent";
 import AudienceTracker from "./components/AudienceTracker";
 import blogConsolidation from "./data/blog-consolidation.json";
 const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    void loadGoogleAds();
-    void loadMetaPixel();
+    const load = () => { void loadGoogleAds(); void loadMetaPixel(); };
+    load();
+    return onConsentChange(load);
   }, []);
 
   return (

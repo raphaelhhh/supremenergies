@@ -4,7 +4,8 @@
 // Les visiteurs ayant refusé, ou n'ayant pas choisi dans une région à
 // consentement, ne déclenchent aucune requête vers Meta.
 
-import { canTrackAds } from "./consent";
+import { permitsTracking } from "./tracking-permission";
+import { onConsentChange } from "./consent";
 
 const PIXEL_ID = "1465530914535005";
 
@@ -40,7 +41,9 @@ function getFbq(): Fbq {
 /** Initialise et charge fbevents.js (idempotent). */
 function initMetaPixel(): void {
   const fbq = getFbq();
+  fbq("consent", "grant");
   if (document.querySelector("script[data-meta-pixel]")) return;
+  fbq("set", "autoConfig", false, PIXEL_ID);
   fbq("init", PIXEL_ID, {}, { agent: "lovable" });
   fbq("track", "PageView");
   const script = document.createElement("script");
@@ -51,8 +54,23 @@ function initMetaPixel(): void {
 }
 
 export async function loadMetaPixel(): Promise<void> {
-  if (await canTrackAds()) initMetaPixel();
+  if (await permitsTracking("advertising")) initMetaPixel();
 }
+
+onConsentChange(() => {
+  void permitsTracking("advertising").then(allowed => {
+    if (allowed) initMetaPixel();
+    else {
+      const w = window as unknown as { fbq?: Fbq };
+      w.fbq?.("consent", "revoke");
+      if (w.fbq?.queue) w.fbq.queue = [];
+      for (const name of ["_fbp", "_fbc"]) {
+        document.cookie = `${name}=; Max-Age=0; path=/`;
+        document.cookie = `${name}=; Max-Age=0; path=/; domain=${location.hostname}`;
+      }
+    }
+  });
+});
 
 /** Événement Meta « Lead » à chaque formulaire réussi (devis, contact…). */
 export async function trackMetaLead(params: {
@@ -60,12 +78,10 @@ export async function trackMetaLead(params: {
   value?: number;
   currency?: string;
 }): Promise<void> {
-  if (!(await canTrackAds())) return;
+  if (!(await permitsTracking("advertising"))) return;
   initMetaPixel();
   const fbq = getFbq();
   fbq("track", "Lead", {
     content_name: params.content_name ?? null,
-    value: params.value ?? 1,
-    currency: params.currency ?? "EUR",
   });
 }

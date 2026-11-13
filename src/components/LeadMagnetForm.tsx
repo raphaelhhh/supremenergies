@@ -6,6 +6,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { trackLead } from "@/lib/track-lead";
+import FormPrivacy from "./FormPrivacy";
+import FormHoneypot from "./FormHoneypot";
+import { trackAnalyticsEvent } from "@/lib/google-analytics";
 
 const schema = z.object({
   first_name: z.string().trim().min(1, "Prénom requis").max(80),
@@ -16,7 +19,7 @@ const schema = z.object({
     .regex(/^\d{5}$/, "Code postal à 5 chiffres")
     .optional()
     .or(z.literal("")),
-  consent: z.literal(true, { errorMap: () => ({ message: "Consentement requis" }) }),
+  consent: z.boolean(),
 });
 
 type Props = {
@@ -28,15 +31,14 @@ type Props = {
 
 const trackEvent = (event: string, data: Record<string, unknown> = {}) => {
   if (typeof window === "undefined") return;
-  const w = window as unknown as { dataLayer?: unknown[] };
-  if (w.dataLayer) w.dataLayer.push({ event, ...data });
+  void trackAnalyticsEvent(event, data);
 };
 
 const LeadMagnetForm = ({
   source = "lead_magnet_aides2026",
   compact = false,
   title = "Recevez gratuitement le Guide Aides Rénovation 2026",
-  subtitle = "À jour des règles de septembre 2026 : MaPrimeRénov', primes CEE, éco-PTZ, TVA 5,5 %. PDF gratuit, envoyé par e-mail.",
+  subtitle = "MaPrimeRénov', primes CEE, éco-PTZ et TVA réduite : guide PDF gratuit. Aides soumises à conditions et à confirmation.",
 }: Props) => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
@@ -46,6 +48,7 @@ const LeadMagnetForm = ({
   const [done, setDone] = useState(false);
   const [guideEmailed, setGuideEmailed] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [website, setWebsite] = useState("");
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,6 +77,8 @@ const LeadMagnetForm = ({
             source,
             page_path: typeof window !== "undefined" ? window.location.pathname : null,
             consent: true,
+            marketing_consent: consent,
+            website,
             wants_guide: true,
           },
         },
@@ -101,7 +106,6 @@ const LeadMagnetForm = ({
       trackEvent("lead_magnet_download", { source });
       setDone(true);
     } catch (err) {
-      console.error(err);
       setError("Une erreur est survenue. Réessayez ou appelez le 01 86 04 68 89.");
     } finally {
       setLoading(false);
@@ -128,6 +132,7 @@ const LeadMagnetForm = ({
           </a>
           .
         </p>
+        {!guideEmailed && <p role="status" className="mt-3 text-sm text-muted-foreground">L’envoi par e-mail n’a pas abouti. Votre guide reste disponible au téléchargement.</p>}
       </div>
     );
   }
@@ -139,6 +144,7 @@ const LeadMagnetForm = ({
         compact ? "p-5" : "p-6 md:p-8"
       }`}
     >
+      <FormHoneypot value={website} onChange={setWebsite} />
       <div className="flex items-start gap-3 mb-4">
         <div className="bg-supreme-primary/10 p-2 rounded-lg flex-shrink-0">
           <Gift className="h-6 w-6 text-supreme-primary" />
@@ -181,18 +187,7 @@ const LeadMagnetForm = ({
         className="mb-3"
       />
 
-      <label className="flex items-start gap-2 text-xs text-muted-foreground mb-4 cursor-pointer">
-        <Checkbox
-          checked={consent}
-          onCheckedChange={(v) => setConsent(v === true)}
-          className="mt-0.5"
-        />
-        <span>
-          J'accepte de recevoir le guide et des conseils utiles par email. Désinscription
-          en 1 clic. Voir notre{" "}
-          <a href="/privacy" className="underline">politique de confidentialité</a>.
-        </span>
-      </label>
+      <div className="mb-4"><p className="mb-2 text-sm text-muted-foreground">Votre e-mail sert à envoyer le guide demandé, sans inscription automatique aux offres.</p><FormPrivacy marketing={consent} onMarketingChange={setConsent} /></div>
 
       {error && (
         <p className="text-sm text-red-600 mb-3" role="alert">

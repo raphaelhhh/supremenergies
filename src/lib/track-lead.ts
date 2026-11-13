@@ -3,6 +3,7 @@
 import { fireAdsConversion } from "./google-ads";
 import { trackMetaLead } from "./meta-pixel";
 import { recordAudience } from "./audience";
+import { trackAnalyticsEvent } from "./google-analytics";
 // Documentation officielle : https://developers.google.com/analytics/devguides/collection/ga4/reference/events#generate_lead
 //
 // Côté GA4 : marquer 'generate_lead' comme conversion (Admin → Évènements → Marquer comme conversion).
@@ -44,20 +45,16 @@ export function trackLead({
 }: LeadEventPayload): void {
   if (typeof window === "undefined") return;
   recordAudience("form_submit");
-  const w = window as unknown as DataLayerWindow;
-  if (!w.dataLayer) w.dataLayer = [];
-  w.dataLayer.push({
-    event: "generate_lead",
+  void trackAnalyticsEvent("generate_lead", {
     lead_source: source,
     project_type: project_type ?? null,
-    value,
-    currency,
     page_path: typeof location !== "undefined" ? location.pathname : null,
-    ...extra,
   });
   // Conversions Google Ads et Meta « Lead » — sans effet sans consentement.
-  void fireAdsConversion();
-  void trackMetaLead({ content_name: source, value, currency });
+  if (!["newsletter", "lead_magnet", "simulateur_aides"].includes(source)) {
+    void fireAdsConversion();
+    void trackMetaLead({ content_name: source });
+  }
 }
 
 /** Lit le paramètre ?from=... de l'URL pour tagger l'origine d'un formulaire. */

@@ -16,6 +16,8 @@ import { trackLead } from "@/lib/track-lead";
 import { Link, useLocation } from "react-router-dom";
 import { guidePathFromSearch, journeyMetadata, requestedQuoteWorks } from "@/lib/heat-pump-journey";
 import HeatPumpQuoteCTA from "@/components/HeatPumpQuoteCTA";
+import FormPrivacy from "@/components/FormPrivacy";
+import FormHoneypot from "@/components/FormHoneypot";
 import {
   GESTES,
   PROFILE_INFO,
@@ -58,6 +60,8 @@ const SimulateurAides = () => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [marketing, setMarketing] = useState(false);
+  const [website, setWebsite] = useState("");
 
   const profile = useMemo(
     () => detectProfile(rfr, householdSize, region),
@@ -102,30 +106,6 @@ const SimulateurAides = () => {
     }
     setSubmitting(true);
     try {
-      const { error } = await supabase.from("simulations").insert([{
-        email: parsed.data.email,
-        phone: parsed.data.phone,
-        postal_code: postalCode,
-        household_size: householdSize,
-        income_category: profile,
-        work_types: selectedGestes.map((g) => g.id),
-        housing_type: housingType,
-        estimated_aid: result.total,
-        inputs: JSON.parse(JSON.stringify({
-          firstName: parsed.data.firstName,
-          housingType, housingAge, ownerStatus, region, rfr,
-          householdSize, postalCode, currentHeating,
-          gestes: selectedGestes,
-        })),
-        result: JSON.parse(JSON.stringify({
-          profile,
-          totalMPR: result.totalMPR,
-          totalCEE: result.totalCEE,
-          total: result.total,
-          gestes: result.gestes,
-        })),
-      }]);
-      if (error) throw error;
       // Centralise aussi le contact dans la liste des leads + alerte équipe
       const { error: leadError } = await supabase.functions.invoke("send-lead-magnet", {
         body: {
@@ -136,6 +116,8 @@ const SimulateurAides = () => {
           source: "simulateur",
           page_path: "/simulateur-aides",
           consent: true,
+          marketing_consent: marketing,
+          website,
           message: `Aide estimée: ${result.total} € | Travaux: ${selectedGestes.map((g) => g.id).join(", ")}`,
           metadata: {
             ...simulationAnswers,
@@ -411,6 +393,7 @@ const SimulateurAides = () => {
             {step === 5 && (
               <>
                 <h2 className="text-xl font-bold mb-2">Recevez votre estimation détaillée</h2>
+                <FormHoneypot value={website} onChange={setWebsite} />
                 <p className="text-sm text-gray-600 mb-6">
                   Un conseiller SupremEnergies vous rappelle sous 24h pour affiner votre projet et confirmer votre éligibilité.
                 </p>
@@ -428,9 +411,7 @@ const SimulateurAides = () => {
                     <Input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="06 XX XX XX XX" className="mt-2" />
                   </div>
                 </div>
-                <p className="text-xs text-gray-600 mt-4">
-                  Vos données restent confidentielles et ne sont utilisées que pour vous recontacter. Pas de spam.
-                </p>
+                <div className="mt-4"><FormPrivacy marketing={marketing} onMarketingChange={setMarketing} /></div>
               </>
             )}
 

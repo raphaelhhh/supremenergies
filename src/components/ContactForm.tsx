@@ -6,6 +6,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { trackLead } from "@/lib/track-lead";
 import { supabase } from "@/integrations/supabase/client";
+import FormPrivacy from "./FormPrivacy";
+import FormHoneypot from "./FormHoneypot";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +20,7 @@ const ContactForm = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [website, setWebsite] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -39,11 +42,6 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.consent) {
-      toast.error("Vous devez accepter la politique de confidentialité pour continuer.");
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -66,19 +64,12 @@ const ContactForm = () => {
           source: "contact_form",
           page_path: window.location.pathname,
           consent: true,
+          marketing_consent: formData.consent,
+          website,
           message: [formData.subject && `Sujet: ${formData.subject}`, formData.message].filter(Boolean).join(" | ").slice(0, 2000),
         },
       });
       if (fnErr) throw fnErr;
-
-      await fetch("https://hooks.zapier.com/hooks/catch/23975075/uulr9bm/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        mode: "no-cors",
-        body: JSON.stringify(zapierData),
-      });
 
       // GA4 standard conversion event
       trackLead({
@@ -97,7 +88,6 @@ const ContactForm = () => {
         consent: false,
       });
     } catch (error) {
-      console.error("Erreur lors de l'envoi:", error);
       toast.error("Erreur lors de l'envoi. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
@@ -106,6 +96,7 @@ const ContactForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <FormHoneypot value={website} onChange={setWebsite} />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -118,6 +109,7 @@ const ContactForm = () => {
             onChange={handleChange}
             placeholder="Entrez votre nom complet"
             required
+            maxLength={80}
           />
         </div>
 
@@ -129,6 +121,7 @@ const ContactForm = () => {
             id="email"
             name="email"
             type="email"
+            maxLength={255}
             value={formData.email}
             onChange={handleChange}
             placeholder="exemple@email.com"
@@ -143,6 +136,8 @@ const ContactForm = () => {
           <Input
             id="phone"
             name="phone"
+            type="tel"
+            maxLength={32}
             value={formData.phone}
             onChange={handleChange}
             placeholder="06 12 34 56 78"
@@ -183,24 +178,12 @@ const ContactForm = () => {
           onChange={handleChange}
           placeholder="Décrivez votre projet ou votre demande en quelques mots..."
           rows={5}
+          maxLength={1800}
           required
         />
       </div>
 
-      <div className="flex items-start space-x-2">
-        <Checkbox
-          id="consent"
-          checked={formData.consent}
-          onCheckedChange={handleCheckboxChange}
-          required
-        />
-        <label
-          htmlFor="consent"
-          className="text-sm text-gray-600 leading-tight cursor-pointer"
-        >
-          J'accepte que mes informations soient utilisées pour me contacter dans le cadre de ma demande et conformément à la politique de confidentialité de SupremEnergies.
-        </label>
-      </div>
+      <FormPrivacy marketing={formData.consent} onMarketingChange={handleCheckboxChange} />
 
       <Button
         type="submit"

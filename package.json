@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/montserrat": "^5.3.0",
     "@hookform/resolvers": "^3.9.0",
     "@lovable.dev/mcp-js": "^0.22.1",
     "@radix-ui/react-accordion": "^1.2.0",
@@ -46,6 +47,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
+    "dompurify": "^3.4.17",
     "embla-carousel-react": "^8.3.0",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",

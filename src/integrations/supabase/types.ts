@@ -80,6 +80,30 @@ export type Database = {
         }
         Relationships: []
       }
+      consent_receipts: {
+        Row: {
+          advertising: boolean
+          analytics: boolean
+          created_at: string
+          id: string
+          notice_version: string
+        }
+        Insert: {
+          advertising: boolean
+          analytics: boolean
+          created_at?: string
+          id?: string
+          notice_version: string
+        }
+        Update: {
+          advertising?: boolean
+          analytics?: boolean
+          created_at?: string
+          id?: string
+          notice_version?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           consent: boolean
@@ -200,11 +224,13 @@ export type Database = {
           id: string
           name: string
           photo_url: string | null
+          publication_authorized: boolean
           published: boolean
           rating: number
           savings: string | null
           service: string
           updated_at: string
+          verification_source: string | null
         }
         Insert: {
           city: string
@@ -214,11 +240,13 @@ export type Database = {
           id?: string
           name: string
           photo_url?: string | null
+          publication_authorized?: boolean
           published?: boolean
           rating?: number
           savings?: string | null
           service: string
           updated_at?: string
+          verification_source?: string | null
         }
         Update: {
           city?: string
@@ -228,11 +256,13 @@ export type Database = {
           id?: string
           name?: string
           photo_url?: string | null
+          publication_authorized?: boolean
           published?: boolean
           rating?: number
           savings?: string | null
           service?: string
           updated_at?: string
+          verification_source?: string | null
         }
         Relationships: []
       }

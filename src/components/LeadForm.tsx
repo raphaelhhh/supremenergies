@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { trackLead } from "@/lib/track-lead";
+import FormPrivacy from "./FormPrivacy";
+import FormHoneypot from "./FormHoneypot";
 
 const ZAPIER_HOOK = "https://hooks.zapier.com/hooks/catch/23975075/uulr9bm/";
 
@@ -50,6 +52,8 @@ const LeadForm = ({
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [marketing, setMarketing] = useState(false);
+  const [website, setWebsite] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,26 +80,12 @@ const LeadForm = ({
           source: "devis_rapide",
           page_path: window.location.pathname,
           consent: true,
+          marketing_consent: marketing,
+          website,
           message: `Projet: ${project} | Ville: ${city.trim()} | Origine: ${source}`.slice(0, 2000),
         },
       });
       if (fnErr) throw fnErr;
-
-      await fetch(ZAPIER_HOOK, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          timestamp: new Date().toISOString(),
-          type: "Lead Devis",
-          source,
-          name: name.trim(),
-          phone: cleaned,
-          city: city.trim(),
-          project,
-          page_url: typeof window !== "undefined" ? window.location.href : "",
-        }),
-      });
 
       trackLead({ source: "devis_rapide", project_type: project });
 
@@ -133,6 +123,7 @@ const LeadForm = ({
       }`}
       aria-label="Formulaire de demande de devis"
     >
+      <FormHoneypot value={website} onChange={setWebsite} />
       {title && (
         <h3 className={`font-bold text-gray-900 mb-4 ${compact ? "text-lg" : "text-xl"}`}>
           {title}
@@ -150,6 +141,7 @@ const LeadForm = ({
             onChange={(e) => setName(e.target.value)}
             placeholder="Votre nom"
             autoComplete="name"
+            maxLength={80}
             required
           />
         </div>
@@ -165,6 +157,7 @@ const LeadForm = ({
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Téléphone (ex : 06 12 34 56 78)"
             autoComplete="tel"
+            maxLength={32}
             required
           />
         </div>
@@ -178,6 +171,7 @@ const LeadForm = ({
             onChange={(e) => setCity(e.target.value)}
             placeholder="Votre ville"
             autoComplete="address-level2"
+            maxLength={80}
             required
           />
         </div>
@@ -216,16 +210,7 @@ const LeadForm = ({
         )}
       </Button>
 
-      {showLegal && (
-        <p className="text-xs text-gray-600 mt-3 leading-relaxed">
-          En envoyant ce formulaire, vous acceptez d'être recontacté par SupremEnergies. Vos
-          données ne sont jamais cédées à des tiers.{" "}
-          <a href="/privacy" className="underline hover:text-supreme-primary">
-            Confidentialité
-          </a>
-          .
-        </p>
-      )}
+      <div className="mt-3"><FormPrivacy marketing={marketing} onMarketingChange={setMarketing} /></div>
     </form>
   );
 };

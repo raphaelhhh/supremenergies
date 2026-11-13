@@ -1,86 +1,58 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Cookie } from "lucide-react";
-import {
-  STORAGE_KEY,
-  isConsentRequiredRegion,
-  persistConsentChoice,
-} from "@/lib/consent";
-import { loadGoogleAds } from "@/lib/google-ads";
-import { loadMetaPixel } from "@/lib/meta-pixel";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { needsAnswer, onConsentChange, readChoice } from "@/lib/consent";
+import { saveAuditedChoices } from "@/lib/consent-audit";
 
-/**
- * Bannière de consentement cookies, affichée uniquement dans les régions
- * qui l'exigent (EEE, Royaume-Uni, Suisse, Québec) tant que le visiteur
- * n'a pas choisi. Rouvrable via l'événement « open-cookie-settings »
- * (lien « Paramètres des cookies » du pied de page).
- */
 const CookieBanner = () => {
   const [visible, setVisible] = useState(false);
-
+  const [settings, setSettings] = useState(false);
+  const [analytics, setAnalytics] = useState(false);
+  const [advertising, setAdvertising] = useState(false);
+  const panel = useRef<HTMLDivElement>(null);
+  const previousFocus = useRef<HTMLElement | null>(null);
+  const gpc = (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
   useEffect(() => {
-    if (localStorage.getItem(STORAGE_KEY) !== null) return;
-    void isConsentRequiredRegion().then((required) => {
-      if (required) setVisible(true);
+    let active = true;
+    const check = () => void needsAnswer(["analytics", "advertising"]).then(required => {
+      if (active && (required || (!gpc && (readChoice("analytics") === null || readChoice("advertising") === null)))) setVisible(true);
     });
-  }, []);
-
-  useEffect(() => {
-    const open = () => setVisible(true);
+    const open = () => {
+      previousFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      setAnalytics(readChoice("analytics") === "granted");
+      setAdvertising(readChoice("advertising") === "granted");
+      setSettings(true); setVisible(true);
+    };
+    check();
     window.addEventListener("open-cookie-settings", open);
-    return () => window.removeEventListener("open-cookie-settings", open);
-  }, []);
-
-  if (!visible) return null;
-
-  const decide = (decision: "granted" | "denied") => {
-    persistConsentChoice(decision);
-    setVisible(false);
-    if (decision === "granted") {
-      void loadGoogleAds();
-      void loadMetaPixel();
-    }
+    const unsubscribe = onConsentChange(check);
+    return () => { active = false; unsubscribe(); window.removeEventListener("open-cookie-settings", open); };
+  }, [gpc]);
+  useEffect(() => { if (visible) panel.current?.focus(); }, [visible, settings]);
+  const save = (a: boolean, ads: boolean) => {
+    saveAuditedChoices({ analytics: a ? "granted" : "denied", advertising: ads ? "granted" : "denied" });
+    setVisible(false); setSettings(false); previousFocus.current?.focus();
   };
-
-  return (
-    <div
-      role="dialog"
-      aria-label="Consentement aux cookies"
-      className="fixed bottom-0 inset-x-0 z-50 bg-white border-t border-gray-200 shadow-[0_-4px_24px_rgba(0,0,0,0.12)]"
-    >
-      <div className="container-custom py-4 flex flex-col md:flex-row md:items-center gap-4">
-        <div className="flex items-start gap-3 flex-1">
-          <Cookie className="text-supreme-primary shrink-0 mt-0.5" size={22} />
-          <p className="text-sm text-gray-700 leading-relaxed">
-            Nous utilisons des cookies pour mesurer l'audience du site et l'efficacité
-            de nos publicités (Google, Meta). Vous pouvez accepter ou refuser ; votre
-            choix est modifiable à tout moment depuis « Paramètres des cookies » en
-            bas de page. Consultez notre{" "}
-            <Link to="/privacy" className="underline hover:text-supreme-primary">
-              politique de confidentialité
-            </Link>
-            .
-          </p>
-        </div>
-        <div className="flex gap-3 shrink-0">
-          <button
-            type="button"
-            onClick={() => decide("denied")}
-            className="px-5 py-2.5 rounded-md text-sm font-semibold border border-gray-300 text-gray-700 hover:bg-gray-50"
-          >
-            Refuser
-          </button>
-          <button
-            type="button"
-            onClick={() => decide("granted")}
-            className="px-5 py-2.5 rounded-md text-sm font-semibold bg-supreme-primary text-white hover:bg-supreme-primary/90"
-          >
-            Accepter
-          </button>
-        </div>
+  if (!visible) return null;
+  return <div ref={panel} tabIndex={-1} role="dialog" aria-modal="false" aria-labelledby="cookie-title" className="fixed inset-x-0 bottom-0 z-[110] max-h-[85vh] overflow-y-auto border-t border-border bg-background text-foreground shadow-xl">
+    <div className="container-custom py-5 max-w-5xl">
+      <h2 id="cookie-title" className="flex items-center gap-2 text-lg mb-2"><Cookie size={21} /> {settings ? "Gérer mes cookies" : "Vos choix de confidentialité"}</h2>
+      <p className="text-sm text-muted-foreground mb-4">Nous comptons les visites sans cookies. Si vous acceptez la mesure d’audience, nous mesurons aussi les clics. Les cookies publicitaires permettent de mesurer les demandes provenant des annonces. <Link to="/politique-confidentialite" className="underline">Politique de confidentialité</Link>.</p>
+      {settings && <div className="space-y-3 mb-4">
+        <div className="flex justify-between gap-4 border-b border-border pb-3 text-sm"><div><strong>Nécessaires</strong><p className="text-muted-foreground">Choix de confidentialité et connexion à l’espace réservé.</p></div><span>Toujours actifs</span></div>
+        {gpc && <p role="status" className="text-sm">Le signal de confidentialité de votre navigateur s’applique : les mesures facultatives sont désactivées.</p>}
+        <div className="flex items-center justify-between gap-4"><label htmlFor="cookie-analytics" className="text-sm"><strong>Mesure d’audience</strong><span className="block text-muted-foreground">Fournie par Lovable ; statistiques anonymes du tableau d’équipe.</span></label><Switch id="cookie-analytics" checked={analytics && !gpc} onCheckedChange={setAnalytics} disabled={gpc} /></div>
+        <div className="flex items-center justify-between gap-4"><label htmlFor="cookie-advertising" className="text-sm"><strong>Publicité</strong><span className="block text-muted-foreground">Fournie par Google et Meta, pour mesurer les annonces.</span></label><Switch id="cookie-advertising" checked={advertising && !gpc} onCheckedChange={setAdvertising} disabled={gpc} /></div>
+        <Button onClick={() => save(analytics && !gpc, advertising && !gpc)}>Enregistrer mes choix</Button>
+      </div>}
+      <div className="grid grid-cols-2 sm:flex gap-3">
+        <Button variant="outline" className="min-h-11 sm:min-w-40" onClick={() => save(false, false)}>Tout refuser</Button>
+        <Button variant="outline" className="min-h-11 sm:min-w-40" disabled={gpc} onClick={() => save(true, true)}>Tout accepter</Button>
+        {!settings && <Button variant="ghost" className="col-span-2 min-h-11" onClick={() => { setAnalytics(readChoice("analytics") === "granted"); setAdvertising(readChoice("advertising") === "granted"); setSettings(true); }}>Personnaliser</Button>}
       </div>
     </div>
-  );
+  </div>;
 };
-
 export default CookieBanner;

@@ -22,6 +22,9 @@ import heroImage from "@/assets/energy-label.png";
 
 import { trackLead, getLeadSourceFromQuery } from "@/lib/track-lead";
 import { requestedQuoteWorks, journeyMetadata, simulationTransferSchema } from "@/lib/heat-pump-journey";
+import FormPrivacy from "@/components/FormPrivacy";
+import FormHoneypot from "@/components/FormHoneypot";
+import { trackAnalyticsEvent } from "@/lib/google-analytics";
 
 const STORAGE_KEY = "sce_devis_state";
 
@@ -60,8 +63,7 @@ const HOUSING_OPTIONS = ["Maison individuelle", "Appartement", "Copropriété", 
 
 const trackEvent = (event: string, data: Record<string, unknown> = {}) => {
   if (typeof window === "undefined") return;
-  const w = window as unknown as { dataLayer?: unknown[] };
-  if (w.dataLayer) w.dataLayer.push({ event, ...data });
+  void trackAnalyticsEvent(event, { step: data.step, form: data.form });
 };
 
 const step3Schema = z.object({
@@ -72,7 +74,7 @@ const step3Schema = z.object({
     .trim()
     .regex(/^(?:\+33|0)[1-9](?:[ .-]?\d{2}){4}$/, "Téléphone invalide")
     .max(32),
-  consent: z.literal(true, { errorMap: () => ({ message: "Consentement requis" }) }),
+  consent: z.boolean(),
 });
 
 const DevisGratuit = () => {
@@ -87,12 +89,14 @@ const DevisGratuit = () => {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [website, setWebsite] = useState("");
 
   // Restore from localStorage
   useEffect(() => {
     let restored = initialState;
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      localStorage.removeItem(STORAGE_KEY); // Remove the old indefinite personal-data draft.
+      const raw = sessionStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<FormState>;
         restored = { ...initialState, ...parsed, consent: false };
@@ -112,7 +116,8 @@ const DevisGratuit = () => {
 
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...state, consent: false }));
+      // Retain only non-identifying project choices for this tab, never contact data.
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ work_types: state.work_types, housing_type: state.housing_type, surface: state.surface }));
     } catch {
       // ignore
     }
@@ -167,6 +172,8 @@ const DevisGratuit = () => {
           phone: parsed.data.phone,
           page_path: "/devis-gratuit",
           consent: true,
+          marketing_consent: state.consent,
+          website,
           message: `Travaux: ${state.work_types.join(", ")} | Logement: ${state.housing_type} | Surface: ${state.surface || "n/a"} | Tél: ${parsed.data.phone}`,
           metadata: {
             ...(simulation ? {
@@ -203,13 +210,12 @@ const DevisGratuit = () => {
       trackEvent("form_submit", { form: "devis_multistep" });
 
       try {
-        localStorage.removeItem(STORAGE_KEY);
+        sessionStorage.removeItem(STORAGE_KEY);
       } catch {
         // ignore
       }
       setDone(true);
     } catch (e) {
-      console.error(e);
       setError("Une erreur est survenue. Réessayez ou appelez le 01 86 04 68 89.");
     } finally {
       setLoading(false);
@@ -221,10 +227,10 @@ const DevisGratuit = () => {
   return (
     <div className="pt-24">
       <Helmet>
-        <title>Devis Gratuit Rénovation Énergétique 48h | 11 000€ d'aides</title>
+        <title>Devis gratuit rénovation énergétique | SupremEnergies</title>
         <meta
           name="description"
-          content="✓ Devis gratuit sous 48h en 4 étapes. Pompe à chaleur, isolation, solaire. Jusqu'à 11 000€ d'aides MaPrimeRénov' 2026. ★ 4.8/5"
+          content="Demandez un devis gratuit et personnalisé pour votre pompe à chaleur, isolation ou solaire. Étude des aides sous conditions, sans engagement."
         />
         <link rel="canonical" href="https://supremenergies.com/devis-gratuit" />
         <meta name="robots" content="index, follow" />
@@ -278,6 +284,7 @@ const DevisGratuit = () => {
                 </div>
               ) : (
                 <>
+                  <FormHoneypot value={website} onChange={setWebsite} />
                   {/* Step 1 — Travaux */}
                   {step === 1 && (
                     <div>
@@ -393,17 +400,7 @@ const DevisGratuit = () => {
                           maxLength={32}
                         />
                       </div>
-                      <label className="flex items-start gap-2 text-xs text-muted-foreground pt-1 cursor-pointer">
-                        <Checkbox
-                          checked={state.consent}
-                          onCheckedChange={(v) => setState((s) => ({ ...s, consent: v === true }))}
-                          className="mt-0.5"
-                        />
-                        <span>
-                          J'accepte d'être contacté par SupremEnergies pour ce projet. Voir notre{" "}
-                          <Link to="/privacy" className="underline">politique de confidentialité</Link>.
-                        </span>
-                      </label>
+                      <FormPrivacy marketing={state.consent} onMarketingChange={v => setState(s => ({ ...s, consent: v }))} />
                     </div>
                   )}
 
@@ -500,7 +497,7 @@ const DevisGratuit = () => {
                   {[1, 2, 3, 4, 5].map((s) => (
                     <Star key={s} className="h-4 w-4 text-yellow-500 fill-yellow-500" />
                   ))}
-                  <span className="ml-1 font-semibold">4.8/5</span>
+                  <Link to="/temoignages" className="ml-1 font-semibold underline">Consulter les avis Google</Link>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-supreme-primary" /> Garantie décennale

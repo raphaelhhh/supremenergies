@@ -1,13 +1,13 @@
 import { supabase } from "@/integrations/supabase/client";
 import { audienceClick, canTrackAudience, publicAudiencePath, type AudienceEvent } from "./audience-policy";
-import { STORAGE_KEY } from "./consent";
+import { readChoice, onConsentChange } from "./consent";
 
 type Event = { page_path: string; event: AudienceEvent };
 let queue: Event[] = [];
 let timer: ReturnType<typeof setTimeout> | undefined;
 
 export function recordAudience(event: AudienceEvent) {
-  if (!canTrackAudience(localStorage.getItem(STORAGE_KEY))) return;
+  if (!canTrackAudience(readChoice("analytics"))) return;
   const page_path = publicAudiencePath(location.pathname);
   if (!page_path) return;
   queue.push({ page_path, event });
@@ -18,7 +18,7 @@ export function recordAudience(event: AudienceEvent) {
 async function flushAudience() {
   clearTimeout(timer);
   timer = undefined;
-  if (!canTrackAudience(localStorage.getItem(STORAGE_KEY))) { queue = []; return; }
+  if (!canTrackAudience(readChoice("analytics"))) { queue = []; return; }
   const events = queue.splice(0, 20);
   if (!events.length) return;
   const { error } = await supabase.functions.invoke("track-site-audience", { body: { consent: true, events } });
@@ -34,16 +34,16 @@ export function listenAudience() {
     else if (e.target.closest('[data-audience-event="review_click"]')) recordAudience("review_click");
   };
   const consent = () => {
-    if (canTrackAudience(localStorage.getItem(STORAGE_KEY))) recordAudience("page_view");
+    if (canTrackAudience(readChoice("analytics"))) recordAudience("page_view");
     else { queue = []; clearTimeout(timer); timer = undefined; }
   };
   const hidden = () => { if (document.visibilityState === "hidden") void flushAudience(); };
   document.addEventListener("click", click);
   document.addEventListener("visibilitychange", hidden);
-  window.addEventListener("site-consent-change", consent);
+  const unsubscribe = onConsentChange(consent);
   return () => {
     document.removeEventListener("click", click);
     document.removeEventListener("visibilitychange", hidden);
-    window.removeEventListener("site-consent-change", consent);
+    unsubscribe();
   };
 }
