@@ -5,9 +5,11 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { trackLead } from "@/lib/track-lead";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 const Footer = () => {
   const [newsletterBusy, setNewsletterBusy] = useState(false);
   const [newsletterMessage, setNewsletterMessage] = useState("");
+  const [newsletterConsent, setNewsletterConsent] = useState(false);
   return <footer className="bg-supreme-dark text-primary-foreground border-t border-secondary">
       <div className="container-custom">
         {/* Newsletter Section */}
@@ -26,7 +28,7 @@ const Footer = () => {
                 const formData = new FormData(form);
                 const email = formData.get('email') as string;
                 
-                if (!email) {
+                if (!email || !newsletterConsent) {
                   setNewsletterMessage('Veuillez saisir votre email');
                   return;
                 }
@@ -35,12 +37,13 @@ const Footer = () => {
                 setNewsletterMessage("");
                 try {
                   const { error } = await supabase.functions.invoke("send-lead-magnet", {
-                    body: { email, source: "newsletter", consent: true, page_path: window.location.pathname },
+                    body: { email, source: "newsletter", consent: false, marketing_consent: newsletterConsent, page_path: window.location.pathname },
                   });
                   if (error) throw error;
                   trackLead({ source: "newsletter" });
                   setNewsletterMessage('Inscription réussie !');
                   form.reset();
+                  setNewsletterConsent(false);
                 } catch (error) {
                   setNewsletterMessage('Erreur lors de l’inscription. Veuillez réessayer.');
                 } finally {
@@ -55,11 +58,11 @@ const Footer = () => {
                   className="flex-grow p-3 bg-card border border-input rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-supreme-accent" 
                   required 
                 />
-                <Button type="submit" disabled={newsletterBusy} className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-3 h-auto flex-shrink-0">
+                <Button type="submit" disabled={newsletterBusy || !newsletterConsent} className="bg-supreme-accent hover:bg-supreme-accent/90 text-supreme-dark px-6 py-3 h-auto flex-shrink-0">
                   {newsletterBusy ? "Envoi…" : "S'inscrire"} <ArrowRight size={16} className="ml-2" />
                 </Button>
               </form>
-              <p className="text-xs mt-2">En vous inscrivant, vous acceptez de recevoir notre newsletter. <Link to="/privacy" className="underline">Confidentialité</Link></p>
+              <div className="flex gap-2 mt-3"><Checkbox id="newsletter-choice" checked={newsletterConsent} onCheckedChange={v => setNewsletterConsent(v === true)} /><label htmlFor="newsletter-choice" className="text-sm">Je souhaite recevoir la newsletter et les conseils par e-mail. Retrait gratuit à contact@supremenergies.com. <Link to="/politique-confidentialite" className="underline">Confidentialité</Link>.</label></div>
               {newsletterMessage && <p role="status" className="text-sm mt-2">{newsletterMessage}</p>}
             </div>
           </div>
@@ -174,21 +177,24 @@ const Footer = () => {
         <div className="py-6 border-t border-gray-800 text-center text-gray-200">
           <p>&copy; {new Date().getFullYear()} SupremEnergies. Tous droits réservés.</p>
           <p className="mt-2 text-sm">
-            <Link to="/privacy" className="hover:text-white transition-colors">Politique de confidentialité</Link>
+            <Link to="/politique-confidentialite" className="hover:text-white transition-colors">Politique de confidentialité</Link>
             {" | "}
-            <Link to="/terms" className="hover:text-white transition-colors">Conditions d'utilisation</Link>
+            <Link to="/conditions-generales" className="hover:text-white transition-colors">Conditions générales</Link>
             {" | "}
             <Link to="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
             {" | "}
             <Link to="/plan-du-site" className="hover:text-white transition-colors">Plan du site</Link>
             {" | "}
-            <button
+            <Link to="/retractation" className="underline">Droit de rétractation</Link>{" | "}
+            <Link to="/politique-cookies" className="underline">Politique cookies</Link>{" | "}
+            <Link to="/exercer-mes-droits" className="underline">Exercer mes droits RGPD</Link>{" | "}
+            <Button variant="ghost"
               type="button"
               onClick={() => window.dispatchEvent(new Event("open-cookie-settings"))}
               className="hover:text-white transition-colors"
             >
-              Paramètres des cookies
-            </button>
+              Gérer mes cookies
+            </Button>
           </p>
         </div>
       </div>

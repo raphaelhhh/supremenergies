@@ -11,14 +11,14 @@ const GUIDE_URL = 'https://supremenergies.com/guide-aides-renovation-2026.pdf'
 const Email = ({ firstName }: Props) => (
   <Html lang="fr" dir="ltr">
     <Head />
-    <Preview>Votre guide des aides rénovation 2026, à jour des règles de septembre 2026</Preview>
+    <Preview>Le guide des aides rénovation que vous avez demandé</Preview>
     <Body style={main}>
       <Container style={container}>
         <Text style={brand}>SupremEnergies</Text>
         <Heading style={h1}>{firstName ? `Bonjour ${firstName},` : 'Bonjour,'}</Heading>
         <Text style={text}>
           Voici votre guide des aides rénovation 2026 : MaPrimeRénov', primes CEE, éco-PTZ et TVA à 5,5 %,
-          à jour des changements du 1er septembre 2026.
+          Les critères et montants doivent être confirmés avant tout engagement.
         </Text>
         <Button href={GUIDE_URL} style={button}>Télécharger le guide (PDF)</Button>
         <Section style={card}>
@@ -27,14 +27,7 @@ const Email = ({ firstName }: Props) => (
           <Text style={li}>• Inscrivez la prime CEE avant de signer votre devis.</Text>
           <Text style={li}>• Attendez l'accord MaPrimeRénov' avant le début des travaux.</Text>
         </Section>
-        <Text style={text}>
-          Vous voulez connaître le montant exact pour votre logement ? Nous faisons l'étude et le devis gratuitement,
-          avec réponse sous 24 h.
-        </Text>
-        <Text style={text}>
-          <Link href="https://supremenergies.com/devis-gratuit" style={link}>Demander mon devis gratuit</Link>
-          {' '}ou appelez le 01 86 04 68 89.
-        </Text>
+        <Text style={text}>Cet e-mail répond uniquement à votre demande de guide. Il ne vous inscrit pas aux offres commerciales.</Text>
         <Text style={footer}>
           France Rénov' est le service public qui vous informe gratuitement sur la rénovation : france-renov.gouv.fr — 0 808 800 700.
         </Text>

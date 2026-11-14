@@ -19,6 +19,9 @@ import NotFound from "./pages/NotFound";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import LegalNotices from "./pages/LegalNotices";
+import Withdrawal from "./pages/Withdrawal";
+import DataRights from "./pages/DataRights";
+import CookiePolicy from "./pages/CookiePolicy";
 import IsolationThermique from "./pages/services/IsolationThermique";
 import PompeAChaleur from "./pages/services/PompeAChaleur";
 import PanneauxSolaires from "./pages/services/PanneauxSolaires";
@@ -64,7 +67,8 @@ const App = () => {
           <AudienceTracker />
           <div className="flex flex-col min-h-screen">
             <Navbar />
-            <main className="flex-grow">
+            <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[120] focus:bg-background focus:p-3 focus:text-foreground">Aller au contenu</a>
+            <main id="main-content" tabIndex={-1} className="flex-grow">
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
@@ -90,6 +94,11 @@ const App = () => {
                 <Route path="/aides-renovation-2026" element={<AidesRenovation2026 />} />
                 <Route path="/pompe-a-chaleur-2026" element={<PompeAChaleur2026 />} />
                 <Route path="/terms" element={<TermsOfService />} />
+                <Route path="/conditions-generales" element={<TermsOfService />} />
+                <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
+                <Route path="/politique-cookies" element={<CookiePolicy />} />
+                <Route path="/retractation" element={<Withdrawal />} />
+                <Route path="/exercer-mes-droits" element={<DataRights />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/legal" element={<LegalNotices />} />
                 <Route path="/mentions-legales" element={<LegalNotices />} />

@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-import { z } from "https://esm.sh/zod@3.23.8";
+import { leadBodySchema, marketingRecord } from "../_shared/lead-validation.ts";
 import { sendTemplateEmail } from "../_shared/transactional-email-templates/send-email.ts";
 import { leadDetailCells } from "../_shared/lead-sheet-details.ts";
 import { leadSheetAppendRequest } from "../_shared/lead-sheet-append.ts";
@@ -19,36 +19,24 @@ const SOURCE_LABELS: Record<string, string> = {
   newsletter: "Newsletter",
 };
 
-const BodySchema = z.object({
-  email: z.string().trim().email().max(255).optional().nullable(),
-  phone: z.string().trim().max(32).optional().nullable(),
-  first_name: z.string().trim().max(80).optional().nullable(),
-  postal_code: z.string().trim().max(16).optional().nullable(),
-  source: z.string().trim().max(64).default("lead_magnet"),
-  page_path: z.string().trim().max(255).optional().nullable(),
-  message: z.string().trim().max(2000).optional().nullable(),
-  consent: z.boolean().default(false),
-  wants_guide: z.boolean().optional(),
-  metadata: z.object({
-    guide_path: z.string().regex(/^\/blog\/[a-z0-9-]{1,180}$/).optional(),
-    journey_stage: z.enum(["guide_simulation", "simulation", "guide_simulation_quote", "simulation_quote", "quote"]).optional(),
-  }).passthrough().optional().nullable(),
-});
-
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
+  if (req.method !== "POST") return new Response(JSON.stringify({ error: "method_not_allowed" }), { status: 405, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
   try {
-    const raw = await req.json().catch(() => ({}));
-    const parsed = BodySchema.safeParse(raw);
+    const text = await req.text();
+    if (text.length > 20000) return new Response(JSON.stringify({ error: "request_too_large" }), { status: 413, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    const raw = JSON.parse(text);
+    const parsed = leadBodySchema.safeParse(raw);
     if (!parsed.success) {
       return new Response(
         JSON.stringify({ error: parsed.error.flatten().fieldErrors }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
+    if (parsed.data.website) return new Response(JSON.stringify({ error: "invalid_submission" }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
@@ -80,17 +68,43 @@ Deno.serve(async (req) => {
       source: parsed.data.source,
       page_path: parsed.data.page_path ?? null,
       message: parsed.data.message ?? null,
-      consent: parsed.data.consent,
-      metadata: { ...(parsed.data.metadata ?? {}), ...(phone ? { phone } : {}) },
-      followup_due_at: parsed.data.email ? followupDue.toISOString() : null,
+      // consent is now explicitly the optional marketing choice, not permission to answer.
+      consent: parsed.data.marketing_consent,
+      metadata: { ...(parsed.data.metadata ?? {}), ...(phone ? { phone } : {}), ...marketingRecord(parsed.data.marketing_consent) },
+      followup_due_at: null, // No marketing sender is configured; never schedule an unsolicited promotion.
     }).select("id").single();
 
     if (error) {
-      console.error("Lead insert error", error);
+      console.error("Lead insert failed");
       return new Response(JSON.stringify({ error: "insert_failed" }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
+    }
+
+    // Preserve the existing simulation registry, without a separate public insert path.
+    if (parsed.data.source === "simulateur" && parsed.data.email) {
+      const m = parsed.data.metadata ?? {};
+      const { error: simulationError } = await supabase.from("simulations").insert({
+        email: parsed.data.email, phone, postal_code: parsed.data.postal_code,
+        household_size: m.household_size, income_category: m.income_category,
+        work_types: m.work_types, housing_type: m.housing_type, estimated_aid: m.estimated_aid,
+        inputs: m, result: { profile: m.income_category, totalMPR: m.total_mpr, totalCEE: m.total_cee, total: m.estimated_aid },
+      });
+      if (simulationError) console.error("Simulation registry failed; lead retained");
+    }
+
+    // Existing Zapier integration now runs server-side after the durable insert.
+    if (["contact_form", "devis_rapide"].includes(parsed.data.source)) {
+      try {
+        const zapier = await fetch("https://hooks.zapier.com/hooks/catch/23975075/uulr9bm/", {
+          method: "POST", headers: { "Content-Type": "application/json" }, signal: AbortSignal.timeout(5000),
+          body: JSON.stringify({ timestamp: new Date().toISOString(), nom: parsed.data.first_name, name: parsed.data.first_name,
+            email: parsed.data.email, telephone: phone, phone, message: parsed.data.message, source: parsed.data.source,
+            type: SOURCE_LABELS[parsed.data.source], page_url: parsed.data.page_path, marketing_consent: parsed.data.marketing_consent }),
+        });
+        if (!zapier.ok) console.warn("Zapier copy failed; lead retained");
+      } catch { console.warn("Zapier unavailable; lead retained"); }
     }
 
     // Ajout dans le Google Sheet de l'équipe (n'empêche jamais l'enregistrement du lead)
@@ -128,10 +142,10 @@ Deno.serve(async (req) => {
             body: JSON.stringify(leadSheetAppendRequest(LEADS_TAB_ID, row)),
           },
         );
-        if (!res.ok) console.error(`Sheet append failed [${res.status}]: ${await res.text()}`);
+        if (!res.ok) console.error(`Sheet append failed [${res.status}]`);
       }
     } catch (sheetErr) {
-      console.error("Sheet append error", sheetErr);
+      console.error("Sheet append failed");
     }
 
     // Alerte e-mail à l'équipe (n'empêche jamais l'enregistrement du lead)
@@ -149,7 +163,7 @@ Deno.serve(async (req) => {
         idempotencyKey: `new-lead-alert-${inserted.id}`,
       });
     } catch (mailErr) {
-      console.error("Lead alert email failed", mailErr);
+      console.error("Lead alert email unavailable");
     }
 
     // Envoi du guide au visiteur qui l'a demandé
@@ -157,7 +171,7 @@ Deno.serve(async (req) => {
     const isGuideRequest =
       parsed.data.wants_guide === true ||
       /lead_magnet|aides2026|pillar_pac2026|^blog_/.test(parsed.data.source);
-    if (isGuideRequest && parsed.data.email && parsed.data.consent) {
+    if (isGuideRequest && parsed.data.email) {
       try {
         const r = await sendTemplateEmail("guide-aides", parsed.data.email, {
           templateData: { firstName: parsed.data.first_name ?? undefined },
@@ -165,7 +179,7 @@ Deno.serve(async (req) => {
         });
         guideEmailed = r?.sent === true;
       } catch (mailErr) {
-        console.error("Guide email failed", mailErr);
+        console.error("Guide email unavailable");
       }
     }
 
@@ -179,7 +193,7 @@ Deno.serve(async (req) => {
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   } catch (e) {
-    console.error("send-lead-magnet error", e);
+    console.error("Lead request failed");
     return new Response(JSON.stringify({ error: "unexpected" }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },

@@ -1,6 +1,4 @@
-/* Note : la police Montserrat est chargée via <link rel="stylesheet"> dans index.html
-   (avec preconnect + display=swap). Ne pas la ré-importer ici — un @import CSS
-   est render-blocking et dégrade le LCP. */
+/* Montserrat is self-hosted through the application entry point. */
 
 @tailwind base;
 @tailwind components;
@@ -56,6 +54,13 @@
 
   body {
     @apply bg-background text-foreground font-montserrat;
+  }
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   }
 
   h1, h2, h3, h4, h5, h6 {

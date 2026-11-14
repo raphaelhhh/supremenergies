@@ -132,8 +132,11 @@ const PlanDuSite = () => {
             <h2 className="text-xl font-bold text-supreme-dark mb-3">Informations légales</h2>
             <ul className="space-y-2 text-supreme-primary">
               <li><Link to="/mentions-legales" className="hover:underline">Mentions légales</Link></li>
-              <li><Link to="/privacy" className="hover:underline">Politique de confidentialité</Link></li>
-              <li><Link to="/terms" className="hover:underline">Conditions générales d'utilisation</Link></li>
+              <li><Link to="/politique-confidentialite" className="hover:underline">Politique de confidentialité</Link></li>
+              <li><Link to="/conditions-generales" className="hover:underline">Conditions générales</Link></li>
+              <li><Link to="/retractation" className="hover:underline">Droit de rétractation</Link></li>
+              <li><Link to="/politique-cookies" className="hover:underline">Politique cookies</Link></li>
+              <li><Link to="/exercer-mes-droits" className="hover:underline">Exercer mes droits</Link></li>
             </ul>
           </section>
         </div>
