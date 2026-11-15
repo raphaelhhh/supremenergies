@@ -14,6 +14,8 @@ interface Testimonial {
   rating: number;
   savings: string | null;
   photo_url: string | null;
+  verification_source?: string;
+  publication_authorized?: boolean;
 }
 
 interface GoogleReview {
@@ -50,12 +52,12 @@ const Temoignages = () => {
       const [{ data: testimonials }, googleRes] = await Promise.all([
         supabase
           .from("testimonials")
-          .select("id,name,city,service,content,rating,savings,photo_url")
+          .select("id,name,city,service,content,rating,savings,photo_url,verification_source,publication_authorized")
           .eq("published", true)
           .order("display_order", { ascending: true }),
         supabase.functions.invoke<GoogleReviewsPayload>("google-reviews"),
       ]);
-      setItems(testimonials || []);
+      setItems((testimonials || []).filter(t => t.publication_authorized === true && !!t.verification_source));
       if (googleRes.data && !("error" in googleRes.data)) {
         setGoogle(googleRes.data);
       }
@@ -64,24 +66,11 @@ const Temoignages = () => {
     load();
   }, []);
 
-  const googleRating = google?.rating ?? 5;
-  const googleCount = google?.totalReviews ?? 0;
-  const internalAvg =
-    items.length > 0
-      ? items.reduce((s, t) => s + t.rating, 0) / items.length
-      : 5;
-  const totalCount = googleCount + items.length;
-  const blendedRating =
-    totalCount > 0
-      ? (
-          (googleRating * googleCount + internalAvg * items.length) /
-          totalCount
-        ).toFixed(1)
-      : "5.0";
-
+  const displayCount = google?.totalReviews ?? 0;
+  const blendedRating = google?.rating?.toFixed(1) ?? null;
   const viewUrl = google?.googleMapsUri || GOOGLE_MAPS_URL;
   const writeReviewUrl = GOOGLE_REVIEW_URL;
-  const displayCount = totalCount || items.length;
+
 
   const showGoogleAction = (title: string, url: string) => {
     setCopied(false);
@@ -104,55 +93,8 @@ const Temoignages = () => {
     }
   };
 
-  const aggregateSchema = displayCount
-    ? {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        name: "SupremEnergies",
-        telephone: "01 86 04 68 89",
-        url: "https://supremenergies.com",
-        address: {
-          "@type": "PostalAddress",
-          addressRegion: "Île-de-France",
-          addressCountry: "FR",
-        },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: blendedRating,
-          reviewCount: displayCount,
-          bestRating: "5",
-          worstRating: "1",
-        },
-        review: [
-          ...(google?.reviews || []).slice(0, 5).map((r) => ({
-            "@type": "Review",
-            author: { "@type": "Person", name: r.author },
-            reviewRating: {
-              "@type": "Rating",
-              ratingValue: r.rating,
-              bestRating: "5",
-            },
-            reviewBody: r.text,
-            datePublished: r.publishTime,
-          })),
-          ...items.slice(0, 5).map((t) => ({
-            "@type": "Review",
-            author: { "@type": "Person", name: t.name },
-            reviewRating: {
-              "@type": "Rating",
-              ratingValue: t.rating,
-              bestRating: "5",
-            },
-            reviewBody: t.content,
-            itemReviewed: { "@type": "Service", name: t.service },
-          })),
-        ],
-      }
-    : null;
-
-  const title = "Témoignages clients SupremEnergies | Avis Google rénovation";
-  const description = `Découvrez ${displayCount || "nos"} avis clients (Google + témoignages) en Île-de-France : pompes à chaleur, isolation, panneaux solaires. Note moyenne ${blendedRating}/5.`;
-
+  const title = "Avis clients et témoignages | SupremEnergies";
+  const description = "Consultez les avis Google de SupremEnergies et les retours de chantiers dont la source et l’autorisation de publication sont documentées.";
   return (
     <div>
       <Helmet>
@@ -161,9 +103,7 @@ const Temoignages = () => {
         <link rel="canonical" href="https://supremenergies.com/temoignages" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        {aggregateSchema && (
-          <script type="application/ld+json">{JSON.stringify(aggregateSchema)}</script>
-        )}
+
       </Helmet>
 
       <section className="bg-gradient-to-br from-supreme-primary to-supreme-primary/90 text-white pt-32 pb-12">
@@ -175,15 +115,15 @@ const Temoignages = () => {
             Ils ont fait confiance à SupremEnergies
           </h1>
           <div className="flex flex-wrap items-center gap-3">
-            <div className="flex">
+            {blendedRating && <div className="flex">
               {[1, 2, 3, 4, 5].map((i) => (
                 <Star key={i} size={20} className="fill-yellow-400 text-yellow-400" />
               ))}
-            </div>
+            </div>}
             <span className="text-white/95">
-              <strong>{blendedRating}/5</strong> sur {displayCount} avis vérifiés
+              {blendedRating && displayCount > 0 ? <><strong>{blendedRating}/5</strong> sur {displayCount} avis Google</> : "Consultez les avis sur notre fiche Google"}
             </span>
-            {google && (
+            {(
               <button
                 type="button"
                 onClick={() => showGoogleAction("Voir SupremEnergies sur Google", viewUrl)}
@@ -196,6 +136,7 @@ const Temoignages = () => {
         </div>
       </section>
 
+      <section className="container-custom py-8 text-muted-foreground"><h2 className="text-xl mb-3">Origine des avis</h2><p>Les avis Google proviennent de la fiche publique Google ; ils ne sont pas mélangés aux témoignages recueillis directement. Google contrôle leur publication selon ses propres règles. SupremEnergies ne prétend pas vérifier chaque achat à partir d’un avis Google. Les témoignages de chantier ne sont affichés que lorsque leur source et l’autorisation de publication sont documentées ; les économies nécessitent des justificatifs distincts.</p></section>
       {/* Google Reviews block */}
       {google && google.reviews.length > 0 && (
         <section className="py-12 bg-white">

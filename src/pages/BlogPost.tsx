@@ -16,6 +16,7 @@ import { getCategory } from "@/lib/blog-categories";
 import { renderToStaticMarkup } from "react-dom/server";
 import HeatPumpQuoteCTA from "@/components/HeatPumpQuoteCTA";
 import { isHeatPumpGuide } from "@/lib/heat-pump-journey";
+import DOMPurify from "dompurify";
 
 interface Heading {
   id: string;
@@ -47,7 +48,7 @@ function enrichContent(html: string, heatPump: boolean, slug: string): {
     return { html, headings: [], faq: [] };
   }
   const parser = new DOMParser();
-  const doc = parser.parseFromString(`<div>${html}</div>`, "text/html");
+  const doc = parser.parseFromString(`<div>${DOMPurify.sanitize(html, { FORBID_TAGS: ["script", "iframe", "form", "input", "object", "embed"], FORBID_ATTR: ["srcdoc"] })}</div>`, "text/html");
   const root = doc.body.firstElementChild as HTMLElement | null;
   if (!root) return { html, headings: [], faq: [] };
 

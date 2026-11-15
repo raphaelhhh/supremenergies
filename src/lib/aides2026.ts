@@ -1,6 +1,6 @@
 // Barèmes officiels MaPrimeRénov' 2026 + CEE Coup de pouce
 // Sources : Guide ANAH 2026, France Rénov', arrêtés du 18/08/2025, 15/12/2025 et 27/12/2025
-// Mis à jour avril 2026
+// Vérifié sur le guide ANAH édition septembre 2026 (pages 8, 14-16).
 
 export type IncomeProfile = "bleu" | "jaune" | "violet" | "rose";
 export type Region = "idf" | "autres";
@@ -12,22 +12,22 @@ export type OwnerStatus = "occupant" | "bailleur" | "copro";
 const RFR_AUTRES: Record<number, { bleu: number; jaune: number; violet: number }> = {
   1: { bleu: 17363, jaune: 22259, violet: 31185 },
   2: { bleu: 25393, jaune: 32553, violet: 45842 },
-  3: { bleu: 30547, jaune: 39192, violet: 55129 },
+  3: { bleu: 30540, jaune: 39148, violet: 55196 },
   4: { bleu: 35676, jaune: 45735, violet: 64550 },
-  5: { bleu: 40821, jaune: 52321, violet: 73923 },
+  5: { bleu: 40835, jaune: 52348, violet: 73907 },
 };
 // Île-de-France (plafonds plus élevés)
 const RFR_IDF: Record<number, { bleu: number; jaune: number; violet: number }> = {
-  1: { bleu: 23768, jaune: 28933, violet: 40404 },
-  2: { bleu: 34884, jaune: 42463, violet: 59394 },
-  3: { bleu: 41893, jaune: 51000, violet: 71060 },
-  4: { bleu: 48914, jaune: 59549, violet: 83637 },
-  5: { bleu: 55961, jaune: 68123, violet: 95758 },
+  1: { bleu: 24031, jaune: 29253, violet: 40851 },
+  2: { bleu: 35270, jaune: 42933, violet: 60051 },
+  3: { bleu: 42357, jaune: 51564, violet: 71846 },
+  4: { bleu: 49455, jaune: 60208, violet: 84562 },
+  5: { bleu: 56580, jaune: 68877, violet: 96817 },
 };
 
 // Incrément par personne supplémentaire au-delà de 5
-const RFR_INCR_AUTRES = { bleu: 5145, jaune: 6587, violet: 9165 };
-const RFR_INCR_IDF = { bleu: 7038, jaune: 8568, violet: 12122 };
+const RFR_INCR_AUTRES = { bleu: 5151, jaune: 6598, violet: 9357 };
+const RFR_INCR_IDF = { bleu: 7116, jaune: 8663, violet: 12257 };
 
 export function detectProfile(rfr: number, householdSize: number, region: Region): IncomeProfile {
   const baseTable = region === "idf" ? RFR_IDF : RFR_AUTRES;
@@ -52,7 +52,7 @@ export const PROFILE_INFO: Record<IncomeProfile, { label: string; color: string;
   bleu: { label: "Bleu", color: "bg-blue-500", description: "Revenus très modestes — aides maximales, jusqu'à 80% en rénovation d'ampleur" },
   jaune: { label: "Jaune", color: "bg-yellow-500", description: "Revenus modestes — jusqu'à 60% en rénovation d'ampleur" },
   violet: { label: "Violet", color: "bg-purple-500", description: "Revenus intermédiaires — jusqu'à 45% en rénovation d'ampleur" },
-  rose: { label: "Rose", color: "bg-pink-500", description: "Revenus supérieurs — éligible uniquement à la rénovation d'ampleur (10%)" },
+  rose: { label: "Rose", color: "bg-pink-500", description: "Revenus supérieurs — pas de forfait MaPrimeRénov’ par geste ; autres dispositifs à étudier" },
 };
 
 // Forfaits MaPrimeRénov' parcours par geste 2026 (€)
@@ -229,10 +229,6 @@ export function calculateAides(
   const warnings: string[] = [];
   const results: GesteResult[] = [];
 
-  // Le profil Bleu/Jaune est considéré "précaire" pour le Coup de pouce CEE
-  const isPrecaire = profile === "bleu" || profile === "jaune";
-  const isFossile = currentHeating === "fioul" || currentHeating === "gaz";
-
   if (housingAge === "<15") {
     warnings.push("MaPrimeRénov' nécessite un logement de plus de 15 ans (sauf sortie de chauffage fioul/charbon).");
   }
@@ -245,7 +241,7 @@ export function calculateAides(
   });
   // Audit exige un geste
   const hasAudit = gestes.some((g) => g.id === "audit");
-  const hasOtherGeste = gestes.some((g) => g.id !== "audit");
+  const hasOtherGeste = gestes.some((g) => ["pac-air-eau", "pac-geo", "raccordement-reseau", "depose-cuve-fioul"].includes(g.id));
 
   for (const input of gestes) {
     const def = GESTES.find((g) => g.id === input.id);
@@ -253,6 +249,15 @@ export function calculateAides(
 
     if (def.excludedReason) {
       results.push({ id: def.id, label: def.label, mpr: 0, cee: 0, excluded: def.excludedReason });
+      continue;
+    }
+    const currentMprGestes = ["pac-air-eau", "pac-geo", "raccordement-reseau", "audit", "depose-cuve-fioul"];
+    if (!currentMprGestes.includes(def.id)) {
+      results.push({ id: def.id, label: def.label, mpr: 0, cee: 0, excluded: "Pas de forfait MaPrimeRénov’ par geste dans le barème de septembre 2026 ; autres aides à étudier" });
+      continue;
+    }
+    if (housingAge === "<15") {
+      results.push({ id: def.id, label: def.label, mpr: 0, cee: 0, excluded: "Ancienneté insuffisante ; l’exception fioul nécessite un logement de plus de 2 ans et une vérification du dossier" });
       continue;
     }
     const forfait = def.forfait[profile];
@@ -298,33 +303,14 @@ export function calculateAides(
       mpr = forfait;
     }
 
-    // CEE Coup de pouce
-    let cee = 0;
-    if (def.cee) {
-      const ceeUnit = def.cee[profile];
-      if (def.unit === "m2" && input.surface) cee = ceeUnit * input.surface;
-      else if (def.unit === "equipement" && input.count) cee = ceeUnit * input.count;
-      else cee = ceeUnit;
-
-      // Bonus Coup de pouce "Chauffage" : remplacement chaudière fioul/gaz par PAC
-      // Montants forfaitaires indicatifs (arrêtés CEE 2026)
-      const isPac = def.id === "pac-air-eau" || def.id === "pac-geo";
-      if (isPac && isFossile) {
-        cee += isPrecaire ? 4000 : 2500;
-      }
-      // Bonus sortie fioul pour poêle granulés / CET
-      if ((def.id === "poele-granules" || def.id === "cet") && currentHeating === "fioul") {
-        cee += isPrecaire ? 800 : 500;
-      }
-    }
+    // CEE depends on the supplier offer and technical data. No invented base
+    // plus bonus, and no income information is transmitted to ad providers.
+    const cee = 0;
 
     results.push({ id: def.id, label: def.label, mpr: Math.round(mpr), cee: Math.round(cee) });
   }
 
-  if (isFossile && gestes.some((g) => g.id === "pac-air-eau" || g.id === "pac-geo")) {
-    warnings.push(`Bonus CEE "Coup de pouce Chauffage" appliqué pour le remplacement de votre chauffage ${currentHeating}.`);
-  }
-
+  warnings.push("CEE non chiffrées : une offre du fournisseur et les critères techniques sont nécessaires. Les forfaits MaPrimeRénov’ restent soumis au dossier, aux qualifications requises, au coût réel, au plafond de 20 000 € sur 5 ans et à l’écrêtement : 90 % Bleu, 75 % Jaune, 60 % Violet pour le cumul MaPrimeRénov’ + CEE.");
   if (ownerStatus === "copro") {
     warnings.push("En copropriété, les aides MaPrimeRénov' Copropriété (collective) sont souvent plus avantageuses — un conseiller vous expliquera.");
   }

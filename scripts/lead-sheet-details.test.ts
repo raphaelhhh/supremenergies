@@ -9,13 +9,18 @@ test("quote without income information does not invent a profile", () => {
   expect(leadDetailCells({ housing_type: "Maison individuelle", surface: "120" })[0]).toBe("Non renseigné");
 });
 test("all submitted simulation choices and amounts reach separate columns", () => {
-  expect(leadDetailCells({ income_category: "violet", housing_type: "maison", housing_age: ">15", owner_status: "occupant", current_heating: "gaz", household_size: 2, rfr: 44362, region: "autres", estimated_aid: 8500, total_mpr: 3400, total_cee: 5100, work_details: [{ label: "Pompe à chaleur air/eau", surface: 80 }, { label: "Fenêtres", count: 4 }] })).toEqual(["Violet", "Maison", "Plus de 15 ans", "Propriétaire occupant", "Gaz", 2, 44362, "", "Pompe à chaleur air/eau — 80 m² ; Fenêtres — Quantité : 4", 8500, 3400, 5100, "Hors Île-de-France", "", ""]);
-  expect(leadDetailHeaders).toHaveLength(15);
+  expect(leadDetailCells({ income_category: "violet", housing_type: "maison", housing_age: ">15", owner_status: "occupant", current_heating: "gaz", household_size: 2, rfr: 44362, region: "autres", estimated_aid: 8500, total_mpr: 3400, total_cee: 5100, work_details: [{ label: "Pompe à chaleur air/eau", surface: 80 }, { label: "Fenêtres", count: 4 }] }).slice(0, 15)).toEqual(["Violet", "Maison", "Plus de 15 ans", "Propriétaire occupant", "Gaz", 2, 44362, "", "Pompe à chaleur air/eau — 80 m² ; Fenêtres — Quantité : 4", 8500, 3400, 5100, "Hors Île-de-France", "", ""]);
+  expect(leadDetailHeaders).toHaveLength(18);
 });
 
 test("submitted journey reaches new Sheet columns without altering existing detail columns", () => {
   const cells = leadDetailCells({ income_category: "violet", guide_path: "/blog/audit-energetique", journey_stage: "guide_simulation_quote" });
   expect(cells[0]).toBe("Violet");
-  expect(cells.slice(13)).toEqual(["/blog/audit-energetique", "Guide → Simulateur → Devis PAC"]);
-  expect(leadDetailCells({ guide_path: "https://evil.example", journey_stage: "fake" }).slice(13)).toEqual(["", ""]);
+  expect(cells.slice(13, 15)).toEqual(["/blog/audit-energetique", "Guide → Simulateur → Devis PAC"]);
+  expect(leadDetailCells({ guide_path: "https://evil.example", journey_stage: "fake" }).slice(13, 15)).toEqual(["", ""]);
+});
+test("marketing choice is exported separately without inferring it for old leads", () => {
+  expect(leadDetailCells({ marketing_consent: false, marketing_notice_version: "2026-11-12", marketing_choice_at: "2026-11-12T08:00:00Z" }).slice(15)).toEqual(["Non", "2026-11-12", "2026-11-12T08:00:00Z"]);
+  expect(leadDetailCells({ marketing_consent: true })[15]).toBe("Oui");
+  expect(leadDetailCells({})[15]).toBe("Non renseigné");
 });

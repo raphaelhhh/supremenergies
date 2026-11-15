@@ -344,7 +344,7 @@ const SimulateurAides = () => {
                     <div className="space-y-2">
                       {GESTES.filter((g) => g.category === cat).map((g) => {
                         const sel = selectedGestes.find((s) => s.id === g.id);
-                        const isExcluded = !!g.excludedReason || g.forfait[profile] === null;
+                        const isExcluded = !!g.excludedReason || g.forfait[profile] === null || !["pac-air-eau", "pac-geo", "raccordement-reseau", "audit", "depose-cuve-fioul"].includes(g.id);
                         return (
                           <div key={g.id} className={`border rounded-lg ${sel ? "border-supreme-primary bg-supreme-primary/5" : ""} ${isExcluded ? "opacity-60" : ""}`}>
                             <label className="flex items-start gap-3 p-3 cursor-pointer hover:bg-gray-50/50">
@@ -355,7 +355,7 @@ const SimulateurAides = () => {
                                 {isExcluded && (
                                   <div className="text-xs text-orange-600 mt-1 flex items-start gap-1">
                                     <AlertCircle size={12} className="mt-0.5 flex-shrink-0" />
-                                    {g.excludedReason || `Profil ${profInfo.label} non éligible à ce geste en parcours par geste`}
+                                    {g.excludedReason || `Pas de forfait par geste confirmé pour ce choix ; autres aides à étudier`}
                                   </div>
                                 )}
                               </div>
@@ -439,7 +439,7 @@ const SimulateurAides = () => {
                       <div className="text-xl font-bold">{result.totalMPR.toLocaleString("fr-FR")} €</div>
                     </div>
                     <div className="bg-white/10 rounded-lg p-3">
-                      <div className="text-white/70 text-xs uppercase">Prime CEE</div>
+                      <div className="text-white/70 text-xs uppercase">CEE à confirmer</div>
                       <div className="text-xl font-bold">{result.totalCEE.toLocaleString("fr-FR")} €</div>
                     </div>
                   </div>
@@ -482,7 +482,7 @@ const SimulateurAides = () => {
                 <p className="text-xs text-gray-600 mb-5">
                   Estimation calculée selon le barème officiel ANAH 2026 (parcours par geste). Le montant définitif dépend
                   du devis retenu, de la conformité technique des équipements et de l'écrêtement légal (cumul max
-                  100% TTC profil Bleu, 90% Jaune, 80% Violet, 50% Rose).
+                  90% Bleu, 75% Jaune, 60% Violet pour MaPrimeRénov’ + CEE en parcours par geste).
                 </p>
 
                 {selectedGestes.some(g => g.id.startsWith("pac-"))

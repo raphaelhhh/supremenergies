@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { permitsTracking } from "@/lib/tracking-permission";
 
 declare global {
   interface Window {
@@ -25,8 +26,8 @@ const ServiceCard = ({
   className,
   imageUrl,
 }: ServiceCardProps) => {
-  const handleServiceClick = () => {
-    if (typeof window !== 'undefined' && window.fbq) {
+  const handleServiceClick = async () => {
+    if (typeof window !== 'undefined' && await permitsTracking("advertising") && window.fbq) {
       window.fbq('trackCustom', 'ServiceClick', {
         service_name: title,
         service_link: link

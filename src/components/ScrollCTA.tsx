@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { X, ArrowRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { trackAnalyticsEvent } from "@/lib/google-analytics";
 
 const QUOTE_FORM =
   "/devis-gratuit";
@@ -27,8 +28,7 @@ const STORAGE_DISMISS = "sce_scroll_dismissed";
 
 const trackEvent = (event: string, data: Record<string, unknown> = {}) => {
   if (typeof window === "undefined") return;
-  const w = window as unknown as { dataLayer?: unknown[] };
-  if (w.dataLayer) w.dataLayer.push({ event, ...data });
+  void trackAnalyticsEvent(event, data);
 };
 
 const ScrollCTA = () => {
@@ -52,11 +52,11 @@ const ScrollCTA = () => {
     if (sessionStorage.getItem(STORAGE_DISMISS) === "1") return;
 
     // Pick (or load) variant
-    let v = localStorage.getItem(STORAGE_VARIANT);
+    let v = sessionStorage.getItem(STORAGE_VARIANT);
     if (v !== "a" && v !== "b") {
       v = Math.random() < 0.5 ? "a" : "b";
       try {
-        localStorage.setItem(STORAGE_VARIANT, v);
+        sessionStorage.setItem(STORAGE_VARIANT, v);
       } catch {
         // ignore
       }

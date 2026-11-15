@@ -78,6 +78,9 @@ const Navbar = () => {
                 className="relative"
                 onMouseEnter={() => setServicesOpen(true)}
                 onMouseLeave={() => setServicesOpen(false)}
+                onFocus={() => setServicesOpen(true)}
+                onBlur={e => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setServicesOpen(false); }}
+                onKeyDown={e => { if (e.key === "Escape") { setServicesOpen(false); servicesRef.current?.querySelector("a")?.focus(); } }}
               >
                 <Link
                   to={link.path}
@@ -137,7 +140,7 @@ const Navbar = () => {
         </Button>
 
         {/* Mobile Menu Button */}
-        <button
+        <Button variant="ghost" size="icon"
           className={`md:hidden ${
             isSolid || isOpen ? "text-gray-800" : "text-supreme-primary"
           } hover:text-supreme-primary`}
@@ -146,7 +149,7 @@ const Navbar = () => {
           aria-expanded={isOpen}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        </Button>
       </div>
 
       {/* Mobile Navigation */}

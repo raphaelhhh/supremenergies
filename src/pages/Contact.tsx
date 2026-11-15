@@ -10,7 +10,7 @@ const faqItems = [
   { question: "Combien de temps durent les travaux ?", answer: "La durée des travaux varie selon la nature et l'ampleur du projet. Une isolation de combles peut prendre une journée, tandis qu'une rénovation globale peut s'étendre sur plusieurs semaines. Nous établissons un planning détaillé avant le début des travaux." },
   { question: "Proposez-vous un service après-vente ?", answer: "Oui, nous offrons un service après-vente complet comprenant la maintenance, le dépannage et le suivi de performance pour tous nos travaux et installations." },
   { question: "Quelles garanties proposez-vous ?", answer: "Nous proposons une garantie décennale sur tous nos travaux d'installation et une garantie de parfait achèvement d'un an. De plus, nous travaillons exclusivement avec des équipementiers reconnus offrant leurs propres garanties constructeur." },
-  { question: "Intervenez-vous dans toute la France ?", answer: "Notre zone d'intervention principale est la région parisienne et l'Île-de-France. Nous pouvons également intervenir dans d'autres régions pour des projets spécifiques." }
+  { question: "Intervenez-vous dans toute la France ?", answer: "Nos équipes installent les pompes à chaleur partout en France. L’Île-de-France reste la zone principale des autres prestations. Indiquez votre commune pour étudier votre projet." }
 ];
 
 const Contact = () => {
