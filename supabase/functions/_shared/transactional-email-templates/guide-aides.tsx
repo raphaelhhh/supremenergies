@@ -17,7 +17,7 @@ const Email = ({ firstName }: Props) => (
         <Text style={brand}>SupremEnergies</Text>
         <Heading style={h1}>{firstName ? `Bonjour ${firstName},` : 'Bonjour,'}</Heading>
         <Text style={text}>
-          Voici votre guide des aides rénovation 2026 : MaPrimeRénov', primes CEE, éco-PTZ et TVA à 5,5 %,
+          Voici votre guide des aides rénovation 2026 : MaPrimeRénov', primes CEE, éco-PTZ et TVA à 5,5 %.
           Les critères et montants doivent être confirmés avant tout engagement.
         </Text>
         <Button href={GUIDE_URL} style={button}>Télécharger le guide (PDF)</Button>
