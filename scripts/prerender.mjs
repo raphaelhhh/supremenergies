@@ -188,7 +188,7 @@ function buildHtml(route) {
 
   // Bloc SEO injecté dans <head> (remplace le titre/description par défaut)
   const headInjection = `    <title>${title}</title>
-    <meta name="description" content="${desc}" />
+    <meta data-rh="true" name="description" content="${desc}" />
     <link rel="canonical" href="${canonical}" />
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${desc}" />
@@ -216,10 +216,10 @@ function buildHtml(route) {
   // Remplace le <title> existant
   html = html.replace(/<title>[\s\S]*?<\/title>/i, "");
   // Remplace meta description / og existants
-  html = html.replace(/<meta\s+name=["']description["'][^>]*>\s*/gi, "");
-  html = html.replace(/<meta\s+property=["']og:[^"']+["'][^>]*>\s*/gi, "");
-  html = html.replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>\s*/gi, "");
-  html = html.replace(/<link\s+rel=["']canonical["'][^>]*>\s*/gi, "");
+  html = html.replace(/<meta\b[^>]*\bname=["']description["'][^>]*>\s*/gi, "");
+  html = html.replace(/<meta\b[^>]*\bproperty=["']og:[^"']+["'][^>]*>\s*/gi, "");
+  html = html.replace(/<meta\b[^>]*\bname=["']twitter:[^"']+["'][^>]*>\s*/gi, "");
+  html = html.replace(/<link\b[^>]*\brel=["']canonical["'][^>]*>\s*/gi, "");
 
   // Injecte les nouveaux tags juste avant </head>
   html = html.replace("</head>", `${headInjection}\n  </head>`);
