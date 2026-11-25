@@ -3,7 +3,7 @@ const short = z.string().trim().max(80);
 const amount = z.number().finite().nonnegative().max(10000000);
 export const leadBodySchema = z.object({
   email: z.string().trim().email().max(255).optional().nullable(),
-  phone: z.string().trim().regex(/^(?:\+?33|0)[1-9](?:[ .-]?\d{2}){4}$/).max(32).optional().nullable(),
+  phone: z.string().trim().max(32).transform(v => v.replace(/[\s().-]/g, "")).refine(v => v === "" || /^\+?\d{8,15}$/.test(v), { message: "invalid_phone" }).transform(v => v || null).optional().nullable(),
   first_name: short.optional().nullable(),
   postal_code: z.string().trim().max(16).optional().nullable(),
   source: z.string().trim().max(64).default("lead_magnet"),

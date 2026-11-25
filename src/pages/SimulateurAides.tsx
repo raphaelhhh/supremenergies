@@ -33,7 +33,7 @@ type Step = 1 | 2 | 3 | 4 | 5 | 6;
 
 const submitSchema = z.object({
   email: z.string().trim().email("Email invalide").max(255),
-  phone: z.string().trim().min(10, "Téléphone invalide").max(20),
+  phone: z.string().trim().max(32).refine(v => /^\+?\d{8,15}$/.test(v.replace(/[\s().-]/g, "")), "Téléphone invalide"),
   firstName: z.string().trim().min(2, "Prénom requis").max(80),
 });
 
